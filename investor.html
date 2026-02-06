@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>FHC for Property Investors — Oney & Co</title>
+  <meta name="description" content="Financial Health Check for property investors. Assess your portfolio health, equity position, and expansion capacity.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%231FAD73'/></linearGradient></defs><g transform='translate(50,50)'><path d='M0-38A38 38 0 1 0 0-37.99' fill='none' stroke='url(%23g)' stroke-width='8' stroke-linecap='round' stroke-dasharray='227 12'/><path d='M0-45L0-52' stroke='url(%23g)' stroke-width='6' stroke-linecap='round'/></g></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #141414;
+      --border: #262626;
+      --accent: #F59E0B;
+      --accent-glow: rgba(245, 158, 11, 0.15);
+      --green: #2ECC85;
+      --text: #ffffff;
+      --text-muted: #a3a3a3;
+      --text-dim: #666;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    
+    nav { background: rgba(10,10,10,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo svg { height: 36px; }
+    .nav-back { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+    .nav-back:hover { color: var(--accent); }
+    
+    .header { padding: 48px 0 32px; text-align: center; border-bottom: 1px solid var(--border); }
+    .header-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-glow); color: var(--accent); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+    .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .header p { color: var(--text-muted); font-size: 15px; }
+    
+    .form-section { padding: 32px 0; }
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .form-group .hint { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .input-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    
+    input, select { width: 100%; padding: 14px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 16px; font-family: inherit; }
+    input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+    input::placeholder { color: var(--text-dim); }
+    
+    .section-title { font-size: 16px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .section-title span { font-size: 20px; }
+    
+    /* Property Cards */
+    .property-list { margin-bottom: 24px; }
+    .property-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+    .property-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .property-card-title { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .property-card-title span { font-size: 18px; }
+    .remove-btn { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 20px; padding: 4px 8px; }
+    .remove-btn:hover { opacity: 0.7; }
+    
+    .add-property-btn { width: 100%; padding: 16px; background: var(--card); border: 2px dashed var(--border); border-radius: 12px; color: var(--text-muted); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .add-property-btn:hover { border-color: var(--accent); color: var(--accent); }
+    
+    .toggle-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .toggle-btn { padding: 10px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .toggle-btn:hover { border-color: var(--accent); color: var(--text); }
+    .toggle-btn.active { background: var(--accent-glow); border-color: var(--accent); color: var(--accent); }
+    
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 32px; background: linear-gradient(135deg, #2ECC85, #1FAD73); border: none; border-radius: 12px; color: white; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 24px; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(46,204,133,0.3); }
+    
+    /* Results */
+    .results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-top: 32px; }
+    .results-header { text-align: center; margin-bottom: 32px; }
+    .results-header h2 { font-size: 20px; margin-bottom: 8px; }
+    
+    .portfolio-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .summary-card { background: var(--bg); border-radius: 12px; padding: 20px; text-align: center; }
+    .summary-card .value { font-size: 28px; font-weight: 700; }
+    .summary-card .value.green { color: var(--green); }
+    .summary-card .value.orange { color: var(--accent); }
+    .summary-card .label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    
+    .equity-bar { background: var(--bg); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+    .equity-bar-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+    .bar-container { height: 24px; background: var(--border); border-radius: 12px; overflow: hidden; position: relative; }
+    .bar-fill { height: 100%; border-radius: 12px; transition: width 0.5s ease; }
+    .bar-fill.good { background: linear-gradient(90deg, #2ECC85, #1FAD73); }
+    .bar-fill.warning { background: linear-gradient(90deg, #F59E0B, #D97706); }
+    .bar-fill.danger { background: linear-gradient(90deg, #EF4444, #DC2626); }
+    .bar-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: var(--text-muted); }
+    
+    .cta-section { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-top: 32px; text-align: center; }
+    .cta-section h3 { margin-bottom: 12px; }
+    .cta-section p { color: var(--text-muted); margin-bottom: 20px; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--accent-glow); border: 1px solid var(--accent); border-radius: 10px; color: var(--accent); text-decoration: none; font-weight: 600; }
+    .cta-btn:hover { background: var(--accent); color: white; }
+    
+    footer { border-top: 1px solid var(--border); padding: 24px 0; margin-top: 48px; text-align: center; }
+    footer p { color: var(--text-dim); font-size: 12px; }
+    footer a { color: var(--accent); text-decoration: none; }
+    
+    @media (max-width: 600px) {
+      .input-row, .input-row-3 { grid-template-columns: 1fr; }
+      .portfolio-summary { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg viewBox="0 0 190 90"><defs><linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#2ECC85"/><stop offset="100%" style="stop-color:#1FAD73"/></linearGradient></defs><g transform="translate(38, 45)"><path d="M 0 -32 A 32 32 0 1 0 0 -31.99" fill="none" stroke="url(#greenGrad)" stroke-width="7" stroke-linecap="round" stroke-dasharray="191 10"/><path d="M0 -38 L0 -44" stroke="url(#greenGrad)" stroke-width="5" stroke-linecap="round"/></g><text x="32" y="50" font-family="Inter" font-size="26" font-weight="600" fill="#fff">ney</text><text x="77" y="50" font-family="Inter" font-size="20" fill="url(#greenGrad)">&amp;</text><text x="94" y="50" font-family="Inter" font-size="26" font-weight="600" fill="#fff">co</text></svg>
+      </a>
+      <a href="index.html" class="nav-back">← All FHC Tools</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="header">
+      <span class="header-badge">🏢 Property Investor</span>
+      <h1>Portfolio Health Check</h1>
+      <p>Assess your equity position, portfolio LVR, and capacity to expand</p>
+    </header>
+
+    <form class="form-section" id="investorForm">
+      <!-- Income Section -->
+      <div class="section-title"><span>💰</span> Your Income</div>
+      
+      <div class="input-row">
+        <div class="form-group">
+          <label>Annual Salary / PAYG Income</label>
+          <input type="number" id="salary" placeholder="e.g. 120000">
+        </div>
+        <div class="form-group">
+          <label>Other Income (dividends, etc.)</label>
+          <input type="number" id="otherIncome" placeholder="e.g. 15000" value="0">
+        </div>
+      </div>
+
+      <!-- Existing Portfolio -->
+      <div class="section-title" style="margin-top: 40px;"><span>🏠</span> Existing Property Portfolio</div>
+      
+      <div class="property-list" id="propertyList">
+        <!-- Property cards will be added here -->
+      </div>
+      
+      <button type="button" class="add-property-btn" onclick="addProperty()">
+        + Add Property
+      </button>
+
+      <!-- New Purchase Goal -->
+      <div class="section-title" style="margin-top: 40px;"><span>🎯</span> Next Purchase Goal</div>
+      
+      <div class="input-row">
+        <div class="form-group">
+          <label>Target Property Value</label>
+          <input type="number" id="targetValue" placeholder="e.g. 650000">
+        </div>
+        <div class="form-group">
+          <label>Expected Weekly Rent</label>
+          <input type="number" id="targetRent" placeholder="e.g. 550">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Available Cash for Deposit</label>
+        <input type="number" id="availableCash" placeholder="e.g. 80000">
+        <p class="hint">Cash savings available (excluding equity release)</p>
+      </div>
+
+      <button type="submit" class="btn">Analyse My Portfolio 📊</button>
+    </form>
+
+    <!-- Results -->
+    <div class="results" id="results" style="display: none;">
+      <div class="results-header">
+        <h2>Portfolio Analysis</h2>
+      </div>
+      
+      <div class="portfolio-summary">
+        <div class="summary-card">
+          <div class="value" id="totalValue">$0</div>
+          <div class="label">Total Portfolio Value</div>
+        </div>
+        <div class="summary-card">
+          <div class="value" id="totalDebt">$0</div>
+          <div class="label">Total Debt</div>
+        </div>
+        <div class="summary-card">
+          <div class="value green" id="totalEquity">$0</div>
+          <div class="label">Total Equity</div>
+        </div>
+        <div class="summary-card">
+          <div class="value orange" id="usableEquity">$0</div>
+          <div class="label">Usable Equity (80% LVR)</div>
+        </div>
+      </div>
+      
+      <div class="equity-bar">
+        <div class="equity-bar-title">Portfolio LVR</div>
+        <div class="bar-container">
+          <div class="bar-fill good" id="lvrBar" style="width: 0%"></div>
+        </div>
+        <div class="bar-labels">
+          <span>0%</span>
+          <span id="lvrValue">0%</span>
+          <span>100%</span>
+        </div>
+      </div>
+      
+      <div class="portfolio-summary">
+        <div class="summary-card">
+          <div class="value" id="totalRent">$0</div>
+          <div class="label">Annual Rental Income</div>
+        </div>
+        <div class="summary-card">
+          <div class="value" id="cashflow">$0</div>
+          <div class="label">Net Cashflow (est.)</div>
+        </div>
+        <div class="summary-card">
+          <div class="value green" id="borrowingPower">$0</div>
+          <div class="label">Est. Borrowing Power</div>
+        </div>
+        <div class="summary-card">
+          <div class="value" id="canBuy">?</div>
+          <div class="label">Can Buy Target?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section" id="ctaSection" style="display: none;">
+      <h3>Ready to Expand Your Portfolio?</h3>
+      <p>Let's discuss your investment strategy, lender options for investors, and structuring to optimize your position.</p>
+      <a href="https://oneyco.com.au/#contact" class="cta-btn">Book Strategy Session <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Oney & Co. <a href="https://oneyco.com.au">oneyco.com.au</a></p>
+      <p style="margin-top: 8px;">This calculator provides estimates only. Actual borrowing capacity depends on lender policies.</p>
+    </div>
+  </footer>
+
+  <script>
+    let properties = [];
+    let propertyId = 0;
+
+    function addProperty() {
+      propertyId++;
+      const id = propertyId;
+      properties.push({ id });
+      
+      const html = `
+        <div class="property-card" id="property-${id}">
+          <div class="property-card-header">
+            <span class="property-card-title"><span>🏠</span> Property ${properties.length}</span>
+            <button type="button" class="remove-btn" onclick="removeProperty(${id})">×</button>
+          </div>
+          <div class="input-row-3">
+            <div class="form-group">
+              <label>Current Value</label>
+              <input type="number" class="prop-value" data-id="${id}" placeholder="e.g. 800000">
+            </div>
+            <div class="form-group">
+              <label>Loan Balance</label>
+              <input type="number" class="prop-loan" data-id="${id}" placeholder="e.g. 500000">
+            </div>
+            <div class="form-group">
+              <label>Weekly Rent</label>
+              <input type="number" class="prop-rent" data-id="${id}" placeholder="e.g. 600">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Property Type</label>
+            <div class="toggle-group">
+              <button type="button" class="toggle-btn active" onclick="setPropType(${id}, 'ppor', this)">PPOR</button>
+              <button type="button" class="toggle-btn" onclick="setPropType(${id}, 'inv', this)">Investment</button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('propertyList').insertAdjacentHTML('beforeend', html);
+    }
+
+    function removeProperty(id) {
+      properties = properties.filter(p => p.id !== id);
+      document.getElementById(`property-${id}`).remove();
+      // Renumber
+      document.querySelectorAll('.property-card-title').forEach((el, i) => {
+        el.innerHTML = `<span>🏠</span> Property ${i + 1}`;
+      });
+    }
+
+    function setPropType(id, type, btn) {
+      const card = document.getElementById(`property-${id}`);
+      card.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const prop = properties.find(p => p.id === id);
+      if (prop) prop.type = type;
+    }
+
+    // Add first property by default
+    addProperty();
+
+    document.getElementById('investorForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const salary = parseFloat(document.getElementById('salary').value) || 0;
+      const otherIncome = parseFloat(document.getElementById('otherIncome').value) || 0;
+      const targetValue = parseFloat(document.getElementById('targetValue').value) || 0;
+      const targetRent = parseFloat(document.getElementById('targetRent').value) || 0;
+      const availableCash = parseFloat(document.getElementById('availableCash').value) || 0;
+      
+      // Calculate portfolio totals
+      let totalValue = 0;
+      let totalDebt = 0;
+      let totalRent = 0;
+      
+      document.querySelectorAll('.prop-value').forEach(input => {
+        totalValue += parseFloat(input.value) || 0;
+      });
+      document.querySelectorAll('.prop-loan').forEach(input => {
+        totalDebt += parseFloat(input.value) || 0;
+      });
+      document.querySelectorAll('.prop-rent').forEach(input => {
+        totalRent += (parseFloat(input.value) || 0) * 52; // Annual
+      });
+      
+      const totalEquity = totalValue - totalDebt;
+      const portfolioLVR = totalValue > 0 ? (totalDebt / totalValue) * 100 : 0;
+      
+      // Usable equity (at 80% LVR)
+      const maxDebtAt80 = totalValue * 0.8;
+      const usableEquity = Math.max(0, maxDebtAt80 - totalDebt);
+      
+      // Rental income for serviceability (80% shading)
+      const netRentalForService = totalRent * 0.8;
+      
+      // Estimated interest costs (6.5% on debt)
+      const interestCosts = totalDebt * 0.065;
+      
+      // Net cashflow estimate
+      const cashflow = totalRent - interestCosts;
+      
+      // Borrowing power estimate
+      const totalIncomeForService = salary + otherIncome + netRentalForService;
+      const maxBorrow = totalIncomeForService * 5; // Simplified multiplier
+      
+      // Can buy target?
+      const depositNeeded = targetValue * 0.2; // 20% deposit
+      const totalAvailable = availableCash + usableEquity;
+      const canBuy = totalAvailable >= depositNeeded && maxBorrow >= targetValue * 0.8;
+      
+      // Update display
+      document.getElementById('totalValue').textContent = '$' + totalValue.toLocaleString();
+      document.getElementById('totalDebt').textContent = '$' + totalDebt.toLocaleString();
+      document.getElementById('totalEquity').textContent = '$' + totalEquity.toLocaleString();
+      document.getElementById('usableEquity').textContent = '$' + Math.round(usableEquity).toLocaleString();
+      document.getElementById('totalRent').textContent = '$' + totalRent.toLocaleString();
+      document.getElementById('cashflow').textContent = (cashflow >= 0 ? '+' : '') + '$' + Math.round(cashflow).toLocaleString() + '/yr';
+      document.getElementById('borrowingPower').textContent = '$' + Math.round(maxBorrow).toLocaleString();
+      document.getElementById('canBuy').textContent = canBuy ? '✅ Yes' : '⚠️ Review';
+      document.getElementById('canBuy').style.color = canBuy ? '#2ECC85' : '#F59E0B';
+      
+      // LVR bar
+      const lvrBar = document.getElementById('lvrBar');
+      lvrBar.style.width = Math.min(portfolioLVR, 100) + '%';
+      lvrBar.className = 'bar-fill ' + (portfolioLVR < 60 ? 'good' : portfolioLVR < 80 ? 'warning' : 'danger');
+      document.getElementById('lvrValue').textContent = portfolioLVR.toFixed(1) + '%';
+      
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('ctaSection').style.display = 'block';
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

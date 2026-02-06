@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>FHC for Business Owners — Oney & Co</title>
+  <meta name="description" content="Financial Health Check for SME owners and self-employed. Understand your borrowing capacity with business income assessment.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%231FAD73'/></linearGradient></defs><g transform='translate(50,50)'><path d='M0-38A38 38 0 1 0 0-37.99' fill='none' stroke='url(%23g)' stroke-width='8' stroke-linecap='round' stroke-dasharray='227 12'/><path d='M0-45L0-52' stroke='url(%23g)' stroke-width='6' stroke-linecap='round'/></g></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #141414;
+      --border: #262626;
+      --accent: #8B5CF6;
+      --accent-glow: rgba(139, 92, 246, 0.15);
+      --green: #2ECC85;
+      --text: #ffffff;
+      --text-muted: #a3a3a3;
+      --text-dim: #666;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    
+    nav { background: rgba(10,10,10,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo svg { height: 36px; }
+    .nav-back { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+    .nav-back:hover { color: var(--accent); }
+    
+    .header { padding: 48px 0 32px; text-align: center; border-bottom: 1px solid var(--border); }
+    .header-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-glow); color: var(--accent); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+    .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .header p { color: var(--text-muted); font-size: 15px; }
+    
+    .form-section { padding: 32px 0; }
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .form-group .hint { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    
+    input, select { width: 100%; padding: 14px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 16px; font-family: inherit; }
+    input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+    input::placeholder { color: var(--text-dim); }
+    
+    .section-title { font-size: 16px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .section-title span { font-size: 20px; }
+    
+    .toggle-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .toggle-btn { padding: 12px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; color: var(--text-muted); font-size: 14px; font-weight: 500; cursor: pointer; }
+    .toggle-btn:hover { border-color: var(--accent); color: var(--text); }
+    .toggle-btn.active { background: var(--accent-glow); border-color: var(--accent); color: var(--accent); }
+    
+    .info-box { background: var(--accent-glow); border: 1px solid var(--accent); border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; }
+    .info-box-title { font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--accent); }
+    .info-box p { font-size: 13px; color: var(--text-muted); }
+    
+    .addback-section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+    .addback-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+    .addback-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .addback-row label { flex: 1; font-size: 13px; color: var(--text-muted); }
+    .addback-row input { width: 140px; padding: 10px 12px; font-size: 14px; }
+    
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 32px; background: linear-gradient(135deg, #2ECC85, #1FAD73); border: none; border-radius: 12px; color: white; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 24px; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(46,204,133,0.3); }
+    
+    /* Results */
+    .results { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-top: 32px; }
+    .results-header { text-align: center; margin-bottom: 32px; }
+    .results-header h2 { font-size: 20px; margin-bottom: 8px; }
+    
+    .income-breakdown { background: var(--bg); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+    .breakdown-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+    .breakdown-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; }
+    .breakdown-row.total { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 12px; font-weight: 600; }
+    .breakdown-row .label { color: var(--text-muted); }
+    .breakdown-row .value { font-weight: 500; }
+    .breakdown-row .value.green { color: var(--green); }
+    
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .summary-card { background: var(--bg); border-radius: 12px; padding: 20px; text-align: center; }
+    .summary-card .value { font-size: 28px; font-weight: 700; }
+    .summary-card .value.green { color: var(--green); }
+    .summary-card .label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    
+    .pathway-section { margin-top: 32px; }
+    .pathway-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+    .pathway-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 16px; }
+    .pathway-icon { font-size: 24px; }
+    .pathway-content h4 { font-size: 14px; margin-bottom: 4px; }
+    .pathway-content p { font-size: 13px; color: var(--text-muted); }
+    .pathway-card.recommended { border-color: var(--green); background: rgba(46, 204, 133, 0.05); }
+    .recommended-badge { font-size: 10px; background: var(--green); color: white; padding: 2px 8px; border-radius: 4px; margin-left: 8px; }
+    
+    .cta-section { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-top: 32px; text-align: center; }
+    .cta-section h3 { margin-bottom: 12px; }
+    .cta-section p { color: var(--text-muted); margin-bottom: 20px; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--accent-glow); border: 1px solid var(--accent); border-radius: 10px; color: var(--accent); text-decoration: none; font-weight: 600; }
+    .cta-btn:hover { background: var(--accent); color: white; }
+    
+    footer { border-top: 1px solid var(--border); padding: 24px 0; margin-top: 48px; text-align: center; }
+    footer p { color: var(--text-dim); font-size: 12px; }
+    footer a { color: var(--accent); text-decoration: none; }
+    
+    @media (max-width: 600px) {
+      .input-row { grid-template-columns: 1fr; }
+      .addback-row { flex-direction: column; align-items: stretch; }
+      .addback-row input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg viewBox="0 0 190 90"><defs><linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#2ECC85"/><stop offset="100%" style="stop-color:#1FAD73"/></linearGradient></defs><g transform="translate(38, 45)"><path d="M 0 -32 A 32 32 0 1 0 0 -31.99" fill="none" stroke="url(#greenGrad)" stroke-width="7" stroke-linecap="round" stroke-dasharray="191 10"/><path d="M0 -38 L0 -44" stroke="url(#greenGrad)" stroke-width="5" stroke-linecap="round"/></g><text x="32" y="50" font-family="Inter" font-size="26" font-weight="600" fill="#fff">ney</text><text x="77" y="50" font-family="Inter" font-size="20" fill="url(#greenGrad)">&amp;</text><text x="94" y="50" font-family="Inter" font-size="26" font-weight="600" fill="#fff">co</text></svg>
+      </a>
+      <a href="index.html" class="nav-back">← All FHC Tools</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="header">
+      <span class="header-badge">🏪 Business Owner</span>
+      <h1>SME Financial Health Check</h1>
+      <p>Understand your borrowing capacity with business income and add-backs</p>
+    </header>
+
+    <form class="form-section" id="businessForm">
+      <!-- Business Structure -->
+      <div class="section-title"><span>🏢</span> Business Structure</div>
+      
+      <div class="form-group">
+        <label>Business Structure</label>
+        <div class="toggle-group">
+          <button type="button" class="toggle-btn active" onclick="setStructure(this, 'sole')">Sole Trader</button>
+          <button type="button" class="toggle-btn" onclick="setStructure(this, 'partnership')">Partnership</button>
+          <button type="button" class="toggle-btn" onclick="setStructure(this, 'company')">Company</button>
+          <button type="button" class="toggle-btn" onclick="setStructure(this, 'trust')">Trust</button>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Years in Business</label>
+        <select id="yearsInBusiness">
+          <option value="1">Less than 1 year</option>
+          <option value="2" selected>1-2 years</option>
+          <option value="3">2-3 years</option>
+          <option value="5">3+ years</option>
+        </select>
+        <p class="hint">Most lenders require 2+ years of financials</p>
+      </div>
+      
+      <div class="form-group">
+        <label>Is the business GST registered?</label>
+        <div class="toggle-group">
+          <button type="button" class="toggle-btn active" onclick="setGST(this, true)">Yes</button>
+          <button type="button" class="toggle-btn" onclick="setGST(this, false)">No</button>
+        </div>
+      </div>
+
+      <!-- Business Financials -->
+      <div class="section-title" style="margin-top: 40px;"><span>📊</span> Business Financials (Latest Year)</div>
+      
+      <div class="info-box">
+        <div class="info-box-title">💡 Why Add-backs Matter</div>
+        <p>Banks recognize that your tax return may not reflect your true income. Depreciation, one-off expenses, and owner benefits are "added back" to calculate your real serviceability.</p>
+      </div>
+      
+      <div class="input-row">
+        <div class="form-group">
+          <label>Business Revenue (Annual)</label>
+          <input type="number" id="revenue" placeholder="e.g. 800000">
+        </div>
+        <div class="form-group">
+          <label>Net Profit (After Expenses)</label>
+          <input type="number" id="netProfit" placeholder="e.g. 120000">
+          <p class="hint">From your tax return / P&L</p>
+        </div>
+      </div>
+      
+      <div class="addback-section">
+        <div class="addback-title">Common Add-backs</div>
+        <div class="addback-row">
+          <label>Depreciation & Amortization</label>
+          <input type="number" id="depreciation" placeholder="0" value="0">
+        </div>
+        <div class="addback-row">
+          <label>Interest Expense</label>
+          <input type="number" id="interestExpense" placeholder="0" value="0">
+        </div>
+        <div class="addback-row">
+          <label>Owner's Salary (if not in profit)</label>
+          <input type="number" id="ownerSalary" placeholder="0" value="0">
+        </div>
+        <div class="addback-row">
+          <label>Superannuation Contributions</label>
+          <input type="number" id="super" placeholder="0" value="0">
+        </div>
+        <div class="addback-row">
+          <label>One-off / Non-recurring Expenses</label>
+          <input type="number" id="oneOff" placeholder="0" value="0">
+        </div>
+        <div class="addback-row">
+          <label>Motor Vehicle Expenses (personal use)</label>
+          <input type="number" id="motorVehicle" placeholder="0" value="0">
+        </div>
+      </div>
+
+      <!-- Personal Position -->
+      <div class="section-title" style="margin-top: 40px;"><span>👤</span> Personal Position</div>
+      
+      <div class="input-row">
+        <div class="form-group">
+          <label>Other Personal Income (PAYG, etc.)</label>
+          <input type="number" id="personalIncome" placeholder="e.g. 0" value="0">
+        </div>
+        <div class="form-group">
+          <label>Partner's Income (if applicable)</label>
+          <input type="number" id="partnerIncome" placeholder="e.g. 80000" value="0">
+        </div>
+      </div>
+      
+      <div class="input-row">
+        <div class="form-group">
+          <label>Existing Home Loan Balance</label>
+          <input type="number" id="existingLoan" placeholder="e.g. 400000" value="0">
+        </div>
+        <div class="form-group">
+          <label>Available Deposit / Equity</label>
+          <input type="number" id="deposit" placeholder="e.g. 150000">
+        </div>
+      </div>
+
+      <!-- Loan Purpose -->
+      <div class="section-title" style="margin-top: 40px;"><span>🎯</span> Loan Purpose</div>
+      
+      <div class="form-group">
+        <label>What are you looking to finance?</label>
+        <div class="toggle-group">
+          <button type="button" class="toggle-btn active" onclick="setPurpose(this, 'home')">Home Purchase</button>
+          <button type="button" class="toggle-btn" onclick="setPurpose(this, 'investment')">Investment Property</button>
+          <button type="button" class="toggle-btn" onclick="setPurpose(this, 'commercial')">Commercial Property</button>
+          <button type="button" class="toggle-btn" onclick="setPurpose(this, 'business')">Business Expansion</button>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Target Loan Amount</label>
+        <input type="number" id="targetLoan" placeholder="e.g. 600000">
+      </div>
+
+      <button type="submit" class="btn">Analyse My Position 📊</button>
+    </form>
+
+    <!-- Results -->
+    <div class="results" id="results" style="display: none;">
+      <div class="results-header">
+        <h2>Financial Assessment</h2>
+      </div>
+      
+      <div class="income-breakdown">
+        <div class="breakdown-title">📈 Adjusted Income Calculation</div>
+        <div class="breakdown-row">
+          <span class="label">Net Profit (Tax Return)</span>
+          <span class="value" id="showNetProfit">$0</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="label">+ Add-backs</span>
+          <span class="value" id="showAddbacks">$0</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="label">+ Personal / Partner Income</span>
+          <span class="value" id="showPersonal">$0</span>
+        </div>
+        <div class="breakdown-row total">
+          <span class="label">Total Assessable Income</span>
+          <span class="value green" id="showTotal">$0</span>
+        </div>
+      </div>
+      
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="value green" id="borrowingPower">$0</div>
+          <div class="label">Est. Borrowing Power</div>
+        </div>
+        <div class="summary-card">
+          <div class="value" id="monthlyRepayment">$0</div>
+          <div class="label">Est. Monthly Repayment</div>
+        </div>
+        <div class="summary-card">
+          <div class="value" id="dsr">0%</div>
+          <div class="label">Debt Service Ratio</div>
+        </div>
+        <div class="summary-card">
+          <div class="value" id="canAfford">?</div>
+          <div class="label">Target Achievable?</div>
+        </div>
+      </div>
+      
+      <div class="pathway-section">
+        <div class="pathway-title">Recommended Lending Pathways</div>
+        <div id="pathways"></div>
+      </div>
+    </div>
+
+    <div class="cta-section" id="ctaSection" style="display: none;">
+      <h3>Business Lending is Complex</h3>
+      <p>Each lender treats self-employed income differently. Let's find the best fit for your situation — bank vs non-bank, full doc vs low doc.</p>
+      <a href="https://oneyco.com.au/#contact" class="cta-btn">Book Business Lending Review <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Oney & Co. <a href="https://oneyco.com.au">oneyco.com.au</a></p>
+      <p style="margin-top: 8px;">This tool provides estimates based on general lender guidelines. Actual borrowing capacity varies by lender.</p>
+    </div>
+  </footer>
+
+  <script>
+    let structure = 'sole';
+    let isGST = true;
+    let loanPurpose = 'home';
+
+    function setStructure(btn, value) {
+      document.querySelectorAll('.form-group:nth-of-type(1) .toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      structure = value;
+    }
+
+    function setGST(btn, value) {
+      btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      isGST = value;
+    }
+
+    function setPurpose(btn, value) {
+      btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loanPurpose = value;
+    }
+
+    document.getElementById('businessForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const netProfit = parseFloat(document.getElementById('netProfit').value) || 0;
+      const depreciation = parseFloat(document.getElementById('depreciation').value) || 0;
+      const interestExpense = parseFloat(document.getElementById('interestExpense').value) || 0;
+      const ownerSalary = parseFloat(document.getElementById('ownerSalary').value) || 0;
+      const superContrib = parseFloat(document.getElementById('super').value) || 0;
+      const oneOff = parseFloat(document.getElementById('oneOff').value) || 0;
+      const motorVehicle = parseFloat(document.getElementById('motorVehicle').value) || 0;
+      
+      const personalIncome = parseFloat(document.getElementById('personalIncome').value) || 0;
+      const partnerIncome = parseFloat(document.getElementById('partnerIncome').value) || 0;
+      const existingLoan = parseFloat(document.getElementById('existingLoan').value) || 0;
+      const deposit = parseFloat(document.getElementById('deposit').value) || 0;
+      const targetLoan = parseFloat(document.getElementById('targetLoan').value) || 0;
+      const yearsInBusiness = parseInt(document.getElementById('yearsInBusiness').value) || 2;
+      
+      // Calculate add-backs
+      const totalAddbacks = depreciation + interestExpense + ownerSalary + superContrib + oneOff + motorVehicle;
+      
+      // Adjusted business income
+      const adjustedBusinessIncome = netProfit + totalAddbacks;
+      
+      // Total personal income
+      const totalPersonalIncome = personalIncome + partnerIncome;
+      
+      // Total assessable income
+      const totalIncome = adjustedBusinessIncome + totalPersonalIncome;
+      
+      // Borrowing power (varies by structure and years)
+      let incomeMultiplier = 4.5;
+      if (yearsInBusiness >= 3) incomeMultiplier = 5;
+      if (structure === 'company' || structure === 'trust') incomeMultiplier *= 0.9;
+      
+      const maxBorrow = totalIncome * incomeMultiplier;
+      
+      // Monthly repayment at 6.5%
+      const rate = 0.065 / 12;
+      const term = 360;
+      const monthlyRepayment = targetLoan * (rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1);
+      
+      // Debt Service Ratio
+      const monthlyIncome = totalIncome / 12;
+      const totalMonthlyDebt = monthlyRepayment + (existingLoan > 0 ? existingLoan * 0.005 : 0);
+      const dsr = monthlyIncome > 0 ? (totalMonthlyDebt / monthlyIncome) * 100 : 0;
+      
+      // Can afford target?
+      const canAfford = maxBorrow >= targetLoan && dsr < 50;
+      
+      // Update display
+      document.getElementById('showNetProfit').textContent = '$' + netProfit.toLocaleString();
+      document.getElementById('showAddbacks').textContent = '$' + totalAddbacks.toLocaleString();
+      document.getElementById('showPersonal').textContent = '$' + totalPersonalIncome.toLocaleString();
+      document.getElementById('showTotal').textContent = '$' + totalIncome.toLocaleString();
+      
+      document.getElementById('borrowingPower').textContent = '$' + Math.round(maxBorrow).toLocaleString();
+      document.getElementById('monthlyRepayment').textContent = '$' + Math.round(monthlyRepayment).toLocaleString();
+      document.getElementById('dsr').textContent = dsr.toFixed(1) + '%';
+      document.getElementById('canAfford').textContent = canAfford ? '✅ Yes' : '⚠️ Review';
+      document.getElementById('canAfford').style.color = canAfford ? '#2ECC85' : '#F59E0B';
+      
+      // Pathways
+      let pathwaysHTML = '';
+      
+      if (yearsInBusiness >= 2 && isGST) {
+        pathwaysHTML += `
+          <div class="pathway-card recommended">
+            <span class="pathway-icon">🏦</span>
+            <div class="pathway-content">
+              <h4>Full Doc - Major Bank <span class="recommended-badge">RECOMMENDED</span></h4>
+              <p>Best rates available. 2+ years of financials, full assessment. Most competitive for your situation.</p>
+            </div>
+          </div>
+        `;
+      }
+      
+      if (yearsInBusiness >= 1) {
+        pathwaysHTML += `
+          <div class="pathway-card">
+            <span class="pathway-icon">📋</span>
+            <div class="pathway-content">
+              <h4>Low Doc - Non-Bank Lender</h4>
+              <p>BAS or Accountant's letter only. Higher rates but simpler process. Good for newer businesses.</p>
+            </div>
+          </div>
+        `;
+      }
+      
+      if (loanPurpose === 'commercial' || loanPurpose === 'business') {
+        pathwaysHTML += `
+          <div class="pathway-card">
+            <span class="pathway-icon">🏢</span>
+            <div class="pathway-content">
+              <h4>Commercial Lending</h4>
+              <p>Assessed on property cashflow (ICR/DSCR). Different criteria to residential lending.</p>
+            </div>
+          </div>
+        `;
+      }
+      
+      pathwaysHTML += `
+        <div class="pathway-card">
+          <span class="pathway-icon">💎</span>
+          <div class="pathway-content">
+            <h4>Private / Non-Conforming</h4>
+            <p>For complex situations, credit issues, or urgent timelines. Higher rates but flexible criteria.</p>
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('pathways').innerHTML = pathwaysHTML;
+      
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('ctaSection').style.display = 'block';
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
