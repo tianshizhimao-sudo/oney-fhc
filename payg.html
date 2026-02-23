@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8f7fc">
+  <meta name="theme-color" content="#1A1A2E">
   <title>PAYG Financial Health Check | Oney & Co</title>
   <meta name="description" content="Free financial health check for PAYG employees and salary earners. Find out if it's time to review your finances — takes under 2 minutes.">
   <meta property="og:title" content="PAYG Financial Health Check | Oney & Co">
@@ -15,18 +15,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f8f7fc;
-      --bg-secondary: #efedf5;
-      --card: #ffffff;
-      --border: #e2dff0;
-      --accent: #6B4C9A;
-      --accent-light: #7C5DB0;
+      --bg: #1A1A2E;
+      --bg-secondary: #16162A;
+      --card: #252540;
+      --border: #3D3D5C;
+      --accent: #2ECC85;
+      --accent-light: #2ECC85;
       --accent-lighter: #9B72D0;
-      --accent-glow: rgba(107, 76, 154, 0.08);
+      --accent-glow: rgba(46, 204, 133, 0.1);
       --green: #2ECC85;
       --green-dark: #1FAD73;
-      --text: #1a1a2e;
-      --text-muted: #6b6b8a;
+      --text: #ffffff;
+      --text-muted: #a3a3b8;
       --success: #22c55e;
       --warning: #f59e0b;
       --danger: #ef4444;
@@ -34,37 +34,6 @@
       --purple-gradient: linear-gradient(135deg, #6B4C9A, #9B59B6);
       --green-gradient: linear-gradient(135deg, #2ECC85, #1FAD73);
     }
-    [data-theme="dark"] {
-      --bg: #0a0a0a;
-      --bg-secondary: #111111;
-      --card: #1a1a1a;
-      --border: #2a2a3e;
-      --accent: #9B72D0;
-      --accent-light: #B08AE0;
-      --accent-lighter: #C4A3F0;
-      --accent-glow: rgba(155, 114, 208, 0.12);
-      --text: #f0eef5;
-      --text-muted: #9090aa;
-      --purple-gradient: linear-gradient(135deg, #9B72D0, #B08AE0);
-    }
-    [data-theme="dark"] .option-card:hover { background: rgba(155, 114, 208, 0.06); }
-    [data-theme="dark"] .option-card.selected { background: rgba(155, 114, 208, 0.08); box-shadow: 0 0 0 3px rgba(155, 114, 208, 0.15); }
-    [data-theme="dark"] .checkbox-item.selected,
-    [data-theme="dark"] .radio-item.selected { background: rgba(155, 114, 208, 0.07); }
-    [data-theme="dark"] .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
-    [data-theme="dark"] .btn-secondary { background: var(--card); color: var(--text); border-color: var(--border); }
-    [data-theme="dark"] .btn-secondary:hover { background: rgba(155, 114, 208, 0.06); }
-    [data-theme="dark"] .result-card { box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-    [data-theme="dark"] .email-preview { background: #1a1a2e; color: #e0e0e0; border-color: var(--border); }
-    [data-theme="dark"] .email-preview-header p { color: #999; }
-    [data-theme="dark"] .email-preview-header strong { color: #e0e0e0; }
-    [data-theme="dark"] .email-preview-body { color: #ccc; }
-    [data-theme="dark"] .disclaimer { background: var(--bg-secondary); }
-    [data-theme="dark"] .recommendation-item { background: var(--bg-secondary); }
-    [data-theme="dark"] .header h1 { -webkit-text-fill-color: transparent; }
-    [data-theme="dark"] .option-card { box-shadow: none; }
-    [data-theme="dark"] .cross-link { background: var(--bg-secondary); }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
@@ -75,7 +44,7 @@
       -webkit-font-smoothing: antialiased;
     }
     .progress-container { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: var(--bg-secondary); z-index: 100; }
-    .progress-bar { height: 100%; background: var(--purple-gradient); transition: width 0.4s ease; width: 0%; }
+    .progress-bar { height: 100%; background: linear-gradient(135deg, #2ECC85, #1FAD73); transition: width 0.4s ease; width: 0%; }
     .container { max-width: 700px; margin: 0 auto; padding: 24px 20px 100px; }
     .top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; padding-top: 8px; }
     .top-bar-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -83,7 +52,7 @@
     .top-bar-back { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
     .top-bar-back:hover { color: var(--accent); }
     .header { text-align: center; margin-bottom: 40px; }
-    .header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; background: var(--purple-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #2ECC85, #1FAD73); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .header p { color: var(--text-muted); font-size: 16px; }
     .header-badge { display: inline-block; background: rgba(107, 76, 154, 0.1); color: var(--accent); padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 600; margin-bottom: 16px; }
     .disclaimer { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 32px; font-size: 13px; color: var(--text-muted); text-align: center; }
@@ -93,7 +62,7 @@
     @keyframes stepIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
     .step-header { margin-bottom: 32px; }
-    .step-number { display: inline-block; background: var(--purple-gradient); color: #fff; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-weight: 700; font-size: 14px; margin-bottom: 16px; }
+    .step-number { display: inline-block; background: linear-gradient(135deg, #2ECC85, #1FAD73); color: #fff; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-weight: 700; font-size: 14px; margin-bottom: 16px; }
     .step-title { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
     .step-desc { color: var(--text-muted); font-size: 15px; }
     .form-group { margin-bottom: 24px; }
@@ -134,7 +103,7 @@
     .hint-red { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
     .btn-row { display: flex; gap: 12px; margin-top: 40px; }
     .btn { flex: 1; padding: 16px 24px; border-radius: 100px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; text-align: center; }
-    .btn-primary { background: var(--purple-gradient); color: #fff; }
+    .btn-primary { background: linear-gradient(135deg, #2ECC85, #1FAD73); color: #fff; }
     .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
@@ -201,6 +170,12 @@
       .option-card-icon { font-size: 20px; }
       .option-card-title { font-size: 13px; }
     }
+  
+    .nav-links { display:flex;align-items:center;gap:20px;list-style:none; }
+    .nav-links a { color:var(--text-muted);text-decoration:none;font-size:13px;font-weight:500;transition:color 0.2s; }
+    .nav-links a:hover { color:var(--accent); }
+    .nav-links a.nav-active { color:var(--accent); }
+    @media(max-width:768px){.nav-links{display:none;}}
   </style>
 </head>
 <body>
@@ -211,18 +186,20 @@
   <div class="container">
     <div class="top-bar">
       <a href="index.html" class="top-bar-logo">
-        <svg viewBox="0 0 180 80" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:auto;">
+        <svg viewBox="0 0 210 90" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="logoGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#2ECC85"/><stop offset="100%" style="stop-color:#1FAD73"/></linearGradient>
-            <linearGradient id="logoPurpleAccent" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#6B4C9A"/><stop offset="100%" style="stop-color:#9B59B6"/></linearGradient>
+            <linearGradient id="fillGrad" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" style="stop-color:#1FAD73"/><stop offset="55%" style="stop-color:#2ECC85"/><stop offset="55%" style="stop-color:transparent"/><stop offset="100%" style="stop-color:transparent"/></linearGradient>
+            <linearGradient id="strokeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#2ECC85"/><stop offset="100%" style="stop-color:#1FAD73"/></linearGradient>
           </defs>
-          <g transform="translate(35, 40)"><path d="M 0 -30 A 30 30 0 1 0 0 -29.99" fill="none" stroke="url(#logoGreenGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="180 10"/><path d="M0 -36 L0 -46" stroke="url(#logoGreenGrad)" stroke-width="6" stroke-linecap="round"/></g>
-          <text x="42" y="44" font-family="Inter, -apple-system, sans-serif" font-size="42" font-weight="600" fill="var(--text)" letter-spacing="-1.5">ney<tspan fill="url(#logoGreenGrad)" font-size="32" font-weight="500">&amp;</tspan>co</text>
-          <circle cx="176" cy="40" r="3" fill="url(#logoPurpleAccent)"/>
+          <g transform="translate(40, 45)"><circle cx="0" cy="0" r="32" fill="none" stroke="url(#strokeGrad)" stroke-width="7"/><circle cx="0" cy="0" r="24" fill="url(#fillGrad)"/></g>
+          <text x="82" y="52" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-0.5">ney</text>
+          <text x="129" y="52" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="500" fill="url(#strokeGrad)">&amp;</text>
+          <text x="148" y="52" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-0.5">co</text>
+          <circle cx="182" cy="48" r="4" fill="#6B4C9A"/>
         </svg>
       </a>
       <div style="display:flex;align-items:center;gap:12px;">
-        <button onclick="toggleTheme()" id="themeToggle" style="background:none;border:1px solid var(--border);border-radius:100px;padding:6px 12px;cursor:pointer;font-size:14px;color:var(--text-muted);transition:all 0.2s;" title="Toggle dark/light mode">🌙</button>
+        
         <a href="index.html" class="top-bar-back">← All Tools</a>
       </div>
     </div>
@@ -616,11 +593,11 @@
             <div style="display: inline-block; padding: 10px 28px; border-radius: 100px; font-size: 18px; font-weight: 700; color: ${scoreColor}; background: ${scoreColor}18; border: 2px solid ${scoreColor};">${scoreLabel}</div>
             <p style="color: #666; margin-top: 14px; font-size: 14px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6;">${scoreMessage}</p>
           </div>
-          <div style="background: #f8f7fc; border: 1px solid #e2dff0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+          <div style="background: var(--bg-secondary, #16162A); border: 1px solid var(--border, #3D3D5C); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
             <h3 style="margin: 0 0 14px 0; font-size: 16px; color: #6B4C9A;">💡 Personalised Insights</h3>
             ${insightsHTML}
           </div>
-          <div style="background: #f8f7fc; border: 1px solid #e2dff0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+          <div style="background: var(--bg-secondary, #16162A); border: 1px solid var(--border, #3D3D5C); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
             <h3 style="margin: 0 0 14px 0; font-size: 16px; color: #6B4C9A;">📧 Draft Email</h3>
             <div style="font-size: 14px; line-height: 1.7;">${emailBody}</div>
           </div>
@@ -640,7 +617,7 @@
       const isDark = html.getAttribute('data-theme') === 'dark';
       html.setAttribute('data-theme', isDark ? 'light' : 'dark');
       document.getElementById('themeToggle').textContent = isDark ? '🌙' : '☀️';
-      document.querySelector('meta[name="theme-color"]').content = isDark ? '#f8f7fc' : '#0a0a0a';
+      
       localStorage.setItem('fhc-theme', isDark ? 'light' : 'dark');
     }
     (function() {
@@ -648,7 +625,7 @@
       if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.setAttribute('data-theme', 'dark');
         document.getElementById('themeToggle').textContent = '☀️';
-        document.querySelector('meta[name="theme-color"]').content = '#0a0a0a';
+        
       }
     })();
 

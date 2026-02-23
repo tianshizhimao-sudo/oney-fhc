@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#1A1A2E">
   <title>FHC for Property Investors — Oney & Co</title>
   <meta name="description" content="Financial Health Check for property investors. Assess your portfolio health, equity position, and expansion capacity.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%231FAD73'/></linearGradient></defs><g transform='translate(50,50)'><path d='M0-38A38 38 0 1 0 0-37.99' fill='none' stroke='url(%23g)' stroke-width='8' stroke-linecap='round' stroke-dasharray='227 12'/><path d='M0-45L0-52' stroke='url(%23g)' stroke-width='6' stroke-linecap='round'/></g></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0a;
-      --card: #141414;
-      --border: #262626;
+      --bg: #1A1A2E;
+      --card: #252540;
+      --border: #3D3D5C;
       --accent: #F59E0B;
       --accent-glow: rgba(245, 158, 11, 0.15);
       --green: #2ECC85;
       --text: #ffffff;
-      --text-muted: #a3a3a3;
+      --text-muted: #a3a3b8;
       --text-dim: #666;
       --warning: #F59E0B;
       --danger: #EF4444;
@@ -107,15 +107,37 @@
       .input-row, .input-row-3 { grid-template-columns: 1fr; }
       .portfolio-summary { grid-template-columns: 1fr 1fr; }
     }
+  
+    .nav-links { display:flex;align-items:center;gap:20px;list-style:none; }
+    .nav-links a { color:var(--text-muted);text-decoration:none;font-size:13px;font-weight:500;transition:color 0.2s; }
+    .nav-links a:hover { color:var(--accent); }
+    .nav-links a.nav-active { color:var(--accent); }
+    @media(max-width:768px){.nav-links{display:none;}}
   </style>
 </head>
 <body>
   <nav>
     <div class="container nav-inner">
       <a href="index.html" class="nav-logo">
-        <svg viewBox="0 0 190 90"><defs><linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#2ECC85"/><stop offset="100%" style="stop-color:#1FAD73"/></linearGradient></defs><g transform="translate(38, 45)"><path d="M 0 -32 A 32 32 0 1 0 0 -31.99" fill="none" stroke="url(#greenGrad)" stroke-width="7" stroke-linecap="round" stroke-dasharray="191 10"/><path d="M0 -38 L0 -44" stroke="url(#greenGrad)" stroke-width="5" stroke-linecap="round"/></g><text x="32" y="50" font-family="Inter" font-size="26" font-weight="600" fill="#fff">ney</text><text x="77" y="50" font-family="Inter" font-size="20" fill="url(#greenGrad)">&amp;</text><text x="94" y="50" font-family="Inter" font-size="26" font-weight="600" fill="#fff">co</text></svg>
+        <svg viewBox="0 0 210 90" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="fillGrad" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" style="stop-color:#1FAD73"/><stop offset="55%" style="stop-color:#2ECC85"/><stop offset="55%" style="stop-color:transparent"/><stop offset="100%" style="stop-color:transparent"/></linearGradient>
+            <linearGradient id="strokeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#2ECC85"/><stop offset="100%" style="stop-color:#1FAD73"/></linearGradient>
+          </defs>
+          <g transform="translate(40, 45)"><circle cx="0" cy="0" r="32" fill="none" stroke="url(#strokeGrad)" stroke-width="7"/><circle cx="0" cy="0" r="24" fill="url(#fillGrad)"/></g>
+          <text x="82" y="52" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-0.5">ney</text>
+          <text x="129" y="52" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="500" fill="url(#strokeGrad)">&amp;</text>
+          <text x="148" y="52" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-0.5">co</text>
+          <circle cx="182" cy="48" r="4" fill="#6B4C9A"/>
+        </svg>
       </a>
-      <a href="index.html" class="nav-back">← All FHC Tools</a>
+      <ul class="nav-links">
+        <li><a href="https://oneyco.com.au">Home</a></li>
+        <li><a href="https://oneyco.com.au/about.html">About</a></li>
+        <li><a href="https://mentor.oneyco.com.au">Mentoring</a></li>
+        <li><a href="https://tools.oneyco.com.au">Tools</a></li>
+        <li><a href="index.html" class="nav-active">Health Check</a></li>
+      </ul>
     </div>
   </nav>
 
@@ -241,7 +263,7 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 Oney & Co. <a href="https://oneyco.com.au">oneyco.com.au</a></p>
+      <p>© 2026 Oney & Co. <a href="https://oneyco.com.au">Home</a> · <a href="https://mentor.oneyco.com.au">Mentoring</a> · <a href="https://tools.oneyco.com.au">Tools</a> · <a href="https://fhc.oneyco.com.au">Health Check</a></p>
       <p style="margin-top: 8px;">This calculator provides estimates only. Actual borrowing capacity depends on lender policies.</p>
     </div>
   </footer>
