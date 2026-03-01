@@ -30,6 +30,7 @@
       --green-gradient: linear-gradient(135deg, #2ECC85, #1FAD73);
       --payg: #3b82f6;
       --business: #8B5CF6;
+      --investor: #F59E0B;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -92,6 +93,8 @@
     }
     .tool-card.payg .tool-icon { background: rgba(59, 130, 246, 0.12); }
     .tool-card.business .tool-icon { background: rgba(139, 92, 246, 0.12); }
+    .tool-card.investor .tool-icon { background: rgba(245, 158, 11, 0.12); }
+    .badge.investor { background: rgba(245, 158, 11, 0.12); color: var(--investor); }
 
     .badge {
       display: inline-block; padding: 4px 12px; border-radius: 100px;
@@ -198,6 +201,20 @@
               <li>Add-back income calculation</li>
               <li>Mixed personal & business assets</li>
               <li>Commercial lending pathways</li>
+            </ul>
+            <span class="cta">Start Check <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </a>
+          <a href="investor.html" class="tool-card investor">
+            <span class="badge investor">Property Portfolio</span>
+            <div class="tool-icon">📊</div>
+            <h3>Property Investor</h3>
+            <p class="subtitle">Existing portfolio & expansion planning</p>
+            <ul>
+              <li>Portfolio LVR & equity analysis</li>
+              <li>Rental yield assessment</li>
+              <li>Cash flow & serviceability check</li>
+              <li>Cross-collateralisation review</li>
+              <li>Next purchase capacity</li>
             </ul>
             <span class="cta">Start Check <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
           </a>
