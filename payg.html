@@ -176,6 +176,35 @@
     .nav-links a:hover { color:var(--accent); }
     .nav-links a.nav-active { color:var(--accent); }
     @media(max-width:768px){.nav-links{display:none;}}
+
+    /* === Score + Expandable Cards === */
+    .score-section { text-align: center; margin-bottom: 32px; }
+    .score-label-top { font-size: 14px; color: var(--text-muted); margin-bottom: 4px; }
+    .score-value { font-size: 48px; font-weight: 800; color: var(--text); }
+    .score-value span { font-size: 24px; font-weight: 500; color: var(--text-muted); }
+    .score-bar-wrap { position: relative; height: 14px; border-radius: 7px; overflow: visible; margin: 20px 0 8px; }
+    .score-bar-bg { width: 100%; height: 100%; border-radius: 7px; background: linear-gradient(90deg, #ef4444 0%, #f59e0b 30%, #eab308 45%, #22c55e 70%, #0ea5e9 100%); }
+    .score-bar-marker { position: absolute; top: 50%; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 3px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.2); transform: translate(-50%, -50%); transition: left 0.8s cubic-bezier(0.4,0,0.2,1); left: 0%; }
+    .score-bar-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); }
+    .score-summary { font-size: 14px; color: var(--text-muted); margin-top: 16px; }
+    .results-section-title { font-size: 15px; font-weight: 600; color: var(--text-muted); margin: 28px 0 12px; padding-left: 4px; }
+    .insight-card { background: var(--card); border-radius: 14px; margin-bottom: 10px; border: 1px solid var(--border); overflow: hidden; transition: box-shadow 0.2s, transform 0.15s; cursor: pointer; }
+    .insight-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-1px); }
+    .insight-card-header { display: flex; align-items: center; gap: 14px; padding: 16px 18px; position: relative; }
+    .insight-card-accent { position: absolute; left: 0; top: 8px; bottom: 8px; width: 5px; border-radius: 0 3px 3px 0; }
+    .insight-card-accent.green { background: var(--success); }
+    .insight-card-accent.yellow { background: var(--warning); }
+    .insight-card-accent.red { background: var(--danger); }
+    .insight-card-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .insight-card-icon.green { background: rgba(34,197,94,0.12); }
+    .insight-card-icon.yellow { background: rgba(245,158,11,0.12); }
+    .insight-card-icon.red { background: rgba(239,68,68,0.12); }
+    .insight-card-title { flex: 1; font-size: 15px; font-weight: 500; color: var(--text); }
+    .insight-card-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; }
+    .insight-card.expanded .insight-card-arrow { transform: rotate(90deg); }
+    .insight-card-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding: 0 18px 0 68px; }
+    .insight-card.expanded .insight-card-body { max-height: 250px; padding: 0 18px 16px 68px; }
+    .insight-card-body p { font-size: 14px; line-height: 1.65; color: var(--text-muted); }
   </style>
 </head>
 <body>
@@ -330,20 +359,21 @@
         <p class="step-desc">Here's where you stand</p>
       </div>
 
-      <div class="result-card">
-        <div class="score-display">
-          <div class="score-traffic-light" id="scoreLight">💚</div>
-          <div class="score-label" id="scoreLabel">Healthy</div>
-          <div class="score-message" id="scoreMessage"></div>
+      <!-- Overall Score -->
+      <div class="score-section">
+        <p class="score-label-top">Your overall score is</p>
+        <div class="score-value"><span id="scoreNum">--</span><span>/100</span></div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-bg"></div>
+          <div class="score-bar-marker" id="scoreMarker"></div>
         </div>
+        <div class="score-bar-labels"><span>Needs attention</span><span>Looking good</span><span>Excellent</span></div>
+        <p id="scoreSummary" class="score-summary"></p>
       </div>
 
-      <div class="result-card">
-        <div class="result-header">
-          <span class="result-title">💡 Personalised Insights</span>
-        </div>
-        <div id="insightsContent"></div>
-      </div>
+      <!-- Insight cards injected by JS -->
+      <div id="attentionSection"></div>
+      <div id="goodSection"></div>
 
       <div class="result-card" id="emailSection">
         <div class="result-header">
@@ -499,53 +529,99 @@
       if (answers.hasAdvisor === 'yes') score += 1;
       return score;
     }
-    function getScoreLevel(score) { return score >= 4 ? 'green' : score >= 1 ? 'amber' : 'red'; }
+
+    // Map raw score (-8 to +7) → 0-100
+    function normalizeScore(raw) {
+      // raw range: approx -8 to +7
+      const clamped = Math.max(-8, Math.min(7, raw));
+      return Math.round(((clamped + 8) / 15) * 100);
+    }
 
     // ==================== RESULTS ====================
     function generateResults() {
-      const score = calculateScore();
-      const level = getScoreLevel(score);
-      const light = document.getElementById('scoreLight');
-      const label = document.getElementById('scoreLabel');
-      const message = document.getElementById('scoreMessage');
-      light.className = 'score-traffic-light';
-      if (level === 'green') {
-        light.classList.add('score-green'); light.textContent = '💚';
-        label.textContent = 'Looking Good!'; label.style.color = 'var(--success)';
-        message.textContent = 'Your financial health looks solid. Keep reviewing regularly — we recommend at least once a year.';
-      } else if (level === 'amber') {
-        light.classList.add('score-amber'); light.textContent = '🟡';
-        label.textContent = 'Check-in Suggested'; label.style.color = 'var(--warning)';
-        message.textContent = "It's been a while — might be worth a quick check-in with your banker or broker. Even a short conversation can uncover savings.";
+      const rawScore = calculateScore();
+      const overallScore = normalizeScore(rawScore);
+
+      // Animate score
+      document.getElementById('scoreNum').textContent = overallScore;
+      const marker = document.getElementById('scoreMarker');
+      setTimeout(() => { marker.style.left = overallScore + '%'; }, 50);
+
+      // Summary text
+      let summaryText = '';
+      if (overallScore >= 70) summaryText = 'Your financial health looks solid. Keep reviewing regularly — we recommend at least once a year.';
+      else if (overallScore >= 40) summaryText = "It's been a while — might be worth a quick check-in with your banker or broker. Even a short conversation can uncover savings.";
+      else summaryText = "You're overdue for a review. We recommend reaching out to your banker, broker, or financial planner. Things change — your finances should keep up.";
+      document.getElementById('scoreSummary').textContent = summaryText;
+
+      // Build insight cards
+      const insights = [];
+
+      // Last Review
+      if (answers.lastReview === '2y+' || answers.lastReview === 'never') insights.push({ type: 'red', icon: '📅', title: 'Overdue for a Review', text: "It's been too long since your last financial review. Rates, products, and your circumstances change — a review could save you thousands." });
+      else if (answers.lastReview === '1-2y') insights.push({ type: 'yellow', icon: '📅', title: 'Time for a Check-in', text: "It's been over a year. A quick review with your banker or broker can ensure you're still on the best deal." });
+      else if (answers.lastReview === '<6m') insights.push({ type: 'green', icon: '📅', title: 'Recent Review', text: "Great — you've reviewed your finances recently. Keep it up with regular annual check-ins." });
+
+      // Interest rate
+      if (answers.happyRate === 'dont-know') insights.push({ type: 'red', icon: '❓', title: "Know Your Rate", text: "Not knowing your interest rate is more common than you think — but it's worth finding out. Even a small rate difference can mean big savings over time." });
+      else if (answers.happyRate === 'no') insights.push({ type: 'yellow', icon: '💸', title: 'Rate Review Opportunity', text: "If you're not happy with your rate, now is the time to ask. Your banker or broker may be able to offer a better deal — sometimes all it takes is a phone call." });
+      else if (answers.happyRate === 'yes') insights.push({ type: 'green', icon: '📊', title: 'Interest Rate', text: "You're happy with your current rate — that's a good sign. Worth a periodic check to stay competitive." });
+
+      // Life changes
+      const realChanges = answers.lifeChanges.filter(c => c !== 'none');
+      if (realChanges.length > 0) {
+        const cl = { income: 'income change', family: 'family situation change', property: 'property transaction', job: 'job change', purchase: 'major purchase planned' };
+        const changeType = realChanges.length >= 3 ? 'red' : 'yellow';
+        insights.push({ type: changeType, icon: '🔄', title: 'Life Changes = Financial Changes', text: `You mentioned: ${realChanges.map(c => cl[c]).join(', ')}. Life changes often mean your financial setup needs adjusting. A quick review can make sure everything still fits.` });
       } else {
-        light.classList.add('score-red'); light.textContent = '🔴';
-        label.textContent = 'Review Recommended'; label.style.color = 'var(--danger)';
-        message.textContent = "You're overdue for a review. We recommend reaching out to your banker, broker, or financial planner. Things change — your finances should keep up.";
+        insights.push({ type: 'green', icon: '🔄', title: 'Stable Situation', text: "No major life changes recently — your current financial setup likely still fits well." });
       }
-      generateInsights(level);
+
+      // Financial plan
+      if (answers.financialPlan === 'no' || answers.financialPlan === 'not-really') insights.push({ type: 'yellow', icon: '🗺️', title: 'Consider a Financial Plan', text: "You don't need a complicated plan — even a rough idea of where you want to be in 2–5 years can help guide better financial decisions." });
+      else if (answers.financialPlan === 'clear') insights.push({ type: 'green', icon: '🗺️', title: 'Financial Plan', text: "Having a clear financial plan puts you ahead. Review it periodically to make sure it still aligns with your goals." });
+
+      // Home loan
+      if (answers.homeLoan === 'yes' && (answers.lastReview === '2y+' || answers.lastReview === 'never')) insights.push({ type: 'red', icon: '🏠', title: 'Home Loan Health Check', text: "With a home loan and no recent review, you could be paying more than you need to. Lenders regularly update their products — make sure yours is still competitive." });
+
+      // Credit card
+      if (answers.otherLoans.includes('credit-card')) insights.push({ type: 'yellow', icon: '💳', title: 'Credit Card Debt', text: "Credit card interest rates are among the highest. If you're carrying a balance, ask about consolidation options that could lower your rate significantly." });
+
+      // Advisor
+      if (answers.hasAdvisor === 'no' || answers.hasAdvisor === 'not-sure') insights.push({ type: 'yellow', icon: '👤', title: 'Find Your Person', text: "Having a banker, broker, or financial planner in your corner means someone is looking out for your financial health. It doesn't cost to ask." });
+      else if (answers.hasAdvisor === 'yes') insights.push({ type: 'green', icon: '👤', title: 'Professional Support', text: "Great that you have a professional relationship. Stay in regular contact to make the most of their expertise." });
+
+      // Separate into attention vs good
+      const attention = insights.filter(i => i.type === 'red' || i.type === 'yellow');
+      const good = insights.filter(i => i.type === 'green');
+
+      function renderCards(items) {
+        return items.map(i => `
+          <div class="insight-card" onclick="this.classList.toggle('expanded')">
+            <div class="insight-card-header">
+              <div class="insight-card-accent ${i.type}"></div>
+              <div class="insight-card-icon ${i.type}">${i.icon}</div>
+              <div class="insight-card-title">${i.title}</div>
+              <div class="insight-card-arrow">›</div>
+            </div>
+            <div class="insight-card-body"><p>${i.text}</p></div>
+          </div>
+        `).join('');
+      }
+
+      let attentionHTML = '';
+      if (attention.length > 0) attentionHTML = `<div class="results-section-title">Areas needing attention</div>${renderCards(attention)}`;
+      let goodHTML = '';
+      if (good.length > 0) goodHTML = `<div class="results-section-title">Looking good</div>${renderCards(good)}`;
+
+      document.getElementById('attentionSection').innerHTML = attentionHTML;
+      document.getElementById('goodSection').innerHTML = goodHTML;
+
+      const level = overallScore >= 70 ? 'green' : overallScore >= 40 ? 'amber' : 'red';
       generateEmailDraft(level);
       if (answers.hasAdvisor === 'no') document.getElementById('emailSection').querySelector('.result-title').textContent = '📧 Draft Email (when you find someone)';
       clearProgress();
       nextStep(3);
-    }
-
-    function generateInsights(level) {
-      const insights = [];
-      if (answers.lastReview === '2y+' || answers.lastReview === 'never') insights.push({ icon: '📅', title: 'Overdue for a Review', text: "It's been too long since your last financial review. Rates, products, and your circumstances change — a review could save you thousands." });
-      else if (answers.lastReview === '1-2y') insights.push({ icon: '📅', title: 'Time for a Check-in', text: "It's been over a year. A quick review with your banker or broker can ensure you're still on the best deal." });
-      if (answers.happyRate === 'dont-know') insights.push({ icon: '❓', title: "Know Your Rate", text: "Not knowing your interest rate is more common than you think — but it's worth finding out. Even a small rate difference can mean big savings over time." });
-      else if (answers.happyRate === 'no') insights.push({ icon: '💸', title: 'Rate Review Opportunity', text: "If you're not happy with your rate, now is the time to ask. Your banker or broker may be able to offer a better deal — sometimes all it takes is a phone call." });
-      const realChanges = answers.lifeChanges.filter(c => c !== 'none');
-      if (realChanges.length > 0) {
-        const cl = { income: 'income change', family: 'family situation change', property: 'property transaction', job: 'job change', purchase: 'major purchase planned' };
-        insights.push({ icon: '🔄', title: 'Life Changes = Financial Changes', text: `You mentioned: ${realChanges.map(c => cl[c]).join(', ')}. Life changes often mean your financial setup needs adjusting. A quick review can make sure everything still fits.` });
-      }
-      if (answers.financialPlan === 'no' || answers.financialPlan === 'not-really') insights.push({ icon: '🗺️', title: 'Consider a Financial Plan', text: "You don't need a complicated plan — even a rough idea of where you want to be in 2–5 years can help guide better financial decisions." });
-      if (answers.homeLoan === 'yes' && (answers.lastReview === '2y+' || answers.lastReview === 'never')) insights.push({ icon: '🏠', title: 'Home Loan Health Check', text: "With a home loan and no recent review, you could be paying more than you need to. Lenders regularly update their products — make sure yours is still competitive." });
-      if (answers.otherLoans.includes('credit-card')) insights.push({ icon: '💳', title: 'Credit Card Debt', text: "Credit card interest rates are among the highest. If you're carrying a balance, ask about consolidation options that could lower your rate significantly." });
-      if (answers.hasAdvisor === 'no' || answers.hasAdvisor === 'not-sure') insights.push({ icon: '👤', title: 'Find Your Person', text: "Having a banker, broker, or financial planner in your corner means someone is looking out for your financial health. It doesn't cost to ask." });
-      if (insights.length === 0) insights.push({ icon: '✅', title: 'Keep It Up!', text: "You're doing well. Continue reviewing your finances regularly and stay in touch with your banking professional." });
-      document.getElementById('insightsContent').innerHTML = insights.map(i => `<div class="recommendation-item"><div class="recommendation-icon">${i.icon}</div><div class="recommendation-content"><h4>${i.title}</h4><p>${i.text}</p></div></div>`).join('');
     }
 
     function generateEmailDraft(level) {

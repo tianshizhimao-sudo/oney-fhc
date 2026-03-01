@@ -162,6 +162,35 @@
     .nav-links a:hover { color:var(--accent); }
     .nav-links a.nav-active { color:var(--accent); }
     @media(max-width:768px){.nav-links{display:none;}}
+
+    /* === Score + Expandable Cards === */
+    .score-section { text-align: center; margin-bottom: 32px; }
+    .score-label-top { font-size: 14px; color: var(--text-muted); margin-bottom: 4px; }
+    .score-value { font-size: 48px; font-weight: 800; color: var(--text); }
+    .score-value span { font-size: 24px; font-weight: 500; color: var(--text-muted); }
+    .score-bar-wrap { position: relative; height: 14px; border-radius: 7px; overflow: visible; margin: 20px 0 8px; }
+    .score-bar-bg { width: 100%; height: 100%; border-radius: 7px; background: linear-gradient(90deg, #ef4444 0%, #f59e0b 30%, #eab308 45%, #22c55e 70%, #0ea5e9 100%); }
+    .score-bar-marker { position: absolute; top: 50%; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 3px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.2); transform: translate(-50%, -50%); transition: left 0.8s cubic-bezier(0.4,0,0.2,1); left: 0%; }
+    .score-bar-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); }
+    .score-summary { font-size: 14px; color: var(--text-muted); margin-top: 16px; }
+    .results-section-title { font-size: 15px; font-weight: 600; color: var(--text-muted); margin: 28px 0 12px; padding-left: 4px; }
+    .insight-card { background: var(--card); border-radius: 14px; margin-bottom: 10px; border: 1px solid var(--border); overflow: hidden; transition: box-shadow 0.2s, transform 0.15s; cursor: pointer; }
+    .insight-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-1px); }
+    .insight-card-header { display: flex; align-items: center; gap: 14px; padding: 16px 18px; position: relative; }
+    .insight-card-accent { position: absolute; left: 0; top: 8px; bottom: 8px; width: 5px; border-radius: 0 3px 3px 0; }
+    .insight-card-accent.green { background: var(--success); }
+    .insight-card-accent.yellow { background: var(--warning); }
+    .insight-card-accent.red { background: var(--danger); }
+    .insight-card-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .insight-card-icon.green { background: rgba(34,197,94,0.12); }
+    .insight-card-icon.yellow { background: rgba(245,158,11,0.12); }
+    .insight-card-icon.red { background: rgba(239,68,68,0.12); }
+    .insight-card-title { flex: 1; font-size: 15px; font-weight: 500; color: var(--text); }
+    .insight-card-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; }
+    .insight-card.expanded .insight-card-arrow { transform: rotate(90deg); }
+    .insight-card-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding: 0 18px 0 68px; }
+    .insight-card.expanded .insight-card-body { max-height: 250px; padding: 0 18px 16px 68px; }
+    .insight-card-body p { font-size: 14px; line-height: 1.65; color: var(--text-muted); }
   </style>
 </head>
 <body>
@@ -483,20 +512,21 @@
         <p class="step-desc">Here's where your business stands</p>
       </div>
 
-      <div class="result-card">
-        <div class="score-display">
-          <div class="score-traffic-light" id="scoreLight">💚</div>
-          <div class="score-label" id="scoreLabel">Healthy</div>
-          <div class="score-message" id="scoreMessage"></div>
+      <!-- Overall Score -->
+      <div class="score-section">
+        <p class="score-label-top">Your overall score is</p>
+        <div class="score-value"><span id="scoreNum">--</span><span>/100</span></div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-bg"></div>
+          <div class="score-bar-marker" id="scoreMarker"></div>
         </div>
+        <div class="score-bar-labels"><span>Needs attention</span><span>Looking good</span><span>Excellent</span></div>
+        <p id="scoreSummary" class="score-summary"></p>
       </div>
 
-      <div class="result-card">
-        <div class="result-header">
-          <span class="result-title">💡 Personalised Insights</span>
-        </div>
-        <div id="insightsContent"></div>
-      </div>
+      <!-- Insight cards injected by JS -->
+      <div id="attentionSection"></div>
+      <div id="goodSection"></div>
 
       <div class="result-card" id="emailSection">
         <div class="result-header">
@@ -687,104 +717,104 @@
       return 'red';
     }
 
-    // ==================== RESULTS ====================
-    function generateResults() {
-      const score = calculateScore();
-      const level = getScoreLevel(score);
-
-      const light = document.getElementById('scoreLight');
-      const label = document.getElementById('scoreLabel');
-      const message = document.getElementById('scoreMessage');
-
-      light.className = 'score-traffic-light';
-
-      if (level === 'green') {
-        light.classList.add('score-green');
-        light.textContent = '💚';
-        label.textContent = 'Looking Good!';
-        label.style.color = 'var(--success)';
-        message.textContent = 'Your business financial health looks solid. Keep reviewing regularly — we recommend at least once every 6 months for business owners.';
-      } else if (level === 'amber') {
-        light.classList.add('score-amber');
-        light.textContent = '🟡';
-        label.textContent = 'Check-in Suggested';
-        label.style.color = 'var(--warning)';
-        message.textContent = "It might be time for a quick check-in with your accountant or broker. Even a short conversation can uncover savings and opportunities for your business.";
-      } else {
-        light.classList.add('score-red');
-        light.textContent = '🔴';
-        label.textContent = 'Review Recommended';
-        label.style.color = 'var(--danger)';
-        message.textContent = "Your business is overdue for a financial review. We strongly recommend reaching out to your accountant, banker, or broker. Things change fast in business — your finances should keep up.";
-      }
-
-      generateInsights(level);
-      generateEmailDraft(level);
-      nextStep(3);
+    // Map raw score to 0-100
+    function normalizeScore(raw) {
+      // raw range: approx -13 to +13
+      const clamped = Math.max(-13, Math.min(13, raw));
+      return Math.round(((clamped + 13) / 26) * 100);
     }
 
-    function generateInsights(level) {
+    // ==================== RESULTS ====================
+    function generateResults() {
+      const rawScore = calculateScore();
+      const overallScore = normalizeScore(rawScore);
+
+      // Animate score
+      document.getElementById('scoreNum').textContent = overallScore;
+      const marker = document.getElementById('scoreMarker');
+      setTimeout(() => { marker.style.left = overallScore + '%'; }, 50);
+
+      // Summary text
+      let summaryText = '';
+      if (overallScore >= 70) summaryText = 'Your business financial health looks solid. Keep reviewing regularly — we recommend at least once every 6 months for business owners.';
+      else if (overallScore >= 40) summaryText = "It might be time for a quick check-in with your accountant or broker. Even a short conversation can uncover savings and opportunities for your business.";
+      else summaryText = "Your business is overdue for a financial review. We strongly recommend reaching out to your accountant, banker, or broker. Things change fast in business — your finances should keep up.";
+      document.getElementById('scoreSummary').textContent = summaryText;
+
+      // Build insight cards
       const insights = [];
 
-      if (answers.lastReview === '2y+' || answers.lastReview === 'never') {
-        insights.push({ icon: '📅', title: 'Overdue for a Review', text: "It's been too long since your last business financial review. Your business circumstances, tax laws, and lending products change — a review could save you thousands." });
-      } else if (answers.lastReview === '1-2y') {
-        insights.push({ icon: '📅', title: 'Time for a Check-in', text: "It's been over a year. A quick review with your accountant or broker can ensure your business is still in the best position." });
-      }
+      // Last Review
+      if (answers.lastReview === '2y+' || answers.lastReview === 'never') insights.push({ type: 'red', icon: '📅', title: 'Overdue for a Review', text: "It's been too long since your last business financial review. Your business circumstances, tax laws, and lending products change — a review could save you thousands." });
+      else if (answers.lastReview === '1-2y') insights.push({ type: 'yellow', icon: '📅', title: 'Time for a Check-in', text: "It's been over a year. A quick review with your accountant or broker can ensure your business is still in the best position." });
+      else if (answers.lastReview === '<6m') insights.push({ type: 'green', icon: '📅', title: 'Recent Review', text: "Great — you've reviewed your business finances recently. Keep it up with regular 6-monthly check-ins." });
 
-      if (answers.profitMargin === 'no-idea' || answers.profitMargin === 'not-really') {
-        insights.push({ icon: '📊', title: 'Know Your Numbers', text: "Understanding your profit margin is one of the most important things you can do as a business owner. Your accountant can help you get clarity on this." });
-      }
+      // Profit margin
+      if (answers.profitMargin === 'no-idea' || answers.profitMargin === 'not-really') insights.push({ type: 'red', icon: '📊', title: 'Know Your Numbers', text: "Understanding your profit margin is one of the most important things you can do as a business owner. Your accountant can help you get clarity on this." });
+      else if (answers.profitMargin === 'clearly') insights.push({ type: 'green', icon: '📊', title: 'Financial Clarity', text: "Knowing your profit margin clearly puts you in a strong position. Keep tracking it regularly." });
 
-      if (answers.structureOptimal === 'never-reviewed' || answers.structureOptimal === 'probably-not') {
-        insights.push({ icon: '🏗️', title: 'Review Your Structure', text: "Your business structure affects how much tax you pay and your personal liability. If you've never reviewed it — or think it's not optimal — it's worth a conversation with your accountant." });
-      }
+      // Structure
+      if (answers.structureOptimal === 'never-reviewed' || answers.structureOptimal === 'probably-not') insights.push({ type: 'yellow', icon: '🏗️', title: 'Review Your Structure', text: "Your business structure affects how much tax you pay and your personal liability. If you've never reviewed it — or think it's not optimal — it's worth a conversation with your accountant." });
+      else if (answers.structureOptimal === 'yes') insights.push({ type: 'green', icon: '🏗️', title: 'Business Structure', text: "You're confident your structure is optimal — that's a good foundation. Review it again if your circumstances change." });
 
+      // Business changes
       const realChanges = answers.bizChanges.filter(c => c !== 'none');
       if (realChanges.length > 0) {
-        const changeLabels = {
-          revenue: 'significant revenue change',
-          debt: 'new debt or facilities',
-          structure: 'business structure change',
-          staff: 'staffing changes',
-          assets: 'asset transactions',
-          expansion: 'expansion or major investment plans'
-        };
+        const changeLabels = { revenue: 'significant revenue change', debt: 'new debt or facilities', structure: 'business structure change', staff: 'staffing changes', assets: 'asset transactions', expansion: 'expansion or major investment plans' };
         const changeList = realChanges.map(c => changeLabels[c]).filter(Boolean).join(', ');
-        insights.push({ icon: '🔄', title: 'Business Changes = Financial Changes', text: `You mentioned: ${changeList}. These changes often mean your financial setup needs adjusting. A quick review can make sure everything still fits.` });
+        const changeType = realChanges.length >= 3 ? 'red' : 'yellow';
+        insights.push({ type: changeType, icon: '🔄', title: 'Business Changes = Financial Changes', text: `You mentioned: ${changeList}. These changes often mean your financial setup needs adjusting. A quick review can make sure everything still fits.` });
+      } else {
+        insights.push({ type: 'green', icon: '🔄', title: 'Stable Business', text: "No major business changes recently — your current financial setup likely still fits well." });
       }
 
-      if (answers.cashFlow === 'struggling' || answers.cashFlow === 'could-be-better') {
-        insights.push({ icon: '💰', title: 'Cash Flow Management', text: answers.cashFlow === 'struggling' ? "Cash flow issues are one of the top reasons businesses fail. Please reach out to your accountant or a business advisor — there are strategies that can help." : "Good cash flow management is the lifeblood of any business. Your accountant or broker may be able to suggest tools or facilities to smooth things out." });
-      }
+      // Cash flow
+      if (answers.cashFlow === 'struggling') insights.push({ type: 'red', icon: '💰', title: 'Cash Flow Management', text: "Cash flow issues are one of the top reasons businesses fail. Please reach out to your accountant or a business advisor — there are strategies that can help." });
+      else if (answers.cashFlow === 'could-be-better') insights.push({ type: 'yellow', icon: '💰', title: 'Cash Flow Management', text: "Good cash flow management is the lifeblood of any business. Your accountant or broker may be able to suggest tools or facilities to smooth things out." });
+      else if (answers.cashFlow === 'excellent' || answers.cashFlow === 'good') insights.push({ type: 'green', icon: '💰', title: 'Cash Flow', text: "Your cash flow management is in good shape. Keep monitoring it and maintain reserves for unexpected events." });
 
-      if (answers.financialPlan === 'no' || answers.financialPlan === 'not-really') {
-        insights.push({ icon: '🗺️', title: 'Create a Business Plan', text: "You don't need a 50-page document — even a rough plan for the next 2–5 years helps guide better decisions and gives your accountant/broker something to work with." });
-      }
+      // Financial plan
+      if (answers.financialPlan === 'no' || answers.financialPlan === 'not-really') insights.push({ type: 'yellow', icon: '🗺️', title: 'Create a Business Plan', text: "You don't need a 50-page document — even a rough plan for the next 2–5 years helps guide better decisions and gives your accountant/broker something to work with." });
+      else if (answers.financialPlan === 'clear') insights.push({ type: 'green', icon: '🗺️', title: 'Business Plan', text: "Having a clear business plan puts you ahead. Review it periodically to make sure it still aligns with your goals." });
 
-      if (answers.hasAccountant === 'no') {
-        insights.push({ icon: '👤', title: 'Find an Accountant', text: "Running a business without an accountant is like driving without a dashboard. A good accountant pays for themselves many times over in tax savings and strategic advice." });
-      } else if (answers.hasAccountant === 'tax-time') {
-        insights.push({ icon: '👤', title: 'Use Your Accountant More', text: "Tax-time-only accounting is reactive. Consider scheduling a mid-year check-in — proactive advice can save significantly more than just filing returns." });
-      }
+      // Accountant
+      if (answers.hasAccountant === 'no') insights.push({ type: 'red', icon: '👤', title: 'Find an Accountant', text: "Running a business without an accountant is like driving without a dashboard. A good accountant pays for themselves many times over in tax savings and strategic advice." });
+      else if (answers.hasAccountant === 'tax-time') insights.push({ type: 'yellow', icon: '👤', title: 'Use Your Accountant More', text: "Tax-time-only accounting is reactive. Consider scheduling a mid-year check-in — proactive advice can save significantly more than just filing returns." });
+      else if (answers.hasAccountant === 'yes') insights.push({ type: 'green', icon: '👤', title: 'Professional Support', text: "Having a regular accountant is a strong foundation. Make sure you're using them proactively, not just at tax time." });
 
-      if (answers.hasBanker === 'no' || answers.hasBanker === 'not-sure') {
-        insights.push({ icon: '🏦', title: 'Build a Banking Relationship', text: "Having a dedicated banker or broker who understands your business means better rates, faster approvals, and someone in your corner when you need capital." });
-      }
+      // Banker
+      if (answers.hasBanker === 'no' || answers.hasBanker === 'not-sure') insights.push({ type: 'yellow', icon: '🏦', title: 'Build a Banking Relationship', text: "Having a dedicated banker or broker who understands your business means better rates, faster approvals, and someone in your corner when you need capital." });
+      else if (answers.hasBanker === 'yes') insights.push({ type: 'green', icon: '🏦', title: 'Banking Relationship', text: "Great that you have a banking relationship. Stay in regular contact to ensure you're getting the best deals." });
 
-      if (insights.length === 0) {
-        insights.push({ icon: '✅', title: 'Keep It Up!', text: "You're doing well. Continue reviewing your business finances regularly and stay in touch with your accountant and banking professionals." });
-      }
+      // Separate into attention vs good
+      const attention = insights.filter(i => i.type === 'red' || i.type === 'yellow');
+      const good = insights.filter(i => i.type === 'green');
 
-      document.getElementById('insightsContent').innerHTML = insights.map(i => `
-        <div class="recommendation-item">
-          <div class="recommendation-icon">${i.icon}</div>
-          <div class="recommendation-content">
-            <h4>${i.title}</h4>
-            <p>${i.text}</p>
+      function renderCards(items) {
+        return items.map(i => `
+          <div class="insight-card" onclick="this.classList.toggle('expanded')">
+            <div class="insight-card-header">
+              <div class="insight-card-accent ${i.type}"></div>
+              <div class="insight-card-icon ${i.type}">${i.icon}</div>
+              <div class="insight-card-title">${i.title}</div>
+              <div class="insight-card-arrow">›</div>
+            </div>
+            <div class="insight-card-body"><p>${i.text}</p></div>
           </div>
-        </div>
-      `).join('');
+        `).join('');
+      }
+
+      let attentionHTML = '';
+      if (attention.length > 0) attentionHTML = `<div class="results-section-title">Areas needing attention</div>${renderCards(attention)}`;
+      let goodHTML = '';
+      if (good.length > 0) goodHTML = `<div class="results-section-title">Looking good</div>${renderCards(good)}`;
+
+      document.getElementById('attentionSection').innerHTML = attentionHTML;
+      document.getElementById('goodSection').innerHTML = goodHTML;
+
+      const level = overallScore >= 70 ? 'green' : overallScore >= 40 ? 'amber' : 'red';
+      generateEmailDraft(level);
+      nextStep(3);
     }
 
     function generateEmailDraft(level) {
