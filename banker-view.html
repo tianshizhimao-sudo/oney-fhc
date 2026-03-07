@@ -10,300 +10,146 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #1A1A2E;
-      --bg2: #16162A;
-      --card: #252540;
-      --border: #3D3D5C;
-      --green: #2ECC85;
-      --green2: #1FAD73;
-      --purple: #6B4C9A;
-      --red: #ef4444;
-      --yellow: #f59e0b;
-      --blue: #3b82f6;
-      --text: #ffffff;
-      --muted: #a3a3b8;
-      --glow: rgba(46,204,133,0.08);
+      --bg:#1A1A2E; --bg2:#16162A; --card:#252540; --border:#3D3D5C;
+      --green:#2ECC85; --green2:#1FAD73; --purple:#6B4C9A;
+      --red:#ef4444; --yellow:#f59e0b; --text:#ffffff; --muted:#a3a3b8;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
 
-    /* ── Top bar ── */
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 24px; border-bottom: 1px solid var(--border);
-      background: var(--card); position: sticky; top: 0; z-index: 100;
-    }
-    .logo svg { height: 28px; }
-    .topbar-back { color: var(--muted); text-decoration: none; font-size: 13px; }
-    .topbar-back:hover { color: var(--green); }
-    .phase-badge {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.8px;
-      text-transform: uppercase; color: var(--purple);
-      background: rgba(107,76,154,0.15); border: 1px solid rgba(107,76,154,0.3);
-      padding: 4px 10px; border-radius: 20px;
-    }
+    /* Topbar */
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--border);background:var(--card);position:sticky;top:0;z-index:100}
+    .topbar-back{color:var(--muted);text-decoration:none;font-size:13px}
+    .topbar-back:hover{color:var(--green)}
+    .phase-badge{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--purple);background:rgba(107,76,154,.15);border:1px solid rgba(107,76,154,.3);padding:4px 10px;border-radius:20px}
 
-    /* ── Hero ── */
-    .hero {
-      background: linear-gradient(180deg, #1e1e3a 0%, var(--bg) 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 48px 24px 40px;
-      text-align: center;
-    }
-    .hero-eyebrow {
-      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
-    }
-    .hero h1 {
-      font-size: clamp(26px, 5vw, 40px); font-weight: 900; line-height: 1.15;
-      margin-bottom: 14px;
-    }
-    .hero h1 em { font-style: normal; color: var(--green); }
-    .hero-sub {
-      font-size: 16px; color: var(--muted); max-width: 560px;
-      margin: 0 auto 24px; line-height: 1.7;
-    }
-    .hero-quote {
-      display: inline-block; background: var(--card); border: 1px solid var(--border);
-      border-left: 3px solid var(--purple); border-radius: 8px;
-      padding: 12px 20px; font-size: 13px; color: var(--muted);
-      font-style: italic; max-width: 480px; text-align: left;
-    }
+    /* Hero */
+    .hero{background:linear-gradient(180deg,#1e1e3a 0%,var(--bg) 100%);border-bottom:1px solid var(--border);padding:44px 24px 36px;text-align:center}
+    .hero-eyebrow{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+    .hero h1{font-size:clamp(24px,5vw,38px);font-weight:900;line-height:1.15;margin-bottom:12px}
+    .hero h1 em{font-style:normal;color:var(--green)}
+    .hero-sub{font-size:15px;color:var(--muted);max-width:540px;margin:0 auto 20px;line-height:1.7}
+    .hero-quote{display:inline-block;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--purple);border-radius:8px;padding:12px 18px;font-size:13px;color:var(--muted);font-style:italic;max-width:460px;text-align:left}
 
-    /* ── Container ── */
-    .container { max-width: 720px; margin: 0 auto; padding: 32px 20px 60px; }
+    /* Container */
+    .container{max-width:720px;margin:0 auto;padding:28px 20px 60px}
 
-    /* ── Input section ── */
-    .input-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 24px; margin-bottom: 32px;
-    }
-    .input-card-title {
-      font-size: 11px; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    @media(max-width: 500px) { .input-grid { grid-template-columns: 1fr; } }
-    .field label {
-      display: block; font-size: 11px; font-weight: 600; color: var(--muted);
-      margin-bottom: 6px; letter-spacing: 0.3px;
-    }
-    .input-wrap { position: relative; }
-    .input-prefix {
-      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-      color: var(--muted); font-size: 13px; pointer-events: none;
-    }
-    .field input, .field select {
-      width: 100%; background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 10px 12px; color: var(--text);
-      font-size: 14px; font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .field input.has-prefix { padding-left: 26px; }
-    .field input:focus, .field select:focus {
-      outline: none; border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(46,204,133,0.1);
-    }
-    .field select {
-      cursor: pointer; -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a3a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right 12px center;
-      padding-right: 32px;
-    }
-    .assess-btn {
-      width: 100%; margin-top: 20px; padding: 14px;
-      background: linear-gradient(135deg, var(--green2), var(--green));
-      border: none; border-radius: 10px; color: #fff;
-      font-size: 15px; font-weight: 700; font-family: inherit;
-      cursor: pointer; transition: opacity 0.2s;
-    }
-    .assess-btn:hover { opacity: 0.88; }
+    /* Input sections */
+    .input-section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:16px}
+    .section-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .section-title .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+    @media(max-width:520px){.grid-2,.grid-3{grid-template-columns:1fr}}
+    .field label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;letter-spacing:.3px}
+    .input-wrap{position:relative}
+    .prefix{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;pointer-events:none}
+    .field input,.field select{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .2s,box-shadow .2s}
+    .field input.pfx{padding-left:24px}
+    .field input:focus,.field select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(46,204,133,.1)}
+    .field select{-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a3a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+    .hint{font-size:11px;color:var(--muted);margin-top:4px}
+    .field-note{font-size:11px;color:var(--muted);background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:6px;padding:7px 10px;margin-top:8px}
 
-    /* ── Dimension Cards ── */
-    .section-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
-    }
-    .dim-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; overflow: hidden; margin-bottom: 16px;
-      transition: border-color 0.3s;
-    }
-    .dim-card.status-green { border-color: rgba(46,204,133,0.35); }
-    .dim-card.status-yellow { border-color: rgba(245,158,11,0.35); }
-    .dim-card.status-red { border-color: rgba(239,68,68,0.4); }
+    /* Run button */
+    .run-btn{width:100%;margin-top:6px;padding:15px;background:linear-gradient(135deg,var(--green2),var(--green));border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+    .run-btn:hover{opacity:.88}
 
-    .dim-header {
-      display: flex; align-items: center; gap: 14px;
-      padding: 16px 20px; border-bottom: 1px solid var(--border);
-    }
-    .dim-icon { font-size: 22px; flex-shrink: 0; width: 36px; text-align: center; }
-    .dim-meta { flex: 1; }
-    .dim-name { font-size: 15px; font-weight: 700; }
-    .dim-q { font-size: 12px; color: var(--muted); margin-top: 1px; }
-    .dim-status {
-      display: flex; align-items: center; gap: 6px;
-      padding: 5px 12px; border-radius: 20px;
-      font-size: 12px; font-weight: 700; white-space: nowrap;
-    }
-    .dim-status.green { background: rgba(46,204,133,0.12); color: var(--green); }
-    .dim-status.yellow { background: rgba(245,158,11,0.12); color: var(--yellow); }
-    .dim-status.red { background: rgba(239,68,68,0.12); color: var(--red); }
-    .dim-status.grey { background: rgba(163,163,184,0.1); color: var(--muted); }
-    .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .green .status-dot { background: var(--green); }
-    .yellow .status-dot { background: var(--yellow); }
-    .red .status-dot { background: var(--red); }
-    .grey .status-dot { background: var(--muted); }
+    /* Assessment */
+    #assessment{display:none}
+    #assessment.visible{display:block}
 
-    .dim-body { padding: 18px 20px; }
-    .dim-metric {
-      display: flex; justify-content: space-between; align-items: baseline;
-      margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
-    }
-    .dim-metric-label { font-size: 12px; color: var(--muted); }
-    .dim-metric-value { font-size: 22px; font-weight: 800; }
-    .dim-metric-value.green { color: var(--green); }
-    .dim-metric-value.yellow { color: var(--yellow); }
-    .dim-metric-value.red { color: var(--red); }
-    .dim-metric-value.grey { color: var(--muted); }
+    /* Dim cards */
+    .dim-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px;transition:border-color .3s}
+    .dim-card.status-green{border-color:rgba(46,204,133,.35)}
+    .dim-card.status-yellow{border-color:rgba(245,158,11,.35)}
+    .dim-card.status-red{border-color:rgba(239,68,68,.4)}
 
-    .banker-voice {
-      background: var(--bg2); border-left: 3px solid var(--border);
-      border-radius: 0 8px 8px 0; padding: 12px 14px;
-      margin-bottom: 14px;
-    }
-    .banker-voice-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
-    }
-    .banker-voice p { font-size: 13px; color: #d0d0e8; line-height: 1.7; }
+    .dim-header{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+    .dim-icon{font-size:20px;width:32px;text-align:center;flex-shrink:0}
+    .dim-meta{flex:1}
+    .dim-name{font-size:14px;font-weight:700}
+    .dim-q{font-size:11px;color:var(--muted);margin-top:1px}
+    .dim-status{display:flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+    .dim-status.green{background:rgba(46,204,133,.12);color:var(--green)}
+    .dim-status.yellow{background:rgba(245,158,11,.12);color:var(--yellow)}
+    .dim-status.red{background:rgba(239,68,68,.12);color:var(--red)}
+    .dim-status.grey{background:rgba(163,163,184,.1);color:var(--muted)}
+    .sdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+    .green .sdot{background:var(--green)}.yellow .sdot{background:var(--yellow)}.red .sdot{background:var(--red)}.grey .sdot{background:var(--muted)}
 
-    .dim-action {
-      background: rgba(46,204,133,0.05); border: 1px solid rgba(46,204,133,0.15);
-      border-radius: 8px; padding: 12px 14px;
-    }
-    .dim-action-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
-      text-transform: uppercase; color: var(--green); margin-bottom: 6px;
-    }
-    .dim-action p { font-size: 13px; color: var(--muted); line-height: 1.7; }
-    .dim-action p strong { color: var(--text); }
+    .dim-body{padding:16px 18px}
+    .dim-metric{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+    .dim-metric-label{font-size:12px;color:var(--muted)}
+    .dim-metric-value{font-size:20px;font-weight:800}
+    .dim-metric-value.green{color:var(--green)}.dim-metric-value.yellow{color:var(--yellow)}.dim-metric-value.red{color:var(--red)}.dim-metric-value.grey{color:var(--muted)}
 
-    .dim-action.yellow-action {
-      background: rgba(245,158,11,0.05); border-color: rgba(245,158,11,0.15);
-    }
-    .dim-action.yellow-action .dim-action-label { color: var(--yellow); }
-    .dim-action.red-action {
-      background: rgba(239,68,68,0.05); border-color: rgba(239,68,68,0.15);
-    }
-    .dim-action.red-action .dim-action-label { color: var(--red); }
+    .banker-voice{background:var(--bg2);border-left:3px solid var(--border);border-radius:0 7px 7px 0;padding:11px 13px;margin-bottom:12px}
+    .bv-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+    .banker-voice p{font-size:13px;color:#d0d0e8;line-height:1.7}
 
-    /* ── Verdict ── */
-    .verdict-card {
-      border-radius: 16px; padding: 28px 24px; margin: 32px 0;
-      text-align: center; border: 1px solid;
-    }
-    .verdict-card.green { background: rgba(46,204,133,0.07); border-color: rgba(46,204,133,0.3); }
-    .verdict-card.yellow { background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.3); }
-    .verdict-card.red { background: rgba(239,68,68,0.07); border-color: rgba(239,68,68,0.3); }
-    .verdict-icon { font-size: 40px; margin-bottom: 10px; }
-    .verdict-title { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
-    .verdict-card.green .verdict-title { color: var(--green); }
-    .verdict-card.yellow .verdict-title { color: var(--yellow); }
-    .verdict-card.red .verdict-title { color: var(--red); }
-    .verdict-body { font-size: 14px; color: var(--muted); max-width: 500px; margin: 0 auto 16px; line-height: 1.8; }
-    .verdict-score {
-      display: inline-flex; gap: 24px; justify-content: center;
-      margin-top: 16px; flex-wrap: wrap;
-    }
-    .v-stat { text-align: center; }
-    .v-stat-num { font-size: 28px; font-weight: 900; }
-    .v-stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
-    .verdict-flags { margin-top: 16px; text-align: left; }
-    .vflag { display: flex; align-items: flex-start; gap: 8px; padding: 7px 0; border-top: 1px solid rgba(255,255,255,0.06); font-size: 13px; color: var(--muted); }
-    .vflag-icon { flex-shrink: 0; margin-top: 1px; }
+    .dim-action{border-radius:8px;padding:11px 13px}
+    .dim-action.g{background:rgba(46,204,133,.06);border:1px solid rgba(46,204,133,.15)}
+    .dim-action.y{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15)}
+    .dim-action.r{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15)}
+    .da-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px}
+    .dim-action.g .da-label{color:var(--green)}.dim-action.y .da-label{color:var(--yellow)}.dim-action.r .da-label{color:var(--red)}
+    .dim-action p{font-size:13px;color:var(--muted);line-height:1.7}
+    .dim-action p strong{color:var(--text)}
 
-    /* ── Next steps ── */
-    .next-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 24px; margin-bottom: 16px;
-    }
-    .next-title { font-size: 14px; font-weight: 700; margin-bottom: 16px; }
-    .step-row {
-      display: flex; gap: 12px; padding: 10px 0;
-      border-bottom: 1px solid var(--border); align-items: flex-start;
-    }
-    .step-row:last-child { border-bottom: none; }
-    .step-num {
-      width: 24px; height: 24px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--green2), var(--green));
-      color: #fff; font-size: 11px; font-weight: 800;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .step-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
-    .step-text strong { color: var(--text); }
+    /* Verdict */
+    .verdict-card{border-radius:16px;padding:26px 22px;margin:24px 0;text-align:center;border:1px solid}
+    .verdict-card.green{background:rgba(46,204,133,.07);border-color:rgba(46,204,133,.3)}
+    .verdict-card.yellow{background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.3)}
+    .verdict-card.red{background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.3)}
+    .verdict-icon{font-size:36px;margin-bottom:8px}
+    .verdict-title{font-size:20px;font-weight:800;margin-bottom:8px}
+    .verdict-card.green .verdict-title{color:var(--green)}.verdict-card.yellow .verdict-title{color:var(--yellow)}.verdict-card.red .verdict-title{color:var(--red)}
+    .verdict-body{font-size:14px;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.8}
+    .verdict-score{display:flex;gap:28px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+    .vs{text-align:center}
+    .vs-num{font-size:26px;font-weight:900}
+    .vs-label{font-size:11px;color:var(--muted)}
 
-    /* ── CTA ── */
-    .cta-section {
-      text-align: center; padding: 40px 20px;
-      background: linear-gradient(135deg, rgba(107,76,154,0.1), rgba(46,204,133,0.05));
-      border: 1px solid var(--border); border-radius: 16px; margin-top: 32px;
-    }
-    .cta-title { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
-    .cta-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.7; }
-    .cta-btn {
-      display: inline-block; padding: 14px 32px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--green2), var(--green));
-      color: #fff; text-decoration: none; font-weight: 700; font-size: 15px;
-      transition: opacity 0.2s;
-    }
-    .cta-btn:hover { opacity: 0.88; }
-    .cta-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+    /* Next steps */
+    .steps-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:16px}
+    .steps-title{font-size:13px;font-weight:700;margin-bottom:14px}
+    .step-row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+    .step-row:last-child{border-bottom:none}
+    .step-num{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--green2),var(--green));color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .step-text{font-size:13px;color:var(--muted);line-height:1.6}
+    .step-text strong{color:var(--text)}
 
-    /* ── Hidden ── */
-    #assessment { display: none; }
-    #assessment.visible { display: block; }
-    .pending-msg {
-      text-align: center; padding: 48px 20px; color: var(--muted);
-      font-size: 14px;
-    }
-    .pending-icon { font-size: 36px; margin-bottom: 12px; }
+    /* Report */
+    .report-section{background:var(--card);border:1px solid rgba(107,76,154,.3);border-radius:14px;padding:22px;margin-top:24px}
+    .report-title{font-size:13px;font-weight:700;margin-bottom:6px;color:var(--text)}
+    .report-sub{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6}
+    .report-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:16px}
+    .rtab{padding:8px 16px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+    .rtab.active{color:var(--green);border-bottom-color:var(--green)}
+    .report-box{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:12px;line-height:1.8;white-space:pre-wrap;font-family:'Menlo','Consolas',monospace;max-height:380px;overflow-y:auto;color:#d0d0e8;display:none}
+    .report-box.active{display:block}
+    .copy-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:12px;font-weight:600;font-family:inherit;cursor:pointer;margin-top:10px;transition:border-color .2s}
+    .copy-btn:hover{border-color:var(--green);color:var(--green)}
+    .copy-ok{font-size:11px;color:var(--green);margin-left:8px;opacity:0;transition:opacity .3s}
+    .copy-ok.show{opacity:1}
+
+    /* disclaimer */
+    .disclaimer{font-size:11px;color:var(--muted);border-top:1px solid var(--border);padding:20px 24px;text-align:center;line-height:1.7;margin-top:32px}
   </style>
 </head>
 <body>
 
-<!-- Top bar -->
 <header class="topbar">
   <a href="/" class="topbar-back">← Financial Health Check</a>
   <span class="phase-badge">Phase 2 — Banker's View</span>
-  <div class="logo">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 90">
+  <div style="height:28px">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 90" height="28">
       <defs>
-        <linearGradient id="hfg" x1="0%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" style="stop-color:#1FAD73"/>
-          <stop offset="55%" style="stop-color:#2ECC85"/>
-          <stop offset="55%" style="stop-color:transparent"/>
-          <stop offset="100%" style="stop-color:transparent"/>
-        </linearGradient>
-        <linearGradient id="hsg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#2ECC85"/>
-          <stop offset="100%" style="stop-color:#1FAD73"/>
-        </linearGradient>
+        <linearGradient id="hfg" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" style="stop-color:#1FAD73"/><stop offset="55%" style="stop-color:#2ECC85"/><stop offset="55%" style="stop-color:transparent"/><stop offset="100%" style="stop-color:transparent"/></linearGradient>
+        <linearGradient id="hsg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#2ECC85"/><stop offset="100%" style="stop-color:#1FAD73"/></linearGradient>
       </defs>
-      <g transform="translate(40,45)">
-        <circle cx="0" cy="0" r="32" fill="none" stroke="url(#hsg)" stroke-width="7"/>
-        <circle cx="0" cy="0" r="24" fill="url(#hfg)"/>
-      </g>
+      <g transform="translate(40,45)"><circle cx="0" cy="0" r="32" fill="none" stroke="url(#hsg)" stroke-width="7"/><circle cx="0" cy="0" r="24" fill="url(#hfg)"/></g>
       <text x="82" y="52" font-family="Inter,system-ui,sans-serif" font-size="28" font-weight="600" fill="#a3a3b8" letter-spacing="-0.5">ney</text>
       <text x="129" y="52" font-family="Inter,system-ui,sans-serif" font-size="21" font-weight="500" fill="url(#hsg)">&amp;</text>
       <text x="148" y="52" font-family="Inter,system-ui,sans-serif" font-size="28" font-weight="600" fill="#a3a3b8" letter-spacing="-0.5">co</text>
@@ -312,72 +158,96 @@
   </div>
 </header>
 
-<!-- Hero -->
 <section class="hero">
   <div class="hero-eyebrow">Phase 2 of your Financial Health Check</div>
   <h1>Your file.<br><em>Through a banker's eyes.</em></h1>
-  <p class="hero-sub">
-    Most people only find out what a bank thinks of them after they apply — and get declined.
-    This is what a credit officer sees when they open your file. No filter.
-  </p>
+  <p class="hero-sub">Most people only find out what a bank thinks of them after they apply — and get declined. This is what a credit officer sees when they open your file. No filter.</p>
   <div class="hero-quote">
-    "8 years inside the Big Four taught me exactly what makes a banker approve — or hesitate.
-    This is that knowledge, given to you for free."
+    "8 years inside the Big Four taught me exactly what makes a banker approve — or hesitate. This is that knowledge, given to you for free."
     <br><br><strong style="color:var(--green);font-style:normal">— Dong, Oney & Co</strong>
   </div>
 </section>
 
 <div class="container">
 
-  <!-- Input card -->
-  <div class="input-card">
-    <div class="input-card-title">
-      <span style="color:var(--green)">●</span> Your numbers — takes 60 seconds
-    </div>
-    <div class="input-grid">
+  <!-- Section 1: Basics -->
+  <div class="input-section">
+    <div class="section-title"><span class="dot"></span>1. Your Financials</div>
+    <div class="grid-3">
       <div class="field">
         <label>Combined Annual Income ($)</label>
-        <div class="input-wrap">
-          <span class="input-prefix">$</span>
-          <input type="number" id="i_income" class="has-prefix" placeholder="120,000" min="0" step="1000" oninput="liveAssess()">
-        </div>
+        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="i_income" class="pfx" placeholder="120,000" min="0" step="1000"></div>
       </div>
       <div class="field">
         <label>Target Property Value ($)</label>
-        <div class="input-wrap">
-          <span class="input-prefix">$</span>
-          <input type="number" id="i_propVal" class="has-prefix" placeholder="800,000" min="0" step="10000" oninput="liveAssess()">
-        </div>
+        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="i_propVal" class="pfx" placeholder="800,000" min="0" step="10000"></div>
       </div>
       <div class="field">
-        <label>Deposit / Savings ($)</label>
-        <div class="input-wrap">
-          <span class="input-prefix">$</span>
-          <input type="number" id="i_deposit" class="has-prefix" placeholder="120,000" min="0" step="5000" oninput="liveAssess()">
-        </div>
+        <label>Your Deposit / Savings ($)</label>
+        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="i_deposit" class="pfx" placeholder="120,000" min="0" step="5000"></div>
+        <div class="hint">What you have ready to put in</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Debts (proper DTI inputs) -->
+  <div class="input-section">
+    <div class="section-title"><span class="dot" style="background:var(--yellow)"></span>2. Existing Debts (Outstanding Balances)</div>
+    <div class="field-note">⚠️ Banks calculate DTI using outstanding balances — not monthly repayments. Enter the total amount still owing on each.</div>
+    <div style="height:14px"></div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Secured Debts — Home / Investment Loans ($)</label>
+        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="i_mortgage" class="pfx" placeholder="0" min="0" step="10000"></div>
+        <div class="hint">Total outstanding balance across all mortgages</div>
       </div>
       <div class="field">
-        <label>Total Existing Monthly Debts ($)</label>
-        <div class="input-wrap">
-          <span class="input-prefix">$</span>
-          <input type="number" id="i_debts" class="has-prefix" placeholder="1,200" min="0" oninput="liveAssess()">
-        </div>
+        <label>Secured Debts — Car / Asset Loans ($)</label>
+        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="i_carloan" class="pfx" placeholder="0" min="0" step="1000"></div>
+        <div class="hint">Outstanding balance (not monthly payment)</div>
       </div>
+      <div class="field">
+        <label>Credit Card — Total Limits ($)</label>
+        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="i_cc" class="pfx" placeholder="0" min="0" step="1000"></div>
+        <div class="hint">Banks use the full limit, not your current balance</div>
+      </div>
+      <div class="field">
+        <label>Personal Loans / BNPL ($)</label>
+        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="i_personal" class="pfx" placeholder="0" min="0" step="1000"></div>
+        <div class="hint">Outstanding balance — include AfterPay / Zip / etc.</div>
+      </div>
+      <div class="field">
+        <label>HECS / HELP Debt ($)</label>
+        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="i_hecs" class="pfx" placeholder="0" min="0" step="1000"></div>
+        <div class="hint">Some lenders include this in DTI calculation</div>
+      </div>
+      <div class="field">
+        <label>Other Debts ($)</label>
+        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="i_other" class="pfx" placeholder="0" min="0"></div>
+        <div class="hint">Tax debts, family loans, guarantees etc.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Profile -->
+  <div class="input-section">
+    <div class="section-title"><span class="dot" style="background:var(--purple)"></span>3. Your Profile</div>
+    <div class="grid-2">
       <div class="field">
         <label>Employment Type</label>
-        <select id="i_employment" onchange="liveAssess()">
+        <select id="i_employment">
           <option value="">Select…</option>
           <option value="payg-perm">PAYG — Permanent Full-Time</option>
           <option value="payg-pt">PAYG — Part-Time / Casual</option>
           <option value="payg-contract">PAYG — Fixed Contract</option>
-          <option value="payg-probation">PAYG — Probation Period</option>
+          <option value="payg-probation">PAYG — On Probation</option>
           <option value="se-2plus">Self-Employed — 2+ years</option>
           <option value="se-under2">Self-Employed — Under 2 years</option>
         </select>
       </div>
       <div class="field">
         <label>Credit History</label>
-        <select id="i_credit" onchange="liveAssess()">
+        <select id="i_credit">
           <option value="">Select…</option>
           <option value="clean">Clean — no issues</option>
           <option value="enquiries">Multiple credit enquiries (5+)</option>
@@ -389,18 +259,18 @@
       </div>
       <div class="field">
         <label>Savings Pattern (last 3 months)</label>
-        <select id="i_savings" onchange="liveAssess()">
+        <select id="i_savings">
           <option value="">Select…</option>
-          <option value="genuine">Steadily growing — I save every month</option>
+          <option value="genuine">Steadily growing — consistent monthly savings</option>
           <option value="gift">Includes gift from family</option>
           <option value="sale">From selling an asset</option>
-          <option value="irregular">Irregular — goes up and down</option>
+          <option value="irregular">Irregular — balance fluctuates</option>
           <option value="recent">Just started saving recently</option>
         </select>
       </div>
       <div class="field">
         <label>Dependants</label>
-        <select id="i_dependants" onchange="liveAssess()">
+        <select id="i_dependants">
           <option value="0">None</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -408,415 +278,397 @@
         </select>
       </div>
     </div>
-    <button class="assess-btn" onclick="liveAssess()">See my banker's assessment →</button>
   </div>
 
-  <!-- Pending -->
-  <div id="pendingMsg" class="pending-msg">
-    <div class="pending-icon">🏦</div>
-    Fill in your numbers above to see how a credit officer would read your file.
-  </div>
+  <button class="run-btn" onclick="runAssessment()">🏦 See how a credit officer reads this file</button>
 
-  <!-- Assessment -->
+  <!-- Assessment output -->
   <div id="assessment">
-
-    <p class="section-label">Credit officer assessment — 6 dimensions</p>
-
-    <!-- Cards injected by JS -->
+    <div style="height:28px"></div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Credit officer assessment — 6 dimensions</div>
     <div id="dimCards"></div>
-
-    <!-- Verdict -->
     <div id="verdictCard"></div>
-
-    <!-- Next steps -->
     <div id="nextSteps"></div>
-
-    <!-- CTA -->
-    <div class="cta-section">
-      <div class="cta-title">Ready to talk strategy?</div>
-      <p class="cta-sub">
-        You now know how the banks see you. The next step is building a plan to close the gaps —
-        and knowing which lenders are right for your situation. That's what we do.
-      </p>
-      <a href="https://oneyco.com.au/fhc" class="cta-btn">Book a Free Consultation →</a>
-      <div class="cta-note">No obligation · No credit check · 30 minutes · By someone who's sat on the other side</div>
-    </div>
-
-  </div><!-- /assessment -->
+    <div id="reportSection"></div>
+  </div>
 
 </div>
 
-<script>
-// ── Helpers ─────────────────────────────────────────────────────────────────
-function val(id) { return parseFloat(document.getElementById(id)?.value) || 0; }
-function sel(id) { return document.getElementById(id)?.value || ''; }
-function fmt(n) {
-  if (!n) return '—';
-  if (n >= 1e6) return '$' + (n/1e6).toFixed(2) + 'M';
-  return '$' + Math.round(n).toLocaleString('en-AU');
-}
-function pct(n) { return n ? n.toFixed(1) + '%' : '—'; }
+<div class="disclaimer">
+  <strong>Educational tool only.</strong> This is not financial advice. Figures are estimates based on standard Australian lending policy guidelines (as at early 2026). Assessment rates, DTI caps, and HEM benchmarks differ between lenders and change over time. Always seek advice from a licensed mortgage broker or financial adviser before making borrowing decisions.<br>
+  <span style="color:var(--green)">Oney & Co Pty Ltd</span> · ACN 688 704 912 · <a href="https://oneyco.com.au" style="color:var(--green)">oneyco.com.au</a>
+</div>
 
-function statusClass(s) { return s; }
-function dimCard(icon, name, question, status, metricLabel, metricVal, metricClass, voiceText, actionText, actionClass) {
-  return `<div class="dim-card status-${status}">
+<script>
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function n(id){return parseFloat(document.getElementById(id)?.value)||0}
+function s(id){return document.getElementById(id)?.value||''}
+function fmt(v){if(!v&&v!==0)return'—';if(Math.abs(v)>=1e6)return'$'+(v/1e6).toFixed(2)+'M';return(v<0?'−$':'$')+Math.round(Math.abs(v)).toLocaleString('en-AU')}
+function pct(v){return v?v.toFixed(1)+'%':'—'}
+
+function statusLabel(s){return{green:'Strong',yellow:'Watch this',red:'Flag raised',grey:'—'}[s]||s}
+function actionClass(s){return s==='green'?'g':s==='yellow'?'y':'r'}
+function actionLabel(s){return s==='green'?'✅ Keep doing this':s==='yellow'?'⚡ Improve this':'🚨 Priority action'}
+
+function buildDimCard(icon,name,question,status,metricLabel,metricVal,voiceText,actionText){
+  const ac=status==='grey'?'g':actionClass(status);
+  return`<div class="dim-card status-${status}">
     <div class="dim-header">
       <div class="dim-icon">${icon}</div>
-      <div class="dim-meta">
-        <div class="dim-name">${name}</div>
-        <div class="dim-q">${question}</div>
-      </div>
-      <div class="dim-status ${status}"><span class="status-dot"></span>${statusLabel(status)}</div>
+      <div class="dim-meta"><div class="dim-name">${name}</div><div class="dim-q">${question}</div></div>
+      <div class="dim-status ${status}"><span class="sdot"></span>${statusLabel(status)}</div>
     </div>
     <div class="dim-body">
       <div class="dim-metric">
         <span class="dim-metric-label">${metricLabel}</span>
-        <span class="dim-metric-value ${metricClass}">${metricVal}</span>
+        <span class="dim-metric-value ${status==='grey'?'grey':status}">${metricVal}</span>
       </div>
-      <div class="banker-voice">
-        <div class="banker-voice-label">🏦 Credit officer's internal read</div>
-        <p>${voiceText}</p>
-      </div>
-      <div class="dim-action ${actionClass}">
-        <div class="dim-action-label">${actionClass.includes('red') ? '🚨 Priority action' : actionClass.includes('yellow') ? '⚡ Improve this' : '✅ Keep doing this'}</div>
-        <p>${actionText}</p>
-      </div>
+      <div class="banker-voice"><div class="bv-label">🏦 Credit officer's read</div><p>${voiceText}</p></div>
+      <div class="dim-action ${ac}"><div class="da-label">${actionLabel(status)}</div><p>${actionText}</p></div>
     </div>
-  </div>`;
-}
-function statusLabel(s) {
-  return { green: 'Strong', yellow: 'Watch this', red: 'Flag raised', grey: 'Not assessed' }[s] || s;
+  </div>`
 }
 
-// ── Assessment engine ────────────────────────────────────────────────────────
-function liveAssess() {
-  const income = val('i_income');
-  const propVal = val('i_propVal');
-  const deposit = val('i_deposit');
-  const existDebts = val('i_debts'); // monthly
-  const employment = sel('i_employment');
-  const credit = sel('i_credit');
-  const savings = sel('i_savings');
-  const dependants = parseInt(sel('i_dependants')) || 0;
+// ── Main assessment ───────────────────────────────────────────────────────────
+function runAssessment(){
+  const income     = n('i_income');
+  const propVal    = n('i_propVal');
+  const deposit    = n('i_deposit');
+  const mortgage   = n('i_mortgage');
+  const carloan    = n('i_carloan');
+  const cc         = n('i_cc');
+  const personal   = n('i_personal');
+  const hecs       = n('i_hecs');
+  const other      = n('i_other');
+  const employment = s('i_employment');
+  const credit     = s('i_credit');
+  const savings    = s('i_savings');
+  const dependants = parseInt(s('i_dependants'))||0;
 
-  // Need at least income + propVal to show anything
-  const hasData = income > 0 && propVal > 0;
-  document.getElementById('pendingMsg').style.display = hasData ? 'none' : 'block';
-  const asmEl = document.getElementById('assessment');
-  if (!hasData) { asmEl.classList.remove('visible'); return; }
-  asmEl.classList.add('visible');
-
-  const loanAmt = Math.max(0, propVal - deposit);
-  const lvrNum = propVal > 0 ? (loanAmt / propVal * 100) : 0;
-
-  // ── 1. SERVICEABILITY ────────────────────────────────────────────────────
-  const assessRate = 0.0685; // 3.85% cash rate + 3% buffer
-  const loanYears = 30;
-  const r = assessRate / 12;
-  const n = loanYears * 12;
-  const newRepay = loanAmt > 0 ? loanAmt * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1) : 0;
-  const hemBase = [2100, 2500, 2900, 3200][Math.min(dependants, 3)];
-  const monthlyIncome = income / 12;
-  const nsr = monthlyIncome - existDebts - newRepay - hemBase;
-
-  let srvStatus, srvVoice, srvAction, srvAClass;
-  if (nsr >= 1000) {
-    srvStatus = 'green';
-    srvVoice = `NSR of ${fmt(nsr)}/month is solid. I'm not going to lose sleep over this one. After the new mortgage, living expenses, and existing commitments, there's a reasonable buffer left. This is a file I can work with.`;
-    srvAction = `<strong>You're in good shape here.</strong> Keep your existing debt levels stable — don't take on new car loans or credit cards before settling. Any increase in commitments will erode this buffer.`;
-    srvAClass = '';
-  } else if (nsr >= 300) {
-    srvStatus = 'yellow';
-    srvVoice = `Tight. NSR is ${fmt(nsr)}/month — technically serviceable, but I'm going to look hard at everything else. One credit card over the limit or an undisclosed debt and this falls over. I'll be asking more questions.`;
-    srvAction = `<strong>Pay down as much existing debt as possible</strong> before applying. Even closing a credit card (or reducing limits) can move the dial. Target NSR above $1,000/month for a comfortable application.`;
-    srvAClass = 'yellow-action';
-  } else {
-    srvStatus = 'red';
-    srvVoice = `NSR is ${fmt(nsr)}/month — this is below what I need to see. I can't approve a loan where the numbers show the borrower is stretched this thin from day one. The stress scenario at higher rates would be worse.`;
-    srvAction = `<strong>Serviceability is the #1 issue to fix.</strong> Options: increase income, reduce existing debts, target a lower loan amount, or extend your timeline. Don't apply until NSR is comfortably above $800/month.`;
-    srvAClass = 'red-action';
+  if(!income||!propVal){
+    alert('Please enter at least your income and target property value.');
+    return;
   }
 
-  // ── 2. DTI ───────────────────────────────────────────────────────────────
-  const annualDebt = (existDebts + newRepay) * 12;
-  const dti = income > 0 ? annualDebt / income : 0;
-  let dtiStatus, dtiVoice, dtiAction, dtiAClass;
-  if (dti < 5) {
-    dtiStatus = 'green';
-    dtiVoice = `DTI of ${dti.toFixed(1)}x is well within APRA's 6x cap. I won't need to escalate this for a DTI exception. Standard processing.`;
-    dtiAction = `<strong>No action needed on DTI.</strong> You have room to absorb rate rises without hitting the APRA cap.`;
-    dtiAClass = '';
-  } else if (dti < 6) {
-    dtiStatus = 'yellow';
-    dtiVoice = `DTI is ${dti.toFixed(1)}x — approaching the APRA 6x boundary. This doesn't disqualify you, but some lenders have already used up their DTI exception quota. I'll need to check availability. If you're towards end of quarter, some banks will have shut the door on high-DTI applications.`;
-    dtiAction = `<strong>Time your application carefully.</strong> Ask your broker which lenders currently have DTI headroom. Early in a quarter = more availability. Also worth reducing any discretionary debt now.`;
-    dtiAClass = 'yellow-action';
-  } else {
-    dtiStatus = 'red';
-    dtiVoice = `DTI is ${dti.toFixed(1)}x — over APRA's 6x cap. I can't approve this without a specific DTI exception, and those are capped at 20% of our new lending. If we've hit that cap this quarter, this file goes nowhere. Non-bank lenders may be the only path.`;
-    dtiAction = `<strong>This is a structural problem.</strong> Priority: reduce total debt or increase income before applying. Non-bank (specialist) lenders don't apply the same DTI cap — your broker can identify the right lender for your scenario.`;
-    dtiAClass = 'red-action';
+  // ── Derived numbers ─────────────────────────────────────────────────────
+  const loanAmt  = Math.max(0, propVal - deposit);
+  const lvrNum   = propVal > 0 ? (loanAmt/propVal*100) : 0;
+
+  // DTI: (all existing outstanding debts + new loan) / annual income
+  // Credit card: banks assess at 3.8% of limit per month = 45.6%/yr, or simpler: limit × 38.4% for annual committed
+  // Simpler standard: total outstanding + new loan / income
+  const totalExistingDebt = mortgage + carloan + cc + personal + hecs + other;
+  const totalDebtForDTI   = totalExistingDebt + loanAmt;
+  const dtiNum            = income > 0 ? totalDebtForDTI / income : 0;
+
+  // Serviceability (monthly repayment test at assessment rate)
+  const assessRate = 0.0685; // floor rate ~6.85% (RBA 3.85% + 3% buffer)
+  const r = assessRate/12, nPay = 30*12;
+  const newRepay = loanAmt > 0 ? loanAmt * r * Math.pow(1+r,nPay)/(Math.pow(1+r,nPay)-1) : 0;
+  // Existing debt monthly commitment (rough: secured at 3%, unsecured at higher)
+  const existMonthly = (mortgage+carloan)*assessRate/12 + cc*0.038 + (personal+hecs+other)*0.05;
+  const hemBase = [2100,2500,2900,3300][Math.min(dependants,3)];
+  const nsr = income/12 - existMonthly - newRepay - hemBase;
+
+  // ── 1. SERVICEABILITY ───────────────────────────────────────────────────
+  let srvS,srvV,srvA;
+  if(nsr>=1000){
+    srvS='green';
+    srvV=`NSR of ${fmt(nsr)}/month is solid. After the new mortgage, living costs, and existing commitments, there's a meaningful buffer left. This is the kind of surplus I want to see — it tells me the borrower has room to absorb a rate rise without coming back to restructure.`;
+    srvA=`<strong>You're in good shape here.</strong> Keep existing debt levels stable — don't take on new car loans or credit cards before settlement. Every new commitment reduces this buffer.`;
+  }else if(nsr>=300){
+    srvS='yellow';
+    srvV=`NSR is ${fmt(nsr)}/month — technically serviceable, but I'm going to look hard at everything else. One undisclosed liability or a credit card limit I missed and this falls over. I'll be asking more questions and scrutinising the bank statements.`;
+    srvA=`<strong>Pay down existing debts before applying.</strong> Reducing or closing credit card limits has an immediate positive effect on serviceability. Target NSR above $1,000/month. A $10K credit card closure can add ~$380/month back into your NSR.`;
+  }else{
+    srvS='red';
+    srvV=`NSR is ${fmt(nsr)}/month — this file doesn't work. The numbers show the borrower will be stretched beyond what policy allows. I'm not going to condition this one, I'm going to decline it. Either the loan amount is too high, the income is too low, or the existing debt load is too heavy.`;
+    srvA=`<strong>Serviceability is the primary issue.</strong> Three levers: (1) reduce loan amount by increasing deposit, (2) pay down existing debts to reduce monthly commitments, (3) increase income. Work with a broker to understand which lever has the most impact in your situation.`;
   }
 
-  // ── 3. LVR ───────────────────────────────────────────────────────────────
-  let lvrStatus, lvrVoice, lvrAction, lvrAClass;
-  if (lvrNum <= 0) {
-    lvrStatus = 'grey';
-    lvrVoice = 'Enter deposit and property value to see your LVR assessment.';
-    lvrAction = 'Fill in the numbers above.';
-    lvrAClass = '';
-  } else if (lvrNum <= 80) {
-    lvrStatus = 'green';
-    lvrVoice = `LVR ${pct(lvrNum)} — this is the clean zone. No LMI, no additional scrutiny on the security. The bank has enough skin in the game to feel comfortable if things go wrong.`;
-    lvrAction = `<strong>You're below 80% — excellent.</strong> This opens the most lender options and lowest rates. If you're at exactly 80%, aim to stay there.`;
-    lvrAClass = '';
-  } else if (lvrNum <= 90) {
-    lvrStatus = 'yellow';
-    lvrVoice = `LVR ${pct(lvrNum)} — LMI territory. Not a dealbreaker, but the borrower pays Lenders Mortgage Insurance, which gets added to the loan. I also check the property type harder at this LVR — apartments over 60m², rural properties, and anything non-standard get flagged.`;
-    lvrAction = `<strong>LMI will cost ${fmt(estimateLMI(loanAmt, lvrNum))} approximately.</strong> Consider whether saving for a larger deposit (to reach 80%) makes sense, or factor LMI into your purchase budget.`;
-    lvrAClass = 'yellow-action';
-  } else {
-    lvrStatus = 'red';
-    lvrVoice = `LVR ${pct(lvrNum)} — above 90%. Very few lenders go here. Those that do charge significantly higher LMI and apply much tighter criteria on everything else. For this to work, everything else on the file needs to be spotless.`;
-    lvrAction = `<strong>Increase your deposit as a priority.</strong> Even an extra $20–30K can bring you under 90%. Family guarantee arrangements can also solve this — talk to a broker about options.`;
-    lvrAClass = 'red-action';
+  // ── 2. DTI ──────────────────────────────────────────────────────────────
+  let dtiS,dtiV,dtiA;
+  if(dtiNum<5){
+    dtiS='green';
+    dtiV=`DTI of ${dtiNum.toFixed(1)}x is comfortably within APRA's 6x guideline. I won't need to flag this for a DTI exception or escalate it for additional review. Standard processing.`;
+    dtiA=`<strong>No action needed on DTI.</strong> You have comfortable headroom. Avoid taking on significant new debt before settlement — adding $20K to a car loan right before applying will show up.`;
+  }else if(dtiNum<6){
+    dtiS='yellow';
+    dtiV=`DTI is ${dtiNum.toFixed(1)}x — approaching APRA's 6x boundary. This doesn't kill the deal, but each lender has a cap on how many high-DTI loans they can write per quarter. If we're late in the quarter and the book's full, this application goes to the back of the queue or gets declined purely on quota. Timing matters here.`;
+    dtiA=`<strong>Application timing matters.</strong> Ask your broker which lenders currently have DTI headroom — this changes quarterly. Also: pay down any unsecured debt now. A $5K personal loan payoff can meaningfully move your DTI.`;
+  }else{
+    dtiS='red';
+    dtiV=`DTI is ${dtiNum.toFixed(1)}x — over APRA's 6x cap. This requires a DTI exception, which is capped at 20% of new lending industry-wide. The Big 4 will only grant exceptions to very clean files with strong compensating factors. More likely this needs to go to a non-bank or specialist lender who doesn't apply the same APRA restriction.`;
+    dtiA=`<strong>This needs structural change.</strong> Priority: (1) pay down existing debts to reduce the total debt stack, (2) consider a lower loan amount, (3) your broker needs to identify non-bank lenders who can write high-DTI loans. Don't apply to mainstream banks without addressing this first.`;
   }
 
-  // ── 4. SAVINGS BEHAVIOR ──────────────────────────────────────────────────
-  let savStatus, savVoice, savAction, savAClass;
-  switch (savings) {
-    case 'genuine':
-      savStatus = 'green';
-      savVoice = `Genuine savings — growing steadily over 3+ months. This is what I want to see. It tells me the borrower has discipline, and that this deposit didn't just appear from nowhere. Much less risk of hidden liabilities.`;
-      savAction = `<strong>Keep the momentum.</strong> Continue regular transfers to your savings account up to settlement. Don't let the balance dip — lenders can re-verify savings right before approval.`;
-      savAClass = '';
-      break;
-    case 'gift':
-      savStatus = 'yellow';
-      savVoice = `Gift funds — this changes how I assess the deposit. Not all of it counts as "genuine savings" under policy. Some lenders require 5% to be genuine, meaning the borrower's own savings, not gifted money. I'll need a statutory declaration from the giftor.`;
-      savAction = `<strong>Ask your broker which lenders accept 100% gifted deposit.</strong> Some do, many don't. Plan to show at least 3 months of your own genuine savings alongside the gift if possible.`;
-      savAClass = 'yellow-action';
-      break;
-    case 'sale':
-      savStatus = 'yellow';
-      savVoice = `Funds from asset sale — I'll accept this as a deposit source but it's not the same as behavioural savings. I still want to see the sale documentation clearly, and I'm going to look at the overall pattern more carefully.`;
-      savAction = `<strong>Have the sale documentation ready.</strong> Provide a clear paper trail: contract, settlement statement, and deposit into your account. Clean trail = no questions.`;
-      savAClass = 'yellow-action';
-      break;
-    case 'irregular':
-      savStatus = 'yellow';
-      savVoice = `Irregular savings pattern — the account goes up and down. This tells me one of two things: either the borrower is living close to their limits, or there are transfers I'm not seeing. Either way I'm going to look at statements more carefully.`;
-      savAction = `<strong>Build 3 months of consistent savings history before applying.</strong> Even small, regular amounts matter — what lenders look for is the pattern, not just the total.`;
-      savAClass = 'yellow-action';
-      break;
-    case 'recent':
-      savStatus = 'red';
-      savVoice = `Savings just started — this is a problem. I need to see a minimum of 3 months genuine savings history. "Just started saving" suggests the deposit was either always there (which means statements will show it) or it was pulled together recently, which I'll want to explain.`;
-      savAction = `<strong>Wait 3 months minimum before applying.</strong> Use this time to build a clean, consistent savings record. This is one of the easiest things to fix — it just requires time.`;
-      savAClass = 'red-action';
-      break;
-    default:
-      savStatus = 'grey';
-      savVoice = `Select your savings pattern above to see this assessment.`;
-      savAction = `Tell us about your savings pattern.`;
-      savAClass = '';
+  // ── 3. LVR ──────────────────────────────────────────────────────────────
+  let lvrS,lvrV,lvrA,lvrDisplay;
+  if(!deposit&&!propVal){
+    lvrS='grey'; lvrV='Enter property value and deposit to see LVR.'; lvrA='Fill in the numbers above.'; lvrDisplay='—';
+  }else{
+    lvrDisplay = `${pct(lvrNum)}  (Loan ${fmt(loanAmt)} / Value ${fmt(propVal)})`;
+    if(lvrNum<=80){
+      lvrS='green';
+      lvrV=`LVR ${pct(lvrNum)} — clean zone. No LMI required. I have enough security coverage that if this loan sours, the bank can recover its money from the property. I'm not going to scrutinise the security extra hard at this LVR.`;
+      lvrA=`<strong>Below 80% — the best outcome.</strong> No LMI cost, full lender choice, and no additional security restrictions. Protect this position — don't borrow more against the property before settlement.`;
+    }else if(lvrNum<=90){
+      lvrS='yellow';
+      const lmiEst = loanAmt*0.018;
+      lvrV=`LVR ${pct(lvrNum)} — LMI territory. The borrower is putting in less than 20%, so the bank takes out insurance to protect itself. That premium gets added to the loan. I'll also look harder at the property type at this LVR — high-density apartments, unusual zoning, or postcodes with falling values get extra scrutiny above 80%.`;
+      lvrA=`<strong>LMI will cost approximately ${fmt(lmiEst)}</strong> (added to your loan). Reaching 80% LVR requires ${fmt(loanAmt - propVal*0.8)} more in deposit. Run the numbers: is saving that gap worth the LMI saving?`;
+    }else{
+      lvrS='red';
+      const lmiEst = loanAmt*0.035;
+      lvrV=`LVR ${pct(lvrNum)} — above 90%. Very few mainstream lenders go here. Those that do apply strict criteria on everything else and charge significant LMI. If this file has any other weakness — employment type, credit history, unusual property — it will be declined at this LVR.`;
+      lvrA=`<strong>Increase deposit as a priority.</strong> To reach 90%, you need ${fmt(loanAmt - propVal*0.9)} more. Family guarantee arrangements can bridge this gap without a cash deposit — speak to a broker about structure. LMI at this LVR is approximately ${fmt(lmiEst)}.`;
+    }
   }
 
-  // ── 5. INCOME STABILITY ──────────────────────────────────────────────────
-  let empStatus, empVoice, empAction, empAClass;
-  switch (employment) {
-    case 'payg-perm':
-      empStatus = 'green';
-      empVoice = `Permanent PAYG — the easiest income to verify and the most stable in a lender's eyes. Two payslips and two years of tax returns, and I'm done. No complex calculations, no risk adjustments.`;
-      empAction = `<strong>No action needed.</strong> Keep your employment stable. Changing jobs during the application is a major complication — wait until after settlement if possible.`;
-      empAClass = '';
-      break;
-    case 'payg-pt':
-      empStatus = 'yellow';
-      empVoice = `Part-time or casual — I'll use the income, but I'm going to average it over 12–24 months and I'll be looking for consistency. Variable hours mean variable income, and that increases my uncertainty about repayment capacity.`;
-      empAction = `<strong>Provide 2 years of tax returns and group certificates</strong> to demonstrate income consistency. The longer the tenure, the better.`;
-      empAClass = 'yellow-action';
-      break;
-    case 'payg-contract':
-      empStatus = 'yellow';
-      empVoice = `Fixed-term contract — this is fine if the contract term is long enough. If the contract ends in 3 months, I'm not confident income continues to settlement. I'll want to see renewal history or a profession where contracts are standard (IT, engineering, nursing).`;
-      empAction = `<strong>Make sure your contract has at least 6–12 months remaining,</strong> or can demonstrate a clear history of renewals. A letter from your employer confirming likelihood of renewal helps.`;
-      empAClass = 'yellow-action';
-      break;
-    case 'payg-probation':
-      empStatus = 'red';
-      empVoice = `On probation — this is a significant flag. I can't rely on this income as stable until probation completes. Most lenders require you to have passed probation before approving. If you haven't, I'll likely condition approval on probation completion.`;
-      empAction = `<strong>Wait until probation is complete before applying</strong> if possible. If you need to proceed now, some lenders will conditionally approve — your broker can identify who.`;
-      empAClass = 'red-action';
-      break;
-    case 'se-2plus':
-      empStatus = 'yellow';
-      empVoice = `Self-employed, 2+ years — I'll use the last 2 years of business financials and personal tax returns. I'll average the income, and if income is declining year-on-year, I'll use the lower year. ATO tax debt is an automatic decline for me.`;
-      empAction = `<strong>Have 2 years of signed, lodged tax returns and financials ready.</strong> If income fluctuates, ask your broker which lenders are more self-employed-friendly. Make sure ATO is fully paid up.`;
-      empAClass = 'yellow-action';
-      break;
-    case 'se-under2':
-      empStatus = 'red';
-      empVoice = `Self-employed under 2 years — most lenders won't touch this through standard channels. I can't verify income stability with less than 2 years of history. This falls to specialist/alt-doc lenders, which means higher rates.`;
-      empAction = `<strong>Your main options are alt-doc products or waiting until 2-year mark.</strong> Alt-doc uses BAS statements and accountant letters instead of tax returns — valid path, but rate premium applies.`;
-      empAClass = 'red-action';
-      break;
-    default:
-      empStatus = 'grey';
-      empVoice = `Select your employment type above.`;
-      empAction = `Tell us your employment situation.`;
-      empAClass = '';
-  }
+  // ── 4. SAVINGS BEHAVIOR ─────────────────────────────────────────────────
+  let savS,savV,savA;
+  const savMap={
+    genuine:{s:'green',v:`Genuine savings — consistent pattern over 3+ months. This is exactly what the policy requires. It demonstrates the borrower has discipline and that this deposit wasn't assembled overnight. I'm satisfied on savings.`,a:`<strong>Maintain the pattern.</strong> Keep saving consistently right up to settlement. Lenders may re-verify bank statements close to settlement date — a sudden dip or withdrawal will raise questions.`},
+    gift:{s:'yellow',v:`Gift funds on deposit. Policy is clear: gifted money can be used, but not all lenders count it as "genuine savings." Most require 5% of the purchase price to be genuine (borrower's own) savings. I'll need a statutory declaration from the person gifting, confirming it's a gift not a loan.`,a:`<strong>Check the genuine savings rule with your lender choice.</strong> Many lenders require you to hold the gift in your account for 3 months before it qualifies. Simultaneously build your own genuine savings alongside the gift if possible.`},
+    sale:{s:'yellow',v:`Proceeds from asset sale. Acceptable as a deposit source, but I need the documentation — contract of sale, settlement statement, and a clear funds trail into the account. Without documentation, I'm going to have questions.`,a:`<strong>Prepare a clean paper trail.</strong> Have the sale contract, settlement statement, and bank records showing the funds received ready before applying. No documentation = questions at assessment.`},
+    irregular:{s:'yellow',v:`Irregular savings pattern — the account fluctuates. This tells me one of two things: the borrower is living close to their means, or there are transfers in and out I haven't seen yet. I'll spend more time on the bank statements.`,a:`<strong>Build 3 months of consistent savings before applying.</strong> Set up an automatic transfer to a separate savings account each pay cycle. The regularity matters as much as the amount.`},
+    recent:{s:'red',v:`Just started saving recently. I can't assess this as genuine savings. Policy requires a minimum of 3 months of established savings history. Starting to save the week before you apply doesn't demonstrate the financial discipline lenders need to see.`,a:`<strong>Wait 3 months before applying.</strong> Use this time to build a clean, consistent savings record. This is one of the most straightforward issues to fix — it just requires time and patience.`},
+    '':{s:'grey',v:'Select your savings pattern above.',a:'Tell us about your savings behaviour.'},
+  };
+  const sm=savMap[savings]||savMap[''];
+  savS=sm.s; savV=sm.v; savA=sm.a;
 
-  // ── 6. CREDIT PROFILE ────────────────────────────────────────────────────
-  let credStatus, credVoice, credAction, credAClass;
-  switch (credit) {
-    case 'clean':
-      credStatus = 'green';
-      credVoice = `Clean credit file — no defaults, no judgements, minimal enquiries. This is what I want to see. A clean credit history tells me this borrower has a track record of meeting their commitments. No hesitation here.`;
-      credAction = `<strong>Protect your credit file.</strong> Don't apply for new credit (cards, BNPL, personal loans) in the 6 months before your mortgage application — each enquiry leaves a mark.`;
-      credAClass = '';
-      break;
-    case 'enquiries':
-      credStatus = 'yellow';
-      credVoice = `Multiple credit enquiries — 5 or more in recent years starts to look concerning. It tells me either the borrower has been shopping around, been declined elsewhere, or has taken on a lot of credit. I'll want an explanation for the pattern.`;
-      credAction = `<strong>Stop applying for any new credit immediately.</strong> Every application (even for BNPL or a new phone plan) adds an enquiry. Give it 6–12 months of clean behaviour before applying for a mortgage.`;
-      credAClass = 'yellow-action';
-      break;
-    case 'late':
-      credStatus = 'yellow';
-      credVoice = `Minor late payments — not an automatic decline, but I'm going to look at the context. A one-off missed payment from 3 years ago is different from a pattern of late payments in the last 12 months. Recent behaviour matters more than old history.`;
-      credAction = `<strong>Dispute any incorrect listings.</strong> For legitimate late payments, wait — most fall off after 5 years. Recent late payments (12 months) are harder to overcome. Demonstrate a clean pattern since then.`;
-      credAClass = 'yellow-action';
-      break;
-    case 'default':
-      credStatus = 'red';
-      credVoice = `Default or court judgement on file — this is a serious flag. Mainstream lenders will decline. The default has to be explained, and ideally paid. Even paid defaults can cause problems for 5–7 years. Non-conforming lenders exist, but the rate premium is significant.`;
-      credAction = `<strong>Get a copy of your credit report first</strong> (free via Equifax/Experian/Illion). Understand exactly what's listed. Pay any unpaid defaults. Your broker can identify specialist lenders who work with impaired credit.`;
-      credAClass = 'red-action';
-      break;
-    case 'bankrupt':
-      credStatus = 'red';
-      credVoice = `Previously bankrupt — some lenders will consider this if you've been discharged for 3–5 years with a clean record since. The longer since discharge, the more options open up. Mainstream lenders are largely off the table until 5+ years post-discharge.`;
-      credAction = `<strong>Check your discharge date and work with a specialist broker.</strong> Non-conforming lenders can assist from 2 years post-discharge in some cases. Expect higher rates. The priority is rebuilding credit history after discharge.`;
-      credAClass = 'red-action';
-      break;
-    case 'unknown':
-      credStatus = 'yellow';
-      credVoice = `Credit file unknown — I can't give this a clean bill of health without seeing it. Surprises on a credit file at settlement are one of the most avoidable problems, and one of the most stressful. Lenders run a credit check on every application.`;
-      credAction = `<strong>Get your free credit report today</strong> — visit equifax.com.au, experian.com.au, or illion.com.au. It's free and doesn't affect your score. Know what's there before a lender does.`;
-      credAClass = 'yellow-action';
-      break;
-    default:
-      credStatus = 'grey';
-      credVoice = `Select your credit history status above.`;
-      credAction = `Tell us about your credit history.`;
-      credAClass = '';
-  }
+  // ── 5. INCOME STABILITY ─────────────────────────────────────────────────
+  let empS,empV,empA;
+  const empMap={
+    'payg-perm':{s:'green',v:`Permanent PAYG — easiest income type to verify and the strongest from a risk perspective. Two payslips, two years tax returns, and I'm done. Stable, predictable, no adjustments needed.`,a:`<strong>No action needed.</strong> Protect this — changing jobs during the application process is a significant complication. Hold off on any job changes until after settlement.`},
+    'payg-pt':{s:'yellow',v:`Part-time or casual — I'll accept this income, but I need to average it over 24 months and I'm looking for consistency. Casual employment without a long track record introduces variability I need to account for.`,a:`<strong>Provide 2 years of tax returns and group certificates</strong> to demonstrate income consistency. The longer and more stable the work history, the stronger the application.`},
+    'payg-contract':{s:'yellow',v:`Fixed-term contract — this works if the contract duration and renewal history are strong. If the contract expires in 3 months and there's no renewal history, I'm not comfortable relying on that income to settlement. Professions where contracting is the norm (IT, nursing, engineering) get more flexibility.`,a:`<strong>Ensure your contract has 6–12 months remaining,</strong> or provide evidence of consistent renewals. A letter from your employer confirming likely renewal is worth including in the application.`},
+    'payg-probation':{s:'red',v:`On probation — I can't treat this income as confirmed stable employment. Most lenders require probation to be completed before approving. Some will conditionally approve subject to probation completion, but that adds a condition that could block settlement.`,a:`<strong>Wait until probation is complete if you can.</strong> If timing is critical, ask your broker which lenders will conditionally approve on probation — there are a small number that do.`},
+    'se-2plus':{s:'yellow',v:`Self-employed, 2+ years — I'll use the last 2 years of tax returns and average the income. If year 2 is lower than year 1, I use the lower figure. If income is declining, that's a red flag I'll question. No ATO debt is non-negotiable — I check this every time.`,a:`<strong>Have 2 years of signed, lodged tax returns ready.</strong> Make sure the ATO is fully paid up — an ATO payment plan needs to be disclosed and is a significant negative. Ask your accountant to confirm income will be assessable under the lender's policy.`},
+    'se-under2':{s:'red',v:`Self-employed under 2 years — this falls outside standard policy for every mainstream lender. I have no track record to assess. Alt-doc products exist, but they're non-bank, carry a rate premium, and have stricter LVR caps.`,a:`<strong>Your options are alt-doc products or waiting.</strong> Alt-doc uses BAS statements + accountant declarations instead of tax returns. Valid path, but expect a higher rate. If you're close to 2 years, waiting might be worth it.`},
+    '':{s:'grey',v:'Select your employment type.',a:'Tell us your employment situation.'},
+  };
+  const em=empMap[employment]||empMap[''];
+  empS=em.s; empV=em.v; empA=em.a;
 
-  // ── Build cards ──────────────────────────────────────────────────────────
-  const cards = [
-    dimCard('💰', 'Serviceability', 'After all expenses, how much is left over each month?',
-      srvStatus, 'Est. Monthly Surplus (NSR)', nsr >= 0 ? fmt(nsr) + '/mth' : '−' + fmt(Math.abs(nsr)) + '/mth',
-      srvStatus, srvVoice, srvAction, srvStatus === 'green' ? '' : srvStatus + '-action'),
+  // ── 6. CREDIT PROFILE ───────────────────────────────────────────────────
+  let credS,credV,credA;
+  const credMap={
+    clean:{s:'green',v:`Clean credit file — no defaults, no judgements, enquiry count manageable. This is what I want to see. A clean history tells me this borrower consistently meets their commitments. No hesitation from me on this dimension.`,a:`<strong>Protect your credit file.</strong> Don't apply for any new credit (store cards, BNPL, phone plans) in the 6 months before your mortgage application. Each application records an enquiry that stays on your file for 5 years.`},
+    enquiries:{s:'yellow',v:`Multiple credit enquiries — 5 or more signals one of three things: shopping for credit, being declined repeatedly, or taking on a lot of new credit. Any of those explanations requires me to look harder at everything else in the file.`,a:`<strong>Stop applying for any new credit now.</strong> Every application — including BNPL and phone plan upgrades — leaves an enquiry. Give the file 6–12 months of quiet to let the pattern settle before applying for a mortgage.`},
+    late:{s:'yellow',v:`Minor late payments — not an automatic decline, but I look at the context carefully. A single missed payment 4 years ago is very different from a pattern of lateness in the last 12 months. Recent behaviour is weighted more than historical.`,a:`<strong>Review your credit report for accuracy.</strong> If the listing is incorrect, dispute it. For legitimate late payments, demonstrate a clean pattern since then. Time is the main remedy here — most listings fall off after 5 years.`},
+    default:{s:'red',v:`Default or court judgement — this is a serious flag. Mainstream lenders will decline. Even a paid default creates a barrier. The file needs to go to a specialist or non-conforming lender, and you should expect a meaningful rate premium and stricter LVR requirements.`,a:`<strong>Get your full credit report first</strong> (free at equifax.com.au, experian.com.au, or illion.com.au). Understand exactly what's listed and when it was recorded. Pay any outstanding defaults. Your broker will need to identify lenders who specialise in impaired credit.`},
+    bankrupt:{s:'red',v:`Previously bankrupt — mainstream lenders are generally off the table until 5+ years post-discharge with a clean record since. Non-conforming lenders can sometimes assist from 2 years post-discharge. Each year after discharge opens more doors.`,a:`<strong>Confirm your exact discharge date</strong> and work with a specialist broker. The longer since discharge and the cleaner your credit record since, the more options you have. Focus on rebuilding credit history methodically after discharge.`},
+    unknown:{s:'yellow',v:`Credit file unknown — I can't clear this without seeing it. A surprise default at settlement is one of the most avoidable problems, and one of the most stressful. I run a credit check on every application — you should know what I'll find before I find it.`,a:`<strong>Check your credit report before doing anything else</strong> — it's free and won't affect your score. Visit equifax.com.au, experian.com.au, or illion.com.au. Knowing what's there puts you in control.`},
+    '':{s:'grey',v:'Select your credit history status.',a:'Tell us about your credit history.'},
+  };
+  const cm=credMap[credit]||credMap[''];
+  credS=cm.s; credV=cm.v; credA=cm.a;
 
-    dimCard('📊', 'Debt-to-Income Ratio (DTI)', "Total debt as a multiple of your income — APRA's biggest lever",
-      dtiStatus, 'Your DTI', dti.toFixed(1) + 'x  (APRA cap: 6x)',
-      dtiStatus, dtiVoice, dtiAction, dtiStatus === 'green' ? '' : dtiStatus + '-action'),
-
-    dimCard('🏠', 'Loan-to-Value Ratio (LVR)', 'How much of the property value are you borrowing?',
-      lvrStatus, 'Your LVR', lvrNum > 0 ? pct(lvrNum) : '—',
-      lvrStatus === 'grey' ? 'grey' : lvrStatus, lvrVoice, lvrAction, lvrStatus === 'green' || lvrStatus === 'grey' ? '' : lvrStatus + '-action'),
-
-    dimCard('💳', 'Genuine Savings', 'Is this deposit really yours, built over time?',
-      savStatus, 'Savings Pattern', savings ? sel('i_savings') : '—',
-      savStatus, savVoice, savAction, savAClass),
-
-    dimCard('👔', 'Income Stability', "Will this income still be here in 12 months?",
-      empStatus, 'Employment Type', employment || '—',
-      empStatus, empVoice, empAction, empAClass),
-
-    dimCard('📋', 'Credit Profile', 'What does your borrowing history say about you?',
-      credStatus, 'Credit Status', credit || '—',
-      credStatus, credVoice, credAction, credAClass),
-  ];
-
-  document.getElementById('dimCards').innerHTML = cards.join('');
+  // ── Build dimension cards ────────────────────────────────────────────────
+  document.getElementById('dimCards').innerHTML=[
+    buildDimCard('💰','Serviceability','After all commitments, what\'s left each month?',srvS,'Est. Monthly Surplus (NSR)',nsr>=0?fmt(nsr)+'/mth':'−'+fmt(Math.abs(nsr))+'/mth',srvV,srvA),
+    buildDimCard('📊','Debt-to-Income (DTI)','Total debt as a multiple of annual income',dtiS,'Your DTI  (APRA cap: 6.0x)',dtiNum.toFixed(1)+'x',dtiV,dtiA),
+    buildDimCard('🏠','Loan-to-Value (LVR)','What % of the property value are you borrowing?',lvrS,'LVR',lvrDisplay,lvrV,lvrA),
+    buildDimCard('💳','Genuine Savings','Is this deposit really yours, built over time?',savS,'Savings Pattern',savings||'Not provided',savV,savA),
+    buildDimCard('👔','Income Stability','Will this income still be here in 12 months?',empS,'Employment',employment||'Not provided',empV,empA),
+    buildDimCard('📋','Credit Profile','What does your borrowing history say about you?',credS,'Credit History',credit||'Not provided',credV,credA),
+  ].join('');
 
   // ── Verdict ──────────────────────────────────────────────────────────────
-  const statuses = [srvStatus, dtiStatus, lvrNum > 0 ? lvrStatus : null, savings ? savStatus : null, employment ? empStatus : null, credit ? credStatus : null].filter(Boolean);
-  const reds = statuses.filter(s => s === 'red').length;
-  const yellows = statuses.filter(s => s === 'yellow').length;
-  const greens = statuses.filter(s => s === 'green').length;
+  const statuses=[srvS,dtiS,lvrS,savS,empS,credS].filter(s=>s!=='grey');
+  const reds=statuses.filter(s=>s==='red').length;
+  const yellows=statuses.filter(s=>s==='yellow').length;
+  const greens=statuses.filter(s=>s==='green').length;
 
-  let vClass, vIcon, vTitle, vBody;
-  if (reds === 0 && yellows <= 1) {
-    vClass = 'green'; vIcon = '✅';
-    vTitle = 'Strong file — proceed with confidence';
-    vBody = `Your numbers stack up well across the key dimensions. A credit officer reviewing this file would be comfortable progressing it through standard channels. Now is a good time to talk to a broker about lender selection and timing.`;
-  } else if (reds === 0) {
-    vClass = 'yellow'; vIcon = '⚡';
-    vTitle = 'Serviceable — but needs strategic lender selection';
-    vBody = `Your file is workable but has some areas that require care. The right lender matters — not every bank will see this the same way. A broker who knows lender appetite can make a significant difference to your outcome.`;
-  } else if (reds === 1) {
-    vClass = 'yellow'; vIcon = '⚠️';
-    vTitle = 'One critical gap to address';
-    vBody = `There's one area that will create a real obstacle with most lenders. The good news: it's identified, and most single-issue problems have a clear path forward — whether that's time, a specific lender, or a structural change.`;
-  } else {
-    vClass = 'red'; vIcon = '🛑';
-    vTitle = 'Multiple flags — build a preparation plan first';
-    vBody = `There are ${reds} critical areas that need addressing before a standard application will succeed. This isn't a "no" — it's a "not yet." A clear plan with a realistic timeline makes this very manageable.`;
-  }
+  let vC,vI,vT,vB;
+  if(reds===0&&yellows<=1){vC='green';vI='✅';vT='Strong file — proceed with confidence';vB='Your numbers stack up well. A credit officer reviewing this file would be comfortable progressing it through standard channels. Focus on lender selection and timing.';}
+  else if(reds===0){vC='yellow';vI='⚡';vT='Workable — requires careful lender selection';vB='Your file is serviceable but has areas requiring care. The right lender matters — lender appetite, DTI headroom, and policy interpretation vary significantly.';}
+  else if(reds===1){vC='yellow';vI='⚠️';vT='One critical gap to address first';vB='There is one area that will create a real obstacle with most lenders. Most single-issue problems have a clear resolution — identify it, fix it, then apply.';}
+  else{vC='red';vI='🛑';vT='Multiple flags — build a preparation plan';vB=`There are ${reds} critical areas. This is not a "no" — it is a "not yet." A clear plan with a realistic timeline is the next step. Most borrowers in this position get there within 12–18 months.`;}
 
-  document.getElementById('verdictCard').innerHTML = `
-    <div class="verdict-card ${vClass}">
-      <div class="verdict-icon">${vIcon}</div>
-      <div class="verdict-title">${vTitle}</div>
-      <p class="verdict-body">${vBody}</p>
-      <div class="verdict-score">
-        <div class="v-stat"><div class="v-stat-num" style="color:var(--green)">${greens}</div><div class="v-stat-label">Strong</div></div>
-        <div class="v-stat"><div class="v-stat-num" style="color:var(--yellow)">${yellows}</div><div class="v-stat-label">Watch</div></div>
-        <div class="v-stat"><div class="v-stat-num" style="color:var(--red)">${reds}</div><div class="v-stat-label">Flag</div></div>
-      </div>
-    </div>`;
+  document.getElementById('verdictCard').innerHTML=`<div class="verdict-card ${vC}"><div class="verdict-icon">${vI}</div><div class="verdict-title">${vT}</div><p class="verdict-body">${vB}</p><div class="verdict-score"><div class="vs"><div class="vs-num" style="color:var(--green)">${greens}</div><div class="vs-label">Strong</div></div><div class="vs"><div class="vs-num" style="color:var(--yellow)">${yellows}</div><div class="vs-label">Watch</div></div><div class="vs"><div class="vs-num" style="color:var(--red)">${reds}</div><div class="vs-label">Flag</div></div></div></div>`;
 
-  // ── Next steps ────────────────────────────────────────────────────────────
-  const steps = [];
-  if (srvStatus !== 'green') steps.push({ t: 'Improve serviceability', d: 'Reduce existing debt repayments or increase income. Target NSR above $1,000/month.' });
-  if (dtiStatus !== 'green') steps.push({ t: 'Address DTI', d: 'Pay down high-balance debts before applying. Ask your broker which lenders have DTI headroom this quarter.' });
-  if (lvrNum > 80) steps.push({ t: 'Build more deposit', d: `You need ${fmt((loanAmt - propVal * 0.8))} more to reach 80% LVR and avoid LMI.` });
-  if (savings && savings !== 'genuine') steps.push({ t: 'Build 3 months genuine savings', d: 'Set up a dedicated savings account and make consistent monthly transfers for at least 3 months.' });
-  if (empStatus === 'red') steps.push({ t: 'Stabilise employment situation', d: 'Complete probation, reach 2-year self-employment mark, or explore alt-doc options with a broker.' });
-  if (credStatus === 'red') steps.push({ t: 'Address credit file issues', d: 'Get your free credit report. Dispute errors. Pay defaults. Work with a specialist lender.' });
-  if (credStatus === 'unknown') steps.push({ t: 'Check your credit file today', d: 'Free at equifax.com.au — know what lenders will see before they see it.' });
-  if (steps.length === 0) steps.push({ t: 'Talk to a broker now', d: 'Your file looks solid. The next step is lender selection — which bank is right for your specific situation.' });
+  // ── Priority steps ────────────────────────────────────────────────────────
+  const steps=[];
+  if(srvS!=='green') steps.push({t:'Fix serviceability',d:`Current NSR is ${fmt(nsr)}/month. Target above $1,000/month by reducing debts or increasing deposit (lower loan amount).`});
+  if(dtiS!=='green') steps.push({t:'Reduce DTI',d:`Current DTI is ${dtiNum.toFixed(1)}x. Pay down existing debts — especially unsecured debts and credit card limits — to bring this below 6x.`});
+  if(lvrNum>90) steps.push({t:'Increase deposit',d:`You need ${fmt(loanAmt-propVal*0.9)} more to reach 90% LVR, or ${fmt(loanAmt-propVal*0.8)} to reach 80% and avoid LMI altogether.`});
+  else if(lvrNum>80) steps.push({t:'Consider LMI cost',d:`LVR above 80% means LMI applies (~${fmt(loanAmt*0.018)}). Factor this into your budget or build more deposit.`});
+  if(savS==='red') steps.push({t:'Build genuine savings history',d:'3 months of consistent, growing savings is the minimum. Start a dedicated account today and make automatic transfers each pay cycle.'});
+  if(empS==='red') steps.push({t:'Address employment stability',d:'Complete probation, reach 2-year self-employed mark, or explore alt-doc options with a broker.'});
+  if(credS==='red') steps.push({t:'Resolve credit file issues',d:'Get your free credit report today. Understand exactly what\'s listed. Pay outstanding defaults. Work with a specialist lender.'});
+  if(credS==='unknown') steps.push({t:'Check your credit file — today',d:'Free at equifax.com.au. Know what lenders will see before they see it.'});
+  if(cc>0) steps.push({t:'Review credit card limits',d:`You have ${fmt(cc)} in credit card limits. Banks assess these at full limit regardless of your actual balance. Reducing or closing cards has an immediate DTI impact.`});
+  if(steps.length===0) steps.push({t:'Select the right lender',d:'Your file is strong. The next step is finding the lender whose appetite matches your situation — rate, policy flexibility, and timing all matter.'});
 
-  document.getElementById('nextSteps').innerHTML = `
-    <div class="next-card">
-      <div class="next-title">Your priority action plan</div>
-      ${steps.map((s, i) => `<div class="step-row"><div class="step-num">${i + 1}</div><div class="step-text"><strong>${s.t}</strong> — ${s.d}</div></div>`).join('')}
-    </div>`;
+  document.getElementById('nextSteps').innerHTML=`<div class="steps-card"><div class="steps-title">Your priority action plan</div>${steps.map((s,i)=>`<div class="step-row"><div class="step-num">${i+1}</div><div class="step-text"><strong>${s.t}</strong> — ${s.d}</div></div>`).join('')}</div>`;
+
+  // ── Report + Talking Points ───────────────────────────────────────────────
+  const today=new Date().toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'});
+  const income_=n('i_income'), propVal_=n('i_propVal'), deposit_=n('i_deposit');
+
+  const fullReport=`FINANCIAL HEALTH CHECK — BANKER'S VIEW REPORT
+════════════════════════════════════════════
+Prepared by:    Oney & Co Financial Health Check Tool
+Date:           ${today}
+Note:           Educational purposes only. Not financial advice.
+════════════════════════════════════════════
+
+INPUT SUMMARY
+  Annual Income:        ${fmt(income_)}
+  Target Property:      ${fmt(propVal_)}
+  Deposit Available:    ${fmt(deposit_)}
+  Proposed Loan:        ${fmt(loanAmt)}
+  Total Existing Debt:  ${fmt(totalExistingDebt)}
+  (Mortgages: ${fmt(n('i_mortgage'))} | Car loans: ${fmt(n('i_carloan'))} | CC limits: ${fmt(n('i_cc'))} | Personal: ${fmt(n('i_personal'))} | HECS: ${fmt(n('i_hecs'))})
+
+────────────────────────────────────────────
+ASSESSMENT RESULTS
+────────────────────────────────────────────
+
+1. SERVICEABILITY              [${srvS.toUpperCase()}]
+   Estimated NSR:    ${fmt(nsr)}/month
+   Assessment rate:  6.85% (RBA 3.85% + 3.0% buffer)
+   HEM (living):     ~${fmt(hemBase)}/month (${dependants} dependant${dependants!==1?'s':''})
+   Status:           ${statusLabel(srvS)}
+
+2. DEBT-TO-INCOME (DTI)        [${dtiS.toUpperCase()}]
+   Total Debt:       ${fmt(totalDebtForDTI)} (existing ${fmt(totalExistingDebt)} + new loan ${fmt(loanAmt)})
+   Annual Income:    ${fmt(income_)}
+   DTI:              ${dtiNum.toFixed(2)}x  (APRA guideline: ≤ 6.0x)
+   Status:           ${statusLabel(dtiS)}
+
+3. LOAN-TO-VALUE (LVR)         [${lvrS.toUpperCase()}]
+   Loan Amount:      ${fmt(loanAmt)}
+   Property Value:   ${fmt(propVal_)}
+   LVR:              ${pct(lvrNum)}  (80% threshold: key LMI boundary)
+   Status:           ${statusLabel(lvrS)}
+
+4. GENUINE SAVINGS             [${savS.toUpperCase()}]
+   Pattern:          ${savings||'Not provided'}
+   Status:           ${statusLabel(savS)}
+
+5. INCOME STABILITY            [${empS.toUpperCase()}]
+   Employment:       ${employment||'Not provided'}
+   Status:           ${statusLabel(empS)}
+
+6. CREDIT PROFILE              [${credS.toUpperCase()}]
+   Credit History:   ${credit||'Not provided'}
+   Status:           ${statusLabel(credS)}
+
+────────────────────────────────────────────
+OVERALL VERDICT:  ${vT.toUpperCase()}
+  Strong: ${greens}  |  Watch: ${yellows}  |  Flag: ${reds}
+────────────────────────────────────────────
+
+PRIORITY ACTIONS
+${steps.map((s,i)=>`  ${i+1}. ${s.t}\n     ${s.d}`).join('\n\n')}
+
+════════════════════════════════════════════
+DISCLAIMER
+This report is generated by an educational tool and does not
+constitute financial advice. Figures are estimates based on
+general lending policy guidelines. Assessment rates, DTI caps,
+HEM benchmarks, and policy vary between lenders and change
+over time. Consult a licensed mortgage broker or financial
+adviser before making any borrowing decisions.
+
+Oney & Co Pty Ltd | ACN 688 704 912 | oneyco.com.au
+════════════════════════════════════════════`;
+
+  const talkingPoints=`TALKING POINTS — QUESTIONS TO ASK YOUR BANKER OR BROKER
+════════════════════════════════════════════
+Prepared:  ${today} (from Oney & Co Financial Health Check)
+Use these when meeting with your bank, existing lender, or broker.
+════════════════════════════════════════════
+
+YOUR KEY NUMBERS TO SHARE
+  • Target property value:   ${fmt(propVal_)}
+  • Loan amount needed:      ${fmt(loanAmt)}
+  • LVR:                     ${pct(lvrNum)}
+  • Combined annual income:  ${fmt(income_)}
+  • Total existing debt:     ${fmt(totalExistingDebt)}
+  • DTI (rough estimate):    ${dtiNum.toFixed(1)}x
+
+────────────────────────────────────────────
+ON SERVICEABILITY
+  □ "What assessment rate do you use for new applications right now?"
+  □ "How do you treat my [PAYG/self-employed] income — do you use gross or net?"
+  ${dependants>0?'□ "How do you calculate living expenses for my household size?"\n  ':''} □ "Is there anything in my income or expenses that would be treated differently?"
+
+ON DTI
+  □ "What is your current DTI cap, and do you have headroom for applications at [${dtiNum.toFixed(1)}x]?"
+  □ "Do you count HECS debt and credit card limits in the DTI calculation?"
+  □ "When does your DTI allocation reset — is now a better time than end of quarter?"
+${dtiS==='red'?'  □ "Can you refer me to a specialist lender who doesn\'t apply the same DTI restriction?"\n':''}
+ON LVR
+  □ "My LVR is ${pct(lvrNum)} — what LMI costs should I expect?"
+  ${lvrNum>80?'□ "Are there any LVR caps for my property type or postcode?"\n  □ "Do you accept family guarantee arrangements to avoid LMI?"\n':''}
+ON SAVINGS
+  ${savings==='gift'?'□ "What are your genuine savings requirements — do you accept gifted deposits?"\n  □ "What documentation do you need for a gift? Do I need the gift to be in my account for a minimum period?"\n':'□ "I have 3+ months of genuine savings history — how does that affect your assessment?"\n'}
+ON CREDIT
+  ${credit==='unknown'?'□ "I\'m going to check my credit file before we proceed — what should I be looking for?"\n':''}  □ "Will you do a credit check upfront before I formally apply? I want to know if there are any issues."
+  □ "How many credit enquiries is too many for your policy?"
+
+ON EMPLOYMENT
+  ${empS==='red'||empS==='yellow'?'□ "How do you assess my type of employment? What documentation will you need?"\n  □ "Is there a minimum time requirement for my employment situation?"\n':'□ "I\'m PAYG permanent — what income documents will you need?"\n'}
+GENERAL
+  □ "What is your current turnaround time for conditional approval?"
+  □ "Are there any current product restrictions or policy changes I should know about?"
+  □ "What would you need to see from me to feel fully comfortable with this application?"
+
+════════════════════════════════════════════
+These questions are designed to help you have an informed,
+confident conversation. You don't need to answer every question
+— listen to what they say and take notes.
+
+Oney & Co Pty Ltd | ACN 688 704 912 | oneyco.com.au
+For a personalised review: oneyco.com.au
+════════════════════════════════════════════`;
+
+  document.getElementById('reportSection').innerHTML=`
+  <div class="report-section">
+    <div class="report-title">📄 Your Report</div>
+    <div class="report-sub">Take these to your bank, existing lender, or broker. Use the report as a summary — use the talking points to guide the conversation.</div>
+    <div class="report-tabs">
+      <div class="rtab active" onclick="switchTab(0)">Full Report</div>
+      <div class="rtab" onclick="switchTab(1)">Talking Points</div>
+    </div>
+    <div class="report-box active" id="rbox-0">${fullReport}</div>
+    <div class="report-box" id="rbox-1">${talkingPoints}</div>
+    <div>
+      <button class="copy-btn" id="copyBtn" onclick="copyReport()">📋 Copy to clipboard</button>
+      <span class="copy-ok" id="copyOk">Copied ✓</span>
+    </div>
+  </div>`;
+
+  document.getElementById('assessment').classList.add('visible');
+  document.getElementById('assessment').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function estimateLMI(loan, lvr) {
-  // Rough LMI estimate
-  if (lvr <= 80) return 0;
-  if (lvr <= 85) return loan * 0.007;
-  if (lvr <= 90) return loan * 0.018;
-  return loan * 0.035;
+function switchTab(i){
+  document.querySelectorAll('.rtab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  document.querySelectorAll('.report-box').forEach((b,j)=>b.classList.toggle('active',j===i));
+}
+function copyReport(){
+  const active=document.querySelector('.report-box.active');
+  if(!active)return;
+  navigator.clipboard.writeText(active.textContent).then(()=>{
+    const ok=document.getElementById('copyOk');
+    ok.classList.add('show');
+    setTimeout(()=>ok.classList.remove('show'),2000);
+  });
 }
 
-// Auto-run if URL params present (from quiz handoff)
-(function() {
-  const p = new URLSearchParams(location.search);
-  if (p.get('income')) document.getElementById('i_income').value = p.get('income');
-  if (p.get('propVal')) document.getElementById('i_propVal').value = p.get('propVal');
-  if (p.get('deposit')) document.getElementById('i_deposit').value = p.get('deposit');
-  if (p.get('debts')) document.getElementById('i_debts').value = p.get('debts');
-  if (p.get('employment')) document.getElementById('i_employment').value = p.get('employment');
-  if (p.get('credit')) document.getElementById('i_credit').value = p.get('credit');
-  if (p.get('savings')) document.getElementById('i_savings').value = p.get('savings');
-  liveAssess();
+// URL param pre-fill
+(function(){
+  const p=new URLSearchParams(location.search);
+  const map={income:'i_income',propVal:'i_propVal',deposit:'i_deposit',employment:'i_employment',credit:'i_credit',savings:'i_savings'};
+  let any=false;
+  Object.keys(map).forEach(k=>{if(p.get(k)){document.getElementById(map[k]).value=p.get(k);any=true;}});
+  if(any&&p.get('income')&&p.get('propVal')) runAssessment();
 })();
 </script>
 </body>
