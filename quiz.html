@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1A1A2E">
-  <title>按揭准备度测试 — 3分钟免费评估 | Oney & Co</title>
-  <meta name="description" content="3分钟了解你的按揭准备度，完全免费，不影响信用评分。由 Oney & Co 提供。">
-  <meta property="og:title" content="按揭准备度测试 — Oney & Co">
-  <meta property="og:description" content="3分钟了解你的按揭准备度，完全免费，不影响信用评分。">
+  <title>Mortgage Readiness Quiz — Free 3-Min Assessment | Oney & Co</title>
+  <meta name="description" content="Find out your mortgage readiness in 3 minutes. Completely free, no credit score impact. Powered by Oney & Co.">
+  <meta property="og:title" content="Mortgage Readiness Quiz — Oney & Co">
+  <meta property="og:description" content="Find out your mortgage readiness in 3 minutes. Free, no credit score impact.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fhc.oneyco.com.au/quiz.html">
   <link rel="canonical" href="https://fhc.oneyco.com.au/quiz.html">
@@ -101,7 +101,7 @@
     .btn-back { background: var(--card); color: var(--text-muted); border: 1px solid var(--border); }
     .btn-back:hover { border-color: var(--accent); color: var(--text); }
 
-    /* Oney 小知识 tips */
+    /* Oney Tip tips */
     .oney-tip {
       background: rgba(46, 204, 133, 0.06); border: 1px solid rgba(46, 204, 133, 0.15);
       border-radius: 12px; padding: 14px 16px; margin-top: 20px;
@@ -247,81 +247,81 @@
           <circle cx="182" cy="48" r="4" fill="#6B4C9A"/>
         </svg>
       </a>
-      <a href="index.html" class="top-bar-back">← 返回</a>
+      <a href="index.html" class="top-bar-back">← Back</a>
     </div>
 
     <!-- Intro (shown before step 1) -->
     <div class="intro" id="introSection">
-      <span class="intro-badge">🎯 完全免费</span>
-      <h1>了解你的按揭准备度</h1>
-      <p>回答 7 个简单问题，3 分钟获得你的个性化评估报告</p>
+      <span class="intro-badge">🎯 100% Free</span>
+      <h1>Understand Your Mortgage Readiness</h1>
+      <p>Answer 7 simple questions and get your personalised assessment in 3 minutes</p>
       <div class="intro-features">
-        <span><span class="check">✓</span> 免费</span>
-        <span><span class="check">✓</span> 不影响信用评分</span>
-        <span><span class="check">✓</span> 3分钟完成</span>
+        <span><span class="check">✓</span> Free</span>
+        <span><span class="check">✓</span> No credit score impact</span>
+        <span><span class="check">✓</span> Done in 3 minutes</span>
       </div>
     </div>
 
     <!-- ===== STEP 1: Goal ===== -->
     <div class="step active" id="step1">
-      <h2 class="step-question">你的目标是？</h2>
-      <p class="step-desc">选择最符合你当前情况的选项</p>
+      <h2 class="step-question">What's your goal?</h2>
+      <p class="step-desc">Choose the option that best describes your situation</p>
       <div class="options" id="goalOptions">
         <button class="option-btn" data-value="first-home" onclick="selectSingle('goal', this)">
-          <span class="icon">🏠</span> 买第一套房
+          <span class="icon">🏠</span> Buy my first home
         </button>
         <button class="option-btn" data-value="upgrade" onclick="selectSingle('goal', this)">
-          <span class="icon">🔄</span> 换房 / 升级
+          <span class="icon">🔄</span> Upgrade / Move up
         </button>
         <button class="option-btn" data-value="invest" onclick="selectSingle('goal', this)">
-          <span class="icon">📈</span> 投资房产
+          <span class="icon">📈</span> Investment property
         </button>
         <button class="option-btn" data-value="refinance" onclick="selectSingle('goal', this)">
-          <span class="icon">💰</span> 再贷款（Refinance）
+          <span class="icon">💰</span> Refinance
         </button>
         <button class="option-btn" data-value="explore" onclick="selectSingle('goal', this)">
-          <span class="icon">🔍</span> 只是想了解我的状况
+          <span class="icon">🔍</span> Just exploring my options
         </button>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-primary" id="nextBtn1" disabled onclick="goTo(2)">继续 →</button>
+        <button class="btn btn-primary" id="nextBtn1" disabled onclick="goTo(2)">Continue →</button>
       </div>
     </div>
 
     <!-- ===== STEP 2: Timeline ===== -->
     <div class="step" id="step2">
-      <h2 class="step-question">计划什么时候行动？</h2>
-      <p class="step-desc">没有对错之分，如实选择就好</p>
+      <h2 class="step-question">When are you planning to act?</h2>
+      <p class="step-desc">No right or wrong — just be honest</p>
       <div class="options" id="timelineOptions">
         <button class="option-btn" data-value="3m" onclick="selectSingle('timeline', this)">
-          <span class="icon">⚡</span> 3个月内
+          <span class="icon">⚡</span> Within 3 months
         </button>
         <button class="option-btn" data-value="3-6m" onclick="selectSingle('timeline', this)">
-          <span class="icon">📅</span> 3 - 6 个月
+          <span class="icon">📅</span> 3 – 6 months
         </button>
         <button class="option-btn" data-value="6-12m" onclick="selectSingle('timeline', this)">
-          <span class="icon">🗓️</span> 6 - 12 个月
+          <span class="icon">🗓️</span> 6 – 12 months
         </button>
         <button class="option-btn" data-value="1-2y" onclick="selectSingle('timeline', this)">
-          <span class="icon">⏳</span> 1 - 2 年后
+          <span class="icon">⏳</span> 1 – 2 years
         </button>
         <button class="option-btn" data-value="exploring" onclick="selectSingle('timeline', this)">
-          <span class="icon">💭</span> 只是在了解选项
+          <span class="icon">💭</span> Just exploring options
         </button>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(1)">← 上一步</button>
-        <button class="btn btn-primary" id="nextBtn2" disabled onclick="goTo(3)">继续 →</button>
+        <button class="btn btn-back" onclick="goTo(1)">← Back</button>
+        <button class="btn btn-primary" id="nextBtn2" disabled onclick="goTo(3)">Continue →</button>
       </div>
     </div>
 
     <!-- ===== STEP 3: Property Price ===== -->
     <div class="step" id="step3">
-      <h2 class="step-question">目标房价大概是？</h2>
-      <p class="step-desc">大概数字就好，不需要精确</p>
+      <h2 class="step-question">What's your target property price?</h2>
+      <p class="step-desc">A rough figure is fine — no need to be exact</p>
       <div class="options" id="priceOptions">
         <button class="option-btn" data-value="under500" onclick="selectSingle('price', this)">
-          <span class="icon">🏘️</span> 低于 $500K
+          <span class="icon">🏘️</span> Under $500K
         </button>
         <button class="option-btn" data-value="500-750" onclick="selectSingle('price', this)">
           <span class="icon">🏡</span> $500K - $750K
@@ -333,25 +333,25 @@
           <span class="icon">🏢</span> $1M - $1.5M
         </button>
         <button class="option-btn" data-value="over1.5m" onclick="selectSingle('price', this)">
-          <span class="icon">🏰</span> $1.5M 以上
+          <span class="icon">🏰</span> Over $1.5M
         </button>
         <button class="option-btn" data-value="unsure" onclick="selectSingle('price', this)">
-          <span class="icon">🤔</span> 还不确定
+          <span class="icon">🤔</span> Not sure yet
         </button>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(2)">← 上一步</button>
-        <button class="btn btn-primary" id="nextBtn3" disabled onclick="goTo(4)">继续 →</button>
+        <button class="btn btn-back" onclick="goTo(2)">← Back</button>
+        <button class="btn btn-primary" id="nextBtn3" disabled onclick="goTo(4)">Continue →</button>
       </div>
     </div>
 
     <!-- ===== STEP 4: Deposit ===== -->
     <div class="step" id="step4">
-      <h2 class="step-question">目前存款/首付大概多少？</h2>
-      <p class="step-desc">占目标房价的比例</p>
+      <h2 class="step-question">How much deposit do you have?</h2>
+      <p class="step-desc">As a percentage of your target property price</p>
       <div class="options" id="depositOptions">
         <button class="option-btn" data-value="under5" onclick="selectSingle('deposit', this)">
-          <span class="icon">💧</span> 低于 5%
+          <span class="icon">💧</span> Less than 5%
         </button>
         <button class="option-btn" data-value="5-10" onclick="selectSingle('deposit', this)">
           <span class="icon">🪣</span> 5% - 10%
@@ -360,27 +360,27 @@
           <span class="icon">🏊</span> 10% - 20%
         </button>
         <button class="option-btn" data-value="over20" onclick="selectSingle('deposit', this)">
-          <span class="icon">🌊</span> 20% 以上
+          <span class="icon">🌊</span> More than 20%
         </button>
       </div>
       <!-- P2: Education tip -->
       <div class="oney-tip">
-        <div class="oney-tip-label">💡 Oney 小知识</div>
-        <p>20% 以下首付通常需要购买 LMI（贷款抵押保险），这是一笔额外费用。但不少首次置业者用 5%-10% 首付也成功上车了！</p>
+        <div class="oney-tip-label">💡 Oney Tip</div>
+        <p>A deposit below 20% usually requires Lenders Mortgage Insurance (LMI) — an extra cost. But many first home buyers successfully purchase with just 5%–10% down!</p>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(3)">← 上一步</button>
-        <button class="btn btn-primary" id="nextBtn4" disabled onclick="goTo(5)">继续 →</button>
+        <button class="btn btn-back" onclick="goTo(3)">← Back</button>
+        <button class="btn btn-primary" id="nextBtn4" disabled onclick="goTo(5)">Continue →</button>
       </div>
     </div>
 
     <!-- ===== STEP 5: Income ===== -->
     <div class="step" id="step5">
-      <h2 class="step-question">年收入（税前，家庭总收入）？</h2>
-      <p class="step-desc">包括你和伴侣的收入总和</p>
+      <h2 class="step-question">What is your annual household income (before tax)?</h2>
+      <p class="step-desc">Include your income and your partner's if applicable</p>
       <div class="options" id="incomeOptions">
         <button class="option-btn" data-value="under60" onclick="selectSingle('income', this)">
-          <span class="icon">📊</span> 低于 $60K
+          <span class="icon">📊</span> Under $60K
         </button>
         <button class="option-btn" data-value="60-100" onclick="selectSingle('income', this)">
           <span class="icon">📈</span> $60K - $100K
@@ -392,85 +392,85 @@
           <span class="icon">🚀</span> $150K - $200K
         </button>
         <button class="option-btn" data-value="over200" onclick="selectSingle('income', this)">
-          <span class="icon">⭐</span> $200K 以上
+          <span class="icon">⭐</span> Over $200K
         </button>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(4)">← 上一步</button>
-        <button class="btn btn-primary" id="nextBtn5" disabled onclick="goTo(6)">继续 →</button>
+        <button class="btn btn-back" onclick="goTo(4)">← Back</button>
+        <button class="btn btn-primary" id="nextBtn5" disabled onclick="goTo(6)">Continue →</button>
       </div>
     </div>
 
     <!-- ===== STEP 6: Debts (multi-select) ===== -->
     <div class="step" id="step6">
-      <h2 class="step-question">目前有哪些债务？</h2>
-      <p class="step-desc">可以多选，选择所有适用的</p>
+      <h2 class="step-question">What debts do you currently have?</h2>
+      <p class="step-desc">Select all that apply</p>
       <div class="options" id="debtOptions">
         <button class="option-btn multi" data-value="none" onclick="selectMulti('debt', this, true)">
           <span class="check-mark">✓</span>
-          <span class="icon">✅</span> 没有债务
+          <span class="icon">✅</span> No debts
         </button>
         <button class="option-btn multi" data-value="credit-card" onclick="selectMulti('debt', this)">
           <span class="check-mark">✓</span>
-          <span class="icon">💳</span> 信用卡（有余额）
+          <span class="icon">💳</span> Credit card (with balance)
         </button>
         <button class="option-btn multi" data-value="car" onclick="selectMulti('debt', this)">
           <span class="check-mark">✓</span>
-          <span class="icon">🚗</span> 汽车贷款
+          <span class="icon">🚗</span> Car loan
         </button>
         <button class="option-btn multi" data-value="personal" onclick="selectMulti('debt', this)">
           <span class="check-mark">✓</span>
-          <span class="icon">🏦</span> 个人贷款
+          <span class="icon">🏦</span> Personal loan
         </button>
         <button class="option-btn multi" data-value="hecs" onclick="selectMulti('debt', this)">
           <span class="check-mark">✓</span>
-          <span class="icon">🎓</span> HECS / 学生贷款
+          <span class="icon">🎓</span> HECS / Student loan
         </button>
         <button class="option-btn multi" data-value="other-mortgage" onclick="selectMulti('debt', this)">
           <span class="check-mark">✓</span>
-          <span class="icon">🏘️</span> 其他房贷
+          <span class="icon">🏘️</span> Other mortgage
         </button>
       </div>
       <!-- P2: Education tip -->
       <div class="oney-tip">
-        <div class="oney-tip-label">💡 Oney 小知识</div>
-        <p>银行会将你的信用卡<strong>额度</strong>（不是余额）计入负债评估。比如你的卡额度是 $10,000，即使没欠款，银行也会按 $10,000 计算。</p>
+        <div class="oney-tip-label">💡 Oney Tip</div>
+        <p>Banks count your credit card <strong>limit</strong> (not balance) as a liability. For example, a $10,000 limit counts as $10,000 of debt — even if you owe nothing.</p>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(5)">← 上一步</button>
-        <button class="btn btn-primary" id="nextBtn6" disabled onclick="goTo(7)">继续 →</button>
+        <button class="btn btn-back" onclick="goTo(5)">← Back</button>
+        <button class="btn btn-primary" id="nextBtn6" disabled onclick="goTo(7)">Continue →</button>
       </div>
     </div>
 
     <!-- ===== STEP 7: Employment ===== -->
     <div class="step" id="step7">
-      <h2 class="step-question">你的就业情况？</h2>
-      <p class="step-desc">最后一题了！</p>
+      <h2 class="step-question">What's your employment situation?</h2>
+      <p class="step-desc">Last question!</p>
       <div class="options" id="employmentOptions">
         <button class="option-btn" data-value="payg" onclick="selectSingle('employment', this)">
-          <span class="icon">💼</span> 全职受雇（PAYG）
+          <span class="icon">💼</span> Full-time employed (PAYG)
         </button>
         <button class="option-btn" data-value="part-time" onclick="selectSingle('employment', this)">
-          <span class="icon">⏰</span> 兼职 / 临时工
+          <span class="icon">⏰</span> Part-time / Casual
         </button>
         <button class="option-btn" data-value="self-employed" onclick="selectSingle('employment', this)">
-          <span class="icon">🏪</span> 自雇 / 生意老板
+          <span class="icon">🏪</span> Self-employed / Business owner
         </button>
         <button class="option-btn" data-value="contract" onclick="selectSingle('employment', this)">
-          <span class="icon">📝</span> 合同工
+          <span class="icon">📝</span> Contractor
         </button>
         <button class="option-btn" data-value="retired" onclick="selectSingle('employment', this)">
-          <span class="icon">🌴</span> 退休 / 其他收入
+          <span class="icon">🌴</span> Retired / Other income
         </button>
       </div>
       <!-- P2: Education tip -->
       <div class="oney-tip" id="tipEmployment" style="display:none;">
-        <div class="oney-tip-label">💡 Oney 小知识</div>
-        <p>自雇人士通常需要 2 年税务记录，但部分银行只需 1 年。找对 Broker 很重要！</p>
+        <div class="oney-tip-label">💡 Oney Tip</div>
+        <p>Self-employed applicants typically need 2 years of tax returns, but some lenders accept just 1. Finding the right Broker makes all the difference!</p>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(6)">← 上一步</button>
-        <button class="btn btn-primary" id="nextBtn7" disabled onclick="showResults()">查看我的结果 🎯</button>
+        <button class="btn btn-back" onclick="goTo(6)">← Back</button>
+        <button class="btn btn-primary" id="nextBtn7" disabled onclick="showResults()">See My Results 🎯</button>
       </div>
     </div>
 
@@ -486,7 +486,7 @@
           </svg>
           <div class="score-number" id="scoreNumber">0<small>/100</small></div>
         </div>
-        <div class="score-label" id="scoreLabel">计算中...</div>
+        <div class="score-label" id="scoreLabel">Calculating...</div>
         <p class="score-summary" id="scoreSummary"></p>
       </div>
 
@@ -494,86 +494,86 @@
       <div class="dimensions" id="dimensionsGrid">
         <div class="dim-card">
           <div class="dim-icon" id="dimDepositIcon">💰</div>
-          <div class="dim-name">存款 / 首付</div>
+          <div class="dim-name">Deposit</div>
           <div class="dim-status" id="dimDeposit">—</div>
         </div>
         <div class="dim-card">
           <div class="dim-icon" id="dimIncomeIcon">📊</div>
-          <div class="dim-name">收入水平</div>
+          <div class="dim-name">Income</div>
           <div class="dim-status" id="dimIncome">—</div>
         </div>
         <div class="dim-card">
           <div class="dim-icon" id="dimDebtIcon">🏦</div>
-          <div class="dim-name">债务状况</div>
+          <div class="dim-name">Debts</div>
           <div class="dim-status" id="dimDebt">—</div>
         </div>
         <div class="dim-card">
           <div class="dim-icon" id="dimTimeIcon">⏳</div>
-          <div class="dim-name">行动时间线</div>
+          <div class="dim-name">Timeline</div>
           <div class="dim-status" id="dimTime">—</div>
         </div>
       </div>
 
       <!-- P1-1: Borrowing Power -->
       <div class="result-section" id="borrowSection">
-        <h3>💪 估算借款能力</h3>
-        <p>基于你提供的收入和债务信息</p>
+        <h3>💪 Estimated Borrowing Power</h3>
+        <p>Based on your income and debt information</p>
         <div class="borrow-range" id="borrowRange">$0 - $0</div>
-        <p style="font-size:12px; color:var(--text-muted); text-align:center;">这是粗略估算，实际数字以 Broker 评估为准</p>
+        <p style="font-size:12px; color:var(--text-muted); text-align:center;">This is a rough estimate — your Broker will give you the accurate figure</p>
       </div>
 
       <!-- P1-2: Stress Test -->
       <div class="result-section" id="stressSection">
-        <h3>📊 利率压力测试</h3>
-        <p>看看利率变化对你的月供有多大影响</p>
+        <h3>📊 Interest Rate Stress Test</h3>
+        <p>See how a rate rise affects your monthly repayments</p>
         <table class="stress-table">
           <thead>
             <tr>
               <th></th>
-              <th>当前利率</th>
-              <th>利率 +2%</th>
-              <th>差额</th>
+              <th>Current Rate</th>
+              <th>Rate +2%</th>
+              <th>Difference</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style="font-size:13px;color:var(--text-muted);">月供</td>
+              <td style="font-size:13px;color:var(--text-muted);">Monthly repayment</td>
               <td class="stress-current" id="stressCurrent">—</td>
               <td class="stress-high" id="stressHigh">—</td>
               <td class="stress-diff" id="stressDiff">—</td>
             </tr>
           </tbody>
         </table>
-        <p style="font-size:12px; color:var(--text-muted); text-align:center;">这就是为什么银行会以更高利率评估你的还款能力</p>
+        <p style="font-size:12px; color:var(--text-muted); text-align:center;">This is why banks assess your repayment capacity at a higher test rate</p>
       </div>
 
       <!-- P1-3: Lead Capture -->
       <div class="lead-section" id="leadSection">
-        <h3>📧 获取你的个人报告</h3>
-        <p>输入邮箱，我们会发送一份详细的财务建议给你</p>
+        <h3>📧 Get Your Personal Report</h3>
+        <p>Enter your email and we'll send you a detailed financial insights report</p>
         <div class="lead-input-row" id="leadForm">
           <input type="email" class="lead-input" id="leadEmail" placeholder="your@email.com">
-          <button class="lead-submit" onclick="submitLead()">发送</button>
+          <button class="lead-submit" onclick="submitLead()">Send</button>
         </div>
-        <button class="lead-skip" onclick="skipLead()">跳过，直接预约咨询</button>
-        <div class="lead-thanks" id="leadThanks">✅ 谢谢！我们会尽快将报告发送到你的邮箱。</div>
+        <button class="lead-skip" onclick="skipLead()">Skip — go straight to booking</button>
+        <div class="lead-thanks" id="leadThanks">✅ Thanks! We'll send your report shortly.</div>
       </div>
 
       <!-- CTA -->
       <div class="cta-section">
-        <a href="https://oneyco.com.au" class="cta-btn" id="ctaBtn">预约 Oney 免费咨询 →</a>
-        <p class="cta-sub">100% 免费 · 不影响信用评分 · 专业 Broker 一对一</p>
+        <a href="https://oneyco.com.au" class="cta-btn" id="ctaBtn">Book a Free Oney Consultation →</a>
+        <p class="cta-sub">100% Free · No credit score impact · Expert Broker, one-on-one</p>
       </div>
 
       <!-- P2-2: Share -->
       <div class="share-row">
-        <button class="share-btn" onclick="shareResult()">📤 分享给朋友</button>
-        <button class="share-btn" onclick="retakeQuiz()">🔄 重新测试</button>
+        <button class="share-btn" onclick="shareResult()">📤 Share with friends</button>
+        <button class="share-btn" onclick="retakeQuiz()">🔄 Retake Quiz</button>
       </div>
 
       <div class="disclaimer">
-        ⚠️ 本工具仅供参考，不构成财务建议。所有数据仅保存在你的浏览器中，不会上传到任何服务器。
-        如需专业评估，请 <a href="https://oneyco.com.au">预约 Oney 免费咨询</a>。
+        ⚠️ This tool is for informational purposes only and does not constitute financial advice. All data is stored locally in your browser and never sent to any server.
+        For a professional assessment, <a href="https://oneyco.com.au">book a free Oney consultation</a>.
       </div>
 
       <div class="footer-note">
@@ -705,17 +705,17 @@ function calculateScore() {
 }
 
 function getGrade(score) {
-  if (score >= 80) return { label: '准备充分 🟢', color: '#22c55e', summary: '你的财务状况非常健康！看起来你已经为买房做好了充分准备。建议尽快和 Broker 聊聊，把握好时机。' };
-  if (score >= 60) return { label: '基本就绪 🟡', color: '#f59e0b', summary: '你的财务基础不错，还有一些小地方可以优化。和专业 Broker 聊聊，他们能帮你找到最适合的方案。' };
-  if (score >= 40) return { label: '需要准备 🟠', color: '#f97316', summary: '你在正确的方向上，但还需要一些准备时间。好消息是——知道差距在哪里，就是进步的开始！' };
-  return { label: '待准备 🔴', color: '#ef4444', summary: '目前可能还需要一些时间积累。不要灰心——每个人都是从这一步开始的。免费咨询可以帮你制定一个清晰的行动计划。' };
+  if (score >= 80) return { label: 'Ready to Go 🟢', color: '#22c55e', summary: "Your finances look great! You appear well-prepared to buy a home. We'd recommend chatting with a Broker soon to lock in your opportunity." };
+  if (score >= 60) return { label: 'Almost There 🟡', color: '#f59e0b', summary: "Your financial foundation is solid with a few things to fine-tune. A professional Broker can help you find the best path forward." };
+  if (score >= 40) return { label: 'Getting There 🟠', color: '#f97316', summary: "You're heading in the right direction, but some prep time is needed. The good news: knowing your gaps is already the first step forward!" };
+  return { label: 'Not Yet Ready 🔴', color: '#ef4444', summary: "It may take a little time to build your position — but don't be discouraged. Everyone starts somewhere. A free consultation can help you map out a clear action plan." };
 }
 
 function dimStatus(score, max) {
   const pct = score / max;
-  if (pct >= 0.7) return { text: '✅ 良好', color: '#22c55e' };
-  if (pct >= 0.4) return { text: '⚠️ 一般', color: '#f59e0b' };
-  return { text: '❌ 待提升', color: '#ef4444' };
+  if (pct >= 0.7) return { text: '✅ Strong', color: '#22c55e' };
+  if (pct >= 0.4) return { text: '⚠️ Fair', color: '#f59e0b' };
+  return { text: '❌ Needs work', color: '#ef4444' };
 }
 
 /* ===================== BORROWING POWER (P1-1) ===================== */
@@ -750,7 +750,7 @@ function showResults() {
   // Hide quiz steps
   document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
   document.getElementById('introSection').style.display = 'none';
-  document.getElementById('progressLabel').textContent = '完成！';
+  document.getElementById('progressLabel').textContent = 'Done!';
   document.getElementById('progressBar').style.width = '100%';
 
   const { total, depositScore, incomeScore, debtScore, timeScore } = calculateScore();
@@ -795,9 +795,9 @@ function showResults() {
   const stressRate = 0.0789;
   const mp1 = monthlyPayment(loanAmount, currentRate, 30);
   const mp2 = monthlyPayment(loanAmount, stressRate, 30);
-  document.getElementById('stressCurrent').textContent = '$' + formatNum(Math.round(mp1)) + '/月';
-  document.getElementById('stressHigh').textContent = '$' + formatNum(Math.round(mp2)) + '/月';
-  document.getElementById('stressDiff').textContent = '+$' + formatNum(Math.round(mp2 - mp1)) + '/月';
+  document.getElementById('stressCurrent').textContent = '$' + formatNum(Math.round(mp1)) + '/mo';
+  document.getElementById('stressHigh').textContent = '$' + formatNum(Math.round(mp2)) + '/mo';
+  document.getElementById('stressDiff').textContent = '+$' + formatNum(Math.round(mp2 - mp1)) + '/mo';
 
   // Save to localStorage
   try {
@@ -858,14 +858,14 @@ function skipLead() {
 /* ===================== SHARE (P2-2) ===================== */
 function shareResult() {
   const score = calculateScore().total;
-  const text = '我在 Oney 按揭准备度测试中得了 ' + score + ' 分！免费测试你的按揭准备度 👉 https://fhc.oneyco.com.au/quiz.html';
+  const text = 'I scored ' + score + '/100 on the Oney Mortgage Readiness Quiz! Check your readiness for free 👉 https://fhc.oneyco.com.au/quiz.html';
   if (navigator.share) {
-    navigator.share({ title: 'Oney 按揭准备度测试', text: text, url: 'https://fhc.oneyco.com.au/quiz.html' }).catch(() => {});
+    navigator.share({ title: 'Oney Mortgage Readiness Quiz', text: text, url: 'https://fhc.oneyco.com.au/quiz.html' }).catch(() => {});
   } else {
     navigator.clipboard.writeText(text).then(() => {
       const btn = event.target;
-      btn.textContent = '✅ 已复制链接';
-      setTimeout(() => { btn.textContent = '📤 分享给朋友'; }, 2000);
+      btn.textContent = '✅ Link copied!';
+      setTimeout(() => { btn.textContent = '📤 Share with friends'; }, 2000);
     }).catch(() => {});
   }
 }
