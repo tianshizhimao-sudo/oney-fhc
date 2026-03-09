@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1A1A2E">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Mortgage Readiness Quiz — Free 3-Min Assessment | Oney & Co</title>
   <meta name="description" content="Find out your mortgage readiness in 3 minutes. Completely free, no credit score impact. Powered by Oney & Co.">
   <meta property="og:title" content="Mortgage Readiness Quiz — Oney & Co">
@@ -547,22 +550,9 @@
         <p style="font-size:12px; color:var(--text-muted); text-align:center;">This is why banks assess your repayment capacity at a higher test rate</p>
       </div>
 
-      <!-- P1-3: Lead Capture -->
-      <div class="lead-section" id="leadSection">
-        <h3>📧 Get Your Personal Report</h3>
-        <p>Enter your email and we'll send you a detailed financial insights report</p>
-        <div class="lead-input-row" id="leadForm">
-          <input type="email" class="lead-input" id="leadEmail" placeholder="your@email.com">
-          <button class="lead-submit" onclick="submitLead()">Send</button>
-        </div>
-        <button class="lead-skip" onclick="skipLead()">Skip — go straight to booking</button>
-        <div class="lead-thanks" id="leadThanks">✅ Thanks! We'll send your report shortly.</div>
-      </div>
-
-      <!-- CTA -->
-      <div class="cta-section">
-        <a href="https://oneyco.com.au" class="cta-btn" id="ctaBtn">Book a Free Oney Consultation →</a>
-        <p class="cta-sub">100% Free · No credit score impact · Expert Broker, one-on-one</p>
+      <!-- Share prompt (replaces lead/CTA) -->
+      <div class="result-section" style="text-align:center;">
+        <p style="font-size:15px;color:var(--text-muted);line-height:1.6;">Your results are based on the information you provided. For a more accurate picture, speak with a licensed mortgage broker who can review your full financial situation.</p>
       </div>
 
       <!-- P2-2: Share -->
@@ -573,7 +563,6 @@
 
       <div class="disclaimer">
         ⚠️ This tool is for informational purposes only and does not constitute financial advice. All data is stored locally in your browser and never sent to any server.
-        For a professional assessment, <a href="https://oneyco.com.au">book a free Oney consultation</a>.
       </div>
 
       <div class="footer-note">
@@ -708,7 +697,7 @@ function getGrade(score) {
   if (score >= 80) return { label: 'Ready to Go 🟢', color: '#22c55e', summary: "Your finances look great! You appear well-prepared to buy a home. We'd recommend chatting with a Broker soon to lock in your opportunity." };
   if (score >= 60) return { label: 'Almost There 🟡', color: '#f59e0b', summary: "Your financial foundation is solid with a few things to fine-tune. A professional Broker can help you find the best path forward." };
   if (score >= 40) return { label: 'Getting There 🟠', color: '#f97316', summary: "You're heading in the right direction, but some prep time is needed. The good news: knowing your gaps is already the first step forward!" };
-  return { label: 'Not Yet Ready 🔴', color: '#ef4444', summary: "It may take a little time to build your position — but don't be discouraged. Everyone starts somewhere. A free consultation can help you map out a clear action plan." };
+  return { label: 'Not Yet Ready 🔴', color: '#ef4444', summary: "It may take a little time to build your position — but don't be discouraged. Everyone starts somewhere. Knowing your gaps is already the first step forward." };
 }
 
 function dimStatus(score, max) {
