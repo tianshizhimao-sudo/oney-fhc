@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1A1A2E">
+  <title>About — Financial Health Check | Oney & Co</title>
+  <meta name="description" content="Learn how the free Oney & Co Financial Health Check works. FAQ, privacy, and methodology explained.">
+  <meta property="og:title" content="About — Financial Health Check | Oney & Co">
+  <meta property="og:description" content="A free mortgage readiness resource. Learn how it works, what it measures, and how your data stays private.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fhc.oneyco.com.au/about.html">
+  <link rel="canonical" href="https://fhc.oneyco.com.au/about.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%231FAD73'/></linearGradient></defs><g transform='translate(50,50)'><path d='M0-38A38 38 0 1 0 0-37.99' fill='none' stroke='url(%23g)' stroke-width='8' stroke-linecap='round' stroke-dasharray='227 12'/><path d='M0-45L0-52' stroke='url(%23g)' stroke-width='6' stroke-linecap='round'/></g></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1A1A2E;
+      --bg-secondary: #16162A;
+      --card: #252540;
+      --border: #3D3D5C;
+      --accent: #2ECC85;
+      --accent-light: #2ECC85;
+      --accent-glow: rgba(46, 204, 133, 0.1);
+      --green: #2ECC85;
+      --green-dark: #1FAD73;
+      --text: #ffffff;
+      --text-muted: #a3a3b8;
+      --green-gradient: linear-gradient(135deg, #2ECC85, #1FAD73);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav — matches index.html */
+    nav {
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo svg { height: 40px; }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-links { display: flex; align-items: center; gap: 20px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.nav-active { color: var(--accent); }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* Hero */
+    .hero { padding: 80px 0 60px; text-align: center; }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 48px); font-weight: 800; margin-bottom: 16px; letter-spacing: -1px;
+      background: linear-gradient(135deg, #2ECC85, #1FAD73); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p { font-size: 18px; color: var(--text-muted); max-width: 620px; margin: 0 auto; }
+
+    /* How It Works */
+    .how-section { padding: 0 0 60px; }
+    .section-title { text-align: center; margin-bottom: 40px; }
+    .section-title h2 { font-size: 24px; margin-bottom: 8px; }
+    .section-title p { color: var(--text-muted); }
+
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .step-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 32px 24px; text-align: center;
+      transition: border-color 0.3s;
+    }
+    .step-card:hover { border-color: var(--accent); }
+    .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--accent-glow); color: var(--accent);
+      font-size: 18px; font-weight: 800; margin-bottom: 16px;
+    }
+    .step-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .step-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* Q&A */
+    .qa-section { padding: 0 0 60px; }
+    .qa-list { display: flex; flex-direction: column; gap: 12px; }
+    .qa-item {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden; transition: border-color 0.3s;
+    }
+    .qa-item:hover { border-color: rgba(46, 204, 133, 0.3); }
+    .qa-q {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 20px 24px; cursor: pointer; font-size: 15px; font-weight: 600;
+      user-select: none; transition: color 0.2s;
+    }
+    .qa-q:hover { color: var(--accent); }
+    .qa-chevron {
+      flex-shrink: 0; width: 20px; height: 20px;
+      transition: transform 0.3s;
+    }
+    .qa-item.open .qa-chevron { transform: rotate(180deg); }
+    .qa-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .qa-item.open .qa-a { max-height: 300px; }
+    .qa-a-inner {
+      padding: 0 24px 20px;
+      font-size: 14px; color: var(--text-muted); line-height: 1.7;
+    }
+
+    /* Disclaimer */
+    .disclaimer-box {
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px;
+      padding: 24px; margin-bottom: 60px; text-align: center;
+    }
+    .disclaimer-box p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+    .disclaimer-box .icon { font-size: 20px; margin-bottom: 8px; display: block; }
+
+    /* CTA row */
+    .about-cta { text-align: center; margin-bottom: 60px; }
+    .about-cta a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 36px; border-radius: 100px; font-size: 17px; font-weight: 700;
+      background: linear-gradient(135deg, #2ECC85, #1FAD73); color: #fff;
+      text-decoration: none; transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(46, 204, 133, 0.2);
+    }
+    .about-cta a:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46, 204, 133, 0.25); }
+    .about-cta p { font-size: 13px; color: var(--text-muted); margin-top: 10px; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; }
+    footer p { color: var(--text-muted); font-size: 14px; }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 60px 0 40px; }
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a href="https://oneyco.com.au" class="nav-logo">
+        <svg viewBox="0 0 210 90" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="fillGrad" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" style="stop-color:#1FAD73"/><stop offset="55%" style="stop-color:#2ECC85"/><stop offset="55%" style="stop-color:transparent"/><stop offset="100%" style="stop-color:transparent"/></linearGradient>
+            <linearGradient id="strokeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#2ECC85"/><stop offset="100%" style="stop-color:#1FAD73"/></linearGradient>
+          </defs>
+          <g transform="translate(40, 45)"><circle cx="0" cy="0" r="32" fill="none" stroke="url(#strokeGrad)" stroke-width="7"/><circle cx="0" cy="0" r="24" fill="url(#fillGrad)"/></g>
+          <text x="82" y="52" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-0.5">ney</text>
+          <text x="129" y="52" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="500" fill="url(#strokeGrad)">&amp;</text>
+          <text x="148" y="52" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-0.5">co</text>
+          <circle cx="182" cy="48" r="4" fill="#6B4C9A"/>
+        </svg>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="https://oneyco.com.au">Home</a></li>
+          <li><a href="https://oneyco.com.au/about.html">About Oney</a></li>
+          <li><a href="https://mentor.oneyco.com.au">Mentoring</a></li>
+          <li><a href="https://tools.oneyco.com.au">Tools</a></li>
+          <li><a href="index.html">Health Check</a></li>
+          <li><a href="about.html" class="nav-active">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- 1. Hero -->
+    <section class="hero">
+      <div class="container">
+        <h1>About This Tool</h1>
+        <p>A free mortgage readiness resource — built by someone who has worked in banking for 8 years.</p>
+      </div>
+    </section>
+
+    <!-- 2. How It Works -->
+    <section class="how-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>How It Works</h2>
+          <p>Three simple steps to understand your position</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h3>Answer 7 Questions</h3>
+            <p>Tell us about your financial situation — income, savings, debts, and goals. Takes about 3 minutes.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h3>Get Your Score</h3>
+            <p>Receive an instant readiness score across 4 key dimensions: Deposit, Income, Debts, and Timeline.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h3>Plan Your Next Steps</h3>
+            <p>Use your personalised results to guide your preparation and understand where to focus your efforts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Q&A -->
+    <section class="qa-section">
+      <div class="container-narrow">
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="qa-list">
+
+          <div class="qa-item open">
+            <div class="qa-q" onclick="toggleQA(this)">
+              Is this tool really free?
+              <svg class="qa-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="qa-a"><div class="qa-a-inner">Yes, completely. No credit card, no sign-up required.</div></div>
+          </div>
+
+          <div class="qa-item">
+            <div class="qa-q" onclick="toggleQA(this)">
+              Will this affect my credit score?
+              <svg class="qa-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="qa-a"><div class="qa-a-inner">No. This tool does not perform any credit checks. Your data never leaves your browser.</div></div>
+          </div>
+
+          <div class="qa-item">
+            <div class="qa-q" onclick="toggleQA(this)">
+              How accurate are the results?
+              <svg class="qa-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="qa-a"><div class="qa-a-inner">The score is based on the information you provide and uses general lending guidelines. It is intended as an educational guide, not a precise assessment. For an accurate picture, speak with a licensed mortgage broker.</div></div>
+          </div>
+
+          <div class="qa-item">
+            <div class="qa-q" onclick="toggleQA(this)">
+              Who built this?
+              <svg class="qa-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="qa-a"><div class="qa-a-inner">This tool was built by Oney &amp; Co — an Australian financial services company focused on helping people understand their borrowing position. Our founder has 8 years of experience in business banking.</div></div>
+          </div>
+
+          <div class="qa-item">
+            <div class="qa-q" onclick="toggleQA(this)">
+              Is my data private?
+              <svg class="qa-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="qa-a"><div class="qa-a-inner">Yes. All data is processed locally in your browser and is never sent to any server. We do not collect, store or share your information.</div></div>
+          </div>
+
+          <div class="qa-item">
+            <div class="qa-q" onclick="toggleQA(this)">
+              What do the 4 dimensions measure?
+              <svg class="qa-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="qa-a"><div class="qa-a-inner">Deposit (your savings relative to the property price), Income (your earning capacity), Debts (existing liabilities), and Timeline (how soon you plan to act).</div></div>
+          </div>
+
+          <div class="qa-item">
+            <div class="qa-q" onclick="toggleQA(this)">
+              I got a low score. Should I be worried?
+              <svg class="qa-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="qa-a"><div class="qa-a-inner">Not at all. A lower score simply means there are areas to work on — and knowing where you stand is the first step. Many people who start with a low score go on to successfully buy a home with the right preparation.</div></div>
+          </div>
+
+          <div class="qa-item">
+            <div class="qa-q" onclick="toggleQA(this)">
+              What should I do after completing the quiz?
+              <svg class="qa-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="qa-a"><div class="qa-a-inner">Review your score across each dimension and focus on the areas flagged as needing work. Consider speaking with a licensed mortgage broker when you feel ready.</div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Take the Quiz CTA -->
+    <div class="about-cta">
+      <a href="quiz.html">Take the 3-Min Quiz &rarr;</a>
+      <p>7 questions &middot; Free &middot; No credit score impact</p>
+    </div>
+
+    <!-- 4. Disclaimer -->
+    <div class="container-narrow">
+      <div class="disclaimer-box">
+        <span class="icon">&#9888;&#65039;</span>
+        <p>This tool is for educational purposes only and does not constitute financial advice. Results are indicative only. Always seek advice from a licensed professional before making any financial decisions.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- 5. Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Oney &amp; Co. <a href="https://oneyco.com.au">Home</a> &middot; <a href="https://mentor.oneyco.com.au">Mentoring</a> &middot; <a href="https://tools.oneyco.com.au">Tools</a> &middot; <a href="https://fhc.oneyco.com.au">Health Check</a></p>
+      <p style="margin-top: 8px; font-size: 12px; color: var(--text-muted);">These tools provide estimates only. For accurate assessment, please consult with a qualified broker.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleQA(el) {
+      const item = el.closest('.qa-item');
+      item.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
