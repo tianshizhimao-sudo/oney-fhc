@@ -40,13 +40,27 @@
       line-height: 1.6;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      position: relative;
     }
+    /* Dot grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body > * { position: relative; z-index: 1; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
+    /* Nav */
     nav {
-      background: rgba(26, 26, 46, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(26, 26, 46, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(61, 61, 92, 0.5);
       padding: 16px 0;
       position: sticky;
       top: 0;
@@ -55,80 +69,360 @@
     .nav-inner { display: flex; align-items: center; justify-content: space-between; }
     .nav-logo svg { height: 40px; }
     .nav-right { display: flex; align-items: center; gap: 12px; }
-    .theme-toggle {
-      background: none; border: 1px solid var(--border); border-radius: 100px;
-      padding: 6px 12px; cursor: pointer; font-size: 14px; color: var(--text-muted); transition: all 0.2s;
-    }
-    .theme-toggle:hover { border-color: var(--accent); }
-    .nav-back { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .nav-back:hover { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 20px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.nav-active { color: var(--accent); }
+    @media (max-width: 768px) { .nav-links { display: none; } }
 
-    .hero { padding: 80px 0 60px; text-align: center; }
+    /* Hero */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Glowing radial gradient background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(46, 204, 133, 0.12) 0%, rgba(107, 76, 154, 0.08) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Floating gradient orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-orb-1 {
+      width: 400px; height: 400px;
+      background: rgba(46, 204, 133, 0.08);
+      top: -100px; left: -100px;
+      animation: float-orb 8s ease-in-out infinite;
+    }
+    .hero-orb-2 {
+      width: 350px; height: 350px;
+      background: rgba(107, 76, 154, 0.1);
+      top: -50px; right: -80px;
+      animation: float-orb 10s ease-in-out infinite reverse;
+    }
+    .hero-orb-3 {
+      width: 250px; height: 250px;
+      background: rgba(155, 89, 182, 0.06);
+      bottom: -60px; left: 30%;
+      animation: float-orb 12s ease-in-out infinite 2s;
+    }
+    @keyframes float-orb {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(20px, -15px) scale(1.05); }
+      66% { transform: translate(-10px, 10px) scale(0.95); }
+    }
+    .hero .container { position: relative; z-index: 1; }
     .hero-badge {
-      display: inline-block; background: var(--accent-glow); color: var(--accent);
-      padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 24px;
+      display: inline-block;
+      background: rgba(46, 204, 133, 0.08);
+      border: 1px solid rgba(46, 204, 133, 0.2);
+      color: var(--accent);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 32px;
+      backdrop-filter: blur(8px);
     }
     .hero h1 {
-      font-size: clamp(32px, 5vw, 48px); font-weight: 800; margin-bottom: 16px; letter-spacing: -1px;
-      background: linear-gradient(135deg, #2ECC85, #1FAD73); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      font-size: clamp(48px, 7vw, 72px);
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      background: linear-gradient(135deg, #2ECC85 0%, #1FAD73 40%, #9B59B6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: gradient-shimmer 4s ease-in-out infinite;
     }
-    .hero p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+    @keyframes gradient-shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .hero p.hero-subtitle {
+      font-size: 19px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 36px;
+      padding: 18px 42px;
+      border-radius: 100px;
+      font-size: 17px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #2ECC85, #1FAD73);
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(46, 204, 133, 0.3), 0 4px 16px rgba(46, 204, 133, 0.2);
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(46, 204, 133, 0.4), 0 8px 24px rgba(46, 204, 133, 0.3);
+    }
+    .hero-sub-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+    /* Social proof row */
+    .social-proof {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      margin-top: 40px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .social-proof span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .social-proof .check {
+      color: var(--accent);
+      font-weight: 700;
+    }
 
-    .tools-section { padding: 40px 0 80px; }
-    .section-title { text-align: center; margin-bottom: 48px; }
-    .section-title h2 { font-size: 24px; margin-bottom: 8px; }
-    .section-title p { color: var(--text-muted); }
+    /* Why Oney strip */
+    .why-section {
+      padding: 60px 0;
+      border-top: 1px solid rgba(61, 61, 92, 0.4);
+      border-bottom: 1px solid rgba(61, 61, 92, 0.4);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+    .why-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .why-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .why-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    .why-item h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .why-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    @media (max-width: 600px) {
+      .why-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    /* Tools section */
+    .tools-section { padding: 60px 0 100px; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 56px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .section-title.visible { opacity: 1; transform: translateY(0); }
+    .section-title h2 { font-size: 28px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .section-title p { color: var(--text-muted); font-size: 16px; }
 
     .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
     .tool-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
-      padding: 36px; text-decoration: none; color: var(--text);
-      transition: all 0.3s ease; display: flex; flex-direction: column;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      background: linear-gradient(180deg, rgba(37, 37, 64, 0.8) 0%, rgba(37, 37, 64, 0.5) 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
     }
-    .tool-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(107,76,154,0.12); }
+    .tool-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Glow border on top */
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .tool-card.payg::before { background: linear-gradient(90deg, transparent, var(--payg), transparent); }
+    .tool-card.business::before { background: linear-gradient(90deg, transparent, var(--business), transparent); }
+    .tool-card.investor::before { background: linear-gradient(90deg, transparent, var(--investor), transparent); }
+    .tool-card:hover::before { opacity: 1; }
+    /* Hover glow effect */
+    .tool-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .tool-card.payg::after { background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.06) 0%, transparent 50%); }
+    .tool-card.business::after { background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.06) 0%, transparent 50%); }
+    .tool-card.investor::after { background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.06) 0%, transparent 50%); }
+    .tool-card:hover::after { opacity: 1; }
+
+    .tool-card:hover {
+      border-color: rgba(61, 61, 92, 0.8);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+    }
+    .tool-card.visible:hover { transform: translateY(-6px); }
+
+    .tool-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
     .tool-icon {
-      width: 56px; height: 56px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
     }
-    .tool-card.payg .tool-icon { background: rgba(59, 130, 246, 0.12); }
-    .tool-card.business .tool-icon { background: rgba(139, 92, 246, 0.12); }
-    .tool-card.investor .tool-icon { background: rgba(245, 158, 11, 0.12); }
-    .badge.investor { background: rgba(245, 158, 11, 0.12); color: var(--investor); }
+    .tool-card.payg .tool-icon {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+      box-shadow: 0 0 24px rgba(59, 130, 246, 0.1);
+    }
+    .tool-card.business .tool-icon {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.05));
+      box-shadow: 0 0 24px rgba(139, 92, 246, 0.1);
+    }
+    .tool-card.investor .tool-icon {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+      box-shadow: 0 0 24px rgba(245, 158, 11, 0.1);
+    }
 
     .badge {
-      display: inline-block; padding: 4px 12px; border-radius: 100px;
-      font-size: 11px; font-weight: 600; text-transform: uppercase; margin-bottom: 12px;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
     }
     .badge.payg { background: rgba(59, 130, 246, 0.12); color: var(--payg); }
     .badge.business { background: rgba(139, 92, 246, 0.12); color: var(--business); }
+    .badge.investor { background: rgba(245, 158, 11, 0.12); color: var(--investor); }
 
-    .tool-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-    .tool-card .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 16px; }
-    .tool-card ul { list-style: none; margin-bottom: 24px; flex-grow: 1; }
+    .time-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      z-index: 1;
+    }
+
+    .tool-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; position: relative; z-index: 1; }
+    .tool-card .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 16px; position: relative; z-index: 1; }
+    .tool-card ul { list-style: none; margin-bottom: 24px; flex-grow: 1; position: relative; z-index: 1; }
     .tool-card li { font-size: 14px; color: var(--text-muted); padding: 6px 0 6px 20px; position: relative; }
     .tool-card li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 600; }
     .tool-card .cta {
-      display: inline-flex; align-items: center; gap: 8px;
-      color: var(--accent); font-weight: 600; font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 14px;
+      position: relative;
+      z-index: 1;
     }
     .tool-card .cta svg { transition: transform 0.2s; }
     .tool-card:hover .cta svg { transform: translateX(4px); }
 
-    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; }
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(61, 61, 92, 0.4);
+      padding: 48px 0;
+      text-align: center;
+      background: rgba(22, 22, 42, 0.5);
+    }
     footer p { color: var(--text-muted); font-size: 14px; }
-    footer a { color: var(--accent); text-decoration: none; }
+    footer a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    footer .footer-links { margin-bottom: 12px; }
+    footer .footer-links a { margin: 0 4px; }
+    footer .footer-disclaimer {
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(163, 163, 184, 0.6);
+    }
 
     @media (max-width: 768px) {
-      .hero { padding: 60px 0 40px; }
+      .hero { padding: 70px 0 50px; }
+      .hero h1 { letter-spacing: -1px; }
       .tools-grid { grid-template-columns: 1fr; }
+      .social-proof { gap: 6px 16px; font-size: 13px; }
     }
-  
-    .nav-links { display:flex;align-items:center;gap:20px;list-style:none; }
-    .nav-links a { color:var(--text-muted);text-decoration:none;font-size:13px;font-weight:500;transition:color 0.2s; }
-    .nav-links a:hover { color:var(--accent); }
-    .nav-links a.nav-active { color:var(--accent); }
-    @media(max-width:768px){.nav-links{display:none;}}
   </style>
 </head>
 <body>
@@ -148,7 +442,6 @@
         </svg>
       </a>
       <div class="nav-right">
-        
         <ul class="nav-links">
         <li><a href="https://oneyco.com.au">Home</a></li>
         <li><a href="https://oneyco.com.au/about.html">About Oney</a></li>
@@ -161,12 +454,46 @@
 
   <main>
     <section class="hero">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
       <div class="container">
-        <span class="hero-badge">🎯 100% Free · No credit score impact</span>
+        <span class="hero-badge">🎯 Free Financial Health Check</span>
         <h1>Financial Health Check</h1>
-        <p>Understand your financial position in minutes. Choose the tool that matches your situation for the most accurate assessment.</p>
-        <a href="quiz.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:16px 36px;border-radius:100px;font-size:17px;font-weight:700;background:linear-gradient(135deg,#2ECC85,#1FAD73);color:#fff;text-decoration:none;transition:all 0.2s;box-shadow:0 4px 16px rgba(46,204,133,0.2);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">3-Min Quick Check →</a>
-        <p style="font-size:13px;color:var(--text-muted);margin-top:10px;">7 questions · Get your mortgage readiness score instantly</p>
+        <p class="hero-subtitle">Understand your financial position in minutes. Choose the tool that matches your situation for the most accurate assessment.</p>
+        <a href="quiz.html" class="hero-cta">3-Min Quick Check →</a>
+        <p class="hero-sub-text">7 questions · Get your mortgage readiness score instantly</p>
+        <div class="social-proof">
+          <span><span class="check">✓</span> 100% Free</span>
+          <span>·</span>
+          <span><span class="check">✓</span> No credit score impact</span>
+          <span>·</span>
+          <span><span class="check">✓</span> 3 minutes</span>
+          <span>·</span>
+          <span><span class="check">✓</span> Used by 1,000+ Australians</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-section">
+      <div class="container">
+        <div class="why-grid">
+          <div class="why-item">
+            <div class="why-icon">🔒</div>
+            <h3>Privacy First</h3>
+            <p>Your data stays on your device. Nothing is stored or shared.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">⚡</div>
+            <h3>Instant Results</h3>
+            <p>Get your financial health score in under 3 minutes.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">🎯</div>
+            <h3>Expert Guidance</h3>
+            <p>Built by licensed brokers with real lending experience.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -178,7 +505,10 @@
         </div>
         <div class="tools-grid">
           <a href="payg.html" class="tool-card payg">
-            <span class="badge payg">Most Common</span>
+            <div class="tool-card-header">
+              <span class="badge payg">Most Common</span>
+              <span class="time-badge">⏱ ~3 min</span>
+            </div>
             <div class="tool-icon">💼</div>
             <h3>PAYG / Salary Earner</h3>
             <p class="subtitle">Regular income from employment</p>
@@ -192,7 +522,10 @@
             <span class="cta">Start Check <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
           </a>
           <a href="business.html" class="tool-card business">
-            <span class="badge business">SME / Self-Employed</span>
+            <div class="tool-card-header">
+              <span class="badge business">SME / Self-Employed</span>
+              <span class="time-badge">⏱ ~3 min</span>
+            </div>
             <div class="tool-icon">🏪</div>
             <h3>Business Owner</h3>
             <p class="subtitle">Self-employed & company directors</p>
@@ -206,7 +539,10 @@
             <span class="cta">Start Check <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
           </a>
           <a href="investor.html" class="tool-card investor">
-            <span class="badge investor">Property Portfolio</span>
+            <div class="tool-card-header">
+              <span class="badge investor">Property Portfolio</span>
+              <span class="time-badge">⏱ ~3 min</span>
+            </div>
             <div class="tool-icon">📊</div>
             <h3>Property Investor</h3>
             <p class="subtitle">Existing portfolio & expansion planning</p>
@@ -226,11 +562,27 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 Oney & Co. <a href="https://oneyco.com.au">Home</a> · <a href="https://mentor.oneyco.com.au">Mentoring</a> · <a href="https://tools.oneyco.com.au">Tools</a> · <a href="https://fhc.oneyco.com.au">Health Check</a></p>
-      <p style="margin-top: 8px; font-size: 12px; color: var(--text-muted);">These tools provide estimates only. For accurate assessment, please consult with a qualified broker.</p>
+      <p class="footer-links">© 2026 Oney & Co. <a href="https://oneyco.com.au">Home</a> · <a href="https://mentor.oneyco.com.au">Mentoring</a> · <a href="https://tools.oneyco.com.au">Tools</a> · <a href="https://fhc.oneyco.com.au">Health Check</a></p>
+      <p class="footer-disclaimer">These tools provide estimates only. For accurate assessment, please consult with a qualified broker.</p>
     </div>
   </footer>
 
-  <!-- Dark theme only -->
+  <script>
+    // IntersectionObserver for fade-in animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.why-item, .tool-card, .section-title').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.1}s`;
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
