@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1A1A2E">
+  <title>RBA Rate Change Impact Calculator | Oney & Co</title>
+  <meta name="description" content="See exactly how a 0.25% RBA rate hike affects your monthly mortgage repayments. Free calculator — no sign-up required.">
+  <meta property="og:title" content="RBA Rate Change Impact Calculator | Oney & Co">
+  <meta property="og:description" content="RBA decides Tuesday 17 March 2026. Find out what a rate hike means for your mortgage — in under 30 seconds.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fhc.oneyco.com.au/rate-impact.html">
+  <link rel="canonical" href="https://fhc.oneyco.com.au/rate-impact.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%231FAD73'/></linearGradient></defs><g transform='translate(50,50)'><path d='M0-38A38 38 0 1 0 0-37.99' fill='none' stroke='url(%23g)' stroke-width='8' stroke-linecap='round' stroke-dasharray='227 12'/><path d='M0-45L0-52' stroke='url(%23g)' stroke-width='6' stroke-linecap='round'/></g></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1A1A2E; --bg-secondary: #16162A; --card: #252540; --border: #3D3D5C;
+      --accent: #2ECC85; --green: #2ECC85; --green-dark: #1FAD73;
+      --text: #ffffff; --text-muted: #a3a3b8;
+      --danger: #ef4444; --warning: #f59e0b; --info: #3b82f6;
+      --green-gradient: linear-gradient(135deg, #2ECC85, #1FAD73);
+      --red-gradient: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* RBA Banner */
+    #rba-banner { display: none; background: linear-gradient(135deg, #7c3aed, #6B4C9A); color: #fff; text-align: center; padding: 10px 20px; font-size: 13px; font-weight: 500; }
+
+    .container { max-width: 720px; margin: 0 auto; padding: 24px 20px 100px; }
+
+    .top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; padding-top: 8px; }
+    .top-bar-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-svg { height: 36px; width: auto; }
+    .logo-text { font-size: 18px; font-weight: 700; color: var(--text); }
+    .logo-text span { color: var(--green); }
+    .top-bar-back { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .top-bar-back:hover { color: var(--accent); }
+
+    /* Hero */
+    .hero { text-align: center; margin-bottom: 40px; }
+    .hero-badge { display: inline-block; background: rgba(239,68,68,0.12); color: #f87171; padding: 6px 16px; border-radius: 100px; font-size: 12px; font-weight: 700; margin-bottom: 16px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .hero h1 { font-size: clamp(26px, 5vw, 36px); font-weight: 800; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 .highlight { background: var(--green-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { color: var(--text-muted); font-size: 16px; max-width: 540px; margin: 0 auto; }
+
+    /* Calculator Card */
+    .calc-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 24px; }
+    .calc-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+
+    .input-group { margin-bottom: 24px; }
+    .input-label { font-size: 14px; font-weight: 600; margin-bottom: 8px; display: flex; justify-content: space-between; }
+    .input-label span { color: var(--text-muted); font-weight: 400; }
+    .input-row { display: flex; gap: 12px; align-items: center; }
+    .input-prefix { background: var(--bg-secondary); border: 1px solid var(--border); border-right: none; border-radius: 12px 0 0 12px; padding: 14px 16px; font-size: 16px; font-weight: 600; color: var(--text-muted); }
+    .form-input { width: 100%; padding: 14px 18px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 16px; font-weight: 600; transition: all 0.2s; }
+    .form-input.with-prefix { border-radius: 0 12px 12px 0; }
+    .form-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(46,204,133,0.12); }
+    .form-input::placeholder { color: var(--text-muted); font-weight: 400; }
+
+    .slider-wrap { padding: 8px 0 4px; }
+    input[type=range] { -webkit-appearance: none; width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--green-gradient); cursor: pointer; box-shadow: 0 2px 8px rgba(46,204,133,0.4); }
+    .slider-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+
+    .rate-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* Results */
+    .results { margin-top: 28px; }
+    .results-divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+    .result-highlight { background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(220,38,38,0.04)); border: 1px solid rgba(239,68,68,0.25); border-radius: 16px; padding: 24px; margin-bottom: 20px; text-align: center; }
+    .result-highlight.positive { background: linear-gradient(135deg, rgba(46,204,133,0.08), rgba(31,173,115,0.04)); border-color: rgba(46,204,133,0.25); }
+    .result-label { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-amount { font-size: 44px; font-weight: 800; color: #f87171; line-height: 1; }
+    .result-amount.positive { color: var(--green); }
+    .result-sub { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    .result-box { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+    .result-box .label { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .result-box .value { font-size: 24px; font-weight: 800; }
+    .result-box .sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+    .insight-box { background: rgba(46,204,133,0.06); border: 1px solid rgba(46,204,133,0.2); border-radius: 14px; padding: 16px 20px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .insight-box strong { color: var(--green); }
+
+    /* Comparison Table */
+    .table-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 24px; }
+    .table-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .table-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+    table { width: 100%; border-collapse: collapse; }
+    th { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: right; }
+    th:first-child { text-align: left; }
+    td { padding: 14px 12px; border-bottom: 1px solid rgba(61,61,92,0.5); font-size: 15px; text-align: right; }
+    td:first-child { text-align: left; font-weight: 600; }
+    td.impact { color: #f87171; font-weight: 700; }
+    td.annual { color: var(--warning); font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    .highlight-row td { background: rgba(46,204,133,0.04); }
+
+    /* CTA */
+    .cta-card { background: linear-gradient(135deg, rgba(46,204,133,0.08), rgba(107,76,154,0.08)); border: 1px solid rgba(46,204,133,0.2); border-radius: 20px; padding: 32px; text-align: center; margin-bottom: 24px; }
+    .cta-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+    .cta-card p { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; }
+    .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 100px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--green-gradient); color: #0d2818; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(46,204,133,0.3); }
+    .btn-secondary { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    .disclaimer { font-size: 12px; color: var(--text-muted); text-align: center; padding: 0 20px; line-height: 1.6; }
+
+    @media (max-width: 600px) {
+      .result-grid { grid-template-columns: 1fr; }
+      .rate-inputs { grid-template-columns: 1fr; }
+      .table-card { padding: 20px 16px; }
+      th, td { padding: 10px 8px; font-size: 13px; }
+      .btn-group { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- RBA Banner -->
+<div id="rba-banner">
+  ⚠️ RBA interest rate decision will be announced on 17 March 2026 at 2:30pm AEDT. Assessment rate may be updated accordingly. Please refresh the page after the decision to get the latest data.
+</div>
+<script>
+  (function(){ var d=new Date(); var cutoff=new Date('2026-03-17T00:00:00+11:00'); if(d<cutoff){ document.getElementById('rba-banner').style.display='block'; } })();
+</script>
+
+<div class="container">
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <a href="https://fhc.oneyco.com.au" class="top-bar-logo">
+      <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g1" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#1FAD73"/>
+            <stop offset="60%" stop-color="#2ECC85"/>
+            <stop offset="60%" stop-color="transparent"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </linearGradient>
+          <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2ECC85"/>
+            <stop offset="100%" stop-color="#1FAD73"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(50,50)">
+          <circle r="38" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
+          <circle r="28" fill="url(#g1)"/>
+        </g>
+      </svg>
+      <span class="logo-text"><span>Oney</span> & Co</span>
+    </a>
+    <a href="https://fhc.oneyco.com.au" class="top-bar-back">← Back to Health Check</a>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">⚡ RBA Decision — 17 March 2026</div>
+    <h1>What Does a Rate Hike<br>Mean for <span class="highlight">Your Mortgage?</span></h1>
+    <p>Enter your loan details below to see exactly how a 0.25% rate change affects your monthly repayments.</p>
+  </div>
+
+  <!-- Calculator -->
+  <div class="calc-card">
+    <div class="calc-title">🧮 Rate Change Calculator</div>
+
+    <div class="input-group">
+      <div class="input-label">Loan Amount <span id="loanDisplay">$600,000</span></div>
+      <div class="slider-wrap">
+        <input type="range" id="loanSlider" min="200000" max="2000000" step="50000" value="600000" oninput="onSlider()">
+        <div class="slider-labels"><span>$200K</span><span>$500K</span><span>$800K</span><span>$1.2M</span><span>$2M</span></div>
+      </div>
+      <div class="input-row" style="margin-top:12px">
+        <span class="input-prefix">$</span>
+        <input class="form-input with-prefix" type="number" id="loanInput" value="600000" min="50000" max="5000000" step="10000" oninput="onLoanInput()" placeholder="e.g. 600000">
+      </div>
+    </div>
+
+    <div class="rate-inputs">
+      <div class="input-group">
+        <div class="input-label">Current Interest Rate</div>
+        <div class="input-row">
+          <input class="form-input" type="number" id="rateInput" value="6.00" min="1" max="15" step="0.01" oninput="calculate()" placeholder="e.g. 6.00">
+          <span style="padding:0 8px;color:var(--text-muted);font-weight:600;font-size:16px">%</span>
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-label">Loan Term (years)</div>
+        <input class="form-input" type="number" id="termInput" value="30" min="5" max="30" step="1" oninput="calculate()" placeholder="30">
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="results" id="results">
+      <hr class="results-divider">
+
+      <div class="result-highlight" id="impactHighlight">
+        <div class="result-label">Monthly increase after +0.25% hike</div>
+        <div class="result-amount" id="monthlyImpact">+$91</div>
+        <div class="result-sub" id="annualImpact">That's an extra $1,092 per year</div>
+      </div>
+
+      <div class="result-grid">
+        <div class="result-box">
+          <div class="label">Current Repayment</div>
+          <div class="value" id="currentRepay" style="color:var(--green)">$3,597</div>
+          <div class="sub" id="currentRateLabel">at 6.00% p.a.</div>
+        </div>
+        <div class="result-box">
+          <div class="label">After +0.25%</div>
+          <div class="value" id="newRepay" style="color:#f87171">$3,688</div>
+          <div class="sub" id="newRateLabel">at 6.25% p.a.</div>
+        </div>
+      </div>
+
+      <div class="insight-box" id="insightBox">
+        On a <strong id="i-loan">$600,000</strong> loan at <strong id="i-rate">6.00%</strong>, a 0.25% hike adds <strong id="i-monthly" style="color:#f87171">$91/month</strong>. Over a year, that's <strong id="i-annual" style="color:var(--warning)">$1,092</strong> in extra repayments — money that could go toward your offset account.
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="table-card">
+    <div class="table-title">📊 Impact at a Glance</div>
+    <div class="table-desc">Monthly repayment increase from a 0.25% rate rise — 30-year P&I loan at 6.00%</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Loan Amount</th>
+          <th>Current (6.00%)</th>
+          <th>After +0.25%</th>
+          <th>+/month</th>
+          <th>+/year</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-card">
+    <h3>Is your rate still competitive?</h3>
+    <p>A rate hike is a good reminder to check if your current loan is still working for you. Take our free 2-minute health check.</p>
+    <div class="btn-group">
+      <a href="https://fhc.oneyco.com.au" class="btn btn-primary">✅ Free Health Check →</a>
+      <a href="https://oneyco.com.au/insights" class="btn btn-secondary">📚 Read Insights</a>
+    </div>
+  </div>
+
+  <p class="disclaimer">These calculations are estimates only based on principal & interest repayments. Actual repayments may vary. This tool does not constitute financial advice. Please consult a qualified mortgage broker for personalised guidance.</p>
+
+</div>
+
+<script>
+  const AMOUNTS = [300000,400000,500000,600000,700000,800000,1000000,1200000,1500000];
+
+  function monthlyRepayment(principal, annualRate, years) {
+    const r = annualRate / 100 / 12;
+    const n = years * 12;
+    if (r === 0) return principal / n;
+    return principal * r * Math.pow(1+r, n) / (Math.pow(1+r, n) - 1);
+  }
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-AU');
+  }
+
+  function calculate() {
+    const loan = parseFloat(document.getElementById('loanInput').value) || 600000;
+    const rate = parseFloat(document.getElementById('rateInput').value) || 6.00;
+    const term = parseFloat(document.getElementById('termInput').value) || 30;
+    const newRate = rate + 0.25;
+
+    const cur = monthlyRepayment(loan, rate, term);
+    const nxt = monthlyRepayment(loan, newRate, term);
+    const diff = nxt - cur;
+    const annual = diff * 12;
+
+    document.getElementById('currentRepay').textContent = fmt(cur);
+    document.getElementById('newRepay').textContent = fmt(nxt);
+    document.getElementById('monthlyImpact').textContent = '+' + fmt(diff).replace('$','$');
+    document.getElementById('annualImpact').textContent = `That's an extra ${fmt(annual)} per year`;
+    document.getElementById('currentRateLabel').textContent = `at ${rate.toFixed(2)}% p.a.`;
+    document.getElementById('newRateLabel').textContent = `at ${newRate.toFixed(2)}% p.a.`;
+    document.getElementById('i-loan').textContent = fmt(loan);
+    document.getElementById('i-rate').textContent = rate.toFixed(2) + '%';
+    document.getElementById('i-monthly').textContent = fmt(diff) + '/month';
+    document.getElementById('i-annual').textContent = fmt(annual);
+
+    // Update insight text dynamically
+    const offsetMsg = diff > 200
+      ? `That's significant — worth reviewing your rate with a broker.`
+      : `money that could go toward your offset account.`;
+    document.getElementById('insightBox').innerHTML =
+      `On a <strong id="i-loan">${fmt(loan)}</strong> loan at <strong id="i-rate">${rate.toFixed(2)}%</strong>, a 0.25% hike adds <strong style="color:#f87171">${fmt(diff)}/month</strong>. Over a year, that's <strong style="color:var(--warning)">${fmt(annual)}</strong> in extra repayments — ${offsetMsg}`;
+
+    // Update table
+    buildTable(rate, term);
+  }
+
+  function buildTable(baseRate, term) {
+    const newRate = baseRate + 0.25;
+    const curLoan = parseFloat(document.getElementById('loanInput').value) || 600000;
+    let html = '';
+    AMOUNTS.forEach(amt => {
+      const cur = monthlyRepayment(amt, baseRate, term);
+      const nxt = monthlyRepayment(amt, newRate, term);
+      const diff = nxt - cur;
+      const annual = diff * 12;
+      const isHighlight = Math.abs(amt - curLoan) < 50001;
+      html += `<tr${isHighlight ? ' class="highlight-row"' : ''}>
+        <td>${fmt(amt)}${isHighlight ? ' ◀' : ''}</td>
+        <td>${fmt(cur)}</td>
+        <td>${fmt(nxt)}</td>
+        <td class="impact">+${fmt(diff)}</td>
+        <td class="annual">+${fmt(annual)}</td>
+      </tr>`;
+    });
+    document.getElementById('tableBody').innerHTML = html;
+  }
+
+  function onSlider() {
+    const val = document.getElementById('loanSlider').value;
+    document.getElementById('loanInput').value = val;
+    document.getElementById('loanDisplay').textContent = '$' + parseInt(val).toLocaleString('en-AU');
+    calculate();
+  }
+
+  function onLoanInput() {
+    const val = document.getElementById('loanInput').value;
+    const clamped = Math.max(200000, Math.min(2000000, val));
+    document.getElementById('loanSlider').value = clamped;
+    document.getElementById('loanDisplay').textContent = '$' + parseInt(val || 0).toLocaleString('en-AU');
+    calculate();
+  }
+
+  // Init
+  calculate();
+</script>
+</body>
+</html>
