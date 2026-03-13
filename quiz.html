@@ -43,11 +43,22 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Progress bar */
-    .progress-container { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--bg-secondary); }
-    .progress-track { height: 5px; background: var(--border); }
-    .progress-bar { height: 100%; background: linear-gradient(90deg, #2ECC85, #1FAD73); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); width: 0%; border-radius: 0 3px 3px 0; }
-    .progress-label { text-align: center; font-size: 12px; color: var(--text-muted); padding: 6px 0 4px; font-weight: 500; }
+    /* Progress dots */
+    .progress-container {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: var(--bg-secondary); padding: 16px 0 12px;
+    }
+    .progress-dots { display: flex; justify-content: center; gap: 12px; }
+    .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--border); border: 2px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    .dot.active {
+      background: var(--accent); border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(46,204,133,0.4);
+    }
+    .dot.completed { background: transparent; border-color: var(--accent); }
 
     .container { max-width: 640px; margin: 0 auto; padding: 50px 20px 0; }
 
@@ -57,8 +68,9 @@
     .top-bar-back { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
     .top-bar-back:hover { color: var(--accent); }
 
-    /* Hero / Intro */
-    .intro { text-align: center; padding: 24px 0 32px; }
+    /* Intro with fade-in */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .intro { text-align: center; padding: 24px 0 32px; animation: fadeUp 0.6s ease both; }
     .intro-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-glow); color: var(--accent); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 16px; }
     .intro h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 800; margin-bottom: 10px; background: linear-gradient(135deg, #2ECC85, #1FAD73); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .intro p { font-size: 15px; color: var(--text-muted); max-width: 460px; margin: 0 auto; }
@@ -66,10 +78,13 @@
     .intro-features span { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
     .intro-features .check { color: var(--accent); }
 
-    /* Steps */
+    /* Steps with slide animations */
     .step { display: none; padding-bottom: 100px; }
-    .step.active { display: block; animation: stepIn 0.35s ease; }
-    @keyframes stepIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .step.active { display: block; }
+    .step.slide-forward { animation: slideInRight 0.3s ease both; }
+    .step.slide-backward { animation: slideInLeft 0.3s ease both; }
+    @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
 
     .step-question { font-size: clamp(20px, 4vw, 26px); font-weight: 700; margin-bottom: 8px; text-align: center; }
     .step-desc { font-size: 14px; color: var(--text-muted); text-align: center; margin-bottom: 28px; }
@@ -115,7 +130,7 @@
 
     /* ========== RESULTS PAGE ========== */
     .results { display: none; padding-bottom: 60px; }
-    .results.active { display: block; animation: stepIn 0.5s ease; }
+    .results.active { display: block; animation: fadeUp 0.5s ease both; }
 
     .score-hero { text-align: center; padding: 40px 0 32px; }
     .score-ring {
@@ -132,15 +147,22 @@
     .score-label { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
     .score-summary { font-size: 15px; color: var(--text-muted); max-width: 480px; margin: 0 auto; line-height: 1.65; }
 
+    /* Score ring pulse */
+    @keyframes ringPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(46,204,133,0); }
+      50% { box-shadow: 0 0 24px 6px rgba(46,204,133,0.25); }
+    }
+    .score-ring.pulsing { border-radius: 50%; animation: ringPulse 1.5s ease-in-out 3; animation-delay: 0.3s; }
+
     /* Dimension cards */
     .dimensions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 32px 0; }
     .dim-card {
       background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-      padding: 18px; text-align: center;
+      padding: 22px 16px; text-align: center;
     }
-    .dim-icon { font-size: 24px; margin-bottom: 6px; }
-    .dim-name { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
-    .dim-status { font-size: 15px; font-weight: 600; }
+    .dim-icon { font-size: 28px; margin-bottom: 8px; }
+    .dim-name { font-size: 14px; color: var(--text-muted); margin-bottom: 6px; }
+    .dim-status { font-size: 16px; font-weight: 700; }
 
     /* Borrowing power section */
     .result-section {
@@ -185,13 +207,14 @@
     /* CTA */
     .cta-section { text-align: center; margin: 32px 0 16px; }
     .cta-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 18px 40px; border-radius: 100px; font-size: 18px; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 20px 48px; border-radius: 100px; font-size: 20px; font-weight: 700;
       background: linear-gradient(135deg, #2ECC85, #1FAD73); color: #fff;
-      text-decoration: none; transition: all 0.2s; border: none; cursor: pointer;
+      text-decoration: none; transition: all 0.3s; border: none; cursor: pointer;
+      box-shadow: 0 4px 24px rgba(46, 204, 133, 0.3);
     }
-    .cta-btn:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46, 204, 133, 0.25); }
-    .cta-sub { font-size: 13px; color: var(--text-muted); margin-top: 10px; }
+    .cta-btn:hover { opacity: 0.95; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(46, 204, 133, 0.4); }
+    .cta-sub { font-size: 13px; color: var(--text-muted); margin-top: 12px; }
 
     /* Share */
     .share-row { display: flex; justify-content: center; gap: 12px; margin: 24px 0; }
@@ -214,7 +237,7 @@
     /* Responsive */
     @media (max-width: 600px) {
       .dimensions { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .dim-card { padding: 14px 10px; }
+      .dim-card { padding: 16px 10px; }
       .score-ring { width: 130px; height: 130px; }
       .score-number { font-size: 40px; }
       .lead-input-row { flex-direction: column; }
@@ -222,15 +245,15 @@
       .option-btn { padding: 16px; font-size: 15px; }
       .stress-table th, .stress-table td { padding: 8px 4px; font-size: 13px; }
       .stress-current, .stress-high { font-size: 14px; }
+      .cta-btn { padding: 18px 36px; font-size: 18px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Progress -->
+  <!-- Progress Dots -->
   <div class="progress-container">
-    <div class="progress-label" id="progressLabel">1 / 7</div>
-    <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="progress-dots" id="progressDots"></div>
   </div>
 
   <div class="container">
@@ -251,7 +274,7 @@
         </svg>
       </a>
       <a href="about.html" class="top-bar-back" style="margin-right:12px;">Q&amp;A</a>
-      <a href="index.html" class="top-bar-back">← Back</a>
+      <a href="index.html" class="top-bar-back">&larr; Back</a>
     </div>
 
     <!-- Intro (shown before step 1) -->
@@ -267,7 +290,7 @@
     </div>
 
     <!-- ===== STEP 1: Goal ===== -->
-    <div class="step active" id="step1">
+    <div class="step active slide-forward" id="step1">
       <h2 class="step-question">What's your goal?</h2>
       <p class="step-desc">Choose the option that best describes your situation</p>
       <div class="options" id="goalOptions">
@@ -286,9 +309,6 @@
         <button class="option-btn" data-value="explore" onclick="selectSingle('goal', this)">
           <span class="icon">🔍</span> Just exploring my options
         </button>
-      </div>
-      <div class="nav-buttons">
-        <button class="btn btn-primary" id="nextBtn1" disabled onclick="goTo(2)">Continue →</button>
       </div>
     </div>
 
@@ -314,8 +334,7 @@
         </button>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(1)">← Back</button>
-        <button class="btn btn-primary" id="nextBtn2" disabled onclick="goTo(3)">Continue →</button>
+        <button class="btn btn-back" onclick="goTo(1)">&larr; Back</button>
       </div>
     </div>
 
@@ -344,8 +363,7 @@
         </button>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(2)">← Back</button>
-        <button class="btn btn-primary" id="nextBtn3" disabled onclick="goTo(4)">Continue →</button>
+        <button class="btn btn-back" onclick="goTo(2)">&larr; Back</button>
       </div>
     </div>
 
@@ -367,14 +385,12 @@
           <span class="icon">🌊</span> More than 20%
         </button>
       </div>
-      <!-- P2: Education tip -->
       <div class="oney-tip">
         <div class="oney-tip-label">💡 Oney Tip</div>
         <p>A deposit below 20% usually requires Lenders Mortgage Insurance (LMI) — an extra cost. But many first home buyers successfully purchase with just 5%–10% down!</p>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(3)">← Back</button>
-        <button class="btn btn-primary" id="nextBtn4" disabled onclick="goTo(5)">Continue →</button>
+        <button class="btn btn-back" onclick="goTo(3)">&larr; Back</button>
       </div>
     </div>
 
@@ -400,8 +416,7 @@
         </button>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(4)">← Back</button>
-        <button class="btn btn-primary" id="nextBtn5" disabled onclick="goTo(6)">Continue →</button>
+        <button class="btn btn-back" onclick="goTo(4)">&larr; Back</button>
       </div>
     </div>
 
@@ -435,14 +450,13 @@
           <span class="icon">🏘️</span> Other mortgage
         </button>
       </div>
-      <!-- P2: Education tip -->
       <div class="oney-tip">
         <div class="oney-tip-label">💡 Oney Tip</div>
         <p>Banks count your credit card <strong>limit</strong> (not balance) as a liability. For example, a $10,000 limit counts as $10,000 of debt — even if you owe nothing.</p>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(5)">← Back</button>
-        <button class="btn btn-primary" id="nextBtn6" disabled onclick="goTo(7)">Continue →</button>
+        <button class="btn btn-back" onclick="goTo(5)">&larr; Back</button>
+        <button class="btn btn-primary" id="nextBtn6" disabled onclick="goTo(7)">Continue &rarr;</button>
       </div>
     </div>
 
@@ -467,14 +481,12 @@
           <span class="icon">🌴</span> Retired / Other income
         </button>
       </div>
-      <!-- P2: Education tip -->
       <div class="oney-tip" id="tipEmployment" style="display:none;">
         <div class="oney-tip-label">💡 Oney Tip</div>
         <p>Self-employed applicants typically need 2 years of tax returns, but some lenders accept just 1. Finding the right Broker makes all the difference!</p>
       </div>
       <div class="nav-buttons">
-        <button class="btn btn-back" onclick="goTo(6)">← Back</button>
-        <button class="btn btn-primary" id="nextBtn7" disabled onclick="showResults()">See My Results 🎯</button>
+        <button class="btn btn-back" onclick="goTo(6)">&larr; Back</button>
       </div>
     </div>
 
@@ -482,7 +494,7 @@
     <div class="results" id="resultsPage">
 
       <div class="score-hero">
-        <div class="score-ring">
+        <div class="score-ring" id="scoreRingContainer">
           <svg viewBox="0 0 120 120">
             <circle class="ring-bg" cx="60" cy="60" r="52"/>
             <circle class="ring-fill" id="scoreRing" cx="60" cy="60" r="52"
@@ -551,7 +563,13 @@
         <p style="font-size:12px; color:var(--text-muted); text-align:center;">This is why banks assess your repayment capacity at a higher test rate</p>
       </div>
 
-      <!-- Share prompt (replaces lead/CTA) -->
+      <!-- CTA -->
+      <div class="cta-section">
+        <a href="about.html" class="cta-btn">📞 Book a Free Call</a>
+        <p class="cta-sub">No obligation — just a friendly chat with a licensed broker</p>
+      </div>
+
+      <!-- Share prompt -->
       <div class="result-section" style="text-align:center;">
         <p style="font-size:15px;color:var(--text-muted);line-height:1.6;">Your results are based on the information you provided. For a more accurate picture, speak with a licensed mortgage broker who can review your full financial situation.</p>
       </div>
@@ -567,7 +585,7 @@
       </div>
 
       <div class="footer-note">
-        <p>© 2026 Oney & Co. <a href="https://oneyco.com.au">Home</a> · <a href="https://fhc.oneyco.com.au">Health Check</a></p>
+        <p>&copy; 2026 Oney & Co. <a href="https://oneyco.com.au">Home</a> · <a href="https://fhc.oneyco.com.au">Health Check</a></p>
       </div>
     </div>
 
@@ -587,39 +605,69 @@ const answers = {
 
 let currentStep = 1;
 const TOTAL_STEPS = 7;
+let isTransitioning = false;
 
-/* ===================== NAVIGATION ===================== */
+/* ===================== PROGRESS DOTS ===================== */
+function initDots() {
+  const container = document.getElementById('progressDots');
+  for (let i = 1; i <= TOTAL_STEPS; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 1 ? ' active' : '');
+    container.appendChild(dot);
+  }
+}
+
 function updateProgress() {
-  const pct = (currentStep / TOTAL_STEPS) * 100;
-  document.getElementById('progressBar').style.width = pct + '%';
-  document.getElementById('progressLabel').textContent = currentStep + ' / ' + TOTAL_STEPS;
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach((dot, i) => {
+    dot.classList.remove('active', 'completed');
+    if (i + 1 === currentStep) dot.classList.add('active');
+    else if (i + 1 < currentStep) dot.classList.add('completed');
+  });
   // Hide intro after step 1 begins
   document.getElementById('introSection').style.display = currentStep === 1 ? '' : 'none';
 }
 
+/* ===================== NAVIGATION ===================== */
 function goTo(step) {
-  document.getElementById('step' + currentStep).classList.remove('active');
+  const direction = step > currentStep ? 'forward' : 'backward';
+  const oldStep = document.getElementById('step' + currentStep);
+  oldStep.classList.remove('active', 'slide-forward', 'slide-backward');
+
   currentStep = step;
-  document.getElementById('step' + currentStep).classList.add('active');
+  const newStep = document.getElementById('step' + currentStep);
+  newStep.classList.remove('slide-forward', 'slide-backward');
+  void newStep.offsetWidth; // force reflow to re-trigger animation
+  newStep.classList.add('active', direction === 'forward' ? 'slide-forward' : 'slide-backward');
+
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ===================== SINGLE SELECT ===================== */
+/* ===================== SINGLE SELECT (auto-advance) ===================== */
 function selectSingle(key, el) {
+  if (isTransitioning) return;
   answers[key] = el.dataset.value;
   const parent = el.closest('.options');
   parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
-  // Enable next button
-  const btn = document.getElementById('nextBtn' + currentStep);
-  if (btn) btn.disabled = false;
 
   // Show self-employed tip
   if (key === 'employment') {
     const tip = document.getElementById('tipEmployment');
     tip.style.display = (el.dataset.value === 'self-employed') ? '' : 'none';
   }
+
+  // Auto-advance after 300ms
+  isTransitioning = true;
+  setTimeout(() => {
+    isTransitioning = false;
+    if (currentStep === 7) {
+      showResults();
+    } else {
+      goTo(currentStep + 1);
+    }
+  }, 300);
 }
 
 /* ===================== MULTI SELECT (debts) ===================== */
@@ -645,12 +693,9 @@ function selectMulti(key, el, isNone) {
     }
   }
   // Enable next if at least one selected
-  const btn = document.getElementById('nextBtn' + currentStep);
+  const btn = document.getElementById('nextBtn6');
   if (btn) btn.disabled = answers[key].length === 0;
 }
-
-/* ===================== RESTORE SELECTIONS (for back navigation) ===================== */
-// When going back, selections are preserved in `answers` and the .selected class stays.
 
 /* ===================== SCORING ENGINE ===================== */
 function calculateScore() {
@@ -704,22 +749,20 @@ function getGrade(score) {
 function dimStatus(score, max) {
   const pct = score / max;
   if (pct >= 0.7) return { text: '✅ Strong', color: '#22c55e' };
-  if (pct >= 0.4) return { text: '⚠️ Fair', color: '#f59e0b' };
-  return { text: '❌ Needs work', color: '#ef4444' };
+  if (pct >= 0.4) return { text: '⚠️ OK', color: '#f59e0b' };
+  return { text: '❌ Needs Work', color: '#ef4444' };
 }
 
 /* ===================== BORROWING POWER (P1-1) ===================== */
 function estimateBorrowingPower() {
-  // Rough income midpoints
   const incomeMid = {
     'under60': 45000, '60-100': 80000, '100-150': 125000,
     '150-200': 175000, 'over200': 250000
   };
   const base = incomeMid[answers.income] || 80000;
 
-  // Debt penalty
   const debts = answers.debt.filter(d => d !== 'none');
-  const debtPenalty = debts.length * 30000; // rough reduction per debt type
+  const debtPenalty = debts.length * 30000;
 
   const conservative = Math.max(0, Math.round((base * 5 - debtPenalty) / 1000) * 1000);
   const normal = Math.max(0, Math.round((base * 6 - debtPenalty) / 1000) * 1000);
@@ -738,10 +781,14 @@ function monthlyPayment(principal, annualRate, years) {
 /* ===================== SHOW RESULTS ===================== */
 function showResults() {
   // Hide quiz steps
-  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active', 'slide-forward', 'slide-backward'));
   document.getElementById('introSection').style.display = 'none';
-  document.getElementById('progressLabel').textContent = 'Done!';
-  document.getElementById('progressBar').style.width = '100%';
+
+  // Mark all dots completed
+  document.querySelectorAll('.dot').forEach(dot => {
+    dot.classList.remove('active');
+    dot.classList.add('completed');
+  });
 
   const { total, depositScore, incomeScore, debtScore, timeScore } = calculateScore();
   const grade = getGrade(total);
@@ -752,12 +799,15 @@ function showResults() {
 
   // Animate score ring
   const ring = document.getElementById('scoreRing');
+  const ringContainer = document.getElementById('scoreRingContainer');
   const circumference = 2 * Math.PI * 52; // ~326.73
   ring.style.stroke = grade.color;
   setTimeout(() => {
     ring.style.strokeDashoffset = circumference - (total / 100) * circumference;
     // Animate number
     animateNumber('scoreNumber', 0, total, 1200);
+    // Pulse after ring fills
+    setTimeout(() => { ringContainer.classList.add('pulsing'); }, 1200);
   }, 200);
 
   document.getElementById('scoreLabel').textContent = grade.label;
@@ -825,24 +875,29 @@ function formatNum(n) {
 
 /* ===================== LEAD CAPTURE ===================== */
 function submitLead() {
-  const email = document.getElementById('leadEmail').value.trim();
+  const emailEl = document.getElementById('leadEmail');
+  if (!emailEl) return;
+  const email = emailEl.value.trim();
   if (!email || !email.includes('@')) {
-    document.getElementById('leadEmail').style.borderColor = '#ef4444';
+    emailEl.style.borderColor = '#ef4444';
     return;
   }
-  // Store locally (no backend yet)
   try {
     const leads = JSON.parse(localStorage.getItem('oney-fhc-leads') || '[]');
     leads.push({ email, timestamp: Date.now(), score: calculateScore().total });
     localStorage.setItem('oney-fhc-leads', JSON.stringify(leads));
   } catch(e) {}
-  document.getElementById('leadForm').style.display = 'none';
-  document.querySelector('.lead-skip').style.display = 'none';
-  document.getElementById('leadThanks').style.display = 'block';
+  const form = document.getElementById('leadForm');
+  if (form) form.style.display = 'none';
+  const skip = document.querySelector('.lead-skip');
+  if (skip) skip.style.display = 'none';
+  const thanks = document.getElementById('leadThanks');
+  if (thanks) thanks.style.display = 'block';
 }
 
 function skipLead() {
-  document.getElementById('leadSection').style.display = 'none';
+  const el = document.getElementById('leadSection');
+  if (el) el.style.display = 'none';
 }
 
 /* ===================== SHARE (P2-2) ===================== */
@@ -861,26 +916,45 @@ function shareResult() {
 }
 
 function retakeQuiz() {
-  // Reset
+  // Reset answers
   answers.goal = null; answers.timeline = null; answers.price = null;
   answers.deposit = null; answers.income = null; answers.debt = []; answers.employment = null;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-  document.querySelectorAll('[id^="nextBtn"]').forEach(b => b.disabled = true);
   document.getElementById('resultsPage').classList.remove('active');
   document.getElementById('tipEmployment').style.display = 'none';
-  // Reset lead section
-  document.getElementById('leadSection').style.display = '';
-  document.getElementById('leadForm').style.display = '';
-  document.querySelector('.lead-skip').style.display = '';
-  document.getElementById('leadThanks').style.display = 'none';
-  document.getElementById('leadEmail').value = '';
+
+  // Reset score ring
+  const ring = document.getElementById('scoreRing');
+  ring.style.strokeDashoffset = '326.73';
+  const ringContainer = document.getElementById('scoreRingContainer');
+  ringContainer.classList.remove('pulsing');
+
+  // Reset lead section (if present)
+  const leadSection = document.getElementById('leadSection');
+  if (leadSection) leadSection.style.display = '';
+  const leadForm = document.getElementById('leadForm');
+  if (leadForm) leadForm.style.display = '';
+  const leadSkip = document.querySelector('.lead-skip');
+  if (leadSkip) leadSkip.style.display = '';
+  const leadThanks = document.getElementById('leadThanks');
+  if (leadThanks) leadThanks.style.display = 'none';
+  const leadEmail = document.getElementById('leadEmail');
+  if (leadEmail) leadEmail.value = '';
+
+  // Reset step 6 continue button
+  const btn6 = document.getElementById('nextBtn6');
+  if (btn6) btn6.disabled = true;
+
   currentStep = 1;
-  document.getElementById('step1').classList.add('active');
+  const step1 = document.getElementById('step1');
+  step1.classList.remove('slide-forward', 'slide-backward');
+  step1.classList.add('active', 'slide-forward');
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /* ===================== INIT ===================== */
+initDots();
 updateProgress();
 </script>
 </body>
