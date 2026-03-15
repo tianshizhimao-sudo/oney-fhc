@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1A1A2E">
+  <title>Your Next Step | Oney & Co</title>
+  <meta name="description" content="Get your personalised Financial Health Report and book a free consultation with Dong.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%231FAD73'/></linearGradient></defs><g transform='translate(50,50)'><circle cx='0' cy='0' r='38' fill='none' stroke='url(%23g)' stroke-width='10'/><circle cx='0' cy='0' r='28' fill='url(%23g)'/></g></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1A1A2E;
+      --bg-secondary: #16162A;
+      --card: #252540;
+      --border: #3D3D5C;
+      --accent: #2ECC85;
+      --green: #2ECC85;
+      --green-dark: #1FAD73;
+      --purple: #6B4C9A;
+      --text: #ffffff;
+      --text-muted: #a3a3b8;
+      --green-gradient: linear-gradient(135deg, #2ECC85, #1FAD73);
+      --purple-gradient: linear-gradient(135deg, #6B4C9A, #9B59B6);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    /* ── Top Bar ── */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      padding-top: 8px;
+    }
+    .logo-wrap { display: flex; align-items: center; }
+    .logo-wrap svg { height: 40px; width: auto; }
+    .back-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    /* ── Layer 1 — Congrats ── */
+    .layer {
+      margin-bottom: 32px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .layer:nth-child(2) { animation-delay: 0.1s; }
+    .layer:nth-child(3) { animation-delay: 0.2s; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+    .congrats-block {
+      text-align: center;
+      padding: 48px 24px 40px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .congrats-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: var(--green-gradient);
+    }
+    .confetti { font-size: 40px; margin-bottom: 16px; display: block; }
+    .congrats-block h1 {
+      font-size: 26px;
+      font-weight: 800;
+      background: var(--green-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .congrats-block p {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 420px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .step-chips {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(46,204,133,0.08);
+      border: 1px solid rgba(46,204,133,0.2);
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ── Layer 2 — Email Capture ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .card-subtitle {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    /* PDF preview teaser */
+    .pdf-preview {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .pdf-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+    .pdf-details { flex: 1; }
+    .pdf-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .pdf-meta { font-size: 12px; color: var(--text-muted); }
+    .pdf-price {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .price-crossed {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+    .price-free {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(46,204,133,0.1);
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+
+    /* Form */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    @media (max-width: 440px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { margin-bottom: 12px; }
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(46,204,133,0.1);
+    }
+    .form-input::placeholder { color: var(--text-muted); }
+
+    .btn-green {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--green-gradient);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      margin-top: 16px;
+      font-family: inherit;
+    }
+    .btn-green:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-green:active { transform: translateY(0); }
+
+    .form-privacy {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+    .form-privacy a { color: var(--accent); text-decoration: none; }
+
+    /* Thank you state */
+    .thankyou-state {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+      animation: fadeUp 0.4s ease;
+    }
+    .thankyou-icon { font-size: 48px; margin-bottom: 16px; }
+    .thankyou-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .thankyou-msg { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
+
+    /* ── Layer 3 — Broker CTA ── */
+    .broker-card {
+      background: linear-gradient(135deg, rgba(107,76,154,0.15), rgba(107,76,154,0.05));
+      border: 1px solid rgba(107,76,154,0.35);
+      border-radius: 20px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .broker-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--purple-gradient);
+    }
+    .broker-avatar {
+      width: 56px;
+      height: 56px;
+      background: var(--purple-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    .broker-card .card-title { font-size: 20px; }
+    .broker-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 20px 0;
+    }
+    .broker-highlight {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .broker-highlight-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--purple);
+      flex-shrink: 0;
+    }
+    .btn-purple {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--purple-gradient);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.2s, transform 0.2s;
+      font-family: inherit;
+    }
+    .btn-purple:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    .no-obligation {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="logo-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 90">
+        <defs>
+          <linearGradient id="fillGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" style="stop-color:#1FAD73"/>
+            <stop offset="55%" style="stop-color:#2ECC85"/>
+            <stop offset="55%" style="stop-color:transparent"/>
+            <stop offset="100%" style="stop-color:transparent"/>
+          </linearGradient>
+          <linearGradient id="strokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2ECC85"/>
+            <stop offset="100%" style="stop-color:#1FAD73"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(40, 45)">
+          <circle cx="0" cy="0" r="32" fill="none" stroke="url(#strokeGrad)" stroke-width="7"/>
+          <circle cx="0" cy="0" r="24" fill="url(#fillGrad)"/>
+        </g>
+        <text x="82" y="52" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-0.5">ney</text>
+        <text x="129" y="52" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="500" fill="url(#strokeGrad)">&amp;</text>
+        <text x="148" y="52" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-0.5">co</text>
+        <circle cx="182" cy="48" r="4" fill="#6B4C9A"/>
+      </svg>
+    </div>
+    <a href="index.html" class="back-link">← Back to tools</a>
+  </div>
+
+
+  <!-- ── LAYER 1: Congrats ── -->
+  <div class="layer">
+    <div class="congrats-block">
+      <span class="confetti">🎉</span>
+      <h1>You've completed your Financial Health Check</h1>
+      <p>Great first step, Dong. You now have a clearer picture of where you stand — and knowing is half the battle.</p>
+      <div class="step-chips">
+        <div class="chip">✅ Health Check Done</div>
+        <div class="chip">📊 Your score is ready</div>
+        <div class="chip">🔒 100% free &amp; private</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── LAYER 2: Email Capture ── -->
+  <div class="layer">
+    <div class="section-label">Step 2 of 3</div>
+    <div class="card">
+      <div class="card-title">Get your free personalised report</div>
+      <div class="card-subtitle">We'll send you a deeper breakdown of your results — including what to prioritise and how to improve your borrowing position.</div>
+
+      <!-- PDF teaser -->
+      <div class="pdf-preview">
+        <div class="pdf-icon">📄</div>
+        <div class="pdf-details">
+          <div class="pdf-name">Your Bank-Ready Financial Report</div>
+          <div class="pdf-meta">Personalised insights · Action checklist · Borrowing tips</div>
+          <div class="pdf-price">
+            <span class="price-crossed">$19</span>
+            <span class="price-free">FREE preview for you</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div id="emailForm">
+        <div class="form-row">
+          <input type="text" class="form-input" id="firstName" placeholder="First name" autocomplete="given-name">
+          <input type="email" class="form-input" id="emailAddr" placeholder="Email address" autocomplete="email">
+        </div>
+        <button class="btn-green" onclick="submitEmail()">获取我的免费报告预览 →</button>
+        <p class="form-privacy">🔒 No spam. Unsubscribe anytime. <a href="#">Privacy Policy</a></p>
+      </div>
+
+      <!-- Thank you state -->
+      <div class="thankyou-state" id="thankyouState">
+        <div class="thankyou-icon">📬</div>
+        <div class="thankyou-title">Report on its way!</div>
+        <div class="thankyou-msg">
+          Thanks! Check your inbox — your free preview report will arrive within a few minutes.<br><br>
+          <strong>While you wait, scroll down</strong> to see how a free 15-minute chat with Dong can fast-track your borrowing journey.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── LAYER 3: Broker Consult CTA ── -->
+  <div class="layer">
+    <div class="section-label">Step 3 of 3</div>
+    <div class="broker-card">
+      <div class="broker-avatar">🏦</div>
+      <div class="card-title">准备好了？和 Dong 聊聊你的贷款方案</div>
+      <div class="card-subtitle">I help first-home buyers and property investors understand exactly where they stand — and what to do next. No jargon, no pressure.</div>
+
+      <div class="broker-highlights">
+        <div class="broker-highlight">
+          <div class="broker-highlight-dot"></div>
+          <span>8 years in Business Banking at Westpac, NAB &amp; St.George</span>
+        </div>
+        <div class="broker-highlight">
+          <div class="broker-highlight-dot"></div>
+          <span>Specialising in first home buyers &amp; self-employed borrowers</span>
+        </div>
+        <div class="broker-highlight">
+          <div class="broker-highlight-dot"></div>
+          <span>15-minute call — completely free, no obligation</span>
+        </div>
+        <div class="broker-highlight">
+          <div class="broker-highlight-dot"></div>
+          <span>Walk away with a clear action plan</span>
+        </div>
+      </div>
+
+      <a href="#" class="btn-purple" onclick="trackBooking(); return false;">预约 15 分钟免费咨询 →</a>
+      <p class="no-obligation">✨ Completely free · No obligation · Available this week</p>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>© 2026 Oney &amp; Co · <a href="https://oneyco.com.au">oneyco.com.au</a></p>
+    <p style="margin-top:6px;">This tool is for general information only and does not constitute financial advice.</p>
+  </div>
+
+</div>
+
+<script>
+  function submitEmail() {
+    const name = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('emailAddr').value.trim();
+
+    if (!name || !email) {
+      // Shake the empty fields
+      if (!name) shake(document.getElementById('firstName'));
+      if (!email) shake(document.getElementById('emailAddr'));
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      shake(document.getElementById('emailAddr'));
+      return;
+    }
+
+    // Show thank you state
+    document.getElementById('emailForm').style.display = 'none';
+    const ty = document.getElementById('thankyouState');
+    ty.style.display = 'block';
+
+    // Scroll to broker CTA
+    setTimeout(() => {
+      document.querySelector('.broker-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 1200);
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function shake(el) {
+    el.style.borderColor = '#ef4444';
+    el.style.animation = 'none';
+    setTimeout(() => {
+      el.style.animation = 'shake 0.4s ease';
+    }, 10);
+    setTimeout(() => {
+      el.style.borderColor = '';
+      el.style.animation = '';
+    }, 800);
+  }
+
+  function trackBooking() {
+    // Placeholder — hook up Cal.com or Calendly here
+    alert('Booking coming soon! For now, email dong@oneyco.com.au to schedule your free call.');
+  }
+</script>
+
+<style>
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+  }
+</style>
+
+</body>
+</html>
