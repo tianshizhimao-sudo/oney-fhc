@@ -366,7 +366,7 @@
     <div class="congrats-block">
       <span class="confetti">🎉</span>
       <h1>You've completed your Financial Health Check</h1>
-      <p>Great first step, Dong. You now have a clearer picture of where you stand — and knowing is half the battle.</p>
+      <p id="congratsMsg">Great first step! You now have a clearer picture of where you stand — and knowing is half the battle.</p>
       <div class="step-chips">
         <div class="chip">✅ Health Check Done</div>
         <div class="chip">📊 Your score is ready</div>
@@ -402,8 +402,8 @@
           <input type="text" class="form-input" id="firstName" placeholder="First name" autocomplete="given-name">
           <input type="email" class="form-input" id="emailAddr" placeholder="Email address" autocomplete="email">
         </div>
-        <button class="btn-green" onclick="submitEmail()">获取我的免费报告预览 →</button>
-        <p class="form-privacy">🔒 No spam. Unsubscribe anytime. <a href="#">Privacy Policy</a></p>
+        <button class="btn-green" id="submitBtn" onclick="submitEmail()">Send me the free report →</button>
+        <p class="form-privacy">🔒 No spam. Unsubscribe anytime.</p>
       </div>
 
       <!-- Thank you state -->
@@ -446,7 +446,7 @@
         </div>
       </div>
 
-      <a href="#" class="btn-purple" onclick="trackBooking(); return false;">预约 15 分钟免费咨询 →</a>
+      <a href="mailto:dong.m@oneyco.com.au?subject=Free%2015-min%20Consultation%20Request&body=Hi%20Dong%2C%0A%0AI%20just%20completed%20the%20Financial%20Health%20Check%20and%20I%27d%20love%20to%20book%20a%20free%2015-minute%20call.%0A%0AMy%20name%3A%0ABest%20time%20to%20call%3A%0A%0AThanks!" class="btn-purple">Book my free 15-min call →</a>
       <p class="no-obligation">✨ Completely free · No obligation · Available this week</p>
     </div>
   </div>
@@ -461,32 +461,18 @@
 </div>
 
 <script>
-  function submitEmail() {
-    const name = document.getElementById('firstName').value.trim();
-    const email = document.getElementById('emailAddr').value.trim();
-
-    if (!name || !email) {
-      // Shake the empty fields
-      if (!name) shake(document.getElementById('firstName'));
-      if (!email) shake(document.getElementById('emailAddr'));
-      return;
+  // Personalise congrats block with name from URL param if present
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const n = params.get('name');
+    if (n) {
+      const h1 = document.querySelector('.congrats-block h1');
+      if (h1) h1.textContent = "You've completed your Financial Health Check";
+      const p = document.querySelector('.congrats-block p');
+      const p2 = document.getElementById('congratsMsg');
+      if (p2) p2.textContent = `Great first step, ${n}! You now have a clearer picture of where you stand — and knowing is half the battle.`;
     }
-
-    if (!isValidEmail(email)) {
-      shake(document.getElementById('emailAddr'));
-      return;
-    }
-
-    // Show thank you state
-    document.getElementById('emailForm').style.display = 'none';
-    const ty = document.getElementById('thankyouState');
-    ty.style.display = 'block';
-
-    // Scroll to broker CTA
-    setTimeout(() => {
-      document.querySelector('.broker-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 1200);
-  }
+  })();
 
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -495,18 +481,87 @@
   function shake(el) {
     el.style.borderColor = '#ef4444';
     el.style.animation = 'none';
-    setTimeout(() => {
-      el.style.animation = 'shake 0.4s ease';
-    }, 10);
-    setTimeout(() => {
-      el.style.borderColor = '';
-      el.style.animation = '';
-    }, 800);
+    setTimeout(() => { el.style.animation = 'shake 0.4s ease'; }, 10);
+    setTimeout(() => { el.style.borderColor = ''; el.style.animation = ''; }, 800);
   }
 
-  function trackBooking() {
-    // Placeholder — hook up Cal.com or Calendly here
-    alert('Booking coming soon! For now, email dong@oneyco.com.au to schedule your free call.');
+  async function submitEmail() {
+    const nameEl  = document.getElementById('firstName');
+    const emailEl = document.getElementById('emailAddr');
+    const name  = nameEl.value.trim();
+    const email = emailEl.value.trim();
+
+    if (!name)  { shake(nameEl);  return; }
+    if (!email) { shake(emailEl); return; }
+    if (!isValidEmail(email)) { shake(emailEl); return; }
+
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer re_daqk4v5i_6UYKkNjgt6z5SxzAnXBgGgZt'
+        },
+        body: JSON.stringify({
+          from: 'Oney & Co <hello@oneyco.com.au>',
+          to: [email],
+          bcc: ['dong.m@oneyco.com.au'],
+          subject: `${name}, your free Financial Health Report is here 📊`,
+          html: `
+<!DOCTYPE html><html><body style="font-family:Inter,sans-serif;background:#f9f9f7;padding:32px 0;margin:0;">
+<div style="max-width:560px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.06);">
+  <div style="background:linear-gradient(135deg,#2ECC85,#1FAD73);padding:32px 32px 24px;">
+    <div style="font-size:32px;margin-bottom:12px;">📊</div>
+    <h1 style="color:#fff;font-size:22px;font-weight:700;margin:0 0 8px;">Hi ${name}, your report is ready!</h1>
+    <p style="color:rgba(255,255,255,0.85);font-size:15px;margin:0;">Here's your personalised Financial Health snapshot from Oney & Co.</p>
+  </div>
+  <div style="padding:32px;">
+    <p style="color:#444;font-size:15px;line-height:1.7;margin:0 0 20px;">Thanks for completing the Financial Health Check! Below are your next steps to improve your borrowing position:</p>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px;margin-bottom:24px;">
+      <h3 style="color:#065f46;font-size:15px;font-weight:700;margin:0 0 12px;">✅ Your Action Checklist</h3>
+      <ul style="color:#047857;font-size:14px;line-height:1.9;padding-left:20px;margin:0;">
+        <li>Check your credit score (free via GetCreditScore.com.au)</li>
+        <li>Reduce credit card limits you don't need</li>
+        <li>Save consistently — lenders love 3+ months of genuine savings</li>
+        <li>Keep your employment stable for at least 6 months before applying</li>
+        <li>Avoid multiple credit enquiries at once</li>
+      </ul>
+    </div>
+    <div style="background:#f5f0ff;border:1px solid #ddd6fe;border-radius:12px;padding:20px;margin-bottom:24px;">
+      <h3 style="color:#5b21b6;font-size:15px;font-weight:700;margin:0 0 8px;">💬 Want a personalised breakdown?</h3>
+      <p style="color:#6d28d9;font-size:14px;line-height:1.6;margin:0 0 12px;">Book a free 15-minute call with Dong. No jargon, no pressure — just clarity on where you stand and what to do next.</p>
+      <a href="mailto:dong.m@oneyco.com.au?subject=Free%2015-min%20Consultation%20-%20${encodeURIComponent(name)}" style="display:inline-block;background:linear-gradient(135deg,#6B4C9A,#9B59B6);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;">Book my free call →</a>
+    </div>
+    <p style="color:#999;font-size:12px;margin:0;">You're receiving this because you completed the Financial Health Check at <a href="https://fhc.oneyco.com.au" style="color:#2ECC85;">fhc.oneyco.com.au</a>. This is not financial advice.</p>
+  </div>
+</div>
+</body></html>`
+        })
+      });
+
+      if (res.ok) {
+        document.getElementById('emailForm').style.display = 'none';
+        document.getElementById('thankyouState').style.display = 'block';
+        setTimeout(() => {
+          document.querySelector('.broker-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 1200);
+      } else {
+        throw new Error('Send failed');
+      }
+    } catch(e) {
+      btn.textContent = 'Send me the free report →';
+      btn.disabled = false;
+      btn.style.background = 'linear-gradient(135deg,#ef4444,#dc2626)';
+      btn.textContent = 'Something went wrong — try again';
+      setTimeout(() => {
+        btn.style.background = '';
+        btn.textContent = 'Send me the free report →';
+      }, 3000);
+    }
   }
 </script>
 
