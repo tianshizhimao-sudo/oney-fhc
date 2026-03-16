@@ -439,32 +439,50 @@
   </footer>
 
   <script>
-    const SHEET_URL = 'https://script.google.com/macros/s/YOUR_GOOGLE_APPS_SCRIPT_ID/exec'; // TODO: connect Apps Script
+    const SUPABASE_URL = 'https://syhwaeloljdswsmqkzrx.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_kQrtxdvnex0ObqoI0UXNLQ_-1FVABOM';
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
       const emailInput = e.target.querySelector('input[type="email"]');
       const email = emailInput.value.trim();
       if (!email) return;
 
-      // Disable button while submitting
       const btn = e.target.querySelector('button');
       btn.textContent = 'Saving...';
       btn.disabled = true;
 
-      // TODO: POST to Google Apps Script / Resend / Supabase
-      // For now, show success immediately (replace with real API call)
-      setTimeout(() => {
-        document.getElementById('success-msg').style.display = 'block';
-        emailInput.value = '';
-        btn.textContent = 'You\'re in ✓';
-        btn.style.background = 'rgba(46,204,133,0.2)';
-        btn.style.color = 'var(--accent)';
-        btn.style.border = '1px solid rgba(46,204,133,0.3)';
+      try {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/leads', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            email: email,
+            source: 'fhc-early-bird',
+            created_at: new Date().toISOString()
+          })
+        });
 
-        // Log to console for now
-        console.log('Early bird signup:', email);
-      }, 600);
+        if (res.ok || res.status === 201) {
+          document.getElementById('success-msg').style.display = 'block';
+          emailInput.value = '';
+          btn.textContent = 'You\'re in ✓';
+          btn.style.background = 'rgba(46,204,133,0.2)';
+          btn.style.color = 'var(--accent)';
+          btn.style.border = '1px solid rgba(46,204,133,0.3)';
+        } else {
+          throw new Error('Submit failed: ' + res.status);
+        }
+      } catch (err) {
+        console.error('Signup error:', err);
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
     }
   </script>
 
