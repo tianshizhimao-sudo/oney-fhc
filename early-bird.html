@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1A1A2E">
+  <title>Financial Health Check — Early Access | Oney & Co</title>
+  <meta name="description" content="Be among the first to access Oney & Co's Financial Health Check toolkit. Lock in early-bird pricing before the public launch.">
+  <meta property="og:title" content="FHC Early Access — Oney & Co">
+  <meta property="og:description" content="The broker's toolkit for Australians. Know your numbers before you apply. Lock in $29 early-bird pricing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fhc.oneyco.com.au/early-bird">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0%25' y1='100%25' x2='0%25' y2='0%25'><stop offset='0%25' stop-color='%231FAD73'/><stop offset='60%25' stop-color='%232ECC85'/><stop offset='60%25' stop-color='transparent'/><stop offset='100%25' stop-color='transparent'/></linearGradient><linearGradient id='sg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%231FAD73'/></linearGradient></defs><g transform='translate(50,50)'><circle r='38' fill='none' stroke='url(%23sg)' stroke-width='10' stroke-linecap='round'/><circle r='28' fill='url(%23fg)'/></g></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1A1A2E;
+      --bg-secondary: #16162A;
+      --card: #252540;
+      --card-hover: #2D2D4A;
+      --border: #3D3D5C;
+      --accent: #2ECC85;
+      --accent-dark: #1FAD73;
+      --accent-glow: rgba(46, 204, 133, 0.12);
+      --purple: #6B4C9A;
+      --purple-light: #9B59B6;
+      --text: #ffffff;
+      --text-muted: #a3a3b8;
+      --text-dim: #7a7a94;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 960px; margin: 0 auto; padding: 0 24px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo svg { height: 38px; }
+    .nav-back {
+      display: flex; align-items: center; gap: 6px;
+      color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      padding: 120px 24px 60px;
+      text-align: center;
+      max-width: 760px; margin: 0 auto;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-glow); border: 1px solid rgba(46,204,133,0.25);
+      color: var(--accent); font-size: 13px; font-weight: 600;
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
+    }
+    .badge .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 18px; color: var(--text-muted); line-height: 1.7;
+      margin-bottom: 36px; max-width: 560px; margin-left: auto; margin-right: auto;
+    }
+
+    /* Price block */
+    .price-block {
+      display: inline-flex; align-items: baseline; gap: 10px;
+      margin-bottom: 36px;
+    }
+    .price-original {
+      font-size: 22px; color: var(--text-dim); text-decoration: line-through;
+      font-weight: 500;
+    }
+    .price-now {
+      font-size: 48px; font-weight: 800; color: var(--accent);
+      letter-spacing: -0.03em;
+    }
+    .price-label {
+      font-size: 14px; color: var(--text-muted);
+    }
+
+    /* CTA form */
+    .cta-form {
+      display: flex; gap: 10px; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 16px;
+    }
+    .cta-form input[type="email"] {
+      padding: 14px 20px; border-radius: 12px;
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); font-size: 15px; font-family: inherit;
+      outline: none; width: 280px; transition: border-color 0.2s;
+    }
+    .cta-form input[type="email"]:focus { border-color: var(--accent); }
+    .cta-form input[type="email"]::placeholder { color: var(--text-dim); }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #2ECC85, #1FAD73);
+      color: #fff; font-size: 15px; font-weight: 700;
+      padding: 14px 28px; border-radius: 12px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      font-family: inherit; white-space: nowrap;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .form-note { font-size: 13px; color: var(--text-dim); }
+    .form-note strong { color: var(--text-muted); }
+
+    /* Social proof */
+    .social-proof {
+      display: flex; justify-content: center; gap: 32px;
+      margin: 48px auto 60px; flex-wrap: wrap;
+    }
+    .sp-item { text-align: center; }
+    .sp-number { font-size: 28px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; }
+    .sp-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    /* What you get */
+    .section { max-width: 960px; margin: 0 auto; padding: 0 24px 72px; }
+    .section-label {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent); margin-bottom: 12px;
+    }
+    .section h2 {
+      font-size: clamp(24px, 3vw, 36px); font-weight: 800;
+      letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .section > p { color: var(--text-muted); font-size: 16px; margin-bottom: 36px; max-width: 600px; }
+
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .feature-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--accent-glow); border: 1px solid rgba(46,204,133,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 16px;
+    }
+    .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* Who it's for */
+    .for-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .for-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px;
+    }
+    .for-card .for-tag {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 4px 10px; border-radius: 6px; margin-bottom: 14px;
+    }
+    .tag-payg { background: rgba(46,204,133,0.12); color: var(--accent); }
+    .tag-business { background: rgba(107,76,154,0.15); color: var(--purple-light); }
+    .tag-investor { background: rgba(96,165,250,0.12); color: #60a5fa; }
+    .for-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .for-card ul { list-style: none; }
+    .for-card ul li {
+      font-size: 14px; color: var(--text-muted); padding: 5px 0;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .for-card ul li::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    /* Founder note */
+    .founder-note {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 36px; margin-bottom: 72px;
+      border-left: 3px solid var(--accent);
+    }
+    .founder-note blockquote {
+      font-size: 17px; color: var(--text-muted); line-height: 1.8;
+      font-style: italic; margin-bottom: 20px;
+    }
+    .founder-note blockquote strong { color: var(--text); font-style: normal; }
+    .founder-sig { display: flex; align-items: center; gap: 12px; }
+    .founder-sig .sig-name { font-size: 15px; font-weight: 700; }
+    .founder-sig .sig-role { font-size: 13px; color: var(--text-muted); }
+
+    /* Bottom CTA */
+    .bottom-cta {
+      background: linear-gradient(135deg, rgba(46,204,133,0.08), rgba(107,76,154,0.08));
+      border: 1px solid rgba(46,204,133,0.2); border-radius: 20px;
+      padding: 56px 40px; text-align: center; margin-bottom: 72px;
+    }
+    .bottom-cta h2 {
+      font-size: clamp(24px, 3vw, 36px); font-weight: 800;
+      letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .bottom-cta p { color: var(--text-muted); font-size: 16px; margin-bottom: 32px; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+      color: var(--text-dim); font-size: 13px;
+    }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* Success state */
+    .success-msg {
+      display: none; background: rgba(46,204,133,0.1);
+      border: 1px solid rgba(46,204,133,0.3); border-radius: 10px;
+      padding: 14px 20px; color: var(--accent); font-size: 14px;
+      font-weight: 600; margin-top: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .cta-form { flex-direction: column; align-items: center; }
+      .cta-form input[type="email"] { width: 100%; max-width: 340px; }
+      .social-proof { gap: 20px; }
+      .bottom-cta { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="https://oneyco.com.au" target="_blank" class="nav-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 90">
+          <defs>
+            <linearGradient id="fg" x1="0%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" style="stop-color:#1FAD73"/>
+              <stop offset="55%" style="stop-color:#2ECC85"/>
+              <stop offset="55%" style="stop-color:transparent"/>
+              <stop offset="100%" style="stop-color:transparent"/>
+            </linearGradient>
+            <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#2ECC85"/>
+              <stop offset="100%" style="stop-color:#1FAD73"/>
+            </linearGradient>
+          </defs>
+          <g transform="translate(40, 45)">
+            <circle cx="0" cy="0" r="32" fill="none" stroke="url(#sg)" stroke-width="7"/>
+            <circle cx="0" cy="0" r="24" fill="url(#fg)"/>
+          </g>
+          <text x="82" y="52" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-0.5">ney</text>
+          <text x="129" y="52" font-family="Inter, system-ui, sans-serif" font-size="21" font-weight="500" fill="url(#sg)">&amp;</text>
+          <text x="148" y="52" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="#ffffff" letter-spacing="-0.5">co</text>
+          <circle cx="182" cy="48" r="4" fill="#6B4C9A"/>
+        </svg>
+      </a>
+      <a href="index.html" class="nav-back">
+        ← Back to Health Check
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="badge"><span class="dot"></span> Early Access — Limited Spots</div>
+    <h1>Know Your Numbers<br><span>Before the Bank Does</span></h1>
+    <p>The Financial Health Check toolkit gives you the same picture a broker builds in their first meeting — before you've made a single application.</p>
+
+    <div class="price-block">
+      <span class="price-original">$79 AUD</span>
+      <span class="price-now">$29</span>
+      <span class="price-label">AUD<br>early-bird</span>
+    </div>
+
+    <form class="cta-form" onsubmit="handleSubmit(event)">
+      <input type="email" id="email-input" placeholder="your@email.com" required>
+      <button type="submit" class="btn-primary">
+        Reserve My Spot →
+      </button>
+    </form>
+    <p class="form-note"><strong>No payment now.</strong> We'll email you when the full toolkit is ready. Early-bird price locked in.</p>
+    <div class="success-msg" id="success-msg">
+      ✓ You're on the list! We'll email you at launch with your early-bird link.
+    </div>
+  </section>
+
+  <!-- Social proof numbers -->
+  <div class="social-proof">
+    <div class="sp-item">
+      <div class="sp-number">8 yrs</div>
+      <div class="sp-label">Inside the banking system</div>
+    </div>
+    <div class="sp-item">
+      <div class="sp-number">$29</div>
+      <div class="sp-label">Early-bird price (vs $79 launch)</div>
+    </div>
+    <div class="sp-item">
+      <div class="sp-number">5 min</div>
+      <div class="sp-label">To know where you stand</div>
+    </div>
+    <div class="sp-item">
+      <div class="sp-number">Free</div>
+      <div class="sp-label">Health check available now</div>
+    </div>
+  </div>
+
+  <!-- What you get -->
+  <section class="section">
+    <p class="section-label">What's Included</p>
+    <h2>Everything a Broker Checks<br>Before They Take You On</h2>
+    <p>The FHC toolkit isn't a generic calculator. It's built from 8 years of knowing exactly what banks need to see — and how to present it.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🏦</div>
+        <h3>Bank-Ready Score</h3>
+        <p>A composite assessment of your mortgage readiness across 5 key dimensions — the same picture a lender builds internally.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Serviceability Calculator</h3>
+        <p>See exactly how much you can borrow using real APRA buffers, not optimistic online estimates. Includes PAYG and self-employed scenarios.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Credit Health Checklist</h3>
+        <p>Know what's on your file before a lender does. Includes how to dispute errors and what genuinely moves the needle.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>90-Day Statement Prep Guide</h3>
+        <p>The exact transactions that raise flags, what to clean up before you apply, and how to tell a clean financial story.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗓️</div>
+        <h3>12-Month Readiness Plan</h3>
+        <p>A personalised action checklist based on your results — what to fix first, in what order, to maximise your approval chances.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>30-Min Broker Review</h3>
+        <p>Early-bird customers get a complimentary 30-minute review session with Dong to walk through your results and next steps.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="section">
+    <p class="section-label">Who It's For</p>
+    <h2>Built for Three Types<br>of Australian Borrower</h2>
+    <p>Whether you're buying your first home, refinancing, or running your own business — the FHC toolkit is designed for your situation.</p>
+
+    <div class="for-grid">
+      <div class="for-card">
+        <span class="for-tag tag-payg">PAYG Employee</span>
+        <h3>First Home Buyer or Upgrader</h3>
+        <ul>
+          <li>Understand your real borrowing capacity</li>
+          <li>Know if your deposit qualifies as "genuine savings"</li>
+          <li>See exactly what's on your credit file</li>
+          <li>Prepare your statements before applying</li>
+        </ul>
+      </div>
+      <div class="for-card">
+        <span class="for-tag tag-business">Self-Employed</span>
+        <h3>Business Owner or Contractor</h3>
+        <ul>
+          <li>Navigate the 2-year tax return requirement</li>
+          <li>Understand how deductions affect borrowing power</li>
+          <li>Find lenders who understand self-employed income</li>
+          <li>Prepare add-backs and income narrative</li>
+        </ul>
+      </div>
+      <div class="for-card">
+        <span class="for-tag tag-investor">Refinancer</span>
+        <h3>Existing Owner Ready to Refinance</h3>
+        <ul>
+          <li>Calculate your loyalty tax — how much you're overpaying</li>
+          <li>Know your current LVR and equity position</li>
+          <li>Identify the right moment to switch lenders</li>
+          <li>Avoid cashback traps and hidden break costs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder note -->
+  <section class="section">
+    <div class="founder-note">
+      <blockquote>
+        "I spent 8 years inside the banking system watching people get declined for loans they could absolutely afford — not because their finances were bad, but because <strong>nobody had ever shown them how banks actually think.</strong> The FHC toolkit is exactly what I wish I could have handed people before they walked through the door."
+      </blockquote>
+      <div class="founder-sig">
+        <div>
+          <div class="sig-name">Dong M</div>
+          <div class="sig-role">Founder, Oney & Co · Former Business Banker (8 years, Big 4)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="section">
+    <div class="bottom-cta">
+      <h2>Lock In $29 Before Launch</h2>
+      <p>The full toolkit launches at $79 AUD. Early-bird spots are capped. Add your email and we'll send your link when it's ready — no payment now.</p>
+      <form class="cta-form" onsubmit="handleSubmit(event)" style="justify-content:center">
+        <input type="email" id="email-input-2" placeholder="your@email.com" required>
+        <button type="submit" class="btn-primary">Get Early Access →</button>
+      </form>
+      <p class="form-note" style="margin-top:12px"><strong>Free health check available now</strong> — no signup needed. <a href="index.html" style="color:var(--accent)">Try it →</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p style="margin-bottom:8px">
+      <a href="https://oneyco.com.au">Oney & Co</a> &middot;
+      <a href="index.html">Health Check</a> &middot;
+      <a href="https://oneyco.com.au/insights.html">Insights</a>
+    </p>
+    <p>General information only. Not personal financial advice. Oney & Co Pty Ltd.</p>
+  </footer>
+
+  <script>
+    const SHEET_URL = 'https://script.google.com/macros/s/YOUR_GOOGLE_APPS_SCRIPT_ID/exec'; // TODO: connect Apps Script
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const emailInput = e.target.querySelector('input[type="email"]');
+      const email = emailInput.value.trim();
+      if (!email) return;
+
+      // Disable button while submitting
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Saving...';
+      btn.disabled = true;
+
+      // TODO: POST to Google Apps Script / Resend / Supabase
+      // For now, show success immediately (replace with real API call)
+      setTimeout(() => {
+        document.getElementById('success-msg').style.display = 'block';
+        emailInput.value = '';
+        btn.textContent = 'You\'re in ✓';
+        btn.style.background = 'rgba(46,204,133,0.2)';
+        btn.style.color = 'var(--accent)';
+        btn.style.border = '1px solid rgba(46,204,133,0.3)';
+
+        // Log to console for now
+        console.log('Early bird signup:', email);
+      }, 600);
+    }
+  </script>
+
+</body>
+</html>
