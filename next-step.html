@@ -461,14 +461,26 @@
 </div>
 
 <script>
-  // Personalise congrats block with name from URL param if present
+  // Read quiz results from localStorage
+  let quizScore = null;
+  let quizGrade = '';
   (function() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('oney-fhc-quiz-v1') || '{}');
+      if (saved.score) {
+        quizScore = saved.score;
+        quizGrade = saved.grade || '';
+        // Show score badge
+        const chip = document.querySelector('.chip');
+        if (chip) chip.textContent = `📊 Your score: ${quizScore}/100 — ${quizGrade}`;
+      }
+    } catch(e) {}
+
     const params = new URLSearchParams(window.location.search);
     const n = params.get('name');
     if (n) {
       const h1 = document.querySelector('.congrats-block h1');
       if (h1) h1.textContent = "You've completed your Financial Health Check";
-      const p = document.querySelector('.congrats-block p');
       const p2 = document.getElementById('congratsMsg');
       if (p2) p2.textContent = `Great first step, ${n}! You now have a clearer picture of where you stand — and knowing is half the battle.`;
     }
@@ -517,9 +529,10 @@
   <div style="background:linear-gradient(135deg,#2ECC85,#1FAD73);padding:32px 32px 24px;">
     <div style="font-size:32px;margin-bottom:12px;">📊</div>
     <h1 style="color:#fff;font-size:22px;font-weight:700;margin:0 0 8px;">Hi ${name}, your report is ready!</h1>
-    <p style="color:rgba(255,255,255,0.85);font-size:15px;margin:0;">Here's your personalised Financial Health snapshot from Oney & Co.</p>
+    <p style="color:rgba(255,255,255,0.85);font-size:15px;margin:0;">${quizScore ? `Your Bank-Ready Score: <strong>${quizScore}/100</strong> — ${quizGrade}` : 'Here\'s your personalised Financial Health snapshot from Oney & Co.'}</p>
   </div>
   <div style="padding:32px;">
+    ${quizScore ? `<div style="background:#f0fdf4;border-left:4px solid #2ECC85;border-radius:8px;padding:16px 20px;margin-bottom:20px;"><p style="color:#065f46;font-size:16px;font-weight:700;margin:0 0 4px;">Your Bank-Ready Score: ${quizScore}/100</p><p style="color:#047857;font-size:14px;margin:0;">${quizGrade}</p></div>` : ''}
     <p style="color:#444;font-size:15px;line-height:1.7;margin:0 0 20px;">Thanks for completing the Financial Health Check! Below are your next steps to improve your borrowing position:</p>
     <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px;margin-bottom:24px;">
       <h3 style="color:#065f46;font-size:15px;font-weight:700;margin:0 0 12px;">✅ Your Action Checklist</h3>

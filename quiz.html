@@ -565,8 +565,8 @@
 
       <!-- CTA -->
       <div class="cta-section">
-        <a href="about.html" class="cta-btn">📞 Book a Free Call</a>
-        <p class="cta-sub">No obligation — just a friendly chat with a licensed broker</p>
+        <a href="next-step.html" class="cta-btn" onclick="passScoreToNextStep()">📋 Get My Free Report</a>
+        <p class="cta-sub">We'll send your personalised results to your inbox — no obligation</p>
       </div>
 
       <!-- Share prompt -->
@@ -956,6 +956,18 @@ function retakeQuiz() {
 /* ===================== INIT ===================== */
 initDots();
 updateProgress();
+
+function passScoreToNextStep() {
+  try {
+    const existing = JSON.parse(localStorage.getItem('oney-fhc-quiz-v1') || '{}');
+    if (!existing.score) {
+      const s = calculateScore();
+      localStorage.setItem('oney-fhc-quiz-v1', JSON.stringify({
+        answers, score: s.total, grade: s.grade ? s.grade.label : '', timestamp: Date.now()
+      }));
+    }
+  } catch(e) {}
+}
 </script>
 </body>
 </html>
