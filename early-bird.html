@@ -453,22 +453,17 @@
       btn.disabled = true;
 
       try {
-        const res = await fetch(SUPABASE_URL + '/rest/v1/leads', {
+        const res = await fetch(SUPABASE_URL + '/functions/v1/fhc-early-bird', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'apikey': SUPABASE_KEY,
-            'Authorization': 'Bearer ' + SUPABASE_KEY,
-            'Prefer': 'return=minimal'
+            'Authorization': 'Bearer ' + SUPABASE_KEY
           },
-          body: JSON.stringify({
-            email: email,
-            source: 'fhc-early-bird',
-            created_at: new Date().toISOString()
-          })
+          body: JSON.stringify({ email })
         });
 
-        if (res.ok || res.status === 201) {
+        const data = await res.json();
+        if (res.ok && data.success) {
           document.getElementById('success-msg').style.display = 'block';
           emailInput.value = '';
           btn.textContent = 'You\'re in ✓';
@@ -476,7 +471,7 @@
           btn.style.color = 'var(--accent)';
           btn.style.border = '1px solid rgba(46,204,133,0.3)';
         } else {
-          throw new Error('Submit failed: ' + res.status);
+          throw new Error(data.error || 'Submit failed');
         }
       } catch (err) {
         console.error('Signup error:', err);
