@@ -370,7 +370,7 @@ function runAssessment(){
   const dtiNum            = income > 0 ? totalDebtForDTI / income : 0;
 
   // Serviceability (monthly repayment test at assessment rate)
-  const assessRate = 0.0685; // floor rate ~6.85% (RBA 3.85% + 3% buffer)
+  const assessRate = 0.0710; // floor rate ~7.10% (RBA 4.10% + 3% buffer, updated Mar 2026)
   const r = assessRate/12, nPay = 30*12;
   const newRepay = loanAmt > 0 ? loanAmt * r * Math.pow(1+r,nPay)/(Math.pow(1+r,nPay)-1) : 0;
   // Existing debt monthly commitment (rough: secured at 3%, unsecured at higher)
@@ -538,7 +538,7 @@ ASSESSMENT RESULTS
 
 1. SERVICEABILITY              [${srvS.toUpperCase()}]
    Estimated NSR:    ${fmt(nsr)}/month
-   Assessment rate:  6.85% (RBA 3.85% + 3.0% buffer)
+   Assessment rate:  7.10% (RBA 4.10% + 3.0% buffer)
    HEM (living):     ~${fmt(hemBase)}/month (${dependants} dependant${dependants!==1?'s':''})
    Status:           ${statusLabel(srvS)}
 
