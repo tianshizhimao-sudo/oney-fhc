@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Banks Really Assess You — FHC</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1A1A2E;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2ECC85 0%, #1FAD73 100%);
+            padding: 40px 32px;
+            text-align: center;
+        }
+        .header-brand {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1A1A2E;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1A1A2E;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .header-subtitle {
+            font-size: 13px;
+            color: rgba(26, 26, 46, 0.7);
+            margin-top: 8px;
+        }
+        .content {
+            padding: 40px 32px;
+        }
+        .section {
+            margin-bottom: 32px;
+        }
+        .section-title {
+            color: #2ECC85;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+        }
+        .section-heading {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .section-text {
+            color: #e2e2e2;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .myth-box {
+            background: #252540;
+            border-left: 3px solid #6B4C9A;
+            border-radius: 0 8px 8px 0;
+            padding: 18px;
+            margin-bottom: 14px;
+        }
+        .myth-title {
+            color: #6B4C9A;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .myth-reality {
+            color: #e2e2e2;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .highlight {
+            color: #2ECC85;
+            font-weight: 600;
+        }
+        .purple-highlight {
+            color: #9B59B6;
+            font-weight: 600;
+        }
+        .rate-box {
+            background: rgba(46, 204, 133, 0.08);
+            border: 1px solid rgba(46, 204, 133, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+        .rate-label {
+            color: #a3a3b8;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+        .rate-number {
+            color: #2ECC85;
+            font-size: 36px;
+            font-weight: 800;
+            margin: 0;
+        }
+        .rate-breakdown {
+            color: #a3a3b8;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #2ECC85, #1FAD73);
+            color: #1A1A2E;
+            font-weight: 700;
+            padding: 16px 36px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 15px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            transition: opacity 0.2s;
+        }
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+        .cta-wrapper {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .footer {
+            padding: 24px 32px;
+            border-top: 1px solid #3D3D5C;
+            text-align: center;
+        }
+        .footer-text {
+            color: #a3a3b8;
+            font-size: 12px;
+            margin: 0;
+        }
+        .footer-legal {
+            color: #3D3D5C;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin: 0 auto 16px;
+        }
+        .chinese {
+            color: #a3a3b8;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-placeholder"></div>
+            <div class="header-brand">Oney & Co</div>
+            <h1 class="header-title">How Banks Really Assess You</h1>
+            <div class="header-subtitle">(It's Not What You Think)</div>
+            <div class="chinese">你知道银行是怎么评估你的吗？</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Assessment Rate Section -->
+            <div class="section">
+                <div class="section-title">The Real Assessment Rate</div>
+                <p class="section-text">
+                    Banks don't lend at the advertised rates you see on their websites. When assessing how much you can borrow, they apply a <span class="highlight">stress test buffer</span>.
+                </p>
+
+                <div class="rate-box">
+                    <div class="rate-label">Assessment Rate (APRA Buffer)</div>
+                    <p class="rate-number">7.10%</p>
+                    <div class="rate-breakdown">RBA Rate (4.10%) + 3% Serviceability Buffer</div>
+                </div>
+
+                <p class="section-text">
+                    This is higher than current mortgage rates because banks want to know you can still repay if rates rise. The FHC uses this exact 7.10% assessment rate — the same one banks use.
+                </p>
+            </div>
+
+            <!-- Three Common Myths -->
+            <div class="section">
+                <div class="section-title">Three Common Myths</div>
+
+                <div class="myth-box">
+                    <div class="myth-title">❌ Myth 1: "I can borrow based on my salary"</div>
+                    <p class="myth-reality">
+                        <span class="highlight">Reality:</span> Banks multiply your income by the assessment rate (7.10%), not the advertised rate. A $100k salary doesn't mean $600k+ borrowing power — it's closer to $350-400k depending on expenses. The FHC shows your real number.
+                    </p>
+                </div>
+
+                <div class="myth-box">
+                    <div class="myth-title">❌ Myth 2: "20% deposit means I'm safe"</div>
+                    <p class="myth-reality">
+                        <span class="highlight">Reality:</span> Deposit size is just one factor. Banks care more about your Debt-To-Income ratio (DTI) and serviceability. Even with 20%, you can be declined if your expenses are too high relative to income. The FHC breaks down all five factors.
+                    </p>
+                </div>
+
+                <div class="myth-box">
+                    <div class="myth-title">❌ Myth 3: "Pre-approval means guaranteed"</div>
+                    <p class="myth-reality">
+                        <span class="highlight">Reality:</span> Pre-approval is conditional. Banks re-assess everything at settlement — income, employment, credit file, everything. Conditions can change. Know your real position before you start hunting.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="section">
+                <p class="section-text">
+                    The <span class="purple-highlight">Bank-Ready Score</span> reveals all five assessment dimensions banks actually use — and shows you exactly where you stand, using their numbers, not optimistic estimates.
+                </p>
+
+                <div class="cta-wrapper">
+                    <a href="https://tools.oneyco.com.au/bank-ready-score.html" class="cta-button">Try the Bank-Ready Score →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="footer-text">Oney & Co · oneyco.com.au · hello@oneyco.com.au</p>
+            <p class="footer-legal">General information only. Not personal financial advice. Oney & Co Pty Ltd.</p>
+        </div>
+    </div>
+</body>
+</html>

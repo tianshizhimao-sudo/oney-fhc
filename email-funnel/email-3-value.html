@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your First Home — Closer Than You Think — FHC</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1A1A2E;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2ECC85 0%, #1FAD73 100%);
+            padding: 40px 32px;
+            text-align: center;
+        }
+        .header-brand {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1A1A2E;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .header-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1A1A2E;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .header-subtitle {
+            font-size: 14px;
+            color: rgba(26, 26, 46, 0.7);
+            margin-top: 8px;
+        }
+        .header-subtitle .chinese {
+            display: block;
+            margin-top: 6px;
+        }
+        .content {
+            padding: 40px 32px;
+        }
+        .founder-story {
+            background: #252540;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 28px;
+            border-left: 3px solid #6B4C9A;
+        }
+        .story-title {
+            color: #6B4C9A;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+        .story-text {
+            color: #e2e2e2;
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0;
+        }
+        .story-text strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .founder-sig {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 16px;
+        }
+        .founder-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #2ECC85, #1FAD73);
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+        .founder-info {
+            font-size: 13px;
+        }
+        .founder-name {
+            color: #ffffff;
+            font-weight: 700;
+            margin: 0 0 4px 0;
+        }
+        .founder-title {
+            color: #a3a3b8;
+            margin: 0;
+            font-size: 12px;
+        }
+        .section {
+            margin-bottom: 28px;
+        }
+        .section-title {
+            color: #2ECC85;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+        .section-heading {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .section-text {
+            color: #e2e2e2;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        .highlight {
+            color: #2ECC85;
+            font-weight: 600;
+        }
+        .cta-section {
+            margin-bottom: 28px;
+        }
+        .cta-label {
+            color: #a3a3b8;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+        .cta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .cta-button {
+            background: linear-gradient(135deg, #2ECC85, #1FAD73);
+            color: #1A1A2E;
+            font-weight: 700;
+            padding: 14px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            transition: opacity 0.2s;
+            display: block;
+        }
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+        .cta-button-secondary {
+            background: transparent;
+            color: #2ECC85;
+            border: 1px solid rgba(46, 204, 133, 0.3);
+        }
+        .note-box {
+            background: rgba(107, 76, 154, 0.08);
+            border-left: 3px solid #6B4C9A;
+            border-radius: 0 8px 8px 0;
+            padding: 16px;
+            margin-bottom: 28px;
+            color: #a3a3b8;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .footer {
+            padding: 24px 32px;
+            border-top: 1px solid #3D3D5C;
+            text-align: center;
+        }
+        .footer-text {
+            color: #a3a3b8;
+            font-size: 12px;
+            margin: 0;
+        }
+        .footer-legal {
+            color: #3D3D5C;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin: 0 auto 16px;
+        }
+        @media (max-width: 500px) {
+            .cta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-placeholder"></div>
+            <div class="header-brand">Oney & Co</div>
+            <h1 class="header-title">Your First Home — Closer Than You Think</h1>
+            <div class="header-subtitle">
+                <span class="chinese">你的首套房，离你有多远？</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Founder Story -->
+            <div class="founder-story">
+                <div class="story-title">Dong's Story</div>
+                <p class="story-text">
+                    "I spent <strong>8 years inside Big 4 banks</strong> watching what made applications succeed and fail. The pattern was always the same: <strong>most rejections weren't about money — they were about information.</strong> People didn't know what banks actually looked at. So they'd apply unprepared, get declined, and think they'd never be ready.
+                </p>
+                <p class="story-text" style="margin-top: 12px;">
+                    Now I'm building tools so you don't have to guess. <strong>Know your real numbers before you apply.</strong> That's the whole idea."
+                </p>
+                <div class="founder-sig">
+                    <div class="founder-avatar"></div>
+                    <div class="founder-info">
+                        <p class="founder-name">Dong M</p>
+                        <p class="founder-title">Founder, Oney & Co</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FHC Value Prop -->
+            <div class="section">
+                <div class="section-title">The FHC Difference</div>
+                <div class="section-heading">Know Your Real Costs Before You Start Looking</div>
+                <p class="section-text">
+                    The Financial Health Check isn't a generic calculator. It's built from 8 years of knowing <span class="highlight">exactly what banks need to see — and how to present it.</span>
+                </p>
+                <p class="section-text">
+                    In 5 minutes, you'll know:
+                </p>
+                <ul style="color: #e2e2e2; font-size: 15px; line-height: 1.7; padding-left: 20px; margin-bottom: 0;">
+                    <li>Your real borrowing capacity (using 7.10% assessment rate)</li>
+                    <li>Where you stand on the 5 key assessment dimensions</li>
+                    <li>What to fix first to maximise approval chances</li>
+                    <li>Your exact serviceability position before you apply</li>
+                </ul>
+            </div>
+
+            <!-- CTA Options -->
+            <div class="cta-section">
+                <div class="cta-label">Next Steps</div>
+                <div class="cta-grid">
+                    <a href="https://fhc.oneyco.com.au" class="cta-button">
+                        Get FHC for $29
+                    </a>
+                    <a href="https://oneyco.com.au/book-call" class="cta-button cta-button-secondary">
+                        Book Free 15-Min Call
+                    </a>
+                </div>
+            </div>
+
+            <!-- Urgency Note -->
+            <div class="note-box">
+                <strong style="color: #e2e2e2;">Early-bird pricing ($29 vs $79) closes at launch</strong> — only a few spots remaining. Lock yours in now.
+            </div>
+
+            <!-- Closing -->
+            <p class="section-text" style="text-align: center; color: #a3a3b8; margin-bottom: 0;">
+                Questions? Reply to this email or reach out to <a href="mailto:hello@oneyco.com.au" style="color: #2ECC85; text-decoration: none;">hello@oneyco.com.au</a>
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="footer-text">Oney & Co · oneyco.com.au · hello@oneyco.com.au</p>
+            <p class="footer-legal">General information only. Not personal financial advice. Oney & Co Pty Ltd.</p>
+        </div>
+    </div>
+</body>
+</html>
