@@ -3,816 +3,215 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="oney-analytics-domain" content="fhc.oneyco.com.au">
   <meta name="theme-color" content="#0a0a0a">
-  <title>Financial Health Check — Free Tools for All Australians | Oney & Co</title>
-  <meta name="description" content="Free financial health check tools for all Australians. PAYG employees and business owners — find the right tool for your situation.">
-  <meta property="og:title" content="Financial Health Check — Oney & Co">
-  <meta property="og:description" content="Free financial health check tools for all Australians. Understand your financial position in minutes.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://fhc.oneyco.com.au/">
-  <link rel="canonical" href="https://fhc.oneyco.com.au/">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%231FAD73'/></linearGradient></defs><g transform='translate(50,50)'><path d='M0-38A38 38 0 1 0 0-37.99' fill='none' stroke='url(%23g)' stroke-width='8' stroke-linecap='round' stroke-dasharray='227 12'/><path d='M0-45L0-52' stroke='url(%23g)' stroke-width='6' stroke-linecap='round'/></g></svg>">
+  <title>Financial Health Check · Oney & Co</title>
+  <meta name="description" content="A banker-grade financial health check suite for Australians — start with the 60-second Quick Check, then go deep on PAYG, Business, or Investor readiness.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%236B4C9A'/></linearGradient></defs><circle cx='50' cy='50' r='38' fill='none' stroke='url(%23g)' stroke-width='10'/><circle cx='50' cy='50' r='28' fill='url(%23g)'/></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0a0a0a;
-      --bg-secondary: #0f0f1a;
-      --card: rgba(37,37,64,0.92);
-      --card-solid: #252540;
-      --border: rgba(255,255,255,0.10);
-      --border-solid: #3D3D5C;
-      --accent: #2ECC85;
-      --accent-light: #2ECC85;
-      --accent-glow: rgba(46,204,133,0.15);
-      --green: #2ECC85;
-      --green-dark: #1FAD73;
-      --text: #ffffff;
-      --text-muted: rgba(255,255,255,0.55);
-      --text-secondary: rgba(255,255,255,0.70);
-      --purple-gradient: linear-gradient(135deg, #6B4C9A, #9B59B6);
-      --green-gradient: linear-gradient(135deg, #2ECC85, #1FAD73);
-      --payg: #3b82f6;
-      --business: #8B5CF6;
-      --investor: #F59E0B;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-      position: relative;
-    }
-    .ambient-bg {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background:
-        radial-gradient(circle at top right, rgba(107,76,154,0.18), transparent 28%),
-        radial-gradient(circle at top left, rgba(46,204,133,0.12), transparent 24%);
-    }
-    body > * { position: relative; z-index: 1; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-
-    /* Nav */
-    nav {
-      background: rgba(10,10,10,0.80);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .nav-logo-icon {
-      width: 32px; height: 32px; border-radius: 50%; padding: 3px;
-      background: conic-gradient(from 180deg at 50% 50%, #2ECC85 0deg, #6B4C9A 220deg, #2ECC85 360deg);
-    }
-    .nav-logo-icon-inner { width: 100%; height: 100%; border-radius: 50%; background: var(--bg); }
-    .nav-logo-text { font-size: 20px; font-weight: 600; color: #fff; letter-spacing: -0.5px; }
-    .nav-logo-text .amp {
-      background: linear-gradient(135deg, #2ECC85, #6B4C9A);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .nav-right { display: flex; align-items: center; gap: 12px; }
-    .nav-links { display: flex; align-items: center; gap: 20px; list-style: none; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-links a.nav-active { color: var(--accent); }
-    @media (max-width: 768px) { .nav-links { display: none; } }
-
-    /* Theme switcher */
-    .theme-switcher {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 100px;
-      padding: 4px 6px;
-      margin-left: 8px;
-    }
-    .theme-dot {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-    .theme-dot:hover { transform: scale(1.15); }
-    .theme-dot[data-theme="dark"] { background: #0a0a0a; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2); }
-    .theme-dot[data-theme="purple"] { background: #9B59B6; }
-    .theme-dot[data-theme="light"] { background: #F8F9FC; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); }
-    .theme-dot.active { border-color: var(--accent); transform: scale(1.15); }
-    /* Tooltips */
-    .theme-dot::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: -28px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 11px;
-      color: var(--text-muted);
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 2px 8px;
-      border-radius: 6px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-    }
-    .theme-dot:hover::after { opacity: 1; }
-
-    /* Theme transitions */
-    html, html * { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
-    /* Disable transition on page load (added by JS briefly) */
-    html.no-transition, html.no-transition * { transition: none !important; }
-
-    /* Purple theme */
-    html[data-theme="purple"] {
-      --bg: #0D0D1A;
-      --bg-secondary: #0A0A15;
-      --card: #1A1228;
-      --border: #3D2D5C;
-      --accent: #9B59B6;
-      --accent-light: #9B59B6;
-      --accent-glow: rgba(155, 89, 182, 0.1);
-      --green: #9B59B6;
-      --green-dark: #6B4C9A;
-      --text: #ffffff;
-      --text-muted: #b8a9c9;
-      --green-gradient: linear-gradient(135deg, #9B59B6, #6B4C9A);
-    }
-    html[data-theme="purple"] .hero h1 {
-      background: linear-gradient(135deg, #9B59B6 0%, #6B4C9A 40%, #D4A5E5 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-    html[data-theme="purple"] .hero-badge {
-      background: rgba(155, 89, 182, 0.08);
-      border-color: rgba(155, 89, 182, 0.2);
-      color: #9B59B6;
-    }
-    html[data-theme="purple"] .hero-cta {
-      background: linear-gradient(135deg, #9B59B6, #6B4C9A);
-      box-shadow: 0 0 30px rgba(155, 89, 182, 0.3), 0 4px 16px rgba(155, 89, 182, 0.2);
-    }
-    html[data-theme="purple"] .hero-cta:hover {
-      box-shadow: 0 0 50px rgba(155, 89, 182, 0.4), 0 8px 24px rgba(155, 89, 182, 0.3);
-    }
-    html[data-theme="purple"] .hero::before {
-      background: radial-gradient(circle, rgba(155, 89, 182, 0.12) 0%, rgba(107, 76, 154, 0.08) 40%, transparent 70%);
-    }
-    html[data-theme="purple"] .hero-orb-1 { background: rgba(155, 89, 182, 0.08); }
-    html[data-theme="purple"] .hero-orb-2 { background: rgba(107, 76, 154, 0.1); }
-    html[data-theme="purple"] nav {
-      background: rgba(13, 13, 26, 0.80);
-      border-bottom-color: rgba(61, 45, 92, 0.5);
-    }
-    html[data-theme="purple"] .ambient-bg {
-      background: radial-gradient(circle at top right, rgba(155,89,182,0.18), transparent 28%),
-                  radial-gradient(circle at top left, rgba(155,89,182,0.10), transparent 24%);
-    }
-    html[data-theme="purple"] .theme-switcher {
-      background: rgba(155, 89, 182, 0.08);
-      border-color: rgba(155, 89, 182, 0.15);
-    }
-
-    /* Light theme */
-    html[data-theme="light"] {
-      --bg: #F8F9FC;
-      --bg-secondary: #EFF1F5;
-      --card: #FFFFFF;
-      --border: #E2E8F0;
-      --accent: #1FAD73;
-      --accent-light: #1FAD73;
-      --accent-glow: rgba(31, 173, 115, 0.1);
-      --green: #1FAD73;
-      --green-dark: #178A5C;
-      --text: #1A1A2E;
-      --text-muted: #6B7280;
-      --green-gradient: linear-gradient(135deg, #1FAD73, #178A5C);
-    }
-    html[data-theme="light"] .hero h1 {
-      background: linear-gradient(135deg, #1FAD73 0%, #178A5C 40%, #6B4C9A 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-    html[data-theme="light"] nav {
-      background: rgba(255, 255, 255, 0.9);
-      border-bottom-color: rgba(226, 232, 240, 0.8);
-      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
-    }
-    html[data-theme="light"] .nav-logo-text { color: #1A1A2E; }
-    html[data-theme="light"] .nav-logo-icon-inner { background: var(--bg); }
-    html[data-theme="light"] .ambient-bg {
-      background: radial-gradient(circle at top right, rgba(107,76,154,0.06), transparent 28%),
-                  radial-gradient(circle at top left, rgba(46,204,133,0.05), transparent 24%);
-    }
-    html[data-theme="light"] .hero::before {
-      background: radial-gradient(circle, rgba(31, 173, 115, 0.08) 0%, rgba(107, 76, 154, 0.05) 40%, transparent 70%);
-    }
-    html[data-theme="light"] .hero-orb-1 { background: rgba(31, 173, 115, 0.06); }
-    html[data-theme="light"] .hero-orb-2 { background: rgba(107, 76, 154, 0.06); }
-    html[data-theme="light"] .hero-orb-3 { background: rgba(155, 89, 182, 0.04); }
-    html[data-theme="light"] .tool-card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-    }
-    html[data-theme="light"] .tool-card:hover {
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
-    }
-    html[data-theme="light"] .time-badge {
-      background: rgba(0, 0, 0, 0.04);
-      color: var(--text-muted);
-      border-color: rgba(0, 0, 0, 0.06);
-    }
-    html[data-theme="light"] footer {
-      background: rgba(239, 241, 245, 0.6);
-      border-top-color: rgba(226, 232, 240, 0.6);
-    }
-    html[data-theme="light"] .why-section {
-      border-top-color: rgba(226, 232, 240, 0.6);
-      border-bottom-color: rgba(226, 232, 240, 0.6);
-    }
-    html[data-theme="light"] .hero-cta { color: #fff; }
-    html[data-theme="light"] .theme-switcher {
-      background: rgba(0, 0, 0, 0.04);
-      border-color: rgba(0, 0, 0, 0.08);
-    }
-
-    /* Hero */
-    .hero {
-      padding: 100px 0 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    /* Glowing radial gradient background */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -40%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 900px;
-      height: 900px;
-      background: radial-gradient(circle, rgba(46, 204, 133, 0.12) 0%, rgba(107, 76, 154, 0.08) 40%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    /* Floating gradient orbs */
-    .hero-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .hero-orb-1 {
-      width: 400px; height: 400px;
-      background: rgba(46, 204, 133, 0.08);
-      top: -100px; left: -100px;
-      animation: float-orb 8s ease-in-out infinite;
-    }
-    .hero-orb-2 {
-      width: 350px; height: 350px;
-      background: rgba(107, 76, 154, 0.1);
-      top: -50px; right: -80px;
-      animation: float-orb 10s ease-in-out infinite reverse;
-    }
-    .hero-orb-3 {
-      width: 250px; height: 250px;
-      background: rgba(155, 89, 182, 0.06);
-      bottom: -60px; left: 30%;
-      animation: float-orb 12s ease-in-out infinite 2s;
-    }
-    @keyframes float-orb {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(20px, -15px) scale(1.05); }
-      66% { transform: translate(-10px, 10px) scale(0.95); }
-    }
-    .hero .container { position: relative; z-index: 1; }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(46, 204, 133, 0.08);
-      border: 1px solid rgba(46, 204, 133, 0.2);
-      color: var(--accent);
-      padding: 8px 20px;
-      border-radius: 100px;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 32px;
-      backdrop-filter: blur(8px);
-    }
-    .hero h1 {
-      font-size: clamp(48px, 7vw, 72px);
-      font-weight: 800;
-      margin-bottom: 20px;
-      letter-spacing: -2px;
-      line-height: 1.05;
-      background: linear-gradient(135deg, #2ECC85 0%, #1FAD73 40%, #9B59B6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      background-size: 200% 200%;
-      animation: gradient-shimmer 4s ease-in-out infinite;
-    }
-    @keyframes gradient-shimmer {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    .hero p.hero-subtitle {
-      font-size: 19px;
-      color: var(--text-muted);
-      max-width: 580px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 36px;
-      padding: 18px 42px;
-      border-radius: 100px;
-      font-size: 17px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #2ECC85, #1FAD73);
-      color: #fff;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 30px rgba(46, 204, 133, 0.3), 0 4px 16px rgba(46, 204, 133, 0.2);
-    }
-    .hero-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 50px rgba(46, 204, 133, 0.4), 0 8px 24px rgba(46, 204, 133, 0.3);
-    }
-    .hero-sub-text {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 12px;
-    }
-    /* Social proof row */
-    .social-proof {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px 24px;
-      margin-top: 40px;
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-    .social-proof span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-    .social-proof .check {
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    /* Why Oney strip */
-    .why-section {
-      padding: 60px 0;
-      border-top: 1px solid rgba(61, 61, 92, 0.4);
-      border-bottom: 1px solid rgba(61, 61, 92, 0.4);
-    }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      text-align: center;
-    }
-    .why-item {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .why-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .why-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
-    .why-item h3 {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .why-item p {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-    @media (max-width: 600px) {
-      .why-grid { grid-template-columns: 1fr; gap: 24px; }
-    }
-
-    /* Tools section */
-    .tools-section { padding: 60px 0 100px; }
-    .section-title {
-      text-align: center;
-      margin-bottom: 56px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .section-title.visible { opacity: 1; transform: translateY(0); }
-    .section-title h2 { font-size: 28px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
-    .section-title p { color: var(--text-muted); font-size: 16px; }
-
-    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-    .tool-card {
-      background: linear-gradient(180deg, rgba(37,37,64,0.92), rgba(18,18,30,0.94));
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px;
-      text-decoration: none;
-      color: var(--text);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.30);
-      transition: all 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    .tool-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    /* Glow border on top */
-    .tool-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .tool-card.payg::before { background: linear-gradient(90deg, transparent, var(--payg), transparent); }
-    .tool-card.business::before { background: linear-gradient(90deg, transparent, var(--business), transparent); }
-    .tool-card.investor::before { background: linear-gradient(90deg, transparent, var(--investor), transparent); }
-    .tool-card:hover::before { opacity: 1; }
-    /* Hover glow effect */
-    .tool-card::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-    .tool-card.payg::after { background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.06) 0%, transparent 50%); }
-    .tool-card.business::after { background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.06) 0%, transparent 50%); }
-    .tool-card.investor::after { background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.06) 0%, transparent 50%); }
-    .tool-card:hover::after { opacity: 1; }
-
-    .tool-card:hover {
-      border-color: rgba(61, 61, 92, 0.8);
-      transform: translateY(-6px);
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
-    }
-    .tool-card.visible:hover { transform: translateY(-6px); }
-
-    .tool-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    .tool-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
-    }
-    .tool-card.payg .tool-icon {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
-      box-shadow: 0 0 24px rgba(59, 130, 246, 0.1);
-    }
-    .tool-card.business .tool-icon {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.05));
-      box-shadow: 0 0 24px rgba(139, 92, 246, 0.1);
-    }
-    .tool-card.investor .tool-icon {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
-      box-shadow: 0 0 24px rgba(245, 158, 11, 0.1);
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      position: relative;
-      z-index: 1;
-    }
-    .badge.payg { background: rgba(59, 130, 246, 0.12); color: var(--payg); }
-    .badge.business { background: rgba(139, 92, 246, 0.12); color: var(--business); }
-    .badge.investor { background: rgba(245, 158, 11, 0.12); color: var(--investor); }
-
-    .time-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 10px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      position: relative;
-      z-index: 1;
-    }
-
-    .tool-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; position: relative; z-index: 1; }
-    .tool-card .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 16px; position: relative; z-index: 1; }
-    .tool-card ul { list-style: none; margin-bottom: 24px; flex-grow: 1; position: relative; z-index: 1; }
-    .tool-card li { font-size: 14px; color: var(--text-muted); padding: 6px 0 6px 20px; position: relative; }
-    .tool-card li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 600; }
-    .tool-card .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 14px;
-      position: relative;
-      z-index: 1;
-    }
-    .tool-card .cta svg { transition: transform 0.2s; }
-    .tool-card:hover .cta svg { transform: translateX(4px); }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid rgba(61, 61, 92, 0.4);
-      padding: 48px 0;
-      text-align: center;
-      background: rgba(22, 22, 42, 0.5);
-    }
-    footer p { color: var(--text-muted); font-size: 14px; }
-    footer a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: #fff; }
-    footer .footer-links { margin-bottom: 12px; }
-    footer .footer-links a { margin: 0 4px; }
-    footer .footer-disclaimer {
-      margin-top: 12px;
-      font-size: 12px;
-      color: rgba(163, 163, 184, 0.6);
-    }
-
-    @media (max-width: 768px) {
-      .hero { padding: 70px 0 50px; }
-      .hero h1 { letter-spacing: -1px; }
-      .tools-grid { grid-template-columns: 1fr; }
-      .social-proof { gap: 6px 16px; font-size: 13px; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/brand.css">
+  <link rel="stylesheet" href="assets/css/tool-shell.css">
+  <link rel="stylesheet" href="assets/css/tool-results.css">
 </head>
 <body>
   <div class="ambient-bg"></div>
-  <!-- RBA Rate Decision Banner -->
-  <div id="rba-banner" style="display:none;background:#F59E0B;color:#1a1a2e;text-align:center;padding:10px 16px;font-family:'Inter',-apple-system,sans-serif;font-size:14px;font-weight:600;line-height:1.5;z-index:9999;position:relative;">
-    ⚠️ RBA interest rate decision will be announced on 17 March 2026 at 2:30pm AEDT. Assessment rate may be updated accordingly. Please refresh the page after the decision to get the latest data.
-  </div>
-  <script>
-    (function(){var d=new Date();var cutoff=new Date('2026-03-17T00:00:00+11:00');if(d<cutoff){document.getElementById('rba-banner').style.display='block';}})();
-  </script>
 
-  <nav>
-    <div class="container nav-inner">
-      <a href="https://oneyco.com.au" class="nav-logo">
+  <nav class="oney-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
         <div class="nav-logo-icon"><div class="nav-logo-icon-inner"></div></div>
         <span class="nav-logo-text">Oney <span class="amp">&amp;</span> Co</span>
       </a>
-      <div class="nav-right">
-        <ul class="nav-links">
+      <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
         <li><a href="https://oneyco.com.au">Home</a></li>
-        <li><a href="https://oneyco.com.au/about.html">About Oney</a></li>
         <li><a href="index.html" class="nav-active">Health Check</a></li>
-        <li><a href="about.html">Q&amp;A</a></li>
+        <li><a href="quiz.html">Quick Check</a></li>
+        <li><a href="payg.html">PAYG</a></li>
+        <li><a href="business.html">Business</a></li>
+        <li><a href="investor.html">Investor</a></li>
+        <li>
+          <div class="theme-switcher" role="radiogroup" aria-label="Theme">
+            <div class="theme-dot active" data-theme="dark" aria-checked="true" tabindex="0"></div>
+            <div class="theme-dot" data-theme="purple" aria-checked="false" tabindex="0"></div>
+            <div class="theme-dot" data-theme="light" aria-checked="false" tabindex="0"></div>
+          </div>
+        </li>
       </ul>
-        <div class="theme-switcher" role="radiogroup" aria-label="Theme">
-          <div class="theme-dot active" data-theme="dark" data-tooltip="Dark" role="radio" aria-checked="true" tabindex="0"></div>
-          <div class="theme-dot" data-theme="purple" data-tooltip="Purple" role="radio" aria-checked="false" tabindex="0"></div>
-          <div class="theme-dot" data-theme="light" data-tooltip="Light" role="radio" aria-checked="false" tabindex="0"></div>
-        </div>
-      </div>
     </div>
   </nav>
 
-  <main>
-    <section class="hero">
-      <div class="hero-orb hero-orb-1"></div>
-      <div class="hero-orb hero-orb-2"></div>
-      <div class="hero-orb hero-orb-3"></div>
-      <div class="container">
-        <span class="hero-badge">🎯 Free Financial Health Check</span>
-        <h1>Financial Health Check</h1>
-        <p class="hero-subtitle">Understand your financial position in minutes. Choose the tool that matches your situation for the most accurate assessment.</p>
-        <a href="quiz.html" class="hero-cta">3-Min Quick Check →</a>
-        <p class="hero-sub-text">7 questions · Get your mortgage readiness score instantly</p>
-        <div class="social-proof">
-          <span><span class="check">✓</span> 100% Free</span>
-          <span>·</span>
-          <span><span class="check">✓</span> No credit score impact</span>
-          <span>·</span>
-          <span><span class="check">✓</span> 3 minutes</span>
-          <span>·</span>
-          <span><span class="check">✓</span> Used by 1,000+ Australians</span>
+  <main class="page-content">
+    <section class="tool-hero">
+      <div class="section-container tool-hero-inner">
+        <div class="tool-hero-copy fade-up visible">
+          <div class="section-eyebrow"><span class="section-eyebrow-dot"></span> Financial Health Check</div>
+          <h1>Know where you stand, <span class="accent">before you move.</span></h1>
+          <p class="tool-hero-sub">A free, banker-grade assessment suite. No sign-up, no credit check, answers stay on your device. Start with the Quick Check to find the right tool — or jump straight in below.</p>
+          <div class="hero-actions">
+            <a class="btn-purple hero-cta-primary" href="quiz.html" data-analytics="index_primary_cta">Start the 60-sec Quick Check →</a>
+            <a class="hero-cta-tertiary" href="#tools" data-analytics="index_scroll_to_tools">Or browse specialist tools ↓</a>
+          </div>
         </div>
+        <aside class="tool-hero-panel fade-up fade-up-d1 visible">
+          <div class="tool-status-card">
+            <p class="status-kicker">What you get</p>
+            <div class="status-row"><span>Time</span><strong>1–6 min</strong></div>
+            <div class="status-row"><span>Credit impact</span><strong>None</strong></div>
+            <div class="status-row"><span>Saved locally</span><strong>Yes</strong></div>
+            <div class="status-row"><span>Built by</span><strong>8+ yrs Big 4 banker</strong></div>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section class="why-section">
-      <div class="container">
-        <div class="why-grid">
-          <div class="why-item">
-            <div class="why-icon">🔒</div>
-            <h3>Privacy First</h3>
-            <p>Your data stays on your device. Nothing is stored or shared.</p>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">⚡</div>
-            <h3>Instant Results</h3>
-            <p>Get your financial health score in under 3 minutes.</p>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">🎯</div>
-            <h3>Expert Guidance</h3>
-            <p>Built by licensed brokers with real lending experience.</p>
-          </div>
-        </div>
+    <section id="tools" class="section-block">
+      <div class="section-header fade-up">
+        <div class="section-eyebrow"><span class="section-eyebrow-dot"></span> Pick your path</div>
+        <h2>Three deep checks. One product system.</h2>
+        <p>Each specialist tool asks questions calibrated to how a real lender reads your file — in the same clean brand shell.</p>
       </div>
-    </section>
 
-    <!-- Rate Impact Banner -->
-    <section style="padding:0 0 8px">
-      <div class="container">
-        <a href="rate-impact.html" style="display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,rgba(239,68,68,0.1),rgba(220,38,38,0.05));border:1px solid rgba(239,68,68,0.3);border-radius:16px;padding:18px 24px;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(239,68,68,0.6)'" onmouseout="this.style.borderColor='rgba(239,68,68,0.3)'">
-          <span style="font-size:28px">📉</span>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:700;color:#f87171;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px">⚡ RBA Decision — 17 March 2026</div>
-            <div style="font-size:15px;font-weight:700;color:#fff">See how a rate hike affects your mortgage repayments →</div>
-          </div>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <div class="tool-pick-grid">
+        <a class="tool-pick-card fade-up" href="quiz.html" data-analytics="index_pick_quiz">
+          <div class="tool-pick-kicker">Entry · 1–2 min</div>
+          <h3>Quick Check</h3>
+          <p>A 60-second qualifier that tells you which deep-check is actually worth your time. Gives a readiness preview and recommends PAYG / Business / Investor.</p>
+          <div class="tool-pick-meta"><span>Best if you're not sure yet</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="tool-pick-card fade-up fade-up-d1" href="payg.html" data-analytics="index_pick_payg">
+          <div class="tool-pick-kicker">Deep check · 3–4 min</div>
+          <h3>PAYG Health Check</h3>
+          <p>For salaried earners. Four sections covering liability pressure, financial visibility, review discipline, and support — the exact dimensions a lender pre-reads.</p>
+          <div class="tool-pick-meta"><span>Salary / wage income</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="tool-pick-card fade-up fade-up-d2" href="business.html" data-analytics="index_pick_business">
+          <div class="tool-pick-kicker">Deep check · 4–5 min</div>
+          <h3>Business Health Check</h3>
+          <p>For self-employed and business owners. Covers profile, financial operations, lending structure, and recent change — mirrors what a Big 4 business banker checks first.</p>
+          <div class="tool-pick-meta"><span>Business / self-employed</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="tool-pick-card fade-up fade-up-d3" href="investor.html" data-analytics="index_pick_investor">
+          <div class="tool-pick-kicker">Deep check · 4–6 min</div>
+          <h3>Investor Portfolio Check</h3>
+          <p>For existing property holders. Models portfolio LVR, usable equity, cashflow, and your next purchase capacity — framed the way an investor-lender would.</p>
+          <div class="tool-pick-meta"><span>Existing landlords</span><span class="arrow">→</span></div>
         </a>
       </div>
     </section>
 
-    <section class="tools-section">
-      <div class="container">
-        <div class="section-title">
-          <h2>Choose Your Profile</h2>
-          <p>Each tool is tailored to your specific financial situation</p>
+    <section class="section-block" style="border-top: 1px solid var(--border); padding-top: 72px;">
+      <div class="section-header fade-up">
+        <div class="section-eyebrow"><span class="section-eyebrow-dot"></span> Why it's different</div>
+        <h2>Not another generic mortgage quiz.</h2>
+        <p>Built by a banker who spent 8+ years inside NAB, Westpac, and St.George — then rebuilt for people who want to get better, not flattered.</p>
+      </div>
+      <div class="reason-grid">
+        <div class="reason-card fade-up">
+          <div class="reason-icon">🏦</div>
+          <h4>Banker logic, not dashboard fluff</h4>
+          <p>Each question maps to something a credit assessor actually weights. No vanity scoring. No hidden lender promos.</p>
         </div>
-        <div class="tools-grid">
-          <a href="payg.html" class="tool-card payg">
-            <div class="tool-card-header">
-              <span class="badge payg">Most Common</span>
-              <span class="time-badge">⏱ ~3 min</span>
-            </div>
-            <div class="tool-icon">💼</div>
-            <h3>PAYG / Salary Earner</h3>
-            <p class="subtitle">Regular income from employment</p>
-            <ul>
-              <li>Single or dual income households</li>
-              <li>First home buyers & upgraders</li>
-              <li>Simple tax situation</li>
-              <li>HECS/HELP debt consideration</li>
-              <li>Borrowing capacity estimate</li>
-            </ul>
-            <span class="cta">Start Check <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-          </a>
-          <a href="business.html" class="tool-card business">
-            <div class="tool-card-header">
-              <span class="badge business">SME / Self-Employed</span>
-              <span class="time-badge">⏱ ~3 min</span>
-            </div>
-            <div class="tool-icon">🏪</div>
-            <h3>Business Owner</h3>
-            <p class="subtitle">Self-employed & company directors</p>
-            <ul>
-              <li>Sole trader / Partnership / Company</li>
-              <li>Business financials analysis</li>
-              <li>Add-back income calculation</li>
-              <li>Mixed personal & business assets</li>
-              <li>Commercial lending pathways</li>
-            </ul>
-            <span class="cta">Start Check <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-          </a>
-          <a href="investor.html" class="tool-card investor">
-            <div class="tool-card-header">
-              <span class="badge investor">Property Portfolio</span>
-              <span class="time-badge">⏱ ~3 min</span>
-            </div>
-            <div class="tool-icon">📊</div>
-            <h3>Property Investor</h3>
-            <p class="subtitle">Existing portfolio & expansion planning</p>
-            <ul>
-              <li>Portfolio LVR & equity analysis</li>
-              <li>Rental yield assessment</li>
-              <li>Cash flow & serviceability check</li>
-              <li>Cross-collateralisation review</li>
-              <li>Next purchase capacity</li>
-            </ul>
-            <span class="cta">Start Check <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-          </a>
+        <div class="reason-card fade-up fade-up-d1">
+          <div class="reason-icon">🔒</div>
+          <h4>Your data stays with you</h4>
+          <p>All calculations run in your browser. Answers are saved to localStorage only. Nothing is shared unless you choose to reach out.</p>
+        </div>
+        <div class="reason-card fade-up fade-up-d2">
+          <div class="reason-icon">🎯</div>
+          <h4>Tells you what to fix first</h4>
+          <p>Every result surfaces the single biggest lever in your file — often worth tens of thousands of borrowing capacity.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section-block" style="border-top: 1px solid var(--border); padding-top: 72px;">
+      <div class="section-header fade-up">
+        <div class="section-eyebrow"><span class="section-eyebrow-dot"></span> How the score is built</div>
+        <h2>Transparent scoring. No hidden levers.</h2>
+        <p>Every tool rolls up to a single readiness score out of 100. Here's what goes into it, and what each band actually means.</p>
+      </div>
+      <div class="reason-grid" style="margin-top: 32px;">
+        <div class="reason-card fade-up">
+          <div class="reason-icon">📐</div>
+          <h4>Four equal dimensions</h4>
+          <p>Each specialist tool measures four dimensions worth 25 points each — liability pressure, visibility, review discipline, support — then sums to a /100 readiness score.</p>
+        </div>
+        <div class="reason-card fade-up fade-up-d1">
+          <div class="reason-icon">🎚</div>
+          <h4>Bands you can act on</h4>
+          <p><strong>70+</strong> lender-ready — focus on product choice. <strong>45–69</strong> workable — one or two big levers to fix. <strong>&lt;45</strong> real prep work — step back before applying.</p>
+        </div>
+        <div class="reason-card fade-up fade-up-d2">
+          <div class="reason-icon">🧮</div>
+          <h4>Calibrated, not flattering</h4>
+          <p>Weights are tuned against how real credit assessors read a file: limits &gt; balances, ATO currency &gt; revenue size, clean employment &gt; promotion speed. The score rewards what banks reward.</p>
+        </div>
+        <div class="reason-card fade-up">
+          <div class="reason-icon">🔍</div>
+          <h4>Attention insights, not generic tips</h4>
+          <p>Every result surfaces the specific items dragging your score down, in priority order. Low scores auto-expand the top items so you see them on mobile without hunting.</p>
+        </div>
+        <div class="reason-card fade-up fade-up-d1">
+          <div class="reason-icon">🛠</div>
+          <h4>Investor math, not vibes</h4>
+          <p>The Investor Check runs real portfolio math: usable equity at 80% LVR, 80% rent shading for serviceability, 5× gross-income borrowing proxy, and a deposit-vs-capacity check against your target.</p>
+        </div>
+        <div class="reason-card fade-up fade-up-d2">
+          <div class="reason-icon">🤝</div>
+          <h4>A score isn't a decision</h4>
+          <p>These tools map your position — they don't approve or decline anything. For an actual lender conversation, the broker chat is where the score becomes a plan.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="cta-band-inner">
+        <h2>Want this looked at properly?</h2>
+        <p>Finish any of the checks, then book a 15-min chat for a human read on what would actually shift your position.</p>
+        <div class="cta-band-actions">
+          <a class="btn-purple" href="https://oneyco.com.au/#contact" data-analytics="index_cta_band_book">Book a 15-min chat →</a>
+          <a class="btn-ghost" href="quiz.html" data-analytics="index_cta_band_quiz">Start the Quick Check</a>
+        </div>
+        <div style="margin-top:18px;">
+          <a class="cta-tertiary" href="#how-it-works" data-analytics="index_cta_band_about">How the health check works ↓</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <p class="footer-links">© 2026 Oney & Co. <a href="https://oneyco.com.au">Home</a> · <a href="https://mentor.oneyco.com.au">Mentoring</a> · <a href="https://tools.oneyco.com.au">Tools</a> · <a href="https://fhc.oneyco.com.au">Health Check</a></p>
-      <p class="footer-disclaimer">These tools provide estimates only. For accurate assessment, please consult with a qualified broker.</p>
+  <footer class="oney-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <div class="footer-logo-icon"><div class="footer-logo-icon-inner"></div></div>
+        <span class="footer-logo-text">Oney <span class="amp">&amp;</span> Co</span>
+      </div>
+      <p>© 2026 Oney & Co. Built by a banker. Powered by AI.</p>
+      <div class="footer-links">
+        <a href="https://oneyco.com.au">Home</a>
+        <a href="index.html">Health Check</a>
+        <a href="https://tools.oneyco.com.au">Tools</a>
+        <a href="mailto:hello@oneyco.com.au">hello@oneyco.com.au</a>
+      </div>
     </div>
   </footer>
 
+  <script src="assets/js/analytics.js"></script>
+  <script src="assets/js/brand.js"></script>
   <script>
-    // IntersectionObserver for fade-in animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-    );
-    document.querySelectorAll('.why-item, .tool-card, .section-title').forEach((el, i) => {
-      el.style.transitionDelay = `${i * 0.1}s`;
-      observer.observe(el);
-    });
-
-    // Theme switcher
-    (function() {
-      const saved = localStorage.getItem('oney-theme') || 'dark';
-      // Apply instantly on load (no transition flash)
-      document.documentElement.classList.add('no-transition');
-      document.documentElement.setAttribute('data-theme', saved);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          document.documentElement.classList.remove('no-transition');
-        });
-      });
-      // Update active dot
-      document.querySelectorAll('.theme-dot').forEach(dot => {
-        dot.classList.toggle('active', dot.dataset.theme === saved);
-        dot.setAttribute('aria-checked', dot.dataset.theme === saved);
-      });
-      // Click handler
-      document.querySelector('.theme-switcher').addEventListener('click', (e) => {
-        const dot = e.target.closest('.theme-dot');
-        if (!dot) return;
-        const theme = dot.dataset.theme;
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('oney-theme', theme);
-        document.querySelectorAll('.theme-dot').forEach(d => {
-          d.classList.toggle('active', d.dataset.theme === theme);
-          d.setAttribute('aria-checked', d.dataset.theme === theme);
-        });
-      });
-      // Keyboard support
-      document.querySelector('.theme-switcher').addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          e.target.click();
+    // Index-level analytics: track tool pick clicks using data-analytics attribute.
+    document.querySelectorAll('[data-analytics]').forEach(el => {
+      el.addEventListener('click', () => {
+        const name = el.getAttribute('data-analytics');
+        const href = el.getAttribute('href') || '';
+        if (window.OneyAnalytics) {
+          window.OneyAnalytics.track(name, { href, label: (el.textContent || '').trim().slice(0, 60) });
         }
       });
-    })();
+    });
   </script>
 </body>
 </html>
