@@ -290,6 +290,16 @@ html[data-theme="light"] .route-alt a:hover { background: #EEF2F7; color: #1A1A2
   max-width: 380px;
 }
 
+.email-capture-error {
+  padding: 12px 0;
+  font-size: 14px; color: #FCA5A5;
+}
+.email-capture-error a {
+  color: var(--purple-soft); font-weight: 500; text-decoration: underline;
+  transition: color 0.18s;
+}
+.email-capture-error a:hover { color: #fff; }
+
 @media (max-width: 480px) {
   .email-capture-row { flex-direction: column; }
   .email-capture-btn { width: 100%; }
@@ -351,6 +361,8 @@ html[data-theme="light"] .result-email-capture {
 html[data-theme="light"] .email-capture-inner h3 { color: #1A1A2E; }
 html[data-theme="light"] .email-capture-inner > p { color: #475569; }
 html[data-theme="light"] .email-capture-success p { color: #475569; }
+html[data-theme="light"] .email-capture-error { color: #B91C1C; }
+html[data-theme="light"] .email-capture-error a { color: #6B4C9A; }
 
 /* ============================================================
    Purple theme — result UI tuning

@@ -333,39 +333,70 @@
       resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    function buildMailtoFallback(email, result) {
+      var toolLabels = { quiz: 'Quick Check', payg: 'PAYG Health Check', business: 'Business Health Check', investor: 'Investor Portfolio Check' };
+      var label = toolLabels[name] || 'Health Check';
+      var subject = 'FHC Report Request \u2014 ' + label + ' \u2014 Score ' + (result.score || 0) + '/100';
+      var body = 'Hi Oney & Co,\n\nI just completed the ' + label + ' and scored ' + (result.score || 0) + '/100.\n\nMy email: ' + email + '\n\n';
+      if (result.heading) body += 'Summary: ' + result.heading + '\n\n';
+      if (result.attention && result.attention.length) {
+        body += 'Areas to work on:\n';
+        result.attention.forEach(function (a) { body += '\u2022 ' + a.title + '\n'; });
+        body += '\n';
+      }
+      if (result.positives && result.positives.length) {
+        body += 'Strengths:\n';
+        result.positives.forEach(function (p) { body += '\u2022 ' + p.title + '\n'; });
+        body += '\n';
+      }
+      body += 'I\u2019d like to receive my full report and discuss next steps.\n\nThanks';
+      return 'mailto:hello@oneyco.com.au?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+
     function wireEmailCapture(result) {
       var form = document.getElementById('emailCaptureForm');
       if (!form) return;
+      var SUPABASE_URL = 'https://syhwaeloljdswsmqkzrx.supabase.co';
+      var SUPABASE_KEY = 'sb_publishable_kQrtxdvnex0ObqoI0UXNLQ_-1FVABOM';
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var input = document.getElementById('emailCaptureInput');
+        var btn = document.getElementById('emailCaptureBtn');
         var email = (input.value || '').trim();
         if (!email) return;
 
-        var toolLabels = { quiz: 'Quick Check', payg: 'PAYG Health Check', business: 'Business Health Check', investor: 'Investor Portfolio Check' };
-        var label = toolLabels[name] || 'Health Check';
-        var subject = 'FHC Report Request \u2014 ' + label + ' \u2014 Score ' + (result.score || 0) + '/100';
-        var body = 'Hi Oney & Co,\n\nI just completed the ' + label + ' and scored ' + (result.score || 0) + '/100.\n\nMy email: ' + email + '\n\n';
-        if (result.heading) body += 'Summary: ' + result.heading + '\n\n';
-        if (result.attention && result.attention.length) {
-          body += 'Areas to work on:\n';
-          result.attention.forEach(function (a) { body += '\u2022 ' + a.title + '\n'; });
-          body += '\n';
-        }
-        if (result.positives && result.positives.length) {
-          body += 'Strengths:\n';
-          result.positives.forEach(function (p) { body += '\u2022 ' + p.title + '\n'; });
-          body += '\n';
-        }
-        body += 'I\u2019d like to receive my full report and discuss next steps.\n\nThanks';
+        btn.disabled = true;
+        btn.textContent = 'Sending\u2026';
 
-        window.location.href = 'mailto:hello@oneyco.com.au?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-
-        form.hidden = true;
-        var success = document.getElementById('emailCaptureSuccess');
-        if (success) success.hidden = false;
-
-        track('result_email_capture', { tool: name, score: result.score || 0 });
+        fetch(SUPABASE_URL + '/functions/v1/fhc-early-bird', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_KEY },
+          body: JSON.stringify({ email: email, source: 'fhc-report', tool: name, score: result.score || 0 })
+        })
+        .then(function (res) { return res.json().then(function (d) { return { ok: res.ok, data: d }; }); })
+        .then(function (out) {
+          if (out.ok && out.data.success) {
+            form.hidden = true;
+            document.getElementById('emailCaptureSuccess').hidden = false;
+            track('result_email_capture', { tool: name, score: result.score || 0, method: 'resend' });
+          } else {
+            throw new Error(out.data.error || 'Request failed');
+          }
+        })
+        .catch(function () {
+          form.hidden = true;
+          var errorEl = document.getElementById('emailCaptureError');
+          if (errorEl) errorEl.hidden = false;
+          var fallbackLink = document.getElementById('emailCaptureFallback');
+          if (fallbackLink) {
+            fallbackLink.href = buildMailtoFallback(email, result);
+            fallbackLink.addEventListener('click', function () {
+              track('result_email_capture', { tool: name, score: result.score || 0, method: 'mailto_fallback' });
+            });
+          }
+          track('result_email_capture_error', { tool: name, score: result.score || 0 });
+        });
       });
     }
 

@@ -224,17 +224,20 @@
     return '<div class="result-email-capture">' +
       '<div class="email-capture-inner">' +
         '<h3>Get your results by email</h3>' +
-        '<p>Send your ' + esc(label) + ' summary (' + (result.score || 0) + '/100) to Oney\u00a0&amp;\u00a0Co — we\u2019ll reply with personalised next steps you can act on.</p>' +
+        '<p>Enter your email and we\u2019ll send your ' + esc(label) + ' summary (' + (result.score || 0) + '/100) with personalised next steps you can act on.</p>' +
         '<form class="email-capture-form" id="emailCaptureForm">' +
           '<div class="email-capture-row">' +
             '<input type="email" class="field-input email-capture-input" id="emailCaptureInput" placeholder="your@email.com" required>' +
-            '<button type="submit" class="btn-purple email-capture-btn">Send my report \u2192</button>' +
+            '<button type="submit" class="btn-purple email-capture-btn" id="emailCaptureBtn">Send my report \u2192</button>' +
           '</div>' +
-          '<span class="email-capture-hint">Opens your email client with a pre-filled summary.</span>' +
+          '<span class="email-capture-hint">No spam. Just your results + what to do next.</span>' +
         '</form>' +
         '<div class="email-capture-success" id="emailCaptureSuccess" hidden>' +
           '<span class="email-capture-check">\u2713</span>' +
-          '<p>Email ready \u2014 just hit send in your mail app to get your personalised follow-up.</p>' +
+          '<p>Check your inbox \u2014 we\u2019ve sent your personalised results summary.</p>' +
+        '</div>' +
+        '<div class="email-capture-error" id="emailCaptureError" hidden>' +
+          '<p>Something went wrong \u2014 <a href="#" id="emailCaptureFallback">click here to send via email instead</a>.</p>' +
         '</div>' +
       '</div>' +
     '</div>';
