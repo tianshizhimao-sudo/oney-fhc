@@ -261,6 +261,10 @@
         parts.push(UI.renderInsightList('Looking good', result.positives));
       }
 
+      // Email capture for moderate/weak scores (< 70) — mailto fallback.
+      const emailHtml = UI.renderEmailCapture(result, name);
+      if (emailHtml) parts.push(emailHtml);
+
       // Layered CTA block: Primary, Secondary, Tertiary text link.
       if (result.cta) parts.push(renderLayeredCTA(result.cta, name));
 
@@ -300,8 +304,45 @@
         });
       });
 
+      wireEmailCapture(result);
       wireRestart();
       resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function wireEmailCapture(result) {
+      var form = document.getElementById('emailCaptureForm');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var input = document.getElementById('emailCaptureInput');
+        var email = (input.value || '').trim();
+        if (!email) return;
+
+        var toolLabels = { quiz: 'Quick Check', payg: 'PAYG Health Check', business: 'Business Health Check', investor: 'Investor Portfolio Check' };
+        var label = toolLabels[name] || 'Health Check';
+        var subject = 'FHC Report Request \u2014 ' + label + ' \u2014 Score ' + (result.score || 0) + '/100';
+        var body = 'Hi Oney & Co,\n\nI just completed the ' + label + ' and scored ' + (result.score || 0) + '/100.\n\nMy email: ' + email + '\n\n';
+        if (result.heading) body += 'Summary: ' + result.heading + '\n\n';
+        if (result.attention && result.attention.length) {
+          body += 'Areas to work on:\n';
+          result.attention.forEach(function (a) { body += '\u2022 ' + a.title + '\n'; });
+          body += '\n';
+        }
+        if (result.positives && result.positives.length) {
+          body += 'Strengths:\n';
+          result.positives.forEach(function (p) { body += '\u2022 ' + p.title + '\n'; });
+          body += '\n';
+        }
+        body += 'I\u2019d like to receive my full report and discuss next steps.\n\nThanks';
+
+        window.location.href = 'mailto:hello@oneyco.com.au?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+        form.hidden = true;
+        var success = document.getElementById('emailCaptureSuccess');
+        if (success) success.hidden = false;
+
+        track('result_email_capture', { tool: name, score: result.score || 0 });
+      });
     }
 
     function computeAutoExpand(result) {

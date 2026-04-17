@@ -248,6 +248,53 @@ html[data-theme="light"] .route-alt a:hover { background: #EEF2F7; color: #1A1A2
 .cta-restart-link:hover { color: var(--text-muted); background: rgba(255,255,255,0.03); }
 .cta-restart-link.armed { color: #FCA5A5; background: rgba(239,68,68,0.08); }
 
+/* ---- Email capture (mailto fallback for moderate/weak scores) ---- */
+.result-email-capture {
+  background: linear-gradient(135deg, rgba(46,204,133,0.10), rgba(107,76,154,0.10));
+  border: 1px solid rgba(46,204,133,0.30); border-radius: var(--radius-xl);
+  padding: 32px 28px; text-align: center;
+}
+.email-capture-inner h3 {
+  font-size: 20px; font-weight: 600; color: #fff;
+  letter-spacing: -0.01em; margin-bottom: 8px;
+}
+.email-capture-inner > p {
+  color: var(--text-secondary); font-size: 14px; line-height: 1.65;
+  max-width: 440px; margin: 0 auto 20px;
+}
+.email-capture-row {
+  display: flex; gap: 10px; max-width: 440px; margin: 0 auto;
+}
+.email-capture-input {
+  flex: 1; min-width: 0;
+}
+.email-capture-btn {
+  white-space: nowrap; padding: 14px 22px; font-size: 14px; font-weight: 600;
+}
+.email-capture-hint {
+  display: block; margin-top: 10px;
+  font-size: 12px; color: var(--text-muted);
+}
+.email-capture-success {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 12px 0;
+}
+.email-capture-check {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(46,204,133,0.18); color: #2ECC85;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 700;
+}
+.email-capture-success p {
+  color: var(--text-secondary); font-size: 14px; line-height: 1.6;
+  max-width: 380px;
+}
+
+@media (max-width: 480px) {
+  .email-capture-row { flex-direction: column; }
+  .email-capture-btn { width: 100%; }
+}
+
 /* ============================================================
    Light theme — result UI overrides
    ============================================================ */
@@ -297,6 +344,13 @@ html[data-theme="light"] .wrong-tool-alts a { color: #6B4C9A; }
 html[data-theme="light"] .wrong-tool-alts a:hover { background: rgba(107,76,154,0.10); color: #4C1D95; }
 html[data-theme="light"] .cta-restart-link { color: #94A3B8; }
 html[data-theme="light"] .cta-restart-link:hover { color: #475569; background: rgba(0,0,0,0.04); }
+html[data-theme="light"] .result-email-capture {
+  background: linear-gradient(135deg, rgba(46,204,133,0.06), rgba(107,76,154,0.06));
+  border-color: rgba(46,204,133,0.30);
+}
+html[data-theme="light"] .email-capture-inner h3 { color: #1A1A2E; }
+html[data-theme="light"] .email-capture-inner > p { color: #475569; }
+html[data-theme="light"] .email-capture-success p { color: #475569; }
 
 /* ============================================================
    Purple theme — result UI tuning
@@ -310,6 +364,10 @@ html[data-theme="purple"] .score-hero {
 html[data-theme="purple"] .route-card {
   background: linear-gradient(180deg, rgba(155,89,182,0.24), rgba(40,25,64,0.82));
   border-color: rgba(176,138,224,0.45);
+}
+html[data-theme="purple"] .result-email-capture {
+  background: linear-gradient(135deg, rgba(46,204,133,0.08), rgba(155,89,182,0.12));
+  border-color: rgba(46,204,133,0.25);
 }
 
 @media (max-width: 768px) {

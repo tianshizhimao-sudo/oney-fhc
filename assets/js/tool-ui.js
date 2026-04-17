@@ -217,9 +217,32 @@
     });
   }
 
+  function renderEmailCapture(result, toolName) {
+    if ((result.score || 100) >= 70) return '';
+    var toolLabels = { quiz: 'Quick Check', payg: 'PAYG Health Check', business: 'Business Health Check', investor: 'Investor Portfolio Check' };
+    var label = toolLabels[toolName] || 'Financial Health Check';
+    return '<div class="result-email-capture">' +
+      '<div class="email-capture-inner">' +
+        '<h3>Get your results by email</h3>' +
+        '<p>Send your ' + esc(label) + ' summary (' + (result.score || 0) + '/100) to Oney\u00a0&amp;\u00a0Co — we\u2019ll reply with personalised next steps you can act on.</p>' +
+        '<form class="email-capture-form" id="emailCaptureForm">' +
+          '<div class="email-capture-row">' +
+            '<input type="email" class="field-input email-capture-input" id="emailCaptureInput" placeholder="your@email.com" required>' +
+            '<button type="submit" class="btn-purple email-capture-btn">Send my report \u2192</button>' +
+          '</div>' +
+          '<span class="email-capture-hint">Opens your email client with a pre-filled summary.</span>' +
+        '</form>' +
+        '<div class="email-capture-success" id="emailCaptureSuccess" hidden>' +
+          '<span class="email-capture-check">\u2713</span>' +
+          '<p>Email ready \u2014 just hit send in your mail app to get your personalised follow-up.</p>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
   window.OneyToolUI = {
     renderStep, renderProgress, renderSupport,
     renderScoreHero, renderMetricGrid, renderInsightList, renderResultCTA,
-    wireInsightAccordions, scoreBand, esc,
+    renderEmailCapture, wireInsightAccordions, scoreBand, esc,
   };
 })();
