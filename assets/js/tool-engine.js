@@ -68,6 +68,7 @@
     let index = 0;
     let showingResult = false;
     let firstRender = true;
+    let autoAdvanceTimer = null;
 
     const stepEl = document.getElementById(mountIds.step);
     const progressEl = document.getElementById(mountIds.progress);
@@ -103,10 +104,21 @@
         btn.addEventListener('click', () => {
           const key = btn.dataset.field;
           const value = btn.dataset.value;
+          clearTimeout(autoAdvanceTimer);
           if (btn.dataset.multi) {
+            const field = currentStep().fields.find(f => f.key === key);
+            const excl = (field && field.exclusive) || [];
             const arr = Array.isArray(state[key]) ? state[key].slice() : [];
             const idx = arr.indexOf(value);
-            if (idx >= 0) arr.splice(idx, 1); else arr.push(value);
+            if (idx >= 0) {
+              arr.splice(idx, 1);
+            } else if (excl.includes(value)) {
+              arr.length = 0;
+              arr.push(value);
+            } else {
+              excl.forEach(ev => { const ei = arr.indexOf(ev); if (ei >= 0) arr.splice(ei, 1); });
+              arr.push(value);
+            }
             state[key] = arr;
             stepEl.querySelectorAll(`.choice-card[data-field="${CSS.escape(key)}"]`).forEach(b => {
               b.classList.toggle('selected', arr.includes(b.dataset.value));
@@ -116,6 +128,17 @@
             stepEl.querySelectorAll(`.choice-card[data-field="${CSS.escape(key)}"]`).forEach(b => {
               b.classList.toggle('selected', b === btn);
             });
+            // P1: auto-advance when all required fields in this step are filled.
+            const step = currentStep();
+            const allFilled = (step.fields || []).every(f => {
+              if (f.optional) return true;
+              const val = state[f.key];
+              if (f.type === 'multi') return Array.isArray(val) && val.length > 0;
+              return val != null && val !== '';
+            });
+            if (allFilled) {
+              autoAdvanceTimer = setTimeout(goNext, 320);
+            }
           }
           saveState(storageKey, state);
           clearStepErrors();
@@ -216,6 +239,7 @@
     }
 
     function goBack() {
+      clearTimeout(autoAdvanceTimer);
       if (index > 0) { index--; renderCurrent(); }
     }
 

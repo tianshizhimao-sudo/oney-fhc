@@ -82,6 +82,7 @@
       supportBody: 'Credit cards, BNPL, personal loans, and HECS all reduce the headline number lenders calculate for you.',
       fields: [{
         key: 'pressure', type: 'multi', label: 'Tick what applies',
+        exclusive: ['none'],
         options: [
           { value: 'credit-card', label: 'Credit card / BNPL balances' },
           { value: 'personal-loan', label: 'Personal or car loan' },
