@@ -412,7 +412,11 @@
         <div class="thankyou-title">Report on its way!</div>
         <div class="thankyou-msg">
           Thanks! Check your inbox — your free preview report will arrive within a few minutes.<br><br>
-          <strong>While you wait, scroll down</strong> to see how a free 15-minute chat with Dong can fast-track your borrowing journey.
+          <strong>While you wait</strong> — explore more tools to sharpen your position:
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;align-items:center;">
+          <a href="rate-impact.html" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;">📊 See how rate changes affect your repayments →</a>
+          <a href="index.html#tools" style="color:var(--text-muted);font-size:14px;text-decoration:none;">← Back to all tools</a>
         </div>
       </div>
     </div>
@@ -547,9 +551,6 @@
       if (res.ok) {
         document.getElementById('emailForm').style.display = 'none';
         document.getElementById('thankyouState').style.display = 'block';
-        setTimeout(() => {
-          document.querySelector('.broker-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 1200);
       } else {
         throw new Error('Send failed');
       }

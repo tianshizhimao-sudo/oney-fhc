@@ -77,7 +77,7 @@
         title: 'Want this looked at properly?',
         body: 'Get a human read on what would shift your borrowing power the most — book a 15-min chat.',
         primary:   { label: 'Book a 15-min chat',       href: 'https://oneyco.com.au/#contact' },
-        secondary: { label: 'Try the Business Check',    href: 'business.html' },
+        secondary: { label: 'Get My Free Report',        href: 'next-step.html' },
         tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },
       }
     };
