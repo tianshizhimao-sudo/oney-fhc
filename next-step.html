@@ -231,6 +231,13 @@
     }
     .form-privacy a { color: var(--accent); text-decoration: none; }
 
+    .field-error {
+      color: #ef4444;
+      font-size: 12px;
+      margin-top: 6px;
+      animation: fadeUp 0.3s ease;
+    }
+
     /* Thank you state */
     .thankyou-state {
       display: none;
@@ -412,7 +419,11 @@
         <div class="thankyou-title">Report on its way!</div>
         <div class="thankyou-msg">
           Thanks! Check your inbox — your free preview report will arrive within a few minutes.<br><br>
-          <strong>While you wait, scroll down</strong> to see how a free 15-minute chat with Dong can fast-track your borrowing journey.
+          <strong>While you wait</strong>, explore our other assessment tools to get an even deeper picture of your borrowing position.
+        </div>
+        <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 10px;">
+          <a href="banker-view.html" class="btn-green" style="text-decoration: none; text-align: center;">Try the Banker's View tool →</a>
+          <a href="index.html" style="color: var(--accent); text-decoration: none; font-size: 14px; text-align: center;">← Explore all tools</a>
         </div>
       </div>
     </div>
@@ -485,15 +496,32 @@
     setTimeout(() => { el.style.borderColor = ''; el.style.animation = ''; }, 800);
   }
 
+  function showFieldError(el, msg) {
+    clearFieldError(el);
+    const err = document.createElement('div');
+    err.className = 'field-error';
+    err.textContent = msg;
+    el.parentNode.insertBefore(err, el.nextSibling);
+    shake(el);
+  }
+
+  function clearFieldError(el) {
+    const existing = el.parentNode.querySelector('.field-error');
+    if (existing) existing.remove();
+  }
+
+  document.getElementById('firstName').addEventListener('input', function() { clearFieldError(this); });
+  document.getElementById('emailAddr').addEventListener('input', function() { clearFieldError(this); });
+
   async function submitEmail() {
     const nameEl  = document.getElementById('firstName');
     const emailEl = document.getElementById('emailAddr');
     const name  = nameEl.value.trim();
     const email = emailEl.value.trim();
 
-    if (!name)  { shake(nameEl);  return; }
-    if (!email) { shake(emailEl); return; }
-    if (!isValidEmail(email)) { shake(emailEl); return; }
+    if (!name)  { showFieldError(nameEl, 'Please enter your first name');  return; }
+    if (!email) { showFieldError(emailEl, 'Please enter your email address'); return; }
+    if (!isValidEmail(email)) { showFieldError(emailEl, 'Please enter a valid email address'); return; }
 
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Sending…';
@@ -548,7 +576,8 @@
         document.getElementById('emailForm').style.display = 'none';
         document.getElementById('thankyouState').style.display = 'block';
         setTimeout(() => {
-          document.querySelector('.broker-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const brokerCard = document.querySelector('.broker-card');
+          if (brokerCard) brokerCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 1200);
       } else {
         throw new Error('Send failed');
