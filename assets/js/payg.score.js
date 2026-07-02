@@ -75,10 +75,10 @@
       score, heading, summary, metrics, attention, positives,
       cta: {
         title: 'Want this looked at properly?',
-        body: 'Get a human read on what would shift your borrowing power the most — book a 15-min chat.',
-        primary:   { label: 'Book a 15-min chat',       href: 'https://oneyco.com.au/#contact' },
-        secondary: { label: 'Try the Business Check',    href: 'business.html' },
-        tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },
+        body: 'Get a free personalised report with your results and action checklist — or book a 15-min chat for a human read.',
+        primary:   { label: 'Get My Free Report',        href: 'next-step.html' },
+        secondary: { label: 'Book a 15-min chat',        href: 'https://oneyco.com.au/#contact' },
+        tertiary:  { label: 'How this score is built',    href: 'index.html#how-it-works' },
       }
     };
   }

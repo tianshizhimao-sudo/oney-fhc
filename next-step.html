@@ -412,7 +412,11 @@
         <div class="thankyou-title">Report on its way!</div>
         <div class="thankyou-msg">
           Thanks! Check your inbox — your free preview report will arrive within a few minutes.<br><br>
-          <strong>While you wait, scroll down</strong> to see how a free 15-minute chat with Dong can fast-track your borrowing journey.
+          <strong>Want to go deeper?</strong> Try one of our specialist tools to get a detailed breakdown of your borrowing position.
+        </div>
+        <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+          <a href="index.html#tools" style="display:inline-block; padding:12px 24px; background:var(--green-gradient); color:#fff; border-radius:12px; text-decoration:none; font-size:14px; font-weight:600;">Explore all tools →</a>
+          <a href="https://oneyco.com.au/#contact" style="display:inline-block; padding:12px 24px; background:transparent; border:1px solid var(--border); color:var(--text-muted); border-radius:12px; text-decoration:none; font-size:14px; font-weight:500;">Book a 15-min chat</a>
         </div>
       </div>
     </div>
@@ -547,9 +551,10 @@
       if (res.ok) {
         document.getElementById('emailForm').style.display = 'none';
         document.getElementById('thankyouState').style.display = 'block';
-        setTimeout(() => {
-          document.querySelector('.broker-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 1200);
+        var brokerEl = document.querySelector('.broker-card');
+        if (brokerEl) {
+          setTimeout(function() { brokerEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 1200);
+        }
       } else {
         throw new Error('Send failed');
       }
