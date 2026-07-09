@@ -88,11 +88,22 @@
     if (s.taxUpToDate === 'Yes' && s.separated === 'Yes')
       positives.push({ tone: 'good', icon: '✅', title: 'Clean compliance footprint', body: 'ATO current and funds separated — the two low-cost signals bankers weight heavily.' });
 
+    const ctaTitle = score >= 70
+      ? 'Your file is lender-ready. Let's pick the right product.'
+      : score >= 45
+        ? 'A focused fix could shift this significantly.'
+        : 'The gaps are clear — and they're fixable.';
+    const ctaBody = score >= 70
+      ? 'Structure, books, and support all read well. A 15-min call maps the fastest path to the right lender for your specific deal.'
+      : score >= 45
+        ? 'One or two targeted moves usually close the gap. Book a 15-min call to identify which lever shifts the most.'
+        : 'Most business files in this range improve materially in 2–3 months with the right sequence. Let's map it out.';
+
     return {
       score, heading, summary, metrics, attention, positives,
       cta: {
-        title: 'Get a banker-grade read on your file',
-        body: 'The Business Health Check is a free starting point. Book a 15-min call for a tailored readiness plan.',
+        title: ctaTitle,
+        body: ctaBody,
         primary:   { label: 'Book a 15-min chat',       href: 'https://oneyco.com.au/#contact' },
         secondary: { label: 'Open Commercial Intake',    href: 'https://tools.oneyco.com.au/commercial-intake.html' },
         tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },

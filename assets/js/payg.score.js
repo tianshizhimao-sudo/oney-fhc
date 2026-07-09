@@ -71,11 +71,22 @@
     if (s.employment === 'Full-time PAYG' && s.recentChange === 'None')
       positives.push({ tone: 'good', icon: '💼', title: 'Clean employment window', body: 'Stable full-time PAYG with no recent change is the cleanest shape lenders see.' });
 
+    const ctaTitle = score >= 70
+      ? 'Ready to move? Let’s talk strategy.'
+      : score >= 45
+        ? 'Close — a quick chat could close the gap.'
+        : 'This score is fixable.';
+    const ctaBody = score >= 70
+      ? 'Your file looks clean — the next step is picking the right product with someone who’s seen thousands of these.'
+      : score >= 45
+        ? 'A 15-min call often identifies the single lever worth tens of thousands in borrowing capacity.'
+        : 'Most people in this range improve 20+ points in 2–3 months with the right focus. Let’s map out what shifts first.';
+
     return {
       score, heading, summary, metrics, attention, positives,
       cta: {
-        title: 'Want this looked at properly?',
-        body: 'Get a human read on what would shift your borrowing power the most — book a 15-min chat.',
+        title: ctaTitle,
+        body: ctaBody,
         primary:   { label: 'Book a 15-min chat',       href: 'https://oneyco.com.au/#contact' },
         secondary: { label: 'Try the Business Check',    href: 'business.html' },
         tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },

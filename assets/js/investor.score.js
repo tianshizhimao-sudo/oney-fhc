@@ -110,11 +110,22 @@
     if (usableEquity > 100000) positives.push({ tone: 'good', icon: '🔓', title: 'Strong usable equity', body: `${fmtMoney(usableEquity)} available for the next deposit — a real tailwind.` });
     if (targetValue > 0 && canBuy === true) positives.push({ tone: 'good', icon: '🎯', title: 'Target looks achievable', body: `Current position supports a ${fmtMoney(targetValue)} purchase on estimate.` });
 
+    const ctaTitle = score >= 70
+      ? 'Portfolio has room. Let's plan the next move.'
+      : score >= 45
+        ? 'Workable — a quick strategy call could unlock capacity.'
+        : 'Consolidate first, then expand smarter.';
+    const ctaBody = score >= 70
+      ? 'Leverage and equity look healthy. A 15-min call maps the cleanest lender sequence for your target purchase.'
+      : score >= 45
+        ? 'The numbers are close. A 15-min call often surfaces one structural fix that unlocks the next property.'
+        : 'Tightening leverage or cashflow now compounds into significantly better terms when you're ready. Let's map the sequence.';
+
     return {
       score, heading, summary, metrics, attention, positives,
       cta: {
-        title: 'Expand with a strategy, not guesswork',
-        body: 'Investor lending is where structure compounds. Book a 15-min chat to map out the cleanest sequence for your next move.',
+        title: ctaTitle,
+        body: ctaBody,
         primary:   { label: 'Book a strategy chat',     href: 'https://oneyco.com.au/#contact' },
         secondary: { label: 'Try the PAYG Check',        href: 'payg.html' },
         tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },
