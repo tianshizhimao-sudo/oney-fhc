@@ -547,9 +547,12 @@
       if (res.ok) {
         document.getElementById('emailForm').style.display = 'none';
         document.getElementById('thankyouState').style.display = 'block';
-        setTimeout(() => {
-          document.querySelector('.broker-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 1200);
+        const brokerCard = document.querySelector('.broker-card');
+        if (brokerCard) {
+          setTimeout(() => {
+            brokerCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 1200);
+        }
       } else {
         throw new Error('Send failed');
       }

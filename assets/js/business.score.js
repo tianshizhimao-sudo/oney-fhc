@@ -92,9 +92,9 @@
       score, heading, summary, metrics, attention, positives,
       cta: {
         title: 'Get a banker-grade read on your file',
-        body: 'The Business Health Check is a free starting point. Book a 15-min call for a tailored readiness plan.',
-        primary:   { label: 'Book a 15-min chat',       href: 'https://oneyco.com.au/#contact' },
-        secondary: { label: 'Open Commercial Intake',    href: 'https://tools.oneyco.com.au/commercial-intake.html' },
+        body: 'Grab your free personalised report or book a 15-min call for a tailored readiness plan.',
+        primary:   { label: 'Get My Free Report',        href: 'next-step.html' },
+        secondary: { label: 'Book a 15-min chat',        href: 'https://oneyco.com.au/#contact' },
         tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },
       }
     };

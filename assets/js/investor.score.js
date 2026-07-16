@@ -114,9 +114,9 @@
       score, heading, summary, metrics, attention, positives,
       cta: {
         title: 'Expand with a strategy, not guesswork',
-        body: 'Investor lending is where structure compounds. Book a 15-min chat to map out the cleanest sequence for your next move.',
-        primary:   { label: 'Book a strategy chat',     href: 'https://oneyco.com.au/#contact' },
-        secondary: { label: 'Try the PAYG Check',        href: 'payg.html' },
+        body: 'Grab your free portfolio report or book a 15-min strategy chat to plan your next move.',
+        primary:   { label: 'Get My Free Report',        href: 'next-step.html' },
+        secondary: { label: 'Book a strategy chat',      href: 'https://oneyco.com.au/#contact' },
         tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },
       }
     };
