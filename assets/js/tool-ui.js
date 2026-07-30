@@ -95,11 +95,12 @@
     `;
   }
 
-  function renderProgress(index, total) {
+  function renderProgress(index, total, stepTitle) {
     const pct = total <= 1 ? (index >= total - 1 ? 100 : 0) : Math.round((index / (total - 1)) * 100);
+    const titleHtml = stepTitle ? `<span class="progress-step-title">${esc(stepTitle)}</span>` : '';
     return `
       <div class="progress-rail-head">
-        <span>Progress</span><strong>${Math.min(index + 1, total)} / ${total}</strong>
+        <span>Step ${Math.min(index + 1, total)} of ${total}</span>${titleHtml}<strong>${pct}%</strong>
       </div>
       <div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
     `;

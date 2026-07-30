@@ -81,7 +81,7 @@
     function renderCurrent() {
       if (showingResult) return;
       const step = currentStep();
-      progressEl.innerHTML = UI.renderProgress(index, schema.length);
+      progressEl.innerHTML = UI.renderProgress(index, schema.length, step.title);
       supportEl.innerHTML = UI.renderSupport(step);
       stepEl.innerHTML = UI.renderStep(step, {
         index, total: schema.length, state, isLast: index === schema.length - 1
