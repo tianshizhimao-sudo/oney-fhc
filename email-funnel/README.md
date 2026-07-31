@@ -1,3 +1,7 @@
+> [!WARNING]
+> STALE SOURCE NOTICE — 2026-07-31
+> This legacy HTML funnel contains hard-coded March 2026 RBA/APRA assessment-rate copy, including `4.10%` and `7.10%`. Do not send or reuse externally. Use `react-email-poc/` and the source-fresh QA checklist for any new FHC / Rate Recheck nurture email.
+
 # FHC Email Funnel System
 
 A 3-email automated sequence for Oney & Co's First Home Cost Calculator (FHC) early-bird registration program.

@@ -1,0 +1,24 @@
+{
+  "name": "oney-fhc-rate-recheck-email-poc",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "email": "email dev --dir emails --port 3000",
+    "lint:source-fresh": "node scripts/source-fresh-lint.mjs",
+    "review": "npm run lint:source-fresh && npm run render:preview && tsc --noEmit",
+    "render:preview": "tsx scripts/render-preview.mjs"
+  },
+  "dependencies": {
+    "@react-email/components": "latest",
+    "@react-email/render": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@react-email/preview-server": "latest",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "tsx": "^4.23.1",
+    "typescript": "latest"
+  }
+}
