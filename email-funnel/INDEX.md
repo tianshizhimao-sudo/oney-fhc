@@ -31,11 +31,11 @@ The FHC Email Funnel is a complete 3-email marketing automation system for Oney 
 - **Chinese**: "你知道银行是怎么评估你的吗？"
 - **Purpose**: Education on banking assessment, myth-busting
 - **Structure**:
-  - Assessment rate section (7.10% APRA buffer)
+  - Assessment-rate logic section (source-checked RBA/APRA facts required before send)
   - Three common myths with realities
   - Bank-Ready Score value prop
   - Primary CTA: "Try the Bank-Ready Score"
-- **Key message**: "Banks use 7.10%, not advertised rates"
+- **Key message**: "Advertised rates are not the same as lender assessment assumptions"
 
 #### `email-3-value.html` (185 lines)
 - **Trigger**: Sent on Day 7 after signup

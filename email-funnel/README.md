@@ -36,7 +36,7 @@ The FHC email funnel is a sophisticated marketing automation system that nurture
 4. **Configuration**
    - Brand colors: `#2ECC85` (green), `#6B4C9A` (purple), `#1A1A2E` (dark bg)
    - Font: Inter
-   - Assessment rate: 7.10% (RBA 4.10% + 3% buffer)
+   - Assessment-rate logic: current lender/customer rate + APRA buffer, source-checked before send
    - URLs:
      - FHC: `fhc.oneyco.com.au`
      - Tools: `tools.oneyco.com.au`
@@ -64,7 +64,7 @@ The FHC email funnel is a sophisticated marketing automation system that nurture
 **Chinese Subject**: "你知道银行是怎么评估你的吗？"
 
 **Content**:
-- **The Real Assessment Rate**: Explains the 7.10% APRA buffer (RBA 4.10% + 3%)
+- **The Real Assessment Rate**: Explains assessment-rate logic and requires source-checked RBA/APRA facts before send
 - **Three Common Myths**:
   1. "I can borrow based on my salary" → Reality: Banks use assessment rate, not advertised rate
   2. "20% deposit means I'm safe" → Reality: DTI and serviceability matter more
@@ -83,7 +83,7 @@ The FHC email funnel is a sophisticated marketing automation system that nurture
 **Content**:
 - **Dong's Story**: 8 years in Big 4 banking, observations on why people get declined
 - **Core Insight**: Rejections are usually about information, not ability to repay
-- **FHC Value**: Know real costs/capacity before applying (using 7.10% assessment rate)
+- **FHC Value**: Know real costs/capacity drivers before applying, using source-checked assumptions
 - **Dual CTAs**:
   1. Get FHC for $29 (primary)
   2. Book Free 15-Min Strategy Call (secondary)
@@ -253,7 +253,7 @@ All templates use inline CSS for email client compatibility:
 
 - **email-2-education.html** (2.8 KB)
   - Day 3 educational content
-  - Assessment rate explanation with 7.10% highlight
+  - Assessment-rate explanation with source-checked facts
   - 3 myth/reality boxes
   - Purple accent for secondary messaging
 
@@ -289,7 +289,7 @@ Edit the corresponding `.html` file. Common customizations:
    - Dark background: `#1A1A2E`
 
 3. **Update Assessment Rate**:
-   - Current: 7.10% (RBA 4.10% + 3% buffer)
+   - Current: verify against official RBA/APRA sources before send
    - Update all references if rates change
 
 ### Change Send Schedule

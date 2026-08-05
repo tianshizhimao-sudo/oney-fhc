@@ -124,7 +124,7 @@ Your email funnel is now live. Here's what will happen:
 
 1. **User signs up** on early-bird.html
 2. **Email 1** sent immediately (confirmation + value)
-3. **Email 2** scheduled for Day 3 (education on 7.10% assessment rate)
+3. **Email 2** scheduled for Day 3 (education on assessment-rate logic; source-check before send)
 4. **Email 3** scheduled for Day 7 (founder story + conversion CTAs)
 
 All sends logged in `email_sequence_log` table for analytics.

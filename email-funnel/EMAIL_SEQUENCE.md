@@ -55,7 +55,7 @@ early-bird price of $29 AUD (regular price $79).
 
 [3 VALUE PROPOSITIONS - Numbered]
 1. Know your real borrowing power
-   Using actual APRA buffers (7.10% assessment rate),
+   Using source-checked APRA serviceability buffers,
    not optimistic estimates
 
 2. See it through a banker's eyes
@@ -80,7 +80,7 @@ Oney & Co · oneyco.com.au · hello@oneyco.com.au
 
 - "early-bird price of $29 AUD" (creates urgency)
 - "locked in" (creates scarcity)
-- "7.10% assessment rate" (establishes credibility)
+- Source-checked assessment-rate logic (establishes credibility without stale numbers)
 - "Bank-Ready in 15 minutes" (emphasizes speed)
 - "No payment required until then" (reduces friction)
 
@@ -145,18 +145,18 @@ a stress test buffer.
 
 [RATE BOX - Green background]
 Assessment Rate (APRA Buffer)
-7.10%
-RBA Rate (4.10%) + 3% Serviceability Buffer
+Source-check required
+Current lender/customer rate + APRA serviceability buffer, verified before send
 
 Explanation:
 This is higher than current mortgage rates because banks want
 to know you can still repay if rates rise. The FHC uses this
-exact 7.10% assessment rate — the same one banks use.
+source-checked assessment-rate logic — not an old hard-coded campaign number.
 
 [SECTION 2: THREE COMMON MYTHS]
 
 Myth 1: "I can borrow based on my salary"
-→ Reality: Banks multiply your income by 7.10%, not advertised rate.
+→ Reality: Banks assess income, debts, expenses and buffer-tested repayments — not just advertised rates.
   $100k salary ≠ $600k+ borrowing power, closer to $350-400k
 
 Myth 2: "20% deposit means I'm safe"
@@ -181,7 +181,7 @@ Try the Bank-Ready Score →
 
 ### Key Copy Points
 
-- "7.10%" (establishes specific, authoritative rate)
+- Source-checked RBA/APRA facts (specific, authoritative, and maintainable)
 - "Assessment rate" not "interest rate" (educates terminology)
 - "Myth 1/2/3" structure (makes content scannable, memorable)
 - "Banks re-assess everything at settlement" (key insight)
@@ -269,7 +269,7 @@ The Financial Health Check isn't a generic calculator. It's built from
 8 years of knowing exactly what banks need to see — and how to present it.
 
 In 5 minutes, you'll know:
-• Your real borrowing capacity (using 7.10% assessment rate)
+• Your borrowing capacity drivers, using source-checked assumptions
 • Where you stand on the 5 key assessment dimensions
 • What to fix first to maximise approval chances
 • Your exact serviceability position before you apply
@@ -358,7 +358,7 @@ Questions? Reply to this email or reach out to hello@oneyco.com.au
 
 ### 1. **Specificity Over Generality**
 - NOT: "Know more about borrowing"
-- YES: "Using actual APRA buffers (7.10% assessment rate)"
+- YES: "Using source-checked APRA serviceability buffers"
 
 ### 2. **Insider Perspective**
 - Dong's 8 years in banking mentioned in 2 emails
@@ -479,8 +479,8 @@ All emails include unsubscribe link (managed by Resend):
 
 ## Common Questions from Recipients
 
-**Q: Why is the assessment rate 7.10%?**
-A: RBA (central bank rate) is 4.10%. Banks add 3% buffer for serviceability stress testing to ensure you can repay if rates rise.
+**Q: Why does the assessment rate change?**
+A: Lender assessment rates depend on current rate assumptions, APRA serviceability buffer settings, product type and lender policy. Verify RBA/APRA facts and lender assumptions before sending.
 
 **Q: Is this the rate I'll pay?**
 A: No, this is the assessment rate for calculating borrowing power. Your actual rate depends on current market rates and your credit profile.

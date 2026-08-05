@@ -53,7 +53,7 @@ System immediately sends Email 1:
 ### 3. Day 3 Education Email
 System automatically sends Email 2:
 - Subject: "How Banks Really Assess You (It's Not What You Think)"
-- Content: 7.10% assessment rate explained, 3 common myths debunked
+- Content: assessment-rate logic explained, 3 common myths debunked
 - CTA: "Try the Bank-Ready Score" (free tool)
 
 ### 4. Day 7 Conversion Email
@@ -224,7 +224,7 @@ You'll know it's working when:
 
 ### Why This Copy Works
 
-- **Assessment rate (7.10%)**: Specific, credible, memorable number
+- **Assessment-rate logic**: Specific enough to educate, but source-checked before send
 - **Three myths**: Scannable format, debunks misconceptions, builds trust
 - **Founder story**: Personal, relatable, establishes credibility
 - **Dual CTAs**: Removes decision paralysis, captures hesitant buyers
