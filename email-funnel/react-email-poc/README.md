@@ -1,12 +1,19 @@
 # FHC / Rate Recheck React Email POC
 
-Status: draft for Dong review. Not connected to Resend or any live send workflow.
+Status: **review-ready draft** for Dong review. Not connected to Resend, Supabase, cron, webhooks, or any live send workflow.
 
-## What this contains
+## Template set
 
-- `emails/rate-recheck-borrowing-confidence.tsx` — Email 1 POC: “Your rate didn’t change. Your approval might have.”
-- `lib/sourceFacts.ts` — source facts object, so RBA/APRA values are not buried in copy.
-- `scripts/source-fresh-lint.mjs` — lightweight lint for stale hard-coded rates and required compliance markers.
+- `emails/email-0-confirmation.tsx` — transactional confirmation after a user submits/opts in.
+- `emails/rate-recheck-borrowing-confidence.tsx` — Email 1: “Your rate didn’t change. Your approval might have.”
+- `emails/email-2-broker-prep.tsx` — Email 2: broker/lender conversation preparation checklist.
+- `emails/email-3-recheck-reminder.tsx` — Email 3: requested approval freshness reminder.
+
+## Source freshness
+
+- `lib/sourceFacts.ts` holds RBA/APRA facts in one shared typed object.
+- `scripts/source-fresh-lint.mjs` blocks stale hard-coded strings such as old RBA/assessment-rate examples.
+- `scripts/render-preview.mjs` renders every template to HTML + plain text and checks compliance markers.
 
 ## Review commands
 
@@ -22,5 +29,12 @@ Preview server: http://localhost:3000
 
 - General information only; not credit advice.
 - No approval, eligibility, borrowing amount, or “best loan” promise.
-- Commercial email must include consent-aware preference management and unsubscribe path.
-- Before external send: confirm RBA/APRA source facts again and render HTML + plain text.
+- Commercial emails include consent-aware preference management and unsubscribe wording.
+- Transactional confirmation explains it is only a confirmation, not an approval or eligibility decision.
+
+## Before any live send
+
+- Reconfirm RBA/APRA source facts from official sources and update `lib/sourceFacts.ts`.
+- Confirm consent capture and unsubscribe/manage-preferences URLs are real.
+- Render and review HTML + plain text output.
+- Connect only after a separate Resend/Supabase implementation review.

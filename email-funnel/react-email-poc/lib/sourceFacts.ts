@@ -1,4 +1,15 @@
+// Source facts are defined ONCE here so RBA/APRA values are never buried
+// in template copy. Before any live send, re-verify against the official
+// source pages below and update these values + source dates together.
+//
+// Official sources (checked 2026-07-31):
+//   RBA  - https://www.rba.gov.au/statistics/cash-rate/
+//   APRA - https://www.apra.gov.au/news-and-publications/apra-announces-update-macroprudential-settings
+
 export type ProductName = 'FHC' | 'Rate Recheck';
+
+export type ProductSource = 'fhc' | 'rate_recheck' | 'bank_ready_score';
+export type ConsentType = 'express' | 'inferred' | 'transactional_only';
 
 export interface SourceFacts {
   rbaCashRate: string;
@@ -12,10 +23,29 @@ export interface SourceFacts {
 
 export const defaultSourceFacts: SourceFacts = {
   rbaCashRate: '4.35%',
-  rbaEffectiveDate: '2026-06-17',
+  rbaEffectiveDate: '17 June 2026',
   rbaSourceDate: '2026-07-31',
   rbaSourceUrl: 'https://www.rba.gov.au/statistics/cash-rate/',
   apraBuffer: '3 percentage points',
   apraSourceDate: '2026-07-31',
   apraSourceUrl: 'https://www.apra.gov.au/news-and-publications/apra-announces-update-macroprudential-settings',
 };
+
+// Consent + preference fields shared by every template. Kept separate from
+// SourceFacts so templates stay source-fresh while consent metadata stays
+// schema-stable for downstream lead / preference management.
+export interface ConsentMeta {
+  consentType: ConsentType;
+  consentCapturedAt?: string;
+  managePreferencesUrl: string;
+  unsubscribeUrl: string;
+}
+
+export interface SharedEmailProps {
+  email: string;
+  firstName?: string;
+  productName: ProductName;
+  productSource?: ProductSource;
+  sourceFacts: SourceFacts;
+  consent: ConsentMeta;
+}
