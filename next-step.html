@@ -454,7 +454,7 @@
   let quizGrade = '';
   (function() {
     try {
-      const saved = JSON.parse(localStorage.getItem('oney-fhc-quiz-v1') || '{}');
+      const saved = JSON.parse(localStorage.getItem('oney-fhc-quiz') || '{}');
       if (saved.score) {
         quizScore = saved.score;
         quizGrade = saved.grade || '';

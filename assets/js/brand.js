@@ -39,9 +39,19 @@
     const nav = document.querySelector('.oney-nav');
     if (!nav) return;
     const hamburger = nav.querySelector('.nav-hamburger');
-    if (hamburger) {
-      hamburger.addEventListener('click', () => nav.classList.toggle('nav-open'));
-    }
+    if (!hamburger) return;
+
+    hamburger.addEventListener('click', () => nav.classList.toggle('nav-open'));
+
+    nav.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('nav-open'));
+    });
+
+    document.addEventListener('click', e => {
+      if (nav.classList.contains('nav-open') && !nav.contains(e.target)) {
+        nav.classList.remove('nav-open');
+      }
+    });
   }
 
   function initReveal() {
