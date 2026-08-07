@@ -11,6 +11,7 @@ const requiredPatterns = [
   /manage.*preferences/i,
   /rba/i,
   /apra/i,
+  /sourceFactVersion/i,
 ];
 
 function files(dir) {

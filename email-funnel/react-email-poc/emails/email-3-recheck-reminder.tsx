@@ -62,6 +62,8 @@ RecheckReminderEmail.PreviewProps = {
   consent: {
     consentType: 'express',
     consentCapturedAt: '2026-08-05',
+    consentCaptureMethod: 'form',
+    consentCaptureSource: 'rate_recheck',
     managePreferencesUrl: 'https://oneyco.com.au/preferences/example',
     unsubscribeUrl: 'https://oneyco.com.au/unsubscribe/example',
   },

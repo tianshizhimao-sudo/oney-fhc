@@ -51,7 +51,8 @@ export function Footer({ sourceFacts, consent, isTransactional = false, showSour
           <Link href={consent.unsubscribeUrl} className="text-[#1FAD73]">
             unsubscribe
           </Link>
-          . Your consent was captured on {consent.consentCapturedAt ?? 'sign-up'} ({consent.consentType}).
+          . Your consent was captured on {consent.consentCapturedAt ?? 'sign-up'} ({consent.consentType};{' '}
+          {consent.consentCaptureMethod}; source: {consent.consentCaptureSource}).
         </Text>
       )}
     </Section>

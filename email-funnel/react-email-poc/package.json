@@ -5,7 +5,8 @@
   "scripts": {
     "email": "email dev --dir emails --port 3000",
     "lint:source-fresh": "node scripts/source-fresh-lint.mjs",
-    "review": "npm run lint:source-fresh && npm run render:preview && tsc --noEmit",
+    "lint:consent-gate": "node scripts/consent-gate-lint.mjs",
+    "review": "npm run lint:source-fresh && npm run lint:consent-gate && npm run render:preview && tsc --noEmit",
     "render:preview": "tsx scripts/render-preview.mjs"
   },
   "dependencies": {
