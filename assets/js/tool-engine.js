@@ -65,7 +65,6 @@
 
     const storageKey = storageKeyFor(name);
     const state = loadState(storageKey);
-    let index = 0;
     let showingResult = false;
     let firstRender = true;
 
@@ -74,9 +73,22 @@
     const supportEl = document.getElementById(mountIds.support);
     const resultEl = document.getElementById(mountIds.result);
 
+    function computeResumeIndex() {
+      var keys = Object.keys(state);
+      if (keys.length === 0) return 0;
+      for (var i = 0; i < schema.length; i++) {
+        var step = schema[i];
+        var { missing } = validateStep(step, state);
+        if (missing.length > 0) return i;
+      }
+      return schema.length - 1;
+    }
+
+    let index = computeResumeIndex();
+
     function currentStep() { return schema[index]; }
 
-    track('tool_open', { tool: name, total_steps: schema.length });
+    track('tool_open', { tool: name, total_steps: schema.length, resumed_at: index > 0 ? index : undefined });
 
     function renderCurrent() {
       if (showingResult) return;
