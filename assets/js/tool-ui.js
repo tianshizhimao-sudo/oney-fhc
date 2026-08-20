@@ -38,7 +38,8 @@
         const value = typeof opt === 'object' ? opt.value : opt;
         const text = typeof opt === 'object' ? opt.label : opt;
         const selected = arr.includes(value) ? 'selected' : '';
-        return `<button type="button" class="choice-card ${selected}" data-field="${esc(field.key)}" data-multi="1" data-value="${esc(value)}">
+        const exclusive = (typeof opt === 'object' && opt.exclusive) ? ' data-exclusive="1"' : '';
+        return `<button type="button" class="choice-card ${selected}" data-field="${esc(field.key)}" data-multi="1" data-value="${esc(value)}"${exclusive}>
           <span class="choice-dot"></span><span>${esc(text)}</span>
         </button>`;
       }).join('');

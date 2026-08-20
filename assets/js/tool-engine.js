@@ -104,9 +104,21 @@
           const key = btn.dataset.field;
           const value = btn.dataset.value;
           if (btn.dataset.multi) {
-            const arr = Array.isArray(state[key]) ? state[key].slice() : [];
+            let arr = Array.isArray(state[key]) ? state[key].slice() : [];
             const idx = arr.indexOf(value);
-            if (idx >= 0) arr.splice(idx, 1); else arr.push(value);
+            if (idx >= 0) {
+              arr.splice(idx, 1);
+            } else if (btn.dataset.exclusive) {
+              // "None of these" clears everything else.
+              arr = [value];
+            } else {
+              // Picking a real item clears any exclusive answer already set.
+              const exclusiveValues = Array.from(
+                stepEl.querySelectorAll(`.choice-card[data-field="${CSS.escape(key)}"][data-exclusive]`)
+              ).map(b => b.dataset.value);
+              arr = arr.filter(v => !exclusiveValues.includes(v));
+              arr.push(value);
+            }
             state[key] = arr;
             stepEl.querySelectorAll(`.choice-card[data-field="${CSS.escape(key)}"]`).forEach(b => {
               b.classList.toggle('selected', arr.includes(b.dataset.value));
@@ -245,6 +257,16 @@
       progressEl.innerHTML = UI.renderProgress(schema.length - 1, schema.length);
       let result = score(state) || {};
       result = applyResultTransform(result);
+
+      // Hand the finished score to the lead-capture page, which is a plain
+      // static page with no access to this tool's state.
+      try {
+        localStorage.setItem('oney-fhc-last-result', JSON.stringify({
+          tool: name,
+          score: result.score || 0,
+          band: UI.scoreBand(result.score || 0).label,
+        }));
+      } catch (e) {}
 
       const parts = [];
       parts.push(UI.renderScoreHero(result.score || 0, result.heading || 'Your result', result.summary || ''));

@@ -88,7 +88,7 @@
           { value: 'hecs', label: 'HECS / HELP debt' },
           { value: 'dependents', label: 'Dependents' },
           { value: 'recent-change', label: 'Recent income change' },
-          { value: 'none', label: 'None of these' },
+          { value: 'none', label: 'None of these', exclusive: true },
         ]
       }]
     },

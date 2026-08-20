@@ -71,7 +71,7 @@
             'New major customer / contract',
             'Lost a major customer',
             'Major industry shift',
-            'None of these',
+            { value: 'None of these', label: 'None of these', exclusive: true },
           ] },
         { key: 'runway', type: 'choice', label: 'Runway if revenue paused tomorrow',
           options: ['<1 month', '1–3 months', '3–6 months', '6+ months'] },
