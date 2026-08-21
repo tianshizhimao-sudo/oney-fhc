@@ -11,6 +11,7 @@
     if (press.includes('hecs')) penalty += 4;
     if (press.includes('dependents')) penalty += 3;
     if (press.includes('recent-change')) penalty += 5;
+    if (press.includes('income-variable')) penalty += 6;
     let score = capScore + tlScore + profileAlign + 25 - penalty;
     if (press.includes('none')) score += 10;
     score = Math.max(5, Math.min(100, Math.round(score)));
@@ -53,6 +54,7 @@
       { label: 'Readiness preview', value: `${score}/100`, tone: score >= 70 ? 'positive' : score >= 45 ? 'warning' : 'danger', bar: score, barTone: score >= 70 ? 'good' : score >= 45 ? 'warn' : 'danger' },
       { label: 'Capital signal', value: ({ 'lt-25k': 'Light', '25-50k': 'Building', '50-100k': 'Workable', '100-200k': 'Strong', '200k+': 'Excellent' })[s.capital] || '—' },
       { label: 'Pressure load', value: press.length && !press.includes('none') ? `${press.filter(p => p !== 'none').length} item${press.length > 1 ? 's' : ''}` : 'Clear' },
+      { label: 'Income resilience', value: press.includes('income-variable') || press.includes('recent-change') ? 'Needs proof' : 'Cleaner', sub: '4.5% unemployment makes repeatable income evidence more important.' },
       { label: 'Timing', value: ({ '0-3': '<3 months', '3-6': '3–6 months', '6-12': '6–12 months', '12+': '12+ months' })[s.timeline] || '—' },
     ];
 
@@ -73,6 +75,7 @@
     if (press.includes('personal-loan')) attention.push({ tone: 'danger', icon: '📉', title: 'Personal/car loan impact', body: 'These commitments bite hardest into serviceability. Paying down or refinancing before applying is usually worthwhile.' });
     if (s.capital === 'lt-25k' && (s.goal === 'first-home' || s.goal === 'upgrade')) attention.push({ tone: 'warn', icon: '💰', title: 'Capital is tight for this goal', body: 'Under $25k makes LMI and upfront costs a real constraint. Build savings or explore guarantor/FHB schemes.' });
     if (s.timeline === '0-3' && score < 55) attention.push({ tone: 'danger', icon: '⏱', title: 'Short timeline with gaps', body: 'A 3-month window usually needs a cleaner readiness picture than this one. Either extend the window or focus on 2–3 big levers.' });
+    if (press.includes('income-variable')) attention.push({ tone: 'warn', icon: '🧱', title: 'Income resilience needs evidence', body: 'With unemployment around 4.5%, lenders are more likely to probe whether overtime, bonus, casual shifts or key-client income will continue.' });
 
     const positives = [];
     if (press.includes('none')) positives.push({ tone: 'good', icon: '✅', title: 'No major liabilities', body: 'This is one of the biggest free wins in serviceability calculations.' });

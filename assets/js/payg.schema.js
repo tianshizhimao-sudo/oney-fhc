@@ -55,12 +55,14 @@
       description: 'Having the right people on your side changes outcomes.',
       supportKicker: 'Section 4 · Support',
       supportTitle: 'Good structure beats good luck.',
-      supportBody: 'Advisers, mortgage brokers, and a clean employment window significantly raise readiness.',
+      supportBody: 'Advisers, mortgage brokers, a clean employment window, and evidence that income can hold up in a 4.5% unemployment environment significantly raise readiness.',
       fields: [
         { key: 'hasAdvisor', type: 'choice', label: 'Do you work with a broker or financial adviser?',
           options: ['Yes — regularly', 'Sometimes', 'No'] },
         { key: 'recentChange', type: 'choice', label: 'Any recent income / employment changes?',
           options: ['None', 'Job change (same industry)', 'Role change (different industry)', 'Income drop'] },
+        { key: 'incomeResilience', type: 'choice', label: 'Income resilience if unemployment sits around 4.5%',
+          options: ['High — permanent/essential role or repeatable income', 'Medium — stable now, but exposed to hours/bonus/client changes', 'Low — recent drop, probation, casual volatility, or weak buffer'] },
         { key: 'confidence', type: 'choice', label: 'How confident are you in your next step?',
           options: ['Very confident', 'Somewhat confident', 'Uncertain', 'Stuck'] },
       ]

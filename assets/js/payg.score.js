@@ -26,9 +26,10 @@
 
     // 4. Support readiness (25)
     const advisorMap = { 'Yes — regularly': 12, 'Sometimes': 6, 'No': 2 };
-    const changeMap = { 'None': 7, 'Job change (same industry)': 5, 'Role change (different industry)': 3, 'Income drop': 0 };
-    const confMap = { 'Very confident': 5, 'Somewhat confident': 3, 'Uncertain': 1, 'Stuck': 0 };
-    const support = Math.min(25, (advisorMap[s.hasAdvisor] ?? 4) + (changeMap[s.recentChange] ?? 4) + (confMap[s.confidence] ?? 2));
+    const changeMap = { 'None': 6, 'Job change (same industry)': 4, 'Role change (different industry)': 2, 'Income drop': 0 };
+    const resilienceMap = { 'High — permanent/essential role or repeatable income': 6, 'Medium — stable now, but exposed to hours/bonus/client changes': 3, 'Low — recent drop, probation, casual volatility, or weak buffer': 0 };
+    const confMap = { 'Very confident': 4, 'Somewhat confident': 3, 'Uncertain': 1, 'Stuck': 0 };
+    const support = Math.min(25, (advisorMap[s.hasAdvisor] ?? 4) + (changeMap[s.recentChange] ?? 3) + (resilienceMap[s.incomeResilience] ?? 2) + (confMap[s.confidence] ?? 2));
 
     const score = Math.round(liability + visibility + discipline + support);
 
@@ -47,6 +48,7 @@
       { label: 'Liability pressure', value: `${Math.round(liability)}/25`, bar: (liability/25)*100, barTone: liability >= 18 ? 'good' : liability >= 10 ? 'warn' : 'danger' },
       { label: 'Financial visibility', value: `${Math.round(visibility)}/25`, bar: (visibility/25)*100, barTone: visibility >= 18 ? 'good' : visibility >= 10 ? 'warn' : 'danger' },
       { label: 'Support readiness', value: `${Math.round(support)}/25`, bar: (support/25)*100, barTone: support >= 18 ? 'good' : support >= 10 ? 'warn' : 'danger' },
+      { label: 'Income resilience', value: s.incomeResilience ? s.incomeResilience.split(' — ')[0] : 'Not checked', tone: s.incomeResilience && s.incomeResilience.startsWith('High') ? 'positive' : s.incomeResilience && s.incomeResilience.startsWith('Low') ? 'danger' : 'warning', sub: '4.5% unemployment narrative: stable, repeatable income matters more.' },
     ];
 
     const attention = [];
@@ -58,6 +60,10 @@
       attention.push({ tone: 'warn', icon: '🗓', title: "You haven't reviewed in a while", body: 'Most people sitting on older loans are 0.3–0.8% above market. A review typically pays for itself within months.' });
     if (s.recentChange === 'Income drop')
       attention.push({ tone: 'danger', icon: '⚠️', title: 'Recent income drop', body: 'Lenders prefer stable or rising income. If possible, wait for 1–2 clean payslip cycles before applying.' });
+    if (s.incomeResilience === 'Low — recent drop, probation, casual volatility, or weak buffer')
+      attention.push({ tone: 'danger', icon: '🧱', title: 'Income resilience is the weak point', body: 'In a 4.5% unemployment environment, lenders will probe probation, casual volatility, bonus reliance, shrinking hours and weak buffers. Build evidence before applying.' });
+    if (s.incomeResilience === 'Medium — stable now, but exposed to hours/bonus/client changes')
+      attention.push({ tone: 'warn', icon: '📄', title: 'Prove income is repeatable', body: 'Prepare payslip history, employment letter, contract renewal evidence, or bank statements showing the income is not a one-off.' });
     if (s.confidence === 'Uncertain' || s.confidence === 'Stuck')
       attention.push({ tone: 'warn', icon: '🧭', title: 'Direction is unclear', body: "The gap is usually not the numbers, it's deciding what outcome you're optimising for. A 15-min chat with a broker often clears this in one sitting." });
 
@@ -70,6 +76,8 @@
       positives.push({ tone: 'good', icon: '🤝', title: 'Supported structure', body: 'Having a broker or adviser on speed dial materially lifts outcomes on application timing and product mix.' });
     if (s.employment === 'Full-time PAYG' && s.recentChange === 'None')
       positives.push({ tone: 'good', icon: '💼', title: 'Clean employment window', body: 'Stable full-time PAYG with no recent change is the cleanest shape lenders see.' });
+    if (s.incomeResilience === 'High — permanent/essential role or repeatable income')
+      positives.push({ tone: 'good', icon: '🛡️', title: 'Income resilience supports the file', body: 'Stable, repeatable income is a stronger story when unemployment is around 4.5% and lenders are watching job risk more closely.' });
 
     return {
       score, heading, summary, metrics, attention, positives,

@@ -79,7 +79,7 @@
       description: 'Select anything that applies — we factor each into the preview.',
       supportKicker: 'Step 5 · Pressure',
       supportTitle: 'Liabilities matter more than people think.',
-      supportBody: 'Credit cards, BNPL, personal loans, and HECS all reduce the headline number lenders calculate for you.',
+      supportBody: 'Credit cards, BNPL, personal loans, HECS, and variable income all affect the headline number lenders calculate for you — especially while unemployment is around 4.5%.',
       fields: [{
         key: 'pressure', type: 'multi', label: 'Tick what applies',
         options: [
@@ -88,6 +88,7 @@
           { value: 'hecs', label: 'HECS / HELP debt' },
           { value: 'dependents', label: 'Dependents' },
           { value: 'recent-change', label: 'Recent income change' },
+          { value: 'income-variable', label: 'Income relies on overtime, bonus, casual shifts, or a few clients' },
           { value: 'none', label: 'None of these' },
         ]
       }]
