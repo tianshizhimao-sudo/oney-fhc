@@ -2,9 +2,9 @@
 // in template copy. Before any live send, re-verify against the official
 // source pages below and update these values + source dates together.
 //
-// Official sources (checked 2026-08-07):
+// Official sources (checked 2026-08-31):
 //   RBA  - https://www.rba.gov.au/statistics/cash-rate/
-//   APRA - https://www.apra.gov.au/news-and-publications/apra-announces-update-macroprudential-settings
+//   APRA - https://www.apra.gov.au/news-and-publications/apra-announces-update-on-macroprudential-settings
 
 export type ProductName = 'FHC' | 'Rate Recheck';
 
@@ -25,13 +25,13 @@ export interface SourceFacts {
 
 export const defaultSourceFacts: SourceFacts = {
   rbaCashRate: '4.35%',
-  rbaEffectiveDate: '17 June 2026',
-  rbaSourceDate: '2026-08-07',
+  rbaEffectiveDate: '12 August 2026',
+  rbaSourceDate: '2026-08-31',
   rbaSourceUrl: 'https://www.rba.gov.au/statistics/cash-rate/',
   apraBuffer: '3 percentage points',
-  apraSourceDate: '2026-08-07',
-  apraSourceUrl: 'https://www.apra.gov.au/news-and-publications/apra-announces-update-macroprudential-settings',
-  sourceFactVersion: 'rba-2026-08-07__apra-buffer-2026-08-07',
+  apraSourceDate: '2026-08-31',
+  apraSourceUrl: 'https://www.apra.gov.au/news-and-publications/apra-announces-update-on-macroprudential-settings',
+  sourceFactVersion: 'rba-2026-08-31__apra-buffer-2026-05-28',
 };
 
 // Consent + preference fields shared by every template. Kept separate from
