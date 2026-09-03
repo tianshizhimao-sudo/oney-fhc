@@ -577,6 +577,8 @@
         <form class="bottom-form" onsubmit="handleSubmit(event)">
           <input type="email" id="email-input-2" name="email" placeholder="you@example.com" autocomplete="email" required>
           <button type="submit" class="btn-purple">Get early access →</button>
+          <div class="form-message" id="success-msg-2" role="status" aria-live="polite"></div>
+          <div class="form-message" id="error-msg-2" role="alert" aria-live="polite"></div>
         </form>
         <p style="font-size:12px;color:var(--text-muted);margin-top:14px;margin-bottom:0;">General information only. Not credit advice, tax advice, or a loan recommendation.</p>
       </div>
@@ -619,19 +621,19 @@
     }
 
     function setMessage(type, message) {
-      if (successMsg) {
-        successMsg.className = 'form-message';
-        successMsg.textContent = '';
-      }
-      if (errorMsg) {
-        errorMsg.className = 'form-message';
-        errorMsg.textContent = '';
-      }
-      const target = type === 'success' ? successMsg : errorMsg;
-      if (target) {
-        target.className = 'form-message ' + type;
-        target.textContent = message;
-      }
+      document.querySelectorAll('.form-message').forEach(el => {
+        el.className = 'form-message';
+        el.textContent = '';
+      });
+      const targets = type === 'success'
+        ? [successMsg, document.getElementById('success-msg-2')]
+        : [errorMsg, document.getElementById('error-msg-2')];
+      targets.forEach(t => {
+        if (t) {
+          t.className = 'form-message ' + type;
+          t.textContent = message;
+        }
+      });
     }
 
     async function handleSubmit(e) {
