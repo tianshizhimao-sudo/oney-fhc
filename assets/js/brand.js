@@ -42,6 +42,9 @@
     if (hamburger) {
       hamburger.addEventListener('click', () => nav.classList.toggle('nav-open'));
     }
+    nav.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('nav-open'));
+    });
   }
 
   function initReveal() {
