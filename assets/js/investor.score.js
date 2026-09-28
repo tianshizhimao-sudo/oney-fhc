@@ -102,7 +102,7 @@
     else if (cashflow < 0) attention.push({ tone: 'warn', icon: '💧', title: 'Portfolio is negatively geared', body: 'Acceptable if income covers it, but it reduces new-borrowing headroom at the margin.' });
     if (usableEquity === 0 && totalValue > 0) attention.push({ tone: 'danger', icon: '🔓', title: 'No usable equity at 80% LVR', body: 'Next purchase will likely need fresh savings or waiting for value growth. Revaluation sometimes surfaces hidden equity.' });
     if (targetValue > 0 && canBuy === false) attention.push({ tone: 'warn', icon: '🎯', title: 'Target price outside current reach', body: `Needs ${fmtMoney(depositNeeded)} deposit; you have ${fmtMoney(totalAvailable)} available between cash and usable equity. Either scale the target or close the gap.` });
-    if (s.crossSec === 'Yes — some') attention.push({ tone: 'warn', icon: '🔗', title: 'Cross-collateralised loans on file', body: 'Cross-securitisation restricts flexibility when refinancing or selling. Worth reviewing with a broker.' });
+    if (s.crossSec === 'Yes — some') attention.push({ tone: 'warn', icon: '🔗', title: 'Cross-collateralised loans on file', body: 'Cross-securitisation restricts flexibility when refinancing or selling. Worth reviewing before refinancing or selling; independent professional advice may be appropriate for your circumstances.' });
 
     const positives = [];
     if (portfolioLVR > 0 && portfolioLVR <= 60) positives.push({ tone: 'good', icon: '🏠', title: 'Healthy leverage', body: `LVR of ${portfolioLVR.toFixed(1)}% sits in the prime band for investor pricing.` });
@@ -114,8 +114,8 @@
       score, heading, summary, metrics, attention, positives,
       cta: {
         title: 'Expand with a strategy, not guesswork',
-        body: 'Investor lending is where structure compounds. Book a 15-min chat to map out the cleanest sequence for your next move.',
-        primary:   { label: 'Book a strategy chat',     href: 'https://oneyco.com.au/#contact' },
+        body: 'Investor lending is sensitive to structure. Use the result to test the sequence, cashflow and leverage assumptions before your next move.',
+        primary:   { label: 'Explore analysis tools',    href: 'https://tools.oneyco.com.au/analyse/' },
         secondary: { label: 'Try the PAYG Check',        href: 'payg.html' },
         tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },
       }

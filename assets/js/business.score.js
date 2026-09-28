@@ -50,9 +50,9 @@
       : 'Real prep work before a lender conversation.';
 
     const summary = score >= 70
-      ? 'Books, cashflow, and support structure all read well. Focus on choosing the right lender for the specific purpose, not fixing fundamentals.'
+      ? 'Books, cashflow, and support structure all read well. Focus on understanding the policy and evidence requirements for the specific purpose, not fixing fundamentals.'
       : score >= 45
-        ? 'You can be application-ready in a month or two. Prioritise the single biggest item below — usually bookkeeping currency or a banker relationship.'
+        ? 'Your current indicators suggest the file may improve materially with focused preparation. Prioritise the single biggest item below — usually bookkeeping currency or a banker relationship.'
         : 'Step back: 2–3 months of structural fixes (accounts, separation, ATO) usually unlocks dramatically better terms.';
 
     const metrics = [
@@ -91,9 +91,9 @@
     return {
       score, heading, summary, metrics, attention, positives,
       cta: {
-        title: 'Get a banker-grade read on your file',
-        body: 'The Business Health Check is a free starting point. Book a 15-min call for a tailored readiness plan.',
-        primary:   { label: 'Book a 15-min chat',       href: 'https://oneyco.com.au/#contact' },
+        title: 'Review what matters next',
+        body: 'The Business Health Check is a free starting point. Use the result to identify the evidence and assumptions worth reviewing next.',
+        primary:   { label: 'Explore Policy Radar',      href: 'https://policy.oneyco.com.au' },
         secondary: { label: 'Open Commercial Intake',    href: 'https://tools.oneyco.com.au/commercial-intake.html' },
         tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },
       }
