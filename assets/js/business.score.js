@@ -91,7 +91,7 @@
     return {
       score, heading, summary, metrics, attention, positives,
       cta: {
-        title: 'Get a banker-grade read on your file',
+        title: 'Review what matters next',
         body: 'The Business Health Check is a free starting point. Use the result to identify the evidence and assumptions worth reviewing next.',
         primary:   { label: 'Explore Policy Radar',      href: 'https://policy.oneyco.com.au' },
         secondary: { label: 'Open Commercial Intake',    href: 'https://tools.oneyco.com.au/commercial-intake.html' },
