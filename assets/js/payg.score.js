@@ -65,7 +65,7 @@
     if (s.incomeResilience === 'Medium — stable now, but exposed to hours/bonus/client changes')
       attention.push({ tone: 'warn', icon: '📄', title: 'Prove income is repeatable', body: 'Prepare payslip history, employment letter, contract renewal evidence, or bank statements showing the income is not a one-off.' });
     if (s.confidence === 'Uncertain' || s.confidence === 'Stuck')
-      attention.push({ tone: 'warn', icon: '🧭', title: 'Direction is unclear', body: "The gap is usually not the numbers, it's deciding what outcome you're optimising for. A 15-min chat with a broker often clears this in one sitting." });
+      attention.push({ tone: 'warn', icon: '🧭', title: 'Direction is unclear', body: "The gap is usually not the numbers, it's deciding what outcome you're optimising for. Write down the outcome you are optimising for, then test the relevant assumptions before applying." });
 
     const positives = [];
     if (s.creditCards === 'None' && s.personalLoan === 'None')
@@ -73,7 +73,7 @@
     if (s.lastReview === 'Past 6 months')
       positives.push({ tone: 'good', icon: '🔍', title: 'Strong review rhythm', body: 'Recent reviews mean you are rarely sitting on stale pricing — a meaningful long-term advantage.' });
     if (s.hasAdvisor === 'Yes — regularly')
-      positives.push({ tone: 'good', icon: '🤝', title: 'Supported structure', body: 'Having a broker or adviser on speed dial materially lifts outcomes on application timing and product mix.' });
+      positives.push({ tone: 'good', icon: '🤝', title: 'Supported structure', body: 'Having independent professional support can help you test assumptions and prepare the evidence before an application.' });
     if (s.employment === 'Full-time PAYG' && s.recentChange === 'None')
       positives.push({ tone: 'good', icon: '💼', title: 'Clean employment window', body: 'Stable full-time PAYG with no recent change is the cleanest shape lenders see.' });
     if (s.incomeResilience === 'High — permanent/essential role or repeatable income')
@@ -83,8 +83,8 @@
       score, heading, summary, metrics, attention, positives,
       cta: {
         title: 'Want this looked at properly?',
-        body: 'Get a human read on what would shift your borrowing power the most — book a 15-min chat.',
-        primary:   { label: 'Book a 15-min chat',       href: 'https://oneyco.com.au/#contact' },
+        body: 'Use the result to test the assumptions most likely to affect your lending position.',
+        primary:   { label: 'Explore calculators',       href: 'https://tools.oneyco.com.au/calculate/' },
         secondary: { label: 'Try the Business Check',    href: 'business.html' },
         tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },
       }
