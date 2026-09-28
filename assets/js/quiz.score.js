@@ -86,9 +86,9 @@
       score, heading, summary, metrics, routeCard, routeKey: route.key, attention, positives,
       cta: {
         title: 'Want a professional second opinion?',
-        body: 'Run the recommended deep-check first — then book a 15-min chat with a human who has spent 8+ years inside the Big 4.',
+        body: 'Run the recommended deep-check first, then use the relevant Oney calculator or policy tool to investigate the next question.',
         primary:   { label: 'Continue to ' + route.name, href: route.href },
-        secondary: { label: 'Book a 15-min chat',        href: 'https://oneyco.com.au/#contact' },
+        secondary: { label: 'Explore Oney Tools',         href: 'https://tools.oneyco.com.au/' },
         tertiary:  { label: 'How this score is built',   href: 'index.html#how-it-works' },
       }
     };
