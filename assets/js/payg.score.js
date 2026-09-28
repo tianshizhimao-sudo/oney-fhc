@@ -82,7 +82,7 @@
     return {
       score, heading, summary, metrics, attention, positives,
       cta: {
-        title: 'Want this looked at properly?',
+        title: 'Review what matters next',
         body: 'Use the result to test the assumptions most likely to affect your lending position.',
         primary:   { label: 'Explore calculators',       href: 'https://tools.oneyco.com.au/calculate/' },
         secondary: { label: 'Try the Business Check',    href: 'business.html' },
