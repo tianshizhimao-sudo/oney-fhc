@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="oney-analytics-domain" content="fhc.oneyco.com.au">
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#F2F4F3">
   <title>FHC Early Access · Oney & Co</title>
   <meta name="description" content="Join early access for Oney & Co's Financial Health Check toolkit — a source-fresh borrower readiness system built around bank-style preparation, not generic borrowing estimates.">
   <meta property="og:title" content="FHC Early Access — Oney & Co">
   <meta property="og:description" content="Reserve early access to the Financial Health Check toolkit. Built to help Australian borrowers prepare cleaner, more bank-ready conversations.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fhc.oneyco.com.au/early-bird">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%236B4C9A'/></linearGradient></defs><circle cx='50' cy='50' r='38' fill='none' stroke='url(%23g)' stroke-width='10'/><circle cx='50' cy='50' r='28' fill='url(%23g)'/></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/svg/oney-icon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="assets/js/theme-init.js"></script>
   <link rel="stylesheet" href="assets/css/brand.css">
   <link rel="stylesheet" href="assets/css/tool-shell.css">
   <link rel="stylesheet" href="assets/css/tool-results.css">
@@ -28,9 +29,7 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background:
-        radial-gradient(circle at 12% 0%, rgba(107,76,154,0.22), transparent 38%),
-        radial-gradient(circle at 88% 22%, rgba(46,204,133,0.13), transparent 44%);
+      background: var(--bg-card);
     }
     .early-hero-inner {
       position: relative;
@@ -44,12 +43,12 @@
       font-weight: 600;
       line-height: 1.02;
       letter-spacing: -0.04em;
-      color: #fff;
+      color: var(--text);
       margin-top: 18px;
       max-width: 680px;
     }
     .early-copy h1 .accent {
-      background: linear-gradient(90deg, #fff, #B59BD6, #7AD9A8);
+      background: var(--bg-card);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -76,12 +75,12 @@
       max-width: 540px;
     }
     .early-card {
-      background: linear-gradient(180deg, rgba(37,37,64,0.85), rgba(26,26,46,0.9));
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
       padding: 28px;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+      backdrop-filter: none;
+      box-shadow: var(--shadow);
     }
     .price-row {
       display: flex;
@@ -96,7 +95,7 @@
       font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--purple-soft);
+      color: var(--product-primary);
       margin-bottom: 6px;
     }
     .price-main {
@@ -108,7 +107,7 @@
       font-size: 52px;
       font-weight: 700;
       letter-spacing: -0.05em;
-      color: #fff;
+      color: var(--text);
       line-height: 0.95;
     }
     .price-label {
@@ -128,17 +127,17 @@
       gap: 12px;
     }
     .early-form label {
-      color: #fff;
+      color: var(--text);
       font-size: 13px;
       font-weight: 500;
     }
     .early-form input[type="email"] {
       width: 100%;
       padding: 15px 16px;
-      background: rgba(255,255,255,0.04);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      color: #fff;
+      color: var(--text);
       font-size: 15px;
       font-weight: 500;
       font-family: inherit;
@@ -146,8 +145,8 @@
       transition: border-color 0.18s, background 0.18s;
     }
     .early-form input[type="email"]:focus {
-      border-color: var(--purple-light);
-      background: rgba(255,255,255,0.07);
+      border-color: var(--product-primary);
+      background: var(--bg-card);
     }
     .early-form input[type="email"]::placeholder { color: var(--text-faint); }
     .early-form .btn-purple,
@@ -176,7 +175,7 @@
       display: block;
       background: rgba(239,68,68,0.10);
       border: 1px solid rgba(239,68,68,0.32);
-      color: #FCA5A5;
+      color: var(--danger);
     }
     .trust-rows {
       display: grid;
@@ -187,12 +186,12 @@
     .trust-pill {
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      background: rgba(255,255,255,0.035);
+      background: var(--bg-card);
       padding: 14px 16px;
     }
     .trust-pill strong {
       display: block;
-      color: #fff;
+      color: var(--text);
       font-size: 15px;
       margin-bottom: 3px;
     }
@@ -214,7 +213,7 @@
       font-weight: 600;
       letter-spacing: -0.03em;
       line-height: 1.1;
-      color: #fff;
+      color: var(--text);
       margin-top: 16px;
       margin-bottom: 12px;
     }
@@ -229,7 +228,7 @@
       gap: 16px;
     }
     .included-card {
-      background: linear-gradient(180deg, rgba(37,37,64,0.65), rgba(26,26,46,0.72));
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 24px;
@@ -238,8 +237,8 @@
     }
     .included-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(155,89,182,0.48);
-      background: linear-gradient(180deg, rgba(37,37,64,0.82), rgba(26,26,46,0.86));
+      border-color: var(--product-primary);
+      background: var(--bg-card);
     }
     .included-icon {
       width: 44px;
@@ -247,13 +246,13 @@
       display: grid;
       place-items: center;
       border-radius: 14px;
-      background: rgba(107,76,154,0.16);
-      border: 1px solid rgba(155,89,182,0.22);
+      background: var(--product-soft);
+      border: 1px solid var(--product-primary);
       margin-bottom: 16px;
       font-size: 20px;
     }
     .included-card h3 {
-      color: #fff;
+      color: var(--text);
       font-size: 17px;
       font-weight: 600;
       margin-bottom: 8px;
@@ -272,7 +271,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 24px;
-      background: rgba(255,255,255,0.035);
+      background: var(--bg-card);
     }
     .path-tag {
       display: inline-flex;
@@ -282,13 +281,13 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--purple-soft);
-      background: rgba(107,76,154,0.14);
-      border: 1px solid rgba(155,89,182,0.22);
+      color: var(--product-primary);
+      background: var(--product-soft);
+      border: 1px solid var(--product-primary);
       margin-bottom: 14px;
     }
     .path-card h3 {
-      color: #fff;
+      color: var(--text);
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 8px;
@@ -308,7 +307,7 @@
     .founder-note {
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
-      background: linear-gradient(180deg, rgba(37,37,64,0.66), rgba(26,26,46,0.76));
+      background: var(--bg-card);
       padding: 28px;
     }
     .founder-aside .status-row strong { text-align: right; }
@@ -318,9 +317,9 @@
       line-height: 1.8;
       margin: 0 0 18px;
     }
-    .founder-note blockquote strong { color: #fff; }
+    .founder-note blockquote strong { color: var(--text); }
     .founder-signature {
-      color: #fff;
+      color: var(--text);
       font-weight: 600;
     }
     .founder-role {
@@ -335,13 +334,13 @@
     }
     .bottom-band-inner {
       text-align: center;
-      border: 1px solid rgba(155,89,182,0.28);
+      border: 1px solid var(--product-primary);
       border-radius: var(--radius-xl);
       padding: 48px 32px;
-      background: linear-gradient(135deg, rgba(107,76,154,0.14), rgba(46,204,133,0.08));
+      background: var(--bg-card);
     }
     .bottom-band h2 {
-      color: #fff;
+      color: var(--text);
       font-size: clamp(26px, 3vw, 38px);
       font-weight: 600;
       letter-spacing: -0.03em;
@@ -364,37 +363,15 @@
     .bottom-form input {
       min-width: 0;
       padding: 14px 16px;
-      background: rgba(255,255,255,0.04);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      color: #fff;
+      color: var(--text);
       font-family: inherit;
       font-size: 15px;
     }
-    .bottom-form input:focus { outline: none; border-color: var(--purple-light); }
-    html[data-theme="light"] .early-card,
-    html[data-theme="light"] .included-card,
-    html[data-theme="light"] .founder-aside,
-    html[data-theme="light"] .founder-note {
-      box-shadow: 0 18px 50px rgba(15,23,42,0.08);
-    }
-    html[data-theme="light"] .early-copy h1,
-    html[data-theme="light"] .early-section-header h2,
-    html[data-theme="light"] .included-card h3,
-    html[data-theme="light"] .path-card h3,
-    html[data-theme="light"] .price-now,
-    html[data-theme="light"] .bottom-band h2,
-    html[data-theme="light"] .early-form label,
-    html[data-theme="light"] .trust-pill strong,
-    html[data-theme="light"] .founder-signature { color: var(--text); }
-    html[data-theme="light"] .early-form input[type="email"],
-    html[data-theme="light"] .bottom-form input { color: var(--text); background: rgba(0,0,0,0.03); }
-    html[data-theme="light"] .early-copy h1 .accent {
-      background: linear-gradient(90deg, #1A1A2E, #6B4C9A, #1FAD73);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    .bottom-form input:focus { outline: none; border-color: var(--product-primary); }
+
     @media (max-width: 920px) {
       .early-hero-inner,
       .founder-panel { grid-template-columns: 1fr; }
@@ -412,19 +389,27 @@
       .early-actions { align-items: stretch; }
       .early-actions a { width: 100%; }
     }
-  </style>
+
+    .early-access-hero::before { background: none; }
+    .early-copy h1 .accent { background: none; color: var(--product-primary); -webkit-text-fill-color: currentColor; }
+    .early-card, .included-card, .path-card, .founder-note, .founder-aside, .bottom-band-inner { background: var(--bg-card); border-color: var(--border-solid); box-shadow: var(--shadow); }
+    .early-form input[type="email"], .bottom-form input { background: var(--bg-card); color: var(--text); border-color: var(--control-border); }
+    .early-form input[type="email"]:focus, .bottom-form input:focus { outline: 3px solid var(--product-primary); outline-offset: 2px; background: var(--bg-card); }
+    .form-message.success { color: var(--green); background: var(--product-soft); }
+    .form-message.error { color: var(--danger); background: var(--danger-soft); }
+</style>
 </head>
 <body>
   <div class="ambient-bg"></div>
 
-  <nav class="oney-nav">
+  <nav class="oney-nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Oney & Co Financial Health Check home">
-        <div class="nav-logo-icon"><div class="nav-logo-icon-inner"></div></div>
-        <span class="nav-logo-text">Oney <span class="amp">&amp;</span> Co</span>
+        <img class="oney-logo-mark" src="assets/svg/oney-icon.svg" width="31" height="31" alt="">
+        <span class="nav-logo-text">Oney <span class="amp">&amp;</span> Co<span class="oney-dot">.</span></span>
       </a>
-      <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-      <ul class="nav-links">
+      <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="oneyNavLinks"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="oneyNavLinks">
         <li><a href="https://oneyco.com.au">Home</a></li>
         <li><a href="index.html">Health Check</a></li>
         <li><a href="quiz.html">Quick Check</a></li>
@@ -433,10 +418,9 @@
         <li><a href="investor.html">Investor</a></li>
         <li><a href="early-bird.html" class="nav-active">Early Access</a></li>
         <li>
-          <div class="theme-switcher" role="radiogroup" aria-label="Theme">
-            <div class="theme-dot active" data-theme="dark" aria-checked="true" tabindex="0"></div>
-            <div class="theme-dot" data-theme="purple" aria-checked="false" tabindex="0"></div>
-            <div class="theme-dot" data-theme="light" aria-checked="false" tabindex="0"></div>
+          <div class="theme-switcher" role="group" aria-label="Colour theme">
+            <button type="button" class="theme-dot active" data-theme="light" aria-pressed="true">Light</button>
+            <button type="button" class="theme-dot" data-theme="dark" aria-pressed="false">Dark</button>
           </div>
         </li>
       </ul>
@@ -586,8 +570,8 @@
   <footer class="oney-footer">
     <div class="footer-inner">
       <div class="footer-logo">
-        <div class="footer-logo-icon"><div class="footer-logo-icon-inner"></div></div>
-        <span class="footer-logo-text">Oney <span class="amp">&amp;</span> Co</span>
+        <img class="oney-logo-mark" src="assets/svg/oney-icon.svg" width="31" height="31" alt="">
+        <span class="footer-logo-text">Oney <span class="amp">&amp;</span> Co<span class="oney-dot">.</span></span>
       </div>
       <p>© 2026 Oney & Co. Built by a banker. Powered by AI.</p>
       <p>General information only. Not personal financial advice, credit advice, or a loan recommendation.</p>

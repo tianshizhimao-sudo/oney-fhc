@@ -4,34 +4,30 @@
 (function () {
   const STORAGE_THEME = 'oney-fhc-theme';
 
-  // Theme: dark | purple | light
-  function applyTheme(theme, { skipTransition = false } = {}) {
+  // Only explicit Dark is dark. Legacy Purple/invalid values migrate to Light.
+  function applyTheme(value, { skipTransition = false } = {}) {
+    const theme = value === 'dark' ? 'dark' : 'light';
     const html = document.documentElement;
     if (skipTransition) html.classList.add('no-transition');
     html.setAttribute('data-theme', theme);
     if (skipTransition) requestAnimationFrame(() => html.classList.remove('no-transition'));
-
-    document.querySelectorAll('.theme-dot').forEach(dot => {
-      const active = dot.getAttribute('data-theme') === theme;
-      dot.classList.toggle('active', active);
-      dot.setAttribute('aria-checked', active ? 'true' : 'false');
+    document.querySelectorAll('.theme-dot').forEach(button => {
+      const active = button.getAttribute('data-theme') === theme;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
     });
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = theme === 'dark' ? '#17131E' : '#F2F4F3';
     try { localStorage.setItem(STORAGE_THEME, theme); } catch (e) {}
   }
 
   function initTheme() {
-    let saved = 'dark';
-    try { saved = localStorage.getItem(STORAGE_THEME) || 'dark'; } catch (e) {}
+    let saved = 'light';
+    try { saved = localStorage.getItem(STORAGE_THEME) || 'light'; } catch (e) {}
     applyTheme(saved, { skipTransition: true });
-
-    document.querySelectorAll('.theme-dot').forEach(dot => {
-      dot.addEventListener('click', () => applyTheme(dot.getAttribute('data-theme')));
-      dot.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          applyTheme(dot.getAttribute('data-theme'));
-        }
-      });
+    // Native buttons supply Enter/Space activation without duplicate key handlers.
+    document.querySelectorAll('.theme-dot').forEach(button => {
+      button.addEventListener('click', () => applyTheme(button.getAttribute('data-theme')));
     });
   }
 
@@ -39,9 +35,44 @@
     const nav = document.querySelector('.oney-nav');
     if (!nav) return;
     const hamburger = nav.querySelector('.nav-hamburger');
-    if (hamburger) {
-      hamburger.addEventListener('click', () => nav.classList.toggle('nav-open'));
+    const links = nav.querySelector('.nav-links');
+    if (!hamburger || !links) return;
+    const mobile = window.matchMedia('(max-width: 768px)');
+    function setOpen(open, returnFocus = false) {
+      open = mobile.matches && open;
+      nav.classList.toggle('nav-open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+      hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      links.hidden = mobile.matches && !open;
+      if (returnFocus) hamburger.focus();
     }
+    hamburger.addEventListener('click', () => setOpen(!nav.classList.contains('nav-open')));
+    nav.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && nav.classList.contains('nav-open')) {
+        event.preventDefault();
+        setOpen(false, true);
+      }
+    });
+    links.addEventListener('click', event => {
+      if (event.target.closest('a')) setOpen(false, mobile.matches);
+    });
+    document.addEventListener('click', event => {
+      if (nav.classList.contains('nav-open') && !nav.contains(event.target)) {
+        setOpen(false, links.contains(document.activeElement));
+      }
+    });
+    nav.addEventListener('focusout', () => {
+      // A disclosure, not a modal: normal Tab can leave the menu.
+      queueMicrotask(() => {
+        if (nav.classList.contains('nav-open') && !nav.contains(document.activeElement)) setOpen(false);
+      });
+    });
+    mobile.addEventListener('change', () => {
+      const focusWasInLinks = links.contains(document.activeElement);
+      setOpen(false, mobile.matches && focusWasInLinks);
+      if (!mobile.matches && document.activeElement === hamburger) links.querySelector('a')?.focus();
+    });
+    setOpen(false);
   }
 
   function initReveal() {

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="oney-analytics-domain" content="fhc.oneyco.com.au">
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#F2F4F3">
   <title>PAYG Health Check · Oney & Co</title>
   <meta name="description" content="A banker-grade readiness check for salaried Australians. Understand where your lending position actually stands — no sign-up, no credit check.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%232ECC85'/><stop offset='100%25' stop-color='%236B4C9A'/></linearGradient></defs><circle cx='50' cy='50' r='38' fill='none' stroke='url(%23g)' stroke-width='10'/><circle cx='50' cy='50' r='28' fill='url(%23g)'/></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/svg/oney-icon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="assets/js/theme-init.js"></script>
   <link rel="stylesheet" href="assets/css/brand.css">
   <link rel="stylesheet" href="assets/css/tool-shell.css">
   <link rel="stylesheet" href="assets/css/tool-results.css">
@@ -16,14 +17,14 @@
 <body>
   <div class="ambient-bg"></div>
 
-  <nav class="oney-nav">
+  <nav class="oney-nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <div class="nav-logo-icon"><div class="nav-logo-icon-inner"></div></div>
-        <span class="nav-logo-text">Oney <span class="amp">&amp;</span> Co</span>
+        <img class="oney-logo-mark" src="assets/svg/oney-icon.svg" width="31" height="31" alt="">
+        <span class="nav-logo-text">Oney <span class="amp">&amp;</span> Co<span class="oney-dot">.</span></span>
       </a>
-      <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-      <ul class="nav-links">
+      <button type="button" class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="oneyNavLinks"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="oneyNavLinks">
         <li><a href="https://oneyco.com.au">Home</a></li>
         <li><a href="index.html">Health Check</a></li>
         <li><a href="quiz.html">Quick Check</a></li>
@@ -31,10 +32,9 @@
         <li><a href="business.html">Business</a></li>
         <li><a href="investor.html">Investor</a></li>
         <li>
-          <div class="theme-switcher" role="radiogroup" aria-label="Theme">
-            <div class="theme-dot active" data-theme="dark" aria-checked="true" tabindex="0"></div>
-            <div class="theme-dot" data-theme="purple" aria-checked="false" tabindex="0"></div>
-            <div class="theme-dot" data-theme="light" aria-checked="false" tabindex="0"></div>
+          <div class="theme-switcher" role="group" aria-label="Colour theme">
+            <button type="button" class="theme-dot active" data-theme="light" aria-pressed="true">Light</button>
+            <button type="button" class="theme-dot" data-theme="dark" aria-pressed="false">Dark</button>
           </div>
         </li>
       </ul>
@@ -78,8 +78,8 @@
   <footer class="oney-footer">
     <div class="footer-inner">
       <div class="footer-logo">
-        <div class="footer-logo-icon"><div class="footer-logo-icon-inner"></div></div>
-        <span class="footer-logo-text">Oney <span class="amp">&amp;</span> Co</span>
+        <img class="oney-logo-mark" src="assets/svg/oney-icon.svg" width="31" height="31" alt="">
+        <span class="footer-logo-text">Oney <span class="amp">&amp;</span> Co<span class="oney-dot">.</span></span>
       </div>
       <p>© 2026 Oney & Co. Built by a banker. Powered by AI.</p>
       <div class="footer-links">
