@@ -2,9 +2,9 @@
 // in template copy. Before any live send, re-verify against the official
 // source pages below and update these values + source dates together.
 //
-// Official sources (checked 2026-09-07):
+// RBA and APRA official sources (checked 2026-10-29):
 //   RBA  - https://www.rba.gov.au/statistics/cash-rate/
-//   APRA - https://www.apra.gov.au/news-and-publications/apra-announces-update-on-macroprudential-settings
+//   APRA - https://www.apra.gov.au/news-and-publications/apra-maintains-current-macroprudential-policy-settings-highly-uncertain
 
 export type ProductName = 'FHC' | 'Rate Recheck';
 
@@ -24,14 +24,14 @@ export interface SourceFacts {
 }
 
 export const defaultSourceFacts: SourceFacts = {
-  rbaCashRate: '4.35%',
-  rbaEffectiveDate: '12 August 2026',
-  rbaSourceDate: '2026-09-07',
+  rbaCashRate: '4.60%',
+  rbaEffectiveDate: '30 September 2026',
+  rbaSourceDate: '2026-10-29',
   rbaSourceUrl: 'https://www.rba.gov.au/statistics/cash-rate/',
   apraBuffer: '3 percentage points',
-  apraSourceDate: '2026-09-07',
-  apraSourceUrl: 'https://www.apra.gov.au/news-and-publications/apra-announces-update-on-macroprudential-settings',
-  sourceFactVersion: 'rba-2026-09-07__apra-buffer-2026-05-28',
+  apraSourceDate: '2026-10-29',
+  apraSourceUrl: 'https://www.apra.gov.au/news-and-publications/apra-maintains-current-macroprudential-policy-settings-highly-uncertain',
+  sourceFactVersion: 'rba-2026-10-29__apra-buffer-2026-10-29',
 };
 
 // Consent + preference fields shared by every template. Kept separate from

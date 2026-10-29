@@ -370,7 +370,7 @@ function runAssessment(){
   const dtiNum            = income > 0 ? totalDebtForDTI / income : 0;
 
   // Serviceability (monthly repayment test at assessment rate)
-  const assessRate = 0.0735; // source-fresh planning assumption: RBA cash rate 4.35% + APRA 3% buffer; verify lender-specific assessment rate before relying on this
+  const assessRate = 0.0735; // Illustrative assumption only, not an RBA rate or lender assessment rate. APRA's buffer applies above the loan product rate; verify lender policy.
   const r = assessRate/12, nPay = 30*12;
   const newRepay = loanAmt > 0 ? loanAmt * r * Math.pow(1+r,nPay)/(Math.pow(1+r,nPay)-1) : 0;
   // Existing debt monthly commitment (rough: secured at 3%, unsecured at higher)
@@ -538,7 +538,7 @@ ASSESSMENT RESULTS
 
 1. SERVICEABILITY              [${srvS.toUpperCase()}]
    Estimated NSR:    ${fmt(nsr)}/month
-   Assessment rate:  7.35% planning assumption (RBA 4.35% + APRA 3.0% buffer; verify lender-specific rate before relying)
+   Assessment rate:  7.35% illustrative assumption only; APRA's 3.0 pp buffer applies above the loan product rate, not the RBA cash rate. Verify lender-specific assessment.
    HEM (living):     ~${fmt(hemBase)}/month (${dependants} dependant${dependants!==1?'s':''})
    Status:           ${statusLabel(srvS)}
 
